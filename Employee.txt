@@ -1,0 +1,7 @@
+[hkr.Employee@5e9f23b4]
+[hkr.Employee@5e9f23b4Employee Password='aasd', employeeCounter=1]
+[Person{firstName='sad', lastName='asdsda', personNumber='\4s5a4ds', phoneNumber='asdasa6'}Employee Password='asd', employeeCounter=1]
+[Person{firstName='Muhammad', lastName='Hamza', personNumber='4564', phoneNumber='45648Employee Password='hello', employeeCounter=0]
+[Person{firstName='Muhammad', lastName='Hamza', personNumber='4564', phoneNumber='45648Employee Password='hello', employeeCounter=0, Person{firstName='as', lastName='assa', personNumber='sas', phoneNumber='saassaEmployee Password='as', employeeCounter=1]
+[Person{firstName='assa', lastName='assaas', personNumber='asasas', phoneNumber='asassEmployee Password='assa', employeeCounter=0]
+Employee Id =0 Employee First Name =qwe Employee Last Name =zxc Employee Personal Number =asd Employee Phone Number =qwe Employee Password =ccd
