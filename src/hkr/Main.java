@@ -2,11 +2,16 @@ package hkr;
 
 //import hkrFX.*;
 
+import hkrFX.MainFX;
+import javafx.application.Application;
+import javafx.stage.Stage;
+
 import java.io.*;
 import java.util.ArrayList;
 import java.util.Scanner;
 
 import static java.lang.System.out;
+
 
 public class Main {
     private ArrayList<Hotel> rooms = new ArrayList<>();
@@ -18,9 +23,9 @@ public class Main {
     int bookingCounter = 0;
     Admin Admin1 = new Admin("Muhammad","Hamza","980515-3377","073-7410229","Hamza",1);
     public static void main(String[] args) {
-        Main myApp = new Main();
-        myApp.showMenu();
-
+//        Main myApp = new Main();
+//        myApp.showMenu();
+        Application.launch(MainFX.class);
     }
     public void showMenu(){
         while(true){
