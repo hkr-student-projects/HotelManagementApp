@@ -309,7 +309,7 @@
 ////
 ////        stage.setTitle("Login page");
 ////        Scene scene = new Scene(grid, Main.SCENE_WIDTH, Main.SCENE_HEIGHT);
-////        scene.getStylesheets().add("Global.css");
+////        scene.getStylesheets().add("[deprecated]Global.css");
 ////
 ////        return scene;
 ////    }

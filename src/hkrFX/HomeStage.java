@@ -12,21 +12,21 @@ import javafx.scene.control.Button;
 
 public class HomeStage extends Stage {
 
-    private AnchorPane _anchorpane;
-    private Pane _pane;
+//    private AnchorPane _anchorpane;
+//    private Pane _pane;
     private Button[] _buttons;
 
     public HomeStage(){
 
         this.setResizable(false);
-        _anchorpane = new AnchorPane();
-        _anchorpane.prefHeight(MainFX.SCENE_HEIGHT);
-        _anchorpane.prefWidth(MainFX.SCENE_WIDTH);
-        _anchorpane.setStyle("-fx-background-color: white");
-
-        _pane = new Pane();
-        _pane.prefHeight(MainFX.SCENE_HEIGHT);
-        _pane.prefWidth(MainFX.SCENE_WIDTH);
+//        _anchorpane = new AnchorPane();
+//        _anchorpane.prefHeight(MainFX.SCENE_HEIGHT);
+//        _anchorpane.prefWidth(MainFX.SCENE_WIDTH);
+//        _anchorpane.setStyle("-fx-background-color: white");
+//
+//        _pane = new Pane();
+//        _pane.prefHeight(MainFX.SCENE_HEIGHT);
+//        _pane.prefWidth(MainFX.SCENE_WIDTH);
 
         _buttons = createButtons(
                 new String[] { "Employee", "Customer", "Admin" },
@@ -43,11 +43,23 @@ public class HomeStage extends Stage {
 
     private void createScene(){
 
-        ObservableList<Node> pChilds = _pane.getChildren();
+        AnchorPane anchorPane = new AnchorPane();
+        anchorPane = new AnchorPane();
+        anchorPane.prefHeight(MainFX.SCENE_HEIGHT);
+        anchorPane.prefWidth(MainFX.SCENE_WIDTH);
+        anchorPane.setStyle("-fx-background-color: white");
+
+        Pane pane = new Pane();
+        pane.prefHeight(MainFX.SCENE_HEIGHT);
+        pane.prefWidth(MainFX.SCENE_WIDTH);
+
+        ObservableList<Node> pChilds = pane.getChildren();
+
         pChilds.addAll(_buttons);
-        _anchorpane.getChildren().add(_pane);
-        Scene scene = new Scene(_anchorpane, MainFX.SCENE_WIDTH, MainFX.SCENE_HEIGHT);
-        scene.getStylesheets().add("hkrFx/Home.css");
+        anchorPane.getChildren().add(pane);
+
+        Scene scene = new Scene(anchorPane, MainFX.SCENE_WIDTH, MainFX.SCENE_HEIGHT);
+        scene.getStylesheets().add("hkrFx/General.css");
 
         this.setScene(scene);
     }
@@ -78,7 +90,7 @@ public class HomeStage extends Stage {
 
     public Button getButton(String name){
         for (Button b : _buttons){
-            if(equals(b.getText().toLowerCase().toCharArray(), name.toLowerCase().toCharArray()))
+            if(MainFX.equals(b.getText().toLowerCase().toCharArray(), name.toLowerCase().toCharArray()))
                 return b;
         }
 
@@ -87,14 +99,4 @@ public class HomeStage extends Stage {
         return null;
     }
 
-    public boolean equals(char[] str1, char[] str2){
-        if(str1.length != str2.length)
-            return false;
-        for (short i = 0; i < str1.length; i++)
-            if(str1[i] != str2[i])
-                return false;
-
-
-        return true;
-    }
 }

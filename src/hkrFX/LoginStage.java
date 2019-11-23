@@ -17,6 +17,8 @@ import javafx.stage.Stage;
 
 class LoginStage extends Stage {
 
+    private TextField _userTextField;
+    private PasswordField _pwBox;
 
     public LoginStage(){
 
@@ -35,12 +37,12 @@ class LoginStage extends Stage {
         grid.add(scenetitle, 0, 0, 2, 1);
         Label userName = new Label("User Name:");
         grid.add(userName, 0, 1);
-        TextField userTextField = new TextField();
-        grid.add(userTextField, 1, 1);
+        _userTextField = new TextField();
+        grid.add(_userTextField, 1, 1);
         Label pw = new Label("Password:");
         grid.add(pw, 0, 2);
-        PasswordField pwBox = new PasswordField();
-        grid.add(pwBox, 1, 2);
+        _pwBox = new PasswordField();
+        grid.add(_pwBox, 1, 2);
 
         scenetitle.setId("welcome-text");
         actiontarget.setId("actiontarget");
@@ -60,7 +62,7 @@ class LoginStage extends Stage {
 
         this.setTitle("Login page");
         Scene scene = new Scene(grid, MainFX.SCENE_WIDTH, MainFX.SCENE_HEIGHT);
-        scene.getStylesheets().add("hkrFx/Global.css");
+        scene.getStylesheets().add("hkrFX/General.css");
 
         this.setScene(scene);
         this.show();

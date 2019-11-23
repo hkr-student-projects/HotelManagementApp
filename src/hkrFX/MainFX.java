@@ -6,19 +6,25 @@ import javafx.event.EventHandler;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.util.List;
+
+interface ISerializable<T> {
+
+    public T Serialize();
+}
 
 public class MainFX extends Application {
 
-    public static short SCENE_HEIGHT = 437;
+    public static short SCENE_HEIGHT = 440;
     public static short SCENE_WIDTH = 600;
-    private BookingStage bookingStage;
+    private BookingInfoStage bookingInfoStage;
     private HomeStage homeStage;
 
 
     @Override
     public void start(Stage stage) throws IOException {
 
-        bookingStage = new BookingStage();
+        bookingInfoStage = new BookingInfoStage();
         homeStage = new HomeStage();
         stage.setResizable(false);
         initializeEvents();
@@ -34,7 +40,7 @@ public class MainFX extends Application {
 
             @Override
             public void handle(ActionEvent event) {
-                bookingStage.show();
+                bookingInfoStage.show();
             }
         });
 
@@ -43,6 +49,7 @@ public class MainFX extends Application {
             @Override
             public void handle(ActionEvent event) {
                 //new ReceptionStage();
+
             }
         });
 
@@ -56,5 +63,16 @@ public class MainFX extends Application {
 
         //scene.setFill(Color.TRANSPARENT);
         //stage.initStyle(StageStyle.TRANSPARENT);
+    }
+
+    public static boolean equals(char[] str1, char[] str2){
+        if(str1.length != str2.length)
+            return false;
+        for (short i = 0; i < str1.length; i++)
+            if(str1[i] != str2[i])
+                return false;
+
+
+        return true;
     }
 }

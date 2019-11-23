@@ -1,6 +1,8 @@
 package hkrFX;
 
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
@@ -16,9 +18,9 @@ import javax.swing.*;
 
 public class BookingStage extends Stage{
 
-    private AnchorPane _anchorpane;
-    private Pane _pane;
-    private Label _label;
+//    private AnchorPane _anchorpane;
+//    private Pane _pane;
+//    private Label _label;
     private Text[] _texts;
     private TextField[] _fields;
     private ComboBox[] _boxes;
@@ -28,35 +30,35 @@ public class BookingStage extends Stage{
     public BookingStage(){
 
         this.setResizable(false);
-        _anchorpane = new AnchorPane();
-        _anchorpane.prefHeight(MainFX.SCENE_HEIGHT);
-        _anchorpane.prefWidth(MainFX.SCENE_WIDTH);
-        _anchorpane.setStyle("-fx-background-color: white");
+//        _anchorpane = new AnchorPane();
+//        _anchorpane.prefHeight(MainFX.SCENE_HEIGHT);
+//        _anchorpane.prefWidth(MainFX.SCENE_WIDTH);
+//        _anchorpane.setStyle("-fx-background-color: white");
 
-        _pane = new Pane();
-        _pane.setMinHeight(MainFX.SCENE_HEIGHT );
-        _pane.prefWidth(220);
-        _pane.setStyle("-fx-background-color: #ffb053");
+//        _pane = new Pane();
+//        _pane.setMinHeight(MainFX.SCENE_HEIGHT );
+//        _pane.prefWidth(220);
+//        _pane.setStyle("-fx-background-color: #ffb053");
 
-        _label = new Label();
-        _label.setLayoutX(238.0);
-        _label.setLayoutY(14.0);
-        _label.prefHeight(17.0);
-        _label.prefWidth(125.0);
-        _label.setText("Booking details");
-        _label.setTextFill(Paint.valueOf("#ffb053"));
-        _label.setFont(new Font("Futura Medium", 13));
+//        _label = new Label();
+//        _label.setLayoutX(238.0);
+//        _label.setLayoutY(14.0);
+//        _label.prefHeight(17.0);
+//        _label.prefWidth(125.0);
+//        _label.setText("Booking details");
+//        _label.setTextFill(Paint.valueOf("#ffb053"));
+//        _label.setFont(new Font("Futura Medium", 13));
 
-        _texts = createTexts(
-                new String[] { "Name", "SSN", "Phone", "Address", "Room Type", "Guests", "Arrival Date", "Departure Date" },
-                new double[] { 71.0, 116.0, 161.0, 206.0, 253.0, 298.0, 343.0, 388.0 },
-                new double[] { 68.21875, 68.21875, 68.21875, 68.21875, 94.21875, 94.21875, 94.21875, 118.21875}
-        );
+//        _texts = createTexts(
+//                new String[] { "Name", "SSN", "Phone", "Address", "Room Type", "Guests", "Arrival Date", "Departure Date" },
+//                new double[] { 71.0, 116.0, 161.0, 206.0, 253.0, 298.0, 343.0, 388.0 },
+//                new double[] { 68.21875, 68.21875, 68.21875, 68.21875, 94.21875, 94.21875, 94.21875, 118.21875}
+//        );
 
         _fields = createFields(
                 new String[] { "Name", "Surname", "19890518-4376", "+073-751-06-21", "Storagatan 12A-1006" },
-                new double[] { 236.0, 412.0, 236.0, 236.0, 236.0},
-                new double[] { 53.0, 53.0, 98.0, 143.0, 188.0}
+                new double[] { 236.0, 412.0, 236.0, 236.0, 236.0 },
+                new double[] { 53.0, 53.0, 98.0, 143.0, 188.0 }
         );
 
         _boxes = createBoxes(new double[] { 234.0, 274.0 });
@@ -68,31 +70,58 @@ public class BookingStage extends Stage{
 
     private void createScene(){
 
-        ObservableList<Node> aChilds = _anchorpane.getChildren();
-        ObservableList<Node> pChilds = _pane.getChildren();
+        AnchorPane anchorpane = new AnchorPane();
+        anchorpane.prefHeight(MainFX.SCENE_HEIGHT);
+        anchorpane.prefWidth(MainFX.SCENE_WIDTH);
+        anchorpane.setStyle("-fx-background-color: white");
 
-        Button b = new Button();//temporary
-        b.setLayoutY(-14);
-        b.setMnemonicParsing(false);
-        b.prefHeight(42);
-        b.prefWidth(45);
-        b.setStyle("-fx-background-color: transparent;");
-        b.setText("⬅");
-        b.setTextFill(Paint.valueOf("WHITE"));
-        b.setFont(new Font("Arial Rounded MT Bold", 30));
+        Pane pane = new Pane();
+        pane.setMinHeight(MainFX.SCENE_HEIGHT );
+        pane.setPrefWidth(MainFX.SCENE_WIDTH / 3.0);
+        pane.setStyle("-fx-background-color: #ffb053");
 
-        pChilds.addAll(_texts);
-        pChilds.add(b);
-        aChilds.add(_pane);
+        ObservableList<Node> aChilds = anchorpane.getChildren();
+        ObservableList<Node> pChilds = pane.getChildren();
+
+//        Button b = new Button();//temporary
+//        b.setLayoutY(-14);
+//        b.setLayoutX(40);
+//        b.setMnemonicParsing(false);
+//        b.prefHeight(42);
+//        b.prefWidth(45);
+//        b.setStyle("-fx-background-color: transparent;");
+//        b.setText("⬅");
+//        //b.setText("-");
+//        b.setTextFill(Paint.valueOf("WHITE"));
+//        b.setFont(new Font("Arial Rounded MT Bold", 40));
+//        b.setOnAction(event -> this.close());
+
+        Text label = new Text();
+        label.setLayoutX(238.0);
+        label.setLayoutY(25.0);
+        label.prefHeight(17.0);
+        label.prefWidth(125.0);
+        label.setText("Booking details");
+        label.setFill(Paint.valueOf("#ffb053"));
+        label.setFont(new Font("Futura Medium", 14));
+
+        pChilds.addAll(createTexts(
+                new String[] { "Name", "SSN", "Phone", "Address", "Room Type", "Guests", "Arrival Date", "Departure Date" },
+                new double[] { 71.0, 116.0, 161.0, 206.0, 253.0, 298.0, 343.0, 388.0 },
+                new double[] { 68.21875, 68.21875, 68.21875, 68.21875, 94.21875, 94.21875, 94.21875, 118.21875}
+        ));
+
+        //pChilds.add(b);
+        aChilds.add(pane);
         aChilds.addAll(_fields);
         aChilds.addAll(_boxes);
         aChilds.addAll(_buttons);
         aChilds.addAll(_dates);
-        aChilds.add(_label);
+        aChilds.add(label);
 
         //this.setScene(new Scene(_anchorpane, Main.SCENE_WIDTH, Main.SCENE_HEIGHT));
-        Scene scene = new Scene(_anchorpane, MainFX.SCENE_WIDTH, MainFX.SCENE_HEIGHT);
-        scene.getStylesheets().add("hkrFx/Home.css");
+        Scene scene = new Scene(anchorpane, MainFX.SCENE_WIDTH, MainFX.SCENE_HEIGHT);
+        scene.getStylesheets().add("hkrFx/General.css");
         this.setScene(scene);
 
         //this.show();
@@ -111,7 +140,7 @@ public class BookingStage extends Stage{
         for (byte i = 0; i < txts.length; i++){
             txts[i] = new Text();
             txts[i].setFill(Paint.valueOf("#ffffff"));
-            txts[i].setLayoutX(24.0);
+            txts[i].setLayoutX(40.0);
             txts[i].setLayoutY(layoutYs[i]);
             txts[i].setStrokeType(StrokeType.OUTSIDE);
             txts[i].setStrokeWidth(0.0);
@@ -198,4 +227,66 @@ public class BookingStage extends Stage{
 
         return buttons;
     }
+
+    public Button getButton(String name){
+        for (Button b : _buttons){
+            if(MainFX.equals(b.getText().toLowerCase().toCharArray(), name.toLowerCase().toCharArray()))
+                return b;
+        }
+
+
+        System.out.println("Unable to find button: "+ name +" in "+ this.getClass().getName() +"");
+        return null;
+    }
+
+//    private void closeStage(){
+//
+//        String outErrors = "";
+//        if(!_ssn.getText().matches("\\d{8}\\-\\d{4}")){
+//            outErrors += " \nSSN";
+//            _ssn.setStyle("-fx-control-inner-background: #"+_errorColor.toString().substring(2));
+//            _ssn.focusedProperty().addListener((obs, wasFocused, isNowFocused) -> {
+//                if (isNowFocused)
+//                    _ssn.setStyle("");
+//            });
+//        }
+//
+//        if(!_name.getText().matches("[A-Z][a-z]*\\s[A-Z][a-z]*")){
+//            outErrors += " \nName";
+//            _name.setStyle("-fx-control-inner-background: #"+_errorColor.toString().substring(2));
+//            _name.focusedProperty().addListener((obs, wasFocused, isNowFocused) -> {
+//                if (isNowFocused)
+//                    _name.setStyle("");
+//            });
+//        }
+//
+//        if(!_phone.getText().matches("\\+\\d{3}\\-\\d{3}\\-\\d{2}\\-\\d{2}")){
+//            outErrors += " \nPhone";
+//            _phone.setStyle("-fx-control-inner-background: #"+_errorColor.toString().substring(2));
+//            _phone.focusedProperty().addListener((obs, wasFocused, isNowFocused) -> {
+//                if (isNowFocused)
+//                    _phone.setStyle("");
+//            });
+//        }
+//
+//        if(!_adrs.getText().matches("[A-Z][a-z]+\\s\\d+[A-Z]?\\-\\d+")){
+//            outErrors += " \naddress";
+//            _adrs.setStyle("-fx-control-inner-background: #"+_errorColor.toString().substring(2));
+//            _adrs.focusedProperty().addListener((obs, wasFocused, isNowFocused) -> {
+//                if (isNowFocused)
+//                    _adrs.setStyle("");
+//            });
+//        }
+//
+//        if (outErrors.isEmpty()){
+//            //create customer
+//            this.close();
+//        }
+//
+//        else{
+//
+//            _output.setText("FORMAT ERRORS:" + outErrors + "");
+//        }
+//
+//    }
 }
