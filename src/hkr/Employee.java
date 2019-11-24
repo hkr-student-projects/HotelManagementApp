@@ -3,11 +3,13 @@ package hkr;
 public class Employee extends Person{
     private String employeePassword;
     private int employeeCounter;
+    private String role;
 
-    public Employee(String firstName, String lastName, String personNumber, String phoneNumber, String employeePassword, int employeeCounter) {
+    public Employee(String firstName, String lastName, String personNumber, String phoneNumber, String employeePassword, int employeeCounter,String role) {
         super(firstName, lastName, personNumber, phoneNumber);
         this.employeePassword = employeePassword;
         this.employeeCounter = employeeCounter;
+        this.role = role;
     }
 
     public String getEmployeePassword() {
@@ -24,6 +26,14 @@ public class Employee extends Person{
 
     public void setEmployeeCounter(int employeeCounter) {
         this.employeeCounter = employeeCounter;
+    }
+
+    public String getRole() {
+        return role;
+    }
+
+    public void setRole(String role) {
+        this.role = role;
     }
 
     @Override
