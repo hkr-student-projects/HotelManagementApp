@@ -12,6 +12,8 @@ https://metanit.com/java/
 
 Sub-sources:
 
+https://howtodoinjava.com/library/json-simple-read-write-json-examples/
+
 https://www.developer.com/java/data/understanding-and-using-the-java-delegation-event-model.html
 
 https://stackoverflow.com/questions/12341672/make-portion-of-a-text-bold-in-a-javafx-label-or-text

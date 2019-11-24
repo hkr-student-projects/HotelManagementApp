@@ -7,12 +7,10 @@ Exists in this organisation's repositories [developing].
 #### To Add:
 Events:
 
-  - OnBookingRequested(Customer customer, Booking booking)
-  - OnBookingRemoveRequested(Customer customer, Booking booking)
-  - OnCustomerCreated(Customer customer, Booking booking)?
-  - OnEmployeeCreated(Employee employee)?
-  - OnAdminCreated(Amin admin)
-  - OnPersonCreated(Person person)?
+  - 1. Multi-language support
+  - 2. Class serialisation
+  - 3. Translation list
+  - 4. Input field validation
   
   
 ## Background Activity

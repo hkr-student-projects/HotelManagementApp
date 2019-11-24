@@ -4,7 +4,7 @@ package hkr;
 
 import hkrFX.MainFX;
 import javafx.application.Application;
-import javafx.stage.Stage;
+import org.json.simple.JSONObject;
 
 import java.io.*;
 import java.util.ArrayList;
@@ -26,6 +26,23 @@ public class Main {
 //        Main myApp = new Main();
 //        myApp.showMenu();
         Application.launch(MainFX.class);
+    }
+    private static void parseEmployeeObject(JSONObject employee)
+    {
+        //Get employee object within list
+        //JSONObject employeeObject = (JSONObject) employee.get("employee");
+
+        //Get employee first name
+        String firstName = (String) employee.get("firstName");
+        System.out.println(firstName);
+
+        //Get employee last name
+        String lastName = (String) employee.get("lastName");
+        System.out.println(lastName);
+
+        //Get employee website name
+        String website = (String) employee.get("website");
+        System.out.println(website);
     }
     public void showMenu(){
         while(true){

@@ -1,0 +1,33 @@
+==============FileWriter FileReader===============
+//        JSONObject employeeDetails = new JSONObject();
+//        employeeDetails.put("firstName", "Lokesh");
+//        employeeDetails.put("lastName", "Gupta");
+//        employeeDetails.put("website", "howtodoinjava.com");
+//        JSONArray employeeList = new JSONArray();
+//        employeeList.add(employeeDetails);
+//
+//        try (FileWriter file = new FileWriter("employees.json", false)) {
+//
+//            file.write(employeeList.toJSONString());
+//            file.flush();
+//
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//        }
+//
+//
+//        HashMap<String, String> tran = null;
+//
+//        try (FileReader reader = new FileReader("employees.json"))
+//        {
+//            //Read JSON file
+//            tran = Translation.dDeserialize(reader);
+//
+//        } catch (FileNotFoundException e) {
+//            e.printStackTrace();
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//        }
+//        tran.entrySet().forEach(pair -> {
+//            out.println(pair.getKey() + " " + pair.getValue());
+//        });
