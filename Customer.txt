@@ -1,0 +1,1 @@
+Customer Id =1 Customer First Name =Hamza Customer Last Name =Anwar Customer Personal Number =19980515-3377 Customer Phone Number =0737410229 Customer Password =hamza
