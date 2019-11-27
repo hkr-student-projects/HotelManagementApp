@@ -6,10 +6,7 @@
   <component name="ChangeListManager">
     <list default="true" id="be750a4a-f25b-417a-8b32-89dd50849fe2" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Hotel_Management/hkrFX/misc.txt" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Hotel_Management/hkrFX/misc.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/hkr/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/hkr/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/hkrFX/MainFX.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/hkrFX/MainFX.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/hkrFX/Translation.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/hkrFX/Translator.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/hkrFX/Translator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/hkrFX/Translator.java" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />

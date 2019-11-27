@@ -12,22 +12,21 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
-public class Translator implements ISerializable<String>, IDeserializable<HashMap<String, String>> {
+public class Translator{// implements ISerializable<String>, IDeserializable<HashMap<String, String>> {
 
     private static Map<String, String> _translations;
-    private static boolean isLoaded;
 
     static {
         _translations = new HashMap<String, String>();
-        isLoaded = false;
-    }
-
-    public Translator(){
         loadDefaults();
         loadTranslation();
     }
 
-    public String translate(String keyID){
+//    public Translator(){
+//
+//    }
+
+    public static String translate(String keyID){
 
         for (Map.Entry<String, String> pair : _translations.entrySet())
             if(pair.getKey() == keyID)
@@ -37,8 +36,8 @@ public class Translator implements ISerializable<String>, IDeserializable<HashMa
         return null;
     }
 
-    @Override
-    public String Serialize() {
+    //@Override
+    private static String Serialize() {
 
         JSONObject obj = new JSONObject();
         _translations.entrySet().forEach(pair -> obj.put(pair.getKey(), pair.getValue()));
@@ -48,11 +47,10 @@ public class Translator implements ISerializable<String>, IDeserializable<HashMa
         return json.toJSONString();
     }
 
-    @Override
-    public HashMap<String, String> Deserialize(FileReader reader) {
+    //@Override
+    private static void Deserialize(FileReader reader) {
 
-
-        HashMap<String, String> tran = new HashMap<String, String>();
+        //HashMap<String, String> tran = new HashMap<String, String>();
         try
         {
             JSONParser jsonParser = new JSONParser();
@@ -69,12 +67,11 @@ public class Translator implements ISerializable<String>, IDeserializable<HashMa
             Logger.LogException(e.getMessage());
         }
 
-        return tran;
+        //return tran;
     }
 
-    private void loadTranslation(){
-        if(isLoaded)
-            return;
+    private static void loadTranslation(){
+
         File f = new File(""+ MainFX.getConfig().getLanguageCode() +".translation.json");
         if(!f.exists()){
             Logger.LogError("Unable to load language pack: "+ MainFX.getConfig().getLanguageCode() +", because pack does not exist");
@@ -85,20 +82,16 @@ public class Translator implements ISerializable<String>, IDeserializable<HashMa
             {
                 JSONParser jsonParser = new JSONParser();
                 Object json = jsonParser.parse(reader);
-                _translations = Deserialize(reader);
+                Deserialize(reader);
             }
             catch (IOException | ParseException e) {
                 Logger.LogException(e.getMessage());
-                isLoaded = false;
                 return;
             }
         }
-        isLoaded = true;
     }
 
-    private void loadDefaults(){
-        if(isLoaded)
-            return;
+    private static void loadDefaults(){
         try (FileWriter file = new FileWriter("en.translation.json", false)) {
 
             _translations.put("button_not_found", "Unable to find the button {0} in {1}");
@@ -107,14 +100,11 @@ public class Translator implements ISerializable<String>, IDeserializable<HashMa
             _translations.put("field_empty", "The field {0} in {1} is empty");
             _translations.put("login_password_fail", "Login: {0} or password: {1} is incorrect");
             _translations.put("keyid_not_found", "KeyID {0} was not found");
-            file.write(this.Serialize());
+            file.write(Serialize());
             file.flush();
 
         } catch (IOException e) {
             Logger.LogException(e.getMessage());
-            isLoaded = false;
-            return;
         }
-        isLoaded = true;
     }
 }
