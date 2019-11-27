@@ -25,7 +25,7 @@ public class Main {
     public static void main(String[] args) {
 //        Main myApp = new Main();
 //        myApp.showMenu();
-        //Application.launch(MainFX.class);
+        Application.launch(MainFX.class);
     }
     private static void parseEmployeeObject(JSONObject employee)
     {

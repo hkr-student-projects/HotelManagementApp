@@ -29,16 +29,18 @@ public class MainFX extends Application {
     private static Config _config;
     private BookingInfoStage bookingInfoStage;
     private HomeStage homeStage;
-
+    public static Translator Translator;
 
     @Override
     public void start(Stage stage) throws IOException {
 
+        stage.setResizable(false);
         bookingInfoStage = new BookingInfoStage();
         homeStage = new HomeStage();
         _config = new Config();
         loadConfig();
-        stage.setResizable(false);
+        Translator = new Translator();
+
         initializeEvents();
         stage.setScene(homeStage.getScene());
         stage.show();
@@ -88,7 +90,7 @@ public class MainFX extends Application {
                 file.flush();
 
             } catch (IOException e) {
-                e.printStackTrace();
+                Logger.LogException(e.getMessage());
             }
         }
         else {
@@ -101,10 +103,13 @@ public class MainFX extends Application {
 
             }
             catch (IOException | ParseException e) {
-                System.out.println("Invalid json format");
-                e.printStackTrace();
+                Logger.LogException(e.getMessage());
             }
         }
+    }
+
+    private void unloadConfig(){
+        //on app close
     }
 
     private void loadDefaults(){
@@ -118,7 +123,7 @@ public class MainFX extends Application {
             file.flush();
 
         } catch (IOException e) {
-            e.printStackTrace();
+            Logger.LogException(e.getMessage());
         }
     }
 

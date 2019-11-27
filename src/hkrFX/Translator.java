@@ -12,16 +12,19 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
-public class Translation implements ISerializable<String>, IDeserializable<HashMap<String, String>> {
+public class Translator implements ISerializable<String>, IDeserializable<HashMap<String, String>> {
 
     private static Map<String, String> _translations;
+    private static boolean isLoaded;
 
     static {
         _translations = new HashMap<String, String>();
+        isLoaded = false;
     }
 
-    public Translation(){
+    public Translator(){
         loadDefaults();
+        loadTranslation();
     }
 
     public String translate(String keyID){
@@ -30,6 +33,7 @@ public class Translation implements ISerializable<String>, IDeserializable<HashM
             if(pair.getKey() == keyID)
                 return pair.getValue();
 
+        Logger.LogError("KeyID "+ keyID +" was not found");
         return null;
     }
 
@@ -47,6 +51,7 @@ public class Translation implements ISerializable<String>, IDeserializable<HashM
     @Override
     public HashMap<String, String> Deserialize(FileReader reader) {
 
+
         HashMap<String, String> tran = new HashMap<String, String>();
         try
         {
@@ -56,67 +61,44 @@ public class Translation implements ISerializable<String>, IDeserializable<HashM
             JSONArray arr = (JSONArray) json;
             arr.forEach( obj -> {
                 ((JSONObject)obj).forEach((key, value) -> {
-                    tran.put((String)key, (String)value);
+                    _translations.put((String)key, (String)value);
                 });
             } );
 
         }  catch (IOException | ParseException e) {
-            System.out.println("Invalid json format");
-            e.printStackTrace();
+            Logger.LogException(e.getMessage());
         }
-
 
         return tran;
     }
 
-    public void loadLanguage(String code){
-
-        File f = new File(""+ code +".translation.json");
-        if(!f.exists()){
-
-//            try (FileWriter file = new FileWriter("employees.json", false)) {
-//
-//                file.write(this.Serialize());
-//                file.flush();
-//
-//            } catch (IOException e) {
-//                e.printStackTrace();
-//            }
-        }
-    }
-
     private void loadTranslation(){
+        if(isLoaded)
+            return;
         File f = new File(""+ MainFX.getConfig().getLanguageCode() +".translation.json");
         if(!f.exists()){
-            try (FileWriter file = new FileWriter("config.json", false)) {
-
-                MainFX._config.setLanguageCode("en");
-                String json = MainFX._config.Serialize();
-                file.write(json);
-                file.flush();
-
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
+            Logger.LogError("Unable to load language pack: "+ MainFX.getConfig().getLanguageCode() +", because pack does not exist");
         }
         else {
 
-            try (FileReader reader = new FileReader("config.json"))
+            try (FileReader reader = new FileReader(""+ MainFX.getConfig().getLanguageCode() +".translation.json"))
             {
                 JSONParser jsonParser = new JSONParser();
                 Object json = jsonParser.parse(reader);
-                //MainFX._config = MainFX._config.Deserialize(reader);
-
+                _translations = Deserialize(reader);
             }
             catch (IOException | ParseException e) {
-                System.out.println("Invalid json format");
-                e.printStackTrace();
+                Logger.LogException(e.getMessage());
+                isLoaded = false;
+                return;
             }
         }
+        isLoaded = true;
     }
 
     private void loadDefaults(){
-
+        if(isLoaded)
+            return;
         try (FileWriter file = new FileWriter("en.translation.json", false)) {
 
             _translations.put("button_not_found", "Unable to find the button {0} in {1}");
@@ -129,7 +111,10 @@ public class Translation implements ISerializable<String>, IDeserializable<HashM
             file.flush();
 
         } catch (IOException e) {
-            e.printStackTrace();
+            Logger.LogException(e.getMessage());
+            isLoaded = false;
+            return;
         }
+        isLoaded = true;
     }
 }
