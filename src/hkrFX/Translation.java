@@ -21,10 +21,15 @@ public class Translation implements ISerializable<String>, IDeserializable<HashM
     }
 
     public Translation(){
-
+        loadDefaults();
     }
 
     public String translate(String keyID){
+
+        for (Map.Entry<String, String> pair : _translations.entrySet())
+            if(pair.getKey() == keyID)
+                return pair.getValue();
+
         return null;
     }
 
@@ -68,23 +73,58 @@ public class Translation implements ISerializable<String>, IDeserializable<HashM
 
         File f = new File(""+ code +".translation.json");
         if(!f.exists()){
-            try (FileWriter file = new FileWriter("employees.json", false)) {
 
-                file.write(this.Serialize());
+//            try (FileWriter file = new FileWriter("employees.json", false)) {
+//
+//                file.write(this.Serialize());
+//                file.flush();
+//
+//            } catch (IOException e) {
+//                e.printStackTrace();
+//            }
+        }
+    }
+
+    private void loadTranslation(){
+        File f = new File(""+ MainFX.getConfig().getLanguageCode() +".translation.json");
+        if(!f.exists()){
+            try (FileWriter file = new FileWriter("config.json", false)) {
+
+                MainFX._config.setLanguageCode("en");
+                String json = MainFX._config.Serialize();
+                file.write(json);
                 file.flush();
 
             } catch (IOException e) {
                 e.printStackTrace();
             }
         }
+        else {
+
+            try (FileReader reader = new FileReader("config.json"))
+            {
+                JSONParser jsonParser = new JSONParser();
+                Object json = jsonParser.parse(reader);
+                //MainFX._config = MainFX._config.Deserialize(reader);
+
+            }
+            catch (IOException | ParseException e) {
+                System.out.println("Invalid json format");
+                e.printStackTrace();
+            }
+        }
     }
 
-    public void loadDefaults(){
+    private void loadDefaults(){
 
         try (FileWriter file = new FileWriter("en.translation.json", false)) {
 
-            _translations.put("find_button_fail", "Unable to find the button {0} in {1}");
-            _translations.put("json_format_fail", "");
+            _translations.put("button_not_found", "Unable to find the button {0} in {1}");
+            _translations.put("json_format_fail", "Incorrect json in {0}");
+            _translations.put("field_format_fail", "The field {0} in {1} is empty");
+            _translations.put("field_empty", "The field {0} in {1} is empty");
+            _translations.put("login_password_fail", "Login: {0} or password: {1} is incorrect");
+            _translations.put("keyid_not_found", "KeyID {0} was not found");
             file.write(this.Serialize());
             file.flush();
 

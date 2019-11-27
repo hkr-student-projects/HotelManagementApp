@@ -1,11 +1,9 @@
 package hkrFX;
 
-import hkr.Main;
 import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.stage.Stage;
-import org.json.simple.JSONArray;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 
@@ -13,7 +11,6 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.util.List;
 
 interface IDeserializable<T> {
 
@@ -136,7 +133,7 @@ public class MainFX extends Application {
         return true;
     }
 
-    public Config getConfig(){
+    public static Config getConfig(){
         return _config;
     }
 }

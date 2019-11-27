@@ -5,15 +5,15 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="be750a4a-f25b-417a-8b32-89dd50849fe2" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/hkrFX/Config.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/hkrFX/misc.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/hkrFX/LogThread.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/hkrFX/Logger.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/hkrFX/LoggerQueue.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Hotel_Management/hkrFX/BookingInfo.fxml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Hotel_Management/hkrFX/Readme.md" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Hotel_Management/hkrFX/Readme.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Hotel_Management/hkrFX/References.txt" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Hotel_Management/hkrFX/References.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/hkr/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/hkr/Main.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/hkrFX/MainFX.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/hkrFX/MainFX.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/hkrFX/References.txt" beforeDir="false" afterPath="$PROJECT_DIR$/src/hkrFX/References.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/hkrFX/Translation.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/hkrFX/Translation.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/hkrFX/misc.txt" beforeDir="false" afterPath="$PROJECT_DIR$/src/hkrFX/misc.txt" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -40,7 +40,7 @@
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.2" />
     <property name="restartRequiresConfirmation" value="false" />
-    <property name="settings.editor.selected.configurable" value="preferences.lookFeel" />
+    <property name="settings.editor.selected.configurable" value="reference.settingsdialog.IDE.editor.colors.Language Defaults" />
   </component>
   <component name="RecentsManager">
     <key name="MoveClassesOrPackagesDialog.RECENTS_KEY">
