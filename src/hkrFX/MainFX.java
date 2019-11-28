@@ -29,17 +29,15 @@ public class MainFX extends Application {
     private static Config _config;
     private BookingInfoStage bookingInfoStage;
     private HomeStage homeStage;
-    public static Translator Translator;
 
     @Override
-    public void start(Stage stage) throws IOException {
+    public void start(Stage stage) {
 
         stage.setResizable(false);
         bookingInfoStage = new BookingInfoStage();
         homeStage = new HomeStage();
         _config = new Config();
         loadConfig();
-        Translator = new Translator();
 
         initializeEvents();
         stage.setScene(homeStage.getScene());
@@ -97,12 +95,9 @@ public class MainFX extends Application {
 
             try (FileReader reader = new FileReader("config.json"))
             {
-                JSONParser jsonParser = new JSONParser();
-                Object json = jsonParser.parse(reader);
                 MainFX._config = MainFX._config.Deserialize(reader);
-
             }
-            catch (IOException | ParseException e) {
+            catch (IOException e) {
                 Logger.LogException(e.getMessage());
             }
         }

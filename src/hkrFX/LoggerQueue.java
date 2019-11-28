@@ -41,12 +41,11 @@ public class LoggerQueue {
 
     private void process(LogEntry entry){
 
-        try (FileWriter fstream = new FileWriter("App.log", true)) {
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter("App.log", true))) {
 
-            BufferedWriter out = new BufferedWriter(fstream);
-            out.write("["+ new SimpleDateFormat("yyyy-MM-dd HH:mm:ss z").format(new Date(System.currentTimeMillis())) +"]" +
+            writer.write("["+ new SimpleDateFormat("yyyy-MM-dd HH:mm:ss z").format(new Date(System.currentTimeMillis())) +"]" +
                     " [" + entry.logType.toString() + "] " + entry.message + "");
-            out.newLine();
+            writer.newLine();
 
         } catch (IOException e) {
             e.printStackTrace();

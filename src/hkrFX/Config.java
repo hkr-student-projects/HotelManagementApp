@@ -12,6 +12,7 @@ public class Config implements ISerializable<String>, IDeserializable<Config>{
     private String _languageCode;
 
     public Config(){
+        _languageCode = "en";
     }
 
     @Override
@@ -19,7 +20,10 @@ public class Config implements ISerializable<String>, IDeserializable<Config>{
         Config config = new Config();
         try
         {
-            JSONArray json = (JSONArray)new JSONParser().parse(reader);
+//            JSONParser jsonParser = new JSONParser();
+//            Object obj = jsonParser.parse(reader);
+
+            JSONArray json = (JSONArray) new JSONParser().parse(reader);
 //            json.forEach(el ->
 //                    config.setLanguageCode(((JSONObject)el).get("lang").toString()), cannot because additional logic needed
 //                    config.setLanguageCode(((JSONObject)el).get("lang").toString())

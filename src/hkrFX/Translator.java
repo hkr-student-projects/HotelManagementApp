@@ -20,6 +20,7 @@ public class Translator{// implements ISerializable<String>, IDeserializable<Has
         _translations = new HashMap<String, String>();
         loadDefaults();
         loadTranslation();
+        //runs before static methods
     }
 
 //    public Translator(){
@@ -27,7 +28,6 @@ public class Translator{// implements ISerializable<String>, IDeserializable<Has
 //    }
 
     public static String translate(String keyID){
-
         for (Map.Entry<String, String> pair : _translations.entrySet())
             if(pair.getKey() == keyID)
                 return pair.getValue();
@@ -80,11 +80,9 @@ public class Translator{// implements ISerializable<String>, IDeserializable<Has
 
             try (FileReader reader = new FileReader(""+ MainFX.getConfig().getLanguageCode() +".translation.json"))
             {
-                JSONParser jsonParser = new JSONParser();
-                Object json = jsonParser.parse(reader);
                 Deserialize(reader);
             }
-            catch (IOException | ParseException e) {
+            catch (IOException e) {
                 Logger.LogException(e.getMessage());
                 return;
             }

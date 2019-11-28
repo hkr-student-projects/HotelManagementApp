@@ -52,19 +52,19 @@ class LogEntry{
         switch (logType){
             case Log:
                 out.println(logType.Log.getCode() + message + "\u001B[0m");
-                new LogThread("logThread", new LogEntry(message, logType));
+                new LogThread("logThread", new LogEntry(message, logType)).start();
                 break;
             case Error:
                 out.println(logType.Error.getCode() + message + "\u001B[0m");
-                new LogThread("logErrorThread", new LogEntry(message, logType));
+                new LogThread("logErrorThread", new LogEntry(message, logType)).start();
                 break;
             case Warning:
                 out.println(logType.Warning.getCode() + message + "\u001B[0m");
-                new LogThread("logWarningThread", new LogEntry(message, logType));
+                new LogThread("logWarningThread", new LogEntry(message, logType)).start();
                 break;
             case Exception:
                 out.println(logType.Exception.getCode() + message + "\u001B[0m");
-                new LogThread("logExceptionThread", new LogEntry(message, logType));
+                new LogThread("logExceptionThread", new LogEntry(message, logType)).start();
                 break;
             default:
                 out.println("\u001B[0m" + message + "\u001B[0m");

@@ -6,6 +6,11 @@
   <component name="ChangeListManager">
     <list default="true" id="be750a4a-f25b-417a-8b32-89dd50849fe2" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/config.json" beforeDir="false" afterPath="$PROJECT_DIR$/config.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/hkrFX/Config.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/hkrFX/Config.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/hkrFX/Logger.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/hkrFX/Logger.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/hkrFX/LoggerQueue.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/hkrFX/LoggerQueue.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/hkrFX/MainFX.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/hkrFX/MainFX.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/hkrFX/Translator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/hkrFX/Translator.java" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -93,6 +98,9 @@
       <updated>1574087679377</updated>
     </task>
     <servers />
+  </component>
+  <component name="UnknownFeatures">
+    <option featureType="com.intellij.fileTypeFactory" implementationName="*.log" />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
     <option name="TAB_STATES">
