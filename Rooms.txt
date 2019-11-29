@@ -1,3 +1,0 @@
-Room No =01 Booking =Yes
-Room No =02 Booking =No
-Room No =03 Booking =Yes
