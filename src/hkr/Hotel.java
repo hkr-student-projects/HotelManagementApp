@@ -2,19 +2,10 @@ package hkr;
 
 public class Hotel {
     private String availableRooms;
-    private String booking;
-    private String bookingReference;
-    private int bookingCounter;
+    private boolean Cleaned;
 
-    public Hotel(String availableRooms, String booking, String bookingReference,int bookingCounter) {
+    public Hotel(String availableRooms) {
         this.availableRooms = availableRooms;
-        this.booking = booking;
-        this.bookingReference = bookingReference;
-        this.bookingCounter = bookingCounter;
-    }
-
-    public void setBooking(String booking) {
-        this.booking = booking;
     }
 
     public String getAvailableRooms() {
@@ -25,25 +16,12 @@ public class Hotel {
         this.availableRooms = availableRooms;
     }
 
-    public String getBooking() {
-        return bookingReference;
+
+    public boolean isCleaned() {
+        return Cleaned;
     }
 
-    public void setBookingReference(String bookingReference) {
-        this.bookingReference = bookingReference;
-    }
-
-    public int getBookingCounter() {
-        return bookingCounter;
-    }
-
-    public void setBookingCounter(int bookingCounter) {
-        this.bookingCounter = bookingCounter;
-    }
-
-    @Override
-    public String toString() {
-        return "Hotel Rooms=" + availableRooms +
-                ", Booking=" + bookingReference ;
+    public void setCleaned(boolean cleaned) {
+        Cleaned = cleaned;
     }
 }

@@ -6,11 +6,14 @@
   <component name="ChangeListManager">
     <list default="true" id="be750a4a-f25b-417a-8b32-89dd50849fe2" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Customer.txt" beforeDir="false" afterPath="$PROJECT_DIR$/Customer.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Rooms.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/AllRooms.txt" beforeDir="false" afterPath="$PROJECT_DIR$/AllRooms.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Booking.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Bookings.txt" beforeDir="false" afterPath="$PROJECT_DIR$/Bookings.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/DeletedRooms.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/UncleanedRooms.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/UpdatedRooms.txt" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/hkr/Hotel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/hkr/Hotel.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/hkr/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/hkr/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/hkrFX/MainFX.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/hkrFX/MainFX.java" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
