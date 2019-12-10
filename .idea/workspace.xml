@@ -1,18 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
-  <component name="AnalysisUIOptions">
-    <option name="SCOPE_TYPE" value="10" />
-  </component>
   <component name="ChangeListManager">
-    <list default="true" id="be750a4a-f25b-417a-8b32-89dd50849fe2" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/lib.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/uiDesigner.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/hkrFX/MainFX.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Hotel_Management.iml" beforeDir="false" afterPath="$PROJECT_DIR$/Hotel_Management.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/hkr/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/hkr/Main.java" afterDir="false" />
-    </list>
+    <list default="true" id="6b6f9578-045d-445d-b30b-b08d69ed448d" name="Default Changelist" comment="" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -22,27 +11,25 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
+        <option value="Interface" />
         <option value="Class" />
       </list>
     </option>
   </component>
-  <component name="Git.Settings">
-    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  <component name="ProjectId" id="1Uco608XDvlldvB8msFjCmFfEVO" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showExcludedFiles" value="true" />
+    <option name="showLibraryContents" value="true" />
   </component>
-  <component name="ProjectId" id="1TnEu5Nd3poQdjbm1Mxc5ciHH1l" />
   <component name="PropertiesComponent">
-    <property name="ASKED_ADD_EXTERNAL_FILES" value="true" />
-    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
-    <property name="project.structure.last.edited" value="Libraries" />
-    <property name="project.structure.proportion" value="0.15" />
-    <property name="project.structure.side.proportion" value="0.2" />
-    <property name="restartRequiresConfirmation" value="false" />
-  </component>
-  <component name="RecentsManager">
-    <key name="MoveClassesOrPackagesDialog.RECENTS_KEY">
-      <recent name="hkrFX" />
-    </key>
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="aspect.path.notification.shown" value="true" />
+    <property name="project.structure.last.edited" value="Project" />
+    <property name="project.structure.proportion" value="0.0" />
+    <property name="project.structure.side.proportion" value="0.0" />
+    <property name="settings.editor.selected.configurable" value="reference.projectsettings.compiler.javacompiler" />
   </component>
   <component name="RunDashboard">
     <option name="ruleStates">
@@ -56,59 +43,81 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Application.JavaFXMain">
-    <configuration name="JavaFXMain" type="Application" factoryName="Application">
-      <option name="MAIN_CLASS_NAME" value="hkr.Main" />
-      <module name="Hotel_Management" />
-      <option name="VM_PARAMETERS" value="--module-path &quot;$PROJECT_DIR$/lib&quot; --add-modules javafx.controls,javafx.fxml" />
+  <component name="RunManager">
+    <configuration name="Unnamed" type="Application" factoryName="Application" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="hkr.eduard.Main" />
+      <module name="HotelManagement" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="Main" type="Application" factoryName="Application" temporary="true">
-      <option name="MAIN_CLASS_NAME" value="hkr.Main" />
-      <module name="Hotel_Management" />
-      <option name="WORKING_DIRECTORY" value="file://$PROJECT_DIR$" />
-      <RunnerSettings RunnerId="Run" />
-      <ConfigurationWrapper RunnerId="Run" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <list>
-      <item itemvalue="Application.JavaFXMain" />
-      <item itemvalue="Application.Main" />
-    </list>
-    <recent_temporary>
-      <list>
-        <item itemvalue="Application.Main" />
-      </list>
-    </recent_temporary>
   </component>
   <component name="SvnConfiguration">
     <configuration />
   </component>
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
-      <changelist id="be750a4a-f25b-417a-8b32-89dd50849fe2" name="Default Changelist" comment="" />
-      <created>1574087679377</created>
+      <changelist id="6b6f9578-045d-445d-b30b-b08d69ed448d" name="Default Changelist" comment="" />
+      <created>1575665064724</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
-      <updated>1574087679377</updated>
+      <updated>1575665064724</updated>
+      <workItem from="1575665066978" duration="1068000" />
+      <workItem from="1575839435508" duration="11132000" />
     </task>
     <servers />
   </component>
-  <component name="Vcs.Log.Tabs.Properties">
-    <option name="TAB_STATES">
-      <map>
-        <entry key="MAIN">
-          <value>
-            <State>
-              <option name="COLUMN_ORDER" />
-            </State>
-          </value>
-        </entry>
-      </map>
-    </option>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="1" />
+  </component>
+  <component name="WindowStateProjectService">
+    <state x="414" y="174" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1575665112693">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="414" y="174" key="#com.intellij.execution.impl.EditConfigurationsDialog/-1280.64.1280.984/0.0.1920.1040@0.0.1920.1040" timestamp="1575665112693" />
+    <state x="765" y="235" key="#com.intellij.ide.util.MemberChooser" timestamp="1575841192749">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="765" y="235" key="#com.intellij.ide.util.MemberChooser/0.0.1920.1040/-1280.64.1280.984@0.0.1920.1040" timestamp="1575841192749" />
+    <state x="689" y="303" key="#com.intellij.ide.util.TreeClassChooserDialog" timestamp="1575665110467">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="689" y="303" key="#com.intellij.ide.util.TreeClassChooserDialog/-1280.64.1280.984/0.0.1920.1040@0.0.1920.1040" timestamp="1575665110467" />
+    <state x="761" y="342" key="FileChooserDialogImpl" timestamp="1575665271461">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="761" y="342" key="FileChooserDialogImpl/-1280.64.1280.984/0.0.1920.1040@0.0.1920.1040" timestamp="1575665271460" />
+    <state width="1877" height="282" key="GridCell.Tab.0.bottom" timestamp="1575911500722">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state width="1877" height="282" key="GridCell.Tab.0.bottom/-1280.64.1280.984/0.0.1920.1040@0.0.1920.1040" timestamp="1575669051020" />
+    <state width="1877" height="282" key="GridCell.Tab.0.bottom/0.0.1920.1040/-1280.64.1280.984@0.0.1920.1040" timestamp="1575841113183" />
+    <state width="1877" height="282" key="GridCell.Tab.0.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1575911500722" />
+    <state width="1877" height="282" key="GridCell.Tab.0.center" timestamp="1575911500722">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state width="1877" height="282" key="GridCell.Tab.0.center/-1280.64.1280.984/0.0.1920.1040@0.0.1920.1040" timestamp="1575669051020" />
+    <state width="1877" height="282" key="GridCell.Tab.0.center/0.0.1920.1040/-1280.64.1280.984@0.0.1920.1040" timestamp="1575841113183" />
+    <state width="1877" height="282" key="GridCell.Tab.0.center/0.0.1920.1040@0.0.1920.1040" timestamp="1575911500722" />
+    <state width="1877" height="282" key="GridCell.Tab.0.left" timestamp="1575911500722">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state width="1877" height="282" key="GridCell.Tab.0.left/-1280.64.1280.984/0.0.1920.1040@0.0.1920.1040" timestamp="1575669051020" />
+    <state width="1877" height="282" key="GridCell.Tab.0.left/0.0.1920.1040/-1280.64.1280.984@0.0.1920.1040" timestamp="1575841113183" />
+    <state width="1877" height="282" key="GridCell.Tab.0.left/0.0.1920.1040@0.0.1920.1040" timestamp="1575911500722" />
+    <state width="1877" height="282" key="GridCell.Tab.0.right" timestamp="1575911500722">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state width="1877" height="282" key="GridCell.Tab.0.right/-1280.64.1280.984/0.0.1920.1040@0.0.1920.1040" timestamp="1575669051020" />
+    <state width="1877" height="282" key="GridCell.Tab.0.right/0.0.1920.1040/-1280.64.1280.984@0.0.1920.1040" timestamp="1575841113183" />
+    <state width="1877" height="282" key="GridCell.Tab.0.right/0.0.1920.1040@0.0.1920.1040" timestamp="1575911500722" />
+    <state x="461" y="162" key="SettingsEditor" timestamp="1575665378995">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="461" y="162" key="SettingsEditor/-1280.64.1280.984/0.0.1920.1040@0.0.1920.1040" timestamp="1575665378995" />
+    <state x="623" y="225" width="672" height="678" key="search.everywhere.popup" timestamp="1575843516144">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="623" y="225" width="672" height="678" key="search.everywhere.popup/0.0.1920.1040/-1280.64.1280.984@0.0.1920.1040" timestamp="1575843516144" />
   </component>
 </project>
