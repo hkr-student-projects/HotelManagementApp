@@ -27,10 +27,10 @@ public class Translator{// implements ISerializable<String>, IDeserializable<Has
 //
 //    }
 
-    public static String translate(String keyID){
+    public static String translate(String keyID, Object... args){
         for (Map.Entry<String, String> pair : _translations.entrySet())
             if(pair.getKey() == keyID)
-                return pair.getValue();
+                return String.format(pair.getValue(), args);
 
         Logger.LogError("KeyID "+ keyID +" was not found");
         return null;
@@ -92,12 +92,13 @@ public class Translator{// implements ISerializable<String>, IDeserializable<Has
     private static void loadDefaults(){
         try (FileWriter file = new FileWriter("en.translation.json", false)) {
 
-            _translations.put("button_not_found", "Unable to find the button {0} in {1}");
-            _translations.put("json_format_fail", "Incorrect json in {0}");
-            _translations.put("field_format_fail", "The field {0} in {1} is empty");
-            _translations.put("field_empty", "The field {0} in {1} is empty");
-            _translations.put("login_password_fail", "Login: {0} or password: {1} is incorrect");
-            _translations.put("keyid_not_found", "KeyID {0} was not found");
+            _translations.put("button_not_found", "Unable to find the button %s in %s");
+            _translations.put("json_format_fail", "Incorrect json in %s");
+            _translations.put("field_format_fail", "The field %s in %s is empty");
+            _translations.put("field_empty", "The field %s in %s is empty");
+            _translations.put("login_password_fail", "Login: %s or password: %s is incorrect");
+            _translations.put("keyid_not_found", "KeyID %s was not found");
+            _translations.put("localization_not_found", "Language pack %s was not found");
             file.write(Serialize());
             file.flush();
 

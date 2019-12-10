@@ -5,6 +5,6 @@
     "login_password_fail":"Login: {0} or password: {1} is incorrect",
     "field_format_fail":"The field {0} in {1} is empty",
     "json_format_fail":"Incorrect json in {0}",
-    "button_not_found":"Unable to find the button {0} in {1}",
+    "button_not_found":"Unable to find the button {0} in {1}"
   }
 ]
