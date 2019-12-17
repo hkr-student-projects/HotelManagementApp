@@ -32,7 +32,7 @@ public class Translator{// implements ISerializable<String>, IDeserializable<Has
             if(pair.getKey() == keyID)
                 return String.format(pair.getValue(), args);
 
-        Logger.LogError("KeyID "+ keyID +" was not found");
+        Logger.logError("KeyID "+ keyID +" was not found");
         return null;
     }
 
@@ -64,7 +64,7 @@ public class Translator{// implements ISerializable<String>, IDeserializable<Has
             } );
 
         }  catch (IOException | ParseException e) {
-            Logger.LogException(e.getMessage());
+            Logger.logException(e.getMessage());
         }
 
         //return tran;
@@ -72,18 +72,18 @@ public class Translator{// implements ISerializable<String>, IDeserializable<Has
 
     private static void loadTranslation(){
 
-        File f = new File(""+ MainFX.getConfig().getLanguageCode() +".translation.json");
+        File f = new File(""+ MainFX.config.getLanguageCode() +".translation.json");
         if(!f.exists()){
-            Logger.LogError("Unable to load language pack: "+ MainFX.getConfig().getLanguageCode() +", because pack does not exist");
+            Logger.logError("Unable to load language pack: "+ MainFX.config.getLanguageCode() +", because pack does not exist");
         }
         else {
 
-            try (FileReader reader = new FileReader(""+ MainFX.getConfig().getLanguageCode() +".translation.json"))
+            try (FileReader reader = new FileReader(""+ MainFX.config.getLanguageCode() +".translation.json"))
             {
                 Deserialize(reader);
             }
             catch (IOException e) {
-                Logger.LogException(e.getMessage());
+                Logger.logException(e.getMessage());
                 return;
             }
         }
@@ -103,7 +103,7 @@ public class Translator{// implements ISerializable<String>, IDeserializable<Has
             file.flush();
 
         } catch (IOException e) {
-            Logger.LogException(e.getMessage());
+            Logger.logException(e.getMessage());
         }
     }
 }

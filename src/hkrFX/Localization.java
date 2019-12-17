@@ -23,18 +23,18 @@ public class Localization {
 
     public static void load(String langCode){
 
-        File f = new File(""+ MainFX.getConfig().getLanguageCode() +".translation.json");
+        File f = new File(""+ MainFX.config.getLanguageCode() +".translation.json");
         if(!f.exists()){
-            Logger.LogError("Unable to load language pack: "+ MainFX.getConfig().getLanguageCode() +", because pack does not exist");
+            Logger.logError("Unable to load language pack: "+ MainFX.config.getLanguageCode() +", because pack does not exist");
         }
         else {
 
-            try (FileReader reader = new FileReader(""+ MainFX.getConfig().getLanguageCode() +".translation.json"))
+            try (FileReader reader = new FileReader(""+ MainFX.config.getLanguageCode() +".translation.json"))
             {
                 Deserialize(reader);
             }
             catch (IOException e) {
-                Logger.LogException(e.getMessage());
+                Logger.logException(e.getMessage());
                 return;
             }
         }
@@ -67,7 +67,7 @@ public class Localization {
             } );
 
         }  catch (IOException | ParseException e) {
-            Logger.LogException(e.getMessage());
+            Logger.logException(e.getMessage());
         }
 
         //return tran;
@@ -78,24 +78,24 @@ public class Localization {
         if(!d.exists())
             d.mkdir();
         File[] fs = new File[] {
-                new File("Localization//"+ MainFX.getConfig().getLanguageCode() +".menu.json"),
-                new File("Localization//"+ MainFX.getConfig().getLanguageCode() +".bookinginfo.json"),
-                new File("Localization//"+ MainFX.getConfig().getLanguageCode() +".bookingform.json"),
-                new File("Localization//"+ MainFX.getConfig().getLanguageCode() +".adminpanel.json")
+                new File("Localization//"+ MainFX.config.getLanguageCode() +".menu.json"),
+                new File("Localization//"+ MainFX.config.getLanguageCode() +".bookinginfo.json"),
+                new File("Localization//"+ MainFX.config.getLanguageCode() +".bookingform.json"),
+                new File("Localization//"+ MainFX.config.getLanguageCode() +".adminpanel.json")
         };
         for(File f : fs){
             if(!f.exists()){
-                Logger.LogError("Unable to load localization language pack: "+ MainFX.getConfig().getLanguageCode() +", because pack does not exist");
+                Logger.logError("Unable to load localization language pack: "+ MainFX.config.getLanguageCode() +", because pack does not exist");
                 return;
             }
             else {
 
-                try (FileReader reader = new FileReader(""+ MainFX.getConfig().getLanguageCode() +".translation.json"))
+                try (FileReader reader = new FileReader(""+ MainFX.config.getLanguageCode() +".translation.json"))
                 {
                     Deserialize(reader);
                 }
                 catch (IOException e) {
-                    Logger.LogException(e.getMessage());
+                    Logger.logException(e.getMessage());
                     return;
                 }
             }
@@ -115,7 +115,7 @@ public class Localization {
 //            file.flush();
 //
 //        } catch (IOException e) {
-//            Logger.LogException(e.getMessage());
+//            Logger.logException(e.getMessage());
 //        }
 //    }
 

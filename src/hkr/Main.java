@@ -2,11 +2,14 @@ package hkr;
 
 //import hkrFX.*;
 
-import hkrFX.MainFX;
+import hkrFX.*;
 import javafx.application.Application;
+import javafx.stage.Stage;
 import org.json.simple.JSONObject;
 
+import javax.swing.*;
 import java.io.*;
+import java.lang.annotation.Annotation;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -25,8 +28,10 @@ public class Main {
     public static void main(String[] args) {
 //        Main myApp = new Main();
 //        myApp.showMenu();
-        Application.launch(MainFX.class);
+        //Application.launch(MainFX.class);
+        hkrFX.Logger.logUML(Translator.class, true);
     }
+
     private static void parseEmployeeObject(JSONObject employee)
     {
         //Get employee object within list

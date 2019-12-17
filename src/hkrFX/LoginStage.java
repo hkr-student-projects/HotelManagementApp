@@ -15,7 +15,7 @@ import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
-class LoginStage extends Stage {
+public class LoginStage extends Stage {
 
     private TextField _userTextField;
     private PasswordField _pwBox;

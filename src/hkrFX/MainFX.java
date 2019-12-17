@@ -26,7 +26,7 @@ public class MainFX extends Application {
 
     public static short SCENE_HEIGHT = 440;
     public static short SCENE_WIDTH = 600;
-    private static Config _config;
+    public static Config config;
     private BookingInfoStage bookingInfoStage;
     private HomeStage homeStage;
 
@@ -36,15 +36,24 @@ public class MainFX extends Application {
         stage.setResizable(false);
         bookingInfoStage = new BookingInfoStage();
         homeStage = new HomeStage();
-        _config = new Config();
-        loadConfig();
+        config = new Config();
+        loadConfig("");
 
         initializeEvents();
+
+//        System.out.println(Translator.translate("field_empty", "MyField",  this.getClass().getName()));
+//        System.out.println(Translator.translate("keyid_not_found", "SomeKey"));
+//        Logger.logError(Translator.translate("button_not_found", "SomeButton",  this.getClass().getName()));
+//        Logger.log("Logging a message in MainFX class");
+//        Logger.logException("Logging an exception in MainFX class");
+
         stage.setScene(homeStage.getScene());
         stage.show();
 
         //Parent root = FXMLLoader.load(getClass().getResource("sample.fxml"));
     }
+
+
 
     private void initializeEvents(){
 
@@ -77,28 +86,28 @@ public class MainFX extends Application {
         //stage.initStyle(StageStyle.TRANSPARENT);
     }
 
-    private void loadConfig(){
+    public void loadConfig(String name){
         File f = new File("config.json");
         if(!f.exists()){
             try (FileWriter file = new FileWriter("config.json", false)) {
 
-                MainFX._config.setLanguageCode("en");
-                String json = MainFX._config.Serialize();
+                MainFX.config.setLanguageCode("en");
+                String json = MainFX.config.Serialize();
                 file.write(json);
                 file.flush();
 
             } catch (IOException e) {
-                Logger.LogException(e.getMessage());
+                Logger.logException(e.getMessage());
             }
         }
         else {
 
             try (FileReader reader = new FileReader("config.json"))
             {
-                MainFX._config = MainFX._config.Deserialize(reader);
+                MainFX.config = MainFX.config.Deserialize(reader);
             }
             catch (IOException e) {
-                Logger.LogException(e.getMessage());
+                Logger.logException(e.getMessage());
             }
         }
     }
@@ -110,15 +119,15 @@ public class MainFX extends Application {
     private void loadDefaults(){
         try (FileWriter file = new FileWriter("config.json", false)) {
 
-            MainFX._config = new Config();
-            MainFX._config.setLanguageCode("en");
+            MainFX.config = new Config();
+            MainFX.config.setLanguageCode("en");
 
-            String json = MainFX._config.Serialize();
+            String json = MainFX.config.Serialize();
             file.write(json);
             file.flush();
 
         } catch (IOException e) {
-            Logger.LogException(e.getMessage());
+            Logger.logException(e.getMessage());
         }
     }
 
@@ -133,7 +142,4 @@ public class MainFX extends Application {
         return true;
     }
 
-    public static Config getConfig(){
-        return _config;
-    }
 }

@@ -37,7 +37,7 @@ public class Config implements ISerializable<String>, IDeserializable<Config>{
             }
 
         }  catch (IOException | ParseException e) {
-            e.printStackTrace();
+            Logger.logException(e.getMessage());
         }
 
         return config;
