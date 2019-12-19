@@ -1,9 +1,13 @@
 package hkr;
 import java.io.*;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.util.ArrayList;
 import java.util.Scanner;
 import static java.lang.System.*;
 
 public class Main {
+    private ArrayList<String> rooms = new ArrayList<>();
     private int empCounter = 0;
     private int admCounter = 0;
     private int roomCounter = 0;
@@ -51,9 +55,15 @@ public class Main {
     private void adminVerify() {
         try {
             Scanner input = new Scanner(System.in);
-            out.println("Enter the Admin Id");
-            int st = input.nextInt();
-            input.nextLine();
+            String st = "";
+            try {
+                out.println("Enter the Admin Id");
+                st = input.nextLine();
+                int number = Integer.parseInt(st);
+            }catch(NumberFormatException e){
+                out.println("You have entered String!Please try again!");
+                adminVerify();
+            }
             String str = "Admin Id ="+st;
             Scanner scanner = new Scanner(new File("Admin.txt"));
                 while (scanner.hasNextLine()) {
@@ -62,15 +72,19 @@ public class Main {
                         out.println("Enter the password");
                         String pass = input.nextLine();
                         String sa = "Admin Password ="+pass;
-                        if(s.contains(sa)){
-                            out.println("Welcome!");
-                            adminMenu();
-                            break;
-                        }
-                        else{
+                        if(!s.equals("")) {
+                            if (s.contains(sa)) {
+                                out.println("Welcome!");
+                                adminMenu();
+                                break;
+                            } else {
+                                out.println("Access Denied!");
+                                showMenu();
+                                break;
+                            }
+                        }else{
                             out.println("Access Denied!");
-                            showMenu();
-                            break;
+                            adminVerify();
                         }
                     }
                 }
@@ -83,7 +97,7 @@ public class Main {
     private void adminMenu() {
         Scanner input = new Scanner(System.in);
         System.out.println("=====Admin=====");
-        System.out.println("1.  11View all available rooms");
+        System.out.println("1.  View all available rooms");
         System.out.println("2.  View all Employees");
         System.out.println("3.  View all Bookings");
         System.out.println("4.  View all Admins");
@@ -147,16 +161,28 @@ public class Main {
             Scanner input = new Scanner(System.in);
             out.println("Enter the room number you want to add");
             String room = input.nextLine();
+            out.println("Enter the price per night");
+            double price = input.nextDouble();
+            out.println("Enter the number of the beds");
+            int numberOfBeds = input.nextInt();
+            out.println("Enter the size of the room");
+            double size = input.nextDouble();
+            out.println("Does the room have double bed");
+            boolean doubleBed = input.nextBoolean();
             out.println("Are you Sure! Press Enter");
             input.nextLine();
-            Hotel hotel1 = new Hotel(room);
+            Room hotel1 = new Room(room,doubleBed,numberOfBeds,price,size);
             FileWriter fw = new FileWriter("AllRooms.txt",true);
             BufferedWriter bw = new BufferedWriter(fw);
             PrintWriter pw = new PrintWriter(bw);
             pw.format("Room No =%s ",hotel1.getAvailableRooms());
-            pw.format("Booking =No ");
-            if(!hotel1.isCleaned()){
-                pw.format("Cleaned =No%n");
+            pw.format("Price =%.2f ",hotel1.getPrice());
+            pw.format("Size =%.2f meter square ",hotel1.getSize());
+            pw.format("Number of bed(s) =%d ",hotel1.getNumberOfBeds());
+            if(hotel1.isDoubleBed()) {
+                pw.format("Double Bed =Yes%n");
+            }else{
+                pw.format("Double Bed =No%n");
             }
             pw.close();
         } catch (IOException e) {
@@ -165,14 +191,17 @@ public class Main {
         adminMenu();
     }
     private void showRoom(){
-        try{
+        try {
             FileReader fr = new FileReader("AllRooms.txt");
             BufferedReader br = new BufferedReader(fr);
-
             String room;
-            while((room = br.readLine()) != null){
-                out.println(room+"\n");
+            rooms.clear();
+            while ((room = br.readLine()) != null) {
+                rooms.add(room);
             }
+            for (int i = 0; i < rooms.size(); i++){
+                out.println(rooms.get(i));
+        }
         }catch(IOException e){
             out.println("File Not Found!");
         }
@@ -773,5 +802,4 @@ public class Main {
             out.println("File Not Found!");
         }
     }
-
 }
