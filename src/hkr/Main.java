@@ -28,8 +28,8 @@ public class Main {
     public static void main(String[] args) {
 //        Main myApp = new Main();
 //        myApp.showMenu();
-        //Application.launch(MainFX.class);
-        hkrFX.Logger.logUML(Translator.class, true);
+        Application.launch(MainFX.class);
+        //hkrFX.Logger.logUML(Translator.class, true);
     }
 
     private static void parseEmployeeObject(JSONObject employee)

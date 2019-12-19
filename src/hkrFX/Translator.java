@@ -14,10 +14,10 @@ import java.util.Map;
 
 public class Translator{// implements ISerializable<String>, IDeserializable<HashMap<String, String>> {
 
-    private static Map<String, String> _translations;
+    private static Map<String, String> translations;
 
     static {
-        _translations = new HashMap<String, String>();
+        translations = new HashMap<String, String>();
         loadDefaults();
         loadTranslation();
         //runs before static methods
@@ -28,7 +28,7 @@ public class Translator{// implements ISerializable<String>, IDeserializable<Has
 //    }
 
     public static String translate(String keyID, Object... args){
-        for (Map.Entry<String, String> pair : _translations.entrySet())
+        for (Map.Entry<String, String> pair : translations.entrySet())
             if(pair.getKey() == keyID)
                 return String.format(pair.getValue(), args);
 
@@ -40,7 +40,7 @@ public class Translator{// implements ISerializable<String>, IDeserializable<Has
     private static String Serialize() {
 
         JSONObject obj = new JSONObject();
-        _translations.entrySet().forEach(pair -> obj.put(pair.getKey(), pair.getValue()));
+        translations.entrySet().forEach(pair -> obj.put(pair.getKey(), pair.getValue()));
         JSONArray json = new JSONArray();
         json.add(obj);
 
@@ -59,7 +59,7 @@ public class Translator{// implements ISerializable<String>, IDeserializable<Has
             JSONArray arr = (JSONArray) json;
             arr.forEach( obj -> {
                 ((JSONObject)obj).forEach((key, value) -> {
-                    _translations.put((String)key, (String)value);
+                    translations.put((String)key, (String)value);
                 });
             } );
 
@@ -92,13 +92,13 @@ public class Translator{// implements ISerializable<String>, IDeserializable<Has
     private static void loadDefaults(){
         try (FileWriter file = new FileWriter("en.translation.json", false)) {
 
-            _translations.put("button_not_found", "Unable to find the button %s in %s");
-            _translations.put("json_format_fail", "Incorrect json in %s");
-            _translations.put("field_format_fail", "The field %s in %s is empty");
-            _translations.put("field_empty", "The field %s in %s is empty");
-            _translations.put("login_password_fail", "Login: %s or password: %s is incorrect");
-            _translations.put("keyid_not_found", "KeyID %s was not found");
-            _translations.put("localization_not_found", "Language pack %s was not found");
+            translations.put("button_not_found", "Unable to find the button %s in %s");
+            translations.put("json_format_fail", "Incorrect json in %s");
+            translations.put("field_format_fail", "The field %s in %s is empty");
+            translations.put("field_empty", "The field %s in %s is empty");
+            translations.put("login_password_fail", "Login: %s or password: %s is incorrect");
+            translations.put("keyid_not_found", "KeyID %s was not found");
+            translations.put("localization_not_found", "Language pack %s was not found");
             file.write(Serialize());
             file.flush();
 

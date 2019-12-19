@@ -9,41 +9,35 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
 
 public class Localization {
 
-    private static String[] _bookingStage;
-    private static String[] _mainMenu;
-    private static String[] _bookingInfo;
-    private static String[] _adminPanel;
+//    private static String[] _bookingStage;
+//    private static String[] _mainMenu;
+//    private static String[] _bookingInfo;
+//    private static String[] _adminPanel;
+    private static Map<String, String> bookingInfo;
+    private static Map<String, String> booking;
+    private static Map<String, String> admin;
+    private static Map<String, String> intro;
 
     static {
-
+        bookingInfo = new HashMap<String, String>();
+        booking = new HashMap<String, String>();
+        admin = new HashMap<String, String>();
+        intro = new HashMap<String, String>();
+        loadDefaults();
+        loadLocalization();
+        //runs before static methods
     }
 
-    public static void load(String langCode){
-
-        File f = new File(""+ MainFX.config.getLanguageCode() +".translation.json");
-        if(!f.exists()){
-            Logger.logError("Unable to load language pack: "+ MainFX.config.getLanguageCode() +", because pack does not exist");
-        }
-        else {
-
-            try (FileReader reader = new FileReader(""+ MainFX.config.getLanguageCode() +".translation.json"))
-            {
-                Deserialize(reader);
-            }
-            catch (IOException e) {
-                Logger.logException(e.getMessage());
-                return;
-            }
-        }
-    }
 
     private static String Serialize() {
 
         JSONObject obj = new JSONObject();
-        //_translations.entrySet().forEach(pair -> obj.put(pair.getKey(), pair.getValue()));
+        bookingInfo.entrySet().forEach(pair -> obj.put(pair.getKey(), pair.getValue()));
         JSONArray json = new JSONArray();
         json.add(obj);
 
@@ -80,8 +74,8 @@ public class Localization {
         File[] fs = new File[] {
                 new File("Localization//"+ MainFX.config.getLanguageCode() +".menu.json"),
                 new File("Localization//"+ MainFX.config.getLanguageCode() +".bookinginfo.json"),
-                new File("Localization//"+ MainFX.config.getLanguageCode() +".bookingform.json"),
-                new File("Localization//"+ MainFX.config.getLanguageCode() +".adminpanel.json")
+                new File("Localization//"+ MainFX.config.getLanguageCode() +".booking.json"),
+                new File("Localization//"+ MainFX.config.getLanguageCode() +".admin.json")
         };
         for(File f : fs){
             if(!f.exists()){
@@ -99,6 +93,22 @@ public class Localization {
                     return;
                 }
             }
+        }
+    }
+    // "Name", "Surname", "19890518-4376", "+073-751-06-21", "Storagatan 12A-1006"
+    private static void loadDefaults(){
+        try (FileWriter file = new FileWriter("Localization//en.booking.json", false)) {
+
+            bookingInfo.put("name", "Name");
+            bookingInfo.put("surname", "Surname");
+            bookingInfo.put("ssn", "SSN");
+            bookingInfo.put("phone", "Phone");
+            bookingInfo.put("Address", "Address");
+            file.write(Serialize());
+            file.flush();
+
+        } catch (IOException e) {
+            Logger.logException(e.getMessage());
         }
     }
 

@@ -22,10 +22,10 @@ public class BookingStage extends Stage{
 //    private Pane _pane;
 //    private Label _label;
     private Text[] _texts;
-    private TextField[] _fields;
+    private TextField[] fields;
     private ComboBox[] _boxes;
     private DatePicker[] _dates;
-    private Button[] _buttons;
+    private Button[] buttons;
 
     public BookingStage(){
 
@@ -55,7 +55,7 @@ public class BookingStage extends Stage{
 //                new double[] { 68.21875, 68.21875, 68.21875, 68.21875, 94.21875, 94.21875, 94.21875, 118.21875}
 //        );
 
-        _fields = createFields(
+        fields = createFields(
                 new String[] { "Name", "Surname", "19890518-4376", "+073-751-06-21", "Storagatan 12A-1006" },
                 new double[] { 236.0, 412.0, 236.0, 236.0, 236.0 },
                 new double[] { 53.0, 53.0, 98.0, 143.0, 188.0 }
@@ -63,8 +63,8 @@ public class BookingStage extends Stage{
 
         _boxes = createBoxes(new double[] { 234.0, 274.0 });
         _dates = createDates(new double[] { 325.0, 365.0 });
-        _buttons = createButtons(new String[] { "Save", "Reset" }, new double[] { 518.0, 236.0 }, new double[] { 60.0, 82.0 });
-
+        buttons = createButtons(new String[] { "Save", "Reset" }, new double[] { 518.0, 236.0 }, new double[] { 60.0, 82.0 });
+        
         createScene();
     }
 
@@ -113,9 +113,9 @@ public class BookingStage extends Stage{
 
         //pChilds.add(b);
         aChilds.add(pane);
-        aChilds.addAll(_fields);
+        aChilds.addAll(fields);
         aChilds.addAll(_boxes);
-        aChilds.addAll(_buttons);
+        aChilds.addAll(buttons);
         aChilds.addAll(_dates);
         aChilds.add(label);
 
@@ -224,12 +224,13 @@ public class BookingStage extends Stage{
             buttons[i].setStyle("-fx-background-color: #f5f5f5; -fx-background-radius: 8");
             buttons[i].setFont(new Font(12));
         }
+        buttons[0].setOnAction(event -> closeStage());
 
         return buttons;
     }
 
     public Button getButton(String name){
-        for (Button b : _buttons){
+        for (Button b : buttons){
             if(MainFX.equals(b.getText().toLowerCase().toCharArray(), name.toLowerCase().toCharArray()))
                 return b;
         }
@@ -239,54 +240,51 @@ public class BookingStage extends Stage{
         return null;
     }
 
-//    private void closeStage(){
-//
-//        String outErrors = "";
-//        if(!_ssn.getText().matches("\\d{8}\\-\\d{4}")){
-//            outErrors += " \nSSN";
-//            _ssn.setStyle("-fx-control-inner-background: #"+_errorColor.toString().substring(2));
-//            _ssn.focusedProperty().addListener((obs, wasFocused, isNowFocused) -> {
-//                if (isNowFocused)
-//                    _ssn.setStyle("");
-//            });
-//        }
-//
-//        if(!_name.getText().matches("[A-Z][a-z]*\\s[A-Z][a-z]*")){
-//            outErrors += " \nName";
-//            _name.setStyle("-fx-control-inner-background: #"+_errorColor.toString().substring(2));
-//            _name.focusedProperty().addListener((obs, wasFocused, isNowFocused) -> {
-//                if (isNowFocused)
-//                    _name.setStyle("");
-//            });
-//        }
-//
-//        if(!_phone.getText().matches("\\+\\d{3}\\-\\d{3}\\-\\d{2}\\-\\d{2}")){
-//            outErrors += " \nPhone";
-//            _phone.setStyle("-fx-control-inner-background: #"+_errorColor.toString().substring(2));
-//            _phone.focusedProperty().addListener((obs, wasFocused, isNowFocused) -> {
-//                if (isNowFocused)
-//                    _phone.setStyle("");
-//            });
-//        }
-//
-//        if(!_adrs.getText().matches("[A-Z][a-z]+\\s\\d+[A-Z]?\\-\\d+")){
-//            outErrors += " \naddress";
-//            _adrs.setStyle("-fx-control-inner-background: #"+_errorColor.toString().substring(2));
-//            _adrs.focusedProperty().addListener((obs, wasFocused, isNowFocused) -> {
-//                if (isNowFocused)
-//                    _adrs.setStyle("");
-//            });
-//        }
-//
-//        if (outErrors.isEmpty()){
-//            //create customer
-//            this.close();
-//        }
-//
-//        else{
-//
-//            _output.setText("FORMAT ERRORS:" + outErrors + "");
-//        }
-//
-//    }
+    private void redOutField(TextField field){
+        field.setStyle("-fx-control-inner-background: #ff4c4c; -fx-background-radius: 111;");
+        field.focusedProperty().addListener((obs, wasFocused, isNowFocused) -> {
+            if (isNowFocused)
+                field.setStyle("-fx-background-radius: 111;");
+        });
+    }
+
+    private void closeStage(){
+
+        // "Name", "Surname", "19890518-4376", "+073-751-06-21", "Storagatan 12A-1006"
+        boolean errors = false;
+        for(TextField field : fields) {
+            switch (field.getPromptText().toLowerCase()) {
+
+                case "name":
+                case "surname":
+                    if (!field.getText().matches("[A-Z][a-z]*")) {
+                        redOutField(field);
+                        errors = true;
+                    }
+                break;
+
+                case "19890518-4376":
+                    if (!field.getText().matches("\\d{8}\\-\\d{4}")) {
+                        redOutField(field);
+                        errors = true;
+                    }
+                break;
+
+                case "+073-751-06-21":
+                    if (!field.getText().matches("\\+\\d{3}\\-\\d{3}\\-\\d{2}\\-\\d{2}")) {
+                        redOutField(field);
+                        errors = true;
+                    }
+                break;
+
+                case "storagatan 12a-1006":
+                    if (!field.getText().matches("[A-Z][a-z]+\\s\\d+[A-Z]?\\-\\d+")) {
+                        redOutField(field);
+                        errors = true;
+                    }
+            }
+        }
+        if(!errors)
+            this.close();
+    }
 }
