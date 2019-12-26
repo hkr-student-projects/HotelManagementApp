@@ -2,15 +2,20 @@ package hkr;
 
 //import hkrFX.*;
 
-import hkrFX.*;
-import javafx.application.Application;
-import javafx.stage.Stage;
+import hkrFX.MainFX;
 import org.json.simple.JSONObject;
+import org.w3c.dom.NamedNodeMap;
+import org.w3c.dom.Node;
+import org.w3c.dom.NodeList;
+import org.xml.sax.SAXException;
 
-import javax.swing.*;
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
+import javax.xml.parsers.ParserConfigurationException;
 import java.io.*;
-import java.lang.annotation.Annotation;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Scanner;
 
 import static java.lang.System.out;
@@ -25,11 +30,117 @@ public class Main {
     int roomCounter = 0;
     int bookingCounter = 0;
     Admin Admin1 = new Admin("Muhammad","Hamza","980515-3377","073-7410229","Hamza",1);
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException, SAXException, ParserConfigurationException {
 //        Main myApp = new Main();
 //        myApp.showMenu();
-        Application.launch(MainFX.class);
-        //hkrFX.Logger.logUML(Translator.class, true);
+//        Application.launch(MainFX.class);
+         //hkrFX.Logger.logUML(AnchorPane.class, false);
+//        out.println(Translator.translate("field_empty", "MyField", BookingStage.class.getName()));
+//        Logger.logError("MyError");
+//        Localization localization = new Localization();
+
+        documentBuild();
+    }
+
+    private static void documentBuild() throws ParserConfigurationException, IOException, SAXException {
+        DocumentBuilder db = DocumentBuilderFactory.newInstance().newDocumentBuilder();
+        Node entry = db.parse("src/hkrFX/sample.xml");
+        String[] name = entry.getBaseURI().split("/");
+        String path = name[name.length - 1].split("\\.")[0];
+        File f = new File(""+ path +".txt");
+        if(f.exists())
+            f.delete();
+        getChildRecursive(entry, path);
+
+        //out.println(entry.getFirstChild().getAttributes().item(0));
+
+    }
+
+    private static void getChildRecursive(Node node, String path) throws IOException {
+        NodeList childs = node.getChildNodes();
+        for (short i = 0; i < childs.getLength(); i++){
+
+            Node child = childs.item(i);
+            out.println(child.getNodeName());
+            if(child.getBaseURI() == null)
+                continue;
+
+            //out.println("\n");
+
+            writeNodeObj(child, path);
+
+            NamedNodeMap attr = childs.item(i).getAttributes();
+            if(attr == null)
+                continue;
+            writeNodeAttrs(child, attr, path);
+//            for(short j = 0; j < attr.getLength(); j++)
+//                out.print(attr.item(j) + " ");
+
+            getChildRecursive(child, path);
+        }
+    }
+
+    private static void writeNodeObj(Node node, String path) throws IOException {
+        if(node.getNodeName() == "children")
+            return;
+        //out.println(path);
+        File f = new File(""+ path +".txt");
+        f.createNewFile();
+        try(FileWriter writer = new FileWriter(""+ path +".txt", true))
+        {
+            writer.write(""+ node.getNodeName() + " " + node.getNodeName().toLowerCase() +" = new "+ node.getNodeName() +"();\n");
+        }
+        catch (Exception e){
+            out.println(e);
+            out.println(e.getMessage());
+            out.println(e.getStackTrace());
+        }
+    }
+
+    private static void writeNodeAttrs(Node node, NamedNodeMap attr, String path) throws IOException {
+
+        //out.println(path);
+        File f = new File(""+ path +".txt");
+        f.createNewFile();
+        try(FileWriter writer = new FileWriter(""+ path +".txt", true))
+        {
+            //writer.write(""+ node.getNodeName() + " " + node.getNodeName().toLowerCase() +" = new "+ node.getNodeName() +"();\n");
+
+            for(Map.Entry<String, String> pair : getAttrValue(attr).entrySet()){
+                writer.write(""+ node.getNodeName().toLowerCase() +".set"+ pair.getKey() +"("+ pair.getValue() +");\n");
+            }
+
+        }
+        catch (Exception e){
+            out.println(e);
+            out.println(e.getMessage());
+            out.println(e.getStackTrace());
+        }
+    }
+
+    private static Map<String, String> getAttrValue(NamedNodeMap attr){
+        HashMap<String, String> pair = new HashMap<String, String>();
+
+        for(short j = 0; j < attr.getLength(); j++){
+            String[] str = attr.item(j).toString().split("=");
+            if(MainFX.equals(str[0].toCharArray(), "fx:controller".toCharArray())
+                    || MainFX.equals(str[0].toCharArray(), "xmlns".toCharArray())
+                    || MainFX.equals(str[0].toCharArray(), "xmlns:fx".toCharArray()))
+                continue;
+            String uncovered = str[1].substring(1, str[1].length() - 2);
+            pair.put(str[0], tryParseDouble(uncovered) ? uncovered : str[1]);
+        }
+
+        return pair;
+    }
+
+    public static boolean tryParseDouble(String str){
+        try {
+            double d = Double.parseDouble(str);
+        } catch (NumberFormatException e) {
+            return false;
+        }
+        return true;
     }
 
     private static void parseEmployeeObject(JSONObject employee)

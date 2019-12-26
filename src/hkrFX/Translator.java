@@ -78,7 +78,7 @@ public class Translator{// implements ISerializable<String>, IDeserializable<Has
         }
         else {
 
-            try (FileReader reader = new FileReader(""+ MainFX.config.getLanguageCode() +".translation.json"))
+            try (FileReader reader = new FileReader("en.translation.json"))
             {
                 Deserialize(reader);
             }

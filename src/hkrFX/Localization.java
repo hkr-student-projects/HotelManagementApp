@@ -28,8 +28,8 @@ public class Localization {
         booking = new HashMap<String, String>();
         admin = new HashMap<String, String>();
         intro = new HashMap<String, String>();
-        loadDefaults();
         loadLocalization();
+        loadDefaults();
         //runs before static methods
     }
 

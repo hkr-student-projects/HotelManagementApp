@@ -6,9 +6,10 @@
   <component name="ChangeListManager">
     <list default="true" id="be750a4a-f25b-417a-8b32-89dd50849fe2" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/en.translation.json" beforeDir="false" afterPath="$PROJECT_DIR$/en.translation.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/hkr/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/hkr/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/hkrFX/BookingStage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/hkrFX/BookingStage.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/hkrFX/Localization.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/hkrFX/Localization.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/hkrFX/Logger.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/hkrFX/Logger.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/hkrFX/Translator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/hkrFX/Translator.java" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -41,6 +42,9 @@
   <component name="RecentsManager">
     <key name="MoveClassesOrPackagesDialog.RECENTS_KEY">
       <recent name="hkrFX" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/src/hkrFX" />
     </key>
   </component>
   <component name="RunDashboard">
@@ -112,5 +116,16 @@
         </entry>
       </map>
     </option>
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/hkrFX/Translator.java</url>
+          <line>69</line>
+          <option name="timeStamp" value="1" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
 </project>

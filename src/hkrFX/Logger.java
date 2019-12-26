@@ -133,7 +133,7 @@ class LogEntry{
 //     }
 
      public static void logUML(Class type, boolean alsoFields){
-         try(FileWriter writer = new FileWriter(""+ type.getName() +".structure.txt", false))
+         try(FileWriter writer = new FileWriter(""+ type.getName() +".UML.txt", false))
          {
              if(alsoFields){
                  for(Field field : type.getDeclaredFields()){
@@ -144,7 +144,7 @@ class LogEntry{
                  writer.write('\n');
              }
 
-             for(Method method : type.getDeclaredMethods()){
+             for(Method method : type.getMethods()){
                  String params = "";
                  for (Parameter param : method.getParameters()){
 //                     out.println(param.getType());

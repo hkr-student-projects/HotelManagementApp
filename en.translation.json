@@ -1,11 +1,1 @@
-[
-  {
-    "field_empty":"The field %s in %s is empty",
-    "keyid_not_found":"KeyID %s was not found",
-    "login_password_fail":"Login: %s or password: %s is incorrect",
-    "localization_not_found":"Language pack %s was not found",
-    "field_format_fail":"The field %s in %s is empty",
-    "json_format_fail":"Incorrect json in %s",
-    "button_not_found":"Unable to find the button %s in %s"
-  }
-]
+[{"field_empty":"The field %s in %s is empty","keyid_not_found":"KeyID %s was not found","login_password_fail":"Login: %s or password: %s is incorrect","localization_not_found":"Language pack %s was not found","field_format_fail":"The field %s in %s is empty","json_format_fail":"Incorrect json in %s","button_not_found":"Unable to find the button %s in %s"}]
