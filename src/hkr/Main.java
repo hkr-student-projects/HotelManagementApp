@@ -58,25 +58,29 @@ public class Main {
 
     private static void getChildRecursive(Node node, String path) throws IOException {
         NodeList childs = node.getChildNodes();
+        //String fullPath = "";
         for (short i = 0; i < childs.getLength(); i++){
 
             Node child = childs.item(i);
-            out.println(child.getNodeName());
+
             if(child.getBaseURI() == null)
                 continue;
 
             //out.println("\n");
 
             writeNodeObj(child, path);
-
+            //fullPath += child.getParentNode().getNodeName() + "-";
+            //out.print(fullPath);
             NamedNodeMap attr = childs.item(i).getAttributes();
             if(attr == null)
                 continue;
             writeNodeAttrs(child, attr, path);
 //            for(short j = 0; j < attr.getLength(); j++)
 //                out.print(attr.item(j) + " ");
-
+            out.println(child.getNodeName()+"-"+child.getParentNode().getNodeName());
             getChildRecursive(child, path);
+            //out.println(fullPath + " " + child.getNodeName());
+            //out.println(i);
         }
     }
 
@@ -107,7 +111,7 @@ public class Main {
             //writer.write(""+ node.getNodeName() + " " + node.getNodeName().toLowerCase() +" = new "+ node.getNodeName() +"();\n");
 
             for(Map.Entry<String, String> pair : getAttrValue(attr).entrySet()){
-                writer.write(""+ node.getNodeName().toLowerCase() +".set"+ pair.getKey() +"("+ pair.getValue() +");\n");
+                writer.write(""+ node.getNodeName().toLowerCase() +".set"+ pair.getKey().substring(0,1).toUpperCase() + pair.getKey().substring(1) +"("+ pair.getValue() +");\n");
             }
 
         }
@@ -127,7 +131,7 @@ public class Main {
                     || MainFX.equals(str[0].toCharArray(), "xmlns".toCharArray())
                     || MainFX.equals(str[0].toCharArray(), "xmlns:fx".toCharArray()))
                 continue;
-            String uncovered = str[1].substring(1, str[1].length() - 2);
+            String uncovered = str[1].substring(1, str[1].length() - 1);
             pair.put(str[0], tryParseDouble(uncovered) ? uncovered : str[1]);
         }
 
