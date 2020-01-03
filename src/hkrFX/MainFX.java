@@ -1,5 +1,6 @@
 package hkrFX;
 
+import hkrDB.DatabaseManager;
 import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -27,6 +28,7 @@ public class MainFX extends Application {
     public static short SCENE_HEIGHT = 440;
     public static short SCENE_WIDTH = 600;
     public static Config config;
+    public DatabaseManager databaseManager;
     private BookingInfoStage bookingInfoStage;
     private HomeStage homeStage;
 
@@ -37,16 +39,14 @@ public class MainFX extends Application {
         bookingInfoStage = new BookingInfoStage();
         homeStage = new HomeStage();
         config = new Config();
-        loadConfig("");
-
+        loadConfig();
+        databaseManager = new DatabaseManager();
         initializeEvents();
-
 //        System.out.println(Translator.translate("field_empty", "MyField",  this.getClass().getName()));
 //        System.out.println(Translator.translate("keyid_not_found", "SomeKey"));
 //        Logger.logError(Translator.translate("button_not_found", "SomeButton",  this.getClass().getName()));
 //        Logger.log("Logging a message in MainFX class");
 //        Logger.logException("Logging an exception in MainFX class");
-
         stage.setScene(homeStage.getScene());
         stage.show();
 
@@ -86,25 +86,16 @@ public class MainFX extends Application {
         //stage.initStyle(StageStyle.TRANSPARENT);
     }
 
-    public void loadConfig(String name){
+    public void loadConfig(){
         File f = new File("config.json");
         if(!f.exists()){
-            try (FileWriter file = new FileWriter("config.json", false)) {
-
-                MainFX.config.setLanguageCode("en");
-                String json = MainFX.config.Serialize();
-                file.write(json);
-                file.flush();
-
-            } catch (IOException e) {
-                Logger.logException(e.getMessage());
-            }
+            config.loadDefaults();
         }
         else {
 
-            try (FileReader reader = new FileReader("config.json"))
+            try (FileReader reader = new FileReader(f))
             {
-                MainFX.config = MainFX.config.Deserialize(reader);
+                config.Deserialize(reader);
             }
             catch (IOException e) {
                 Logger.logException(e.getMessage());
@@ -113,23 +104,12 @@ public class MainFX extends Application {
     }
 
     private void unloadConfig(){
-        //on app close
+        config.writeConfig();
     }
 
-    private void loadDefaults(){
-        try (FileWriter file = new FileWriter("config.json", false)) {
-
-            MainFX.config = new Config();
-            MainFX.config.setLanguageCode("en");
-
-            String json = MainFX.config.Serialize();
-            file.write(json);
-            file.flush();
-
-        } catch (IOException e) {
-            Logger.logException(e.getMessage());
-        }
-    }
+//    private void loadDefaults(){
+//
+//    }
 
     public static boolean equals(char[] str1, char[] str2){
         if(str1.length != str2.length)

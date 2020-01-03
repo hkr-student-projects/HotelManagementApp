@@ -1,1 +1,10 @@
-[{"lang":"en"}]
+[
+  {
+    "DatabaseUsername":"root",
+    "DatabasePort":3306,
+    "DatabasePassword":"91rasuho",
+    "DatabaseName":"hotel",
+    "lang":"en",
+    "DatabaseAddress":"jdbc:mysql://localhost/hotel?serverTimezone=Europe/Stockholm&useSSL=false"
+  }
+]

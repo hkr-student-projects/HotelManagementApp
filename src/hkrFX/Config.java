@@ -6,18 +6,23 @@ import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 
 import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
 
-public class Config implements ISerializable<String>, IDeserializable<Config>{
-    private String _languageCode;
+public class Config implements ISerializable<String>{
+
+    public String languageCode;
+    public String DatabaseAddress;
+    public String DatabaseUsername;
+    public String DatabasePassword;
+    public String DatabaseName;
+    public int DatabasePort;
 
     public Config(){
-        _languageCode = "en";
+
     }
 
-    @Override
-    public Config Deserialize(FileReader reader) {
-        Config config = new Config();
+    public void Deserialize(FileReader reader) {
         try
         {
 //            JSONParser jsonParser = new JSONParser();
@@ -30,39 +35,70 @@ public class Config implements ISerializable<String>, IDeserializable<Config>{
 //            );
             for(Object field : json){
                 for(Object key : ((JSONObject)field).keySet()){
-                    if(MainFX.equals(key.toString().toCharArray(), "lang".toCharArray()))
-                        config.setLanguageCode(((JSONObject)field).get("lang").toString());
-                    //other config fields to retrieve  ?switch
+                    //if(MainFX.equals(key.toString().toCharArray(), "lang".toCharArray()))
+                   //   languageCode = ((JSONObject)field).get("lang").toString();
+                    switch (key.toString()){
+                        case "lang" :
+                            languageCode = ((JSONObject)field).get("lang").toString();
+                            break;
+                        case "DatabaseAddress" :
+                            DatabaseAddress = ((JSONObject)field).get("DatabaseAddress").toString();
+                            break;
+                        case "DatabaseUsername" :
+                            DatabaseUsername = ((JSONObject)field).get("DatabaseUsername").toString();
+                            break;
+                        case "DatabasePassword" :
+                            DatabasePassword = ((JSONObject)field).get("DatabasePassword").toString();
+                            break;
+                        case "DatabaseName" :
+                            DatabaseName = ((JSONObject)field).get("DatabaseName").toString();
+                            break;
+                        case "DatabasePort" :
+                            DatabasePort = Integer.parseInt((((JSONObject)field).get("DatabasePort")).toString());
+                            break;
+                        default:
+                            break;
+                    }
                 }
             }
 
         }  catch (IOException | ParseException e) {
             Logger.logException(e.getMessage());
         }
-
-        return config;
     }
 
     @Override
     public String Serialize() {
 
         JSONObject obj = new JSONObject();
-        obj.put("lang", _languageCode);
+        obj.put("lang", languageCode);
+        obj.put("DatabaseAddress", DatabaseAddress);
+        obj.put("DatabaseUsername", DatabaseUsername);
+        obj.put("DatabasePassword", DatabasePassword);
+        obj.put("DatabaseName", DatabaseName);
+        obj.put("DatabasePort", DatabasePort);
         JSONArray json = new JSONArray();
         json.add(obj);
 
         return json.toJSONString();
     }
 
-    public String getLanguageCode(){
-        return _languageCode;
+    public void loadDefaults(){
+        languageCode = "en";
+        DatabaseAddress = "jdbc:mysql://localhost/store?serverTimezone=Europe/Stockholm&useSSL=false";
+        DatabaseUsername = "root";
+        DatabasePassword = "password";
+        DatabaseName = "hotel";
+        DatabasePort = 3306;
+        writeConfig();
     }
 
-    public void setLanguageCode(String langCode){
-        _languageCode = langCode;
-    }
-
-    private void loadDefaults(){
-        this._languageCode = "en";
+    public void writeConfig(){
+        try (FileWriter file = new FileWriter("config.json", false)) {
+            file.write(Serialize());
+            file.flush();
+        } catch (IOException e) {
+            Logger.logException(e.getMessage());
+        }
     }
 }

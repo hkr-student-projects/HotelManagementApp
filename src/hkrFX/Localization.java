@@ -72,19 +72,19 @@ public class Localization {
         if(!d.exists())
             d.mkdir();
         File[] fs = new File[] {
-                new File("Localization//"+ MainFX.config.getLanguageCode() +".menu.json"),
-                new File("Localization//"+ MainFX.config.getLanguageCode() +".bookinginfo.json"),
-                new File("Localization//"+ MainFX.config.getLanguageCode() +".booking.json"),
-                new File("Localization//"+ MainFX.config.getLanguageCode() +".admin.json")
+                new File("Localization//"+ MainFX.config.languageCode +".menu.json"),
+                new File("Localization//"+ MainFX.config.languageCode +".bookinginfo.json"),
+                new File("Localization//"+ MainFX.config.languageCode +".booking.json"),
+                new File("Localization//"+ MainFX.config.languageCode +".admin.json")
         };
         for(File f : fs){
             if(!f.exists()){
-                Logger.logError("Unable to load localization language pack: "+ MainFX.config.getLanguageCode() +", because pack does not exist");
+                Logger.logError("Unable to load localization language pack: "+ MainFX.config.languageCode +", because pack does not exist");
                 return;
             }
             else {
 
-                try (FileReader reader = new FileReader(""+ MainFX.config.getLanguageCode() +".translation.json"))
+                try (FileReader reader = new FileReader(""+ MainFX.config.languageCode +".translation.json"))
                 {
                     Deserialize(reader);
                 }
