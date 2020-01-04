@@ -5,12 +5,9 @@ import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.stage.Stage;
-import org.json.simple.parser.JSONParser;
-import org.json.simple.parser.ParseException;
 
 import java.io.File;
 import java.io.FileReader;
-import java.io.FileWriter;
 import java.io.IOException;
 
 interface IDeserializable<T> {
@@ -28,7 +25,7 @@ public class MainFX extends Application {
     public static short SCENE_HEIGHT = 440;
     public static short SCENE_WIDTH = 600;
     public static Config config;
-    public DatabaseManager databaseManager;
+    public static DatabaseManager databaseManager;
     private BookingInfoStage bookingInfoStage;
     private HomeStage homeStage;
 
@@ -49,7 +46,7 @@ public class MainFX extends Application {
 //        Logger.logException("Logging an exception in MainFX class");
         stage.setScene(homeStage.getScene());
         stage.show();
-
+        databaseManager.addCustomer("gay","gay","gay","gay","gay","gay","gay");
         //Parent root = FXMLLoader.load(getClass().getResource("sample.fxml"));
     }
 
@@ -97,8 +94,8 @@ public class MainFX extends Application {
             {
                 config.Deserialize(reader);
             }
-            catch (IOException e) {
-                Logger.logException(e.getMessage());
+            catch (IOException ex) {
+                Logger.logException(ex);
             }
         }
     }

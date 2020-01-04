@@ -63,8 +63,8 @@ public class Translator{// implements ISerializable<String>, IDeserializable<Has
                 });
             } );
 
-        }  catch (IOException | ParseException e) {
-            Logger.logException(e.getMessage());
+        }  catch (IOException | ParseException ex) {
+            Logger.logException(ex);
         }
 
         //return tran;
@@ -82,8 +82,8 @@ public class Translator{// implements ISerializable<String>, IDeserializable<Has
             {
                 Deserialize(reader);
             }
-            catch (IOException e) {
-                Logger.logException(e.getMessage());
+            catch (IOException ex) {
+                Logger.logException(ex);
                 return;
             }
         }
@@ -102,8 +102,8 @@ public class Translator{// implements ISerializable<String>, IDeserializable<Has
             file.write(Serialize());
             file.flush();
 
-        } catch (IOException e) {
-            Logger.logException(e.getMessage());
+        } catch (IOException ex) {
+            Logger.logException(ex);
         }
     }
 }

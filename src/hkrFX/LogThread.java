@@ -1,8 +1,5 @@
 package hkrFX;
 
-import java.util.ArrayDeque;
-import java.util.Queue;
-
 public class LogThread extends Thread {
 
     private LogEntry _entry;

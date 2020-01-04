@@ -21,7 +21,9 @@ enum ELogType{
     ELogType(String code){
         this.code = code;
     }
-    public String getCode(){ return code;}
+    public String getCode(){
+        return code;
+    }
 }
 
 class LogEntry{
@@ -49,8 +51,12 @@ class LogEntry{
         writeConsole(message, ELogType.Error);
     }
 
-    public static void logException(String message){
-        writeConsole(message, ELogType.Exception);
+    public static void logException(Exception ex){
+        writeConsole("Exception message: " + ex.getMessage(), ELogType.Exception);
+        String exm = "";
+        for(StackTraceElement se : ex.getStackTrace())
+            exm += "\n\tat " + se.getClassName() + "." + se.getMethodName() + "()";
+        writeConsole(exm, ELogType.Exception);
     }
 
     private static void writeConsole(String message, ELogType logType){

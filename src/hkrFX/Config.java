@@ -62,8 +62,8 @@ public class Config implements ISerializable<String>{
                 }
             }
 
-        }  catch (IOException | ParseException e) {
-            Logger.logException(e.getMessage());
+        }  catch (IOException | ParseException ex) {
+            Logger.logException(ex);
         }
     }
 
@@ -85,7 +85,7 @@ public class Config implements ISerializable<String>{
 
     public void loadDefaults(){
         languageCode = "en";
-        DatabaseAddress = "jdbc:mysql://localhost/store?serverTimezone=Europe/Stockholm&useSSL=false";
+        DatabaseAddress = "jdbc:mysql://localhost/hotel?serverTimezone=Europe/Stockholm&allowMultiQueries=true&useSSL=false";
         DatabaseUsername = "root";
         DatabasePassword = "password";
         DatabaseName = "hotel";
@@ -97,8 +97,8 @@ public class Config implements ISerializable<String>{
         try (FileWriter file = new FileWriter("config.json", false)) {
             file.write(Serialize());
             file.flush();
-        } catch (IOException e) {
-            Logger.logException(e.getMessage());
+        } catch (IOException ex) {
+            Logger.logException(ex);
         }
     }
 }
