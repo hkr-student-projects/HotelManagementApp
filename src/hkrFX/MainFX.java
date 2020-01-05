@@ -46,7 +46,7 @@ public class MainFX extends Application {
 //        Logger.logException("Logging an exception in MainFX class");
         stage.setScene(homeStage.getScene());
         stage.show();
-        databaseManager.addCustomer("gay","gay","gay","gay","gay","gay","gay");
+       // databaseManager.addCustomer("gay","gay","gay","gay","gay","gay","gay");
         //Parent root = FXMLLoader.load(getClass().getResource("sample.fxml"));
     }
 

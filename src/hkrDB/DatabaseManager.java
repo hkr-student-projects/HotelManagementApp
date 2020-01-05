@@ -1,11 +1,12 @@
 package hkrDB;
 
-import hkrFX.BookingStage;
 import hkrFX.Logger;
 import hkrFX.MainFX;
 
-import java.sql.*;
-import static java.lang.System.out;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
+import java.sql.Statement;
 
 enum QueryType{
     UPDATE,//INSERT, UPDATE, DELETE, CREATE TABLE, DROP TABLE
@@ -19,6 +20,8 @@ public class DatabaseManager {
     private final String clients = "`hotel`.`Customers`";
     private final String books = "`hotel`.`Bookings`";
     private final String beds = "`hotel`.`Beds`";
+    private final String orders = "`hotel`.`Orders`";
+    private final String booked = "`hotel`.`Booked`";
 
     static {
         try{
@@ -46,42 +49,70 @@ public class DatabaseManager {
     {
         try{
             executeQuery(QueryType.BOOL,
-                    "CREATE TABLE IF NOT EXISTS " + books + " (" +
-                            "`refNumber` VARCHAR(6) NOT NULL," +
-                            "PRIMARY KEY (`refNumber`));" +
+                    " CREATE SCHEMA IF NOT EXISTS `hotel` DEFAULT CHARACTER SET utf8;" +
+                            "CREATE TABLE IF NOT EXISTS " + books + " (" +
+                            "`reference` VARCHAR(6) NOT NULL," +
+                            "`movein` DATETIME NOT NULL," +
+                            "`moveout` DATETIME NOT NULL," +
+                            "PRIMARY KEY (`reference`));" +
                             "CREATE TABLE IF NOT EXISTS " + clients + " (" +
                             "`id` INT NOT NULL AUTO_INCREMENT," +
-                            "`Booking_refNumber` VARCHAR(6) NOT NULL," +
-                            "`SSN` VARCHAR(13) NOT NULL," +
-                            "`Name` VARCHAR(45) NOT NULL," +
-                            "`MiddleName` VARCHAR(45) NULL," +
-                            "`Surname` VARCHAR(45) NOT NULL," +
-                            "`Address` VARCHAR(45) NOT NULL," +
-                            "`Phone` VARCHAR(15) NOT NULL," +
+                            "`ssn` VARCHAR(45) NOT NULL," +
+                            "`name` VARCHAR(45) NOT NULL," +
+                            "`middlename` VARCHAR(45) DEFAULT NULL," +
+                            "`surname` VARCHAR(45) NOT NULL," +
+                            "`phone` VARCHAR(15) NOT NULL," +
+                            "`address` VARCHAR(45) NOT NULL," +
+                            "PRIMARY KEY (`id`));" +
+                            "CREATE TABLE IF NOT EXISTS " + orders + " (" +
+                            "`id` INT NOT NULL AUTO_INCREMENT," +
+                            "`Customer_id` INT NOT NULL," +
+                            "`Booking_reference` VARCHAR(6) NOT NULL," +
                             "PRIMARY KEY (`id`)," +
-                            //"INDEX `fk_Customer_Booking1_idx` (`Booking_refNumber` ASC)," +
-                            //"CONSTRAINT `fk_Customer_Booking1`" +
-                            "FOREIGN KEY (`Booking_refNumber`)" +
-                            "REFERENCES " + books + " (`refNumber`));" +
-                            //"ON DELETE CASCADE " +
-                            //"ON UPDATE NO ACTION);" +
-                            "CREATE TABLE IF NOT EXISTS " + rooms + " (" +
+                            "INDEX `fk_Orders_Customer1_idx` (`Customer_id` ASC)," +
+                            "INDEX `fk_Orders_Booking1_idx` (`Booking_reference` ASC)," +
+                            "CONSTRAINT `fk_Orders_Customer1`" +
+                            "FOREIGN KEY (`Customer_id`)" +
+                            "REFERENCES "+clients+" (`id`)" +
+                            "ON DELETE NO ACTION " +
+                            "ON UPDATE NO ACTION," +
+                            "CONSTRAINT `fk_Orders_Booking1`" +
+                            "FOREIGN KEY (`Booking_reference`)" +
+                            "REFERENCES "+books+" (`reference`)" +
+                            "ON DELETE NO ACTION " +
+                            "ON UPDATE NO ACTION);" +
+                            "CREATE TABLE IF NOT EXISTS "+rooms+" (" +
                             "`number` VARCHAR(10) NOT NULL," +
                             "`floor` SMALLINT(3) NOT NULL," +
                             "`class` ENUM('ECONOMY', 'MIDDLE', 'LUXURY') NOT NULL," +
-                            "`Booking_refNumber` VARCHAR(6) NOT NULL," +
-                            "PRIMARY KEY (`number`)," +
-                            //"INDEX `fk_Room_Booking1_idx` (`Booking_refNumber` ASC)," +
-                            //"CONSTRAINT `fk_Room_Booking1`" +
-                            "FOREIGN KEY (`Booking_refNumber`)" +
-                            "REFERENCES "+ books +" (`refNumber`));" +
-                            //"ON DELETE CASCADE " +
-                            //"ON UPDATE NO ACTION);" +
-                            "CREATE TABLE IF NOT EXISTS " + beds + " (" +
+                            "PRIMARY KEY (`number`));" +
+                            "CREATE TABLE IF NOT EXISTS "+beds+" (" +
                             "`code` VARCHAR(15) NOT NULL," +
                             "`Room_number` VARCHAR(10) NOT NULL," +
-                            "`size` ENUM('SINGLE', 'DOUBLE') NULL," +
-                            "PRIMARY KEY (`code`));"
+                            "`size` ENUM('SINGLE', 'DOUBLE') NOT NULL," +
+                            "PRIMARY KEY (`code`)," +
+                            "INDEX `fk_Bed_Room_idx` (`Room_number` ASC)," +
+                            "CONSTRAINT `fk_Bed_Room`" +
+                            "FOREIGN KEY (`Room_number`)" +
+                            "REFERENCES "+rooms+" (`number`)" +
+                            "ON DELETE NO ACTION " +
+                            "ON UPDATE NO ACTION);" +
+                            "CREATE TABLE IF NOT EXISTS "+booked+" (" +
+                            "`id` INT NOT NULL," +
+                            "`Booking_reference` VARCHAR(6) NOT NULL," +
+                            "`Room_number` VARCHAR(10) NOT NULL," +
+                            "INDEX `fk_BookedRoom_Booking1_idx` (`Booking_reference` ASC)," +
+                            "INDEX `fk_BookedRoom_Room1_idx` (`Room_number` ASC)," +
+                            "CONSTRAINT `fk_BookedRoom_Booking1`" +
+                            "FOREIGN KEY (`Booking_reference`)" +
+                            "REFERENCES "+books+" (`reference`)" +
+                            "ON DELETE NO ACTION " +
+                            "ON UPDATE NO ACTION," +
+                            "CONSTRAINT `fk_BookedRoom_Room1`" +
+                            "FOREIGN KEY (`Room_number`)" +
+                            "REFERENCES "+rooms+" (`number`)" +
+                            "ON DELETE NO ACTION " +
+                            "ON UPDATE NO ACTION);"
             );
         }
         catch (Exception ex){
