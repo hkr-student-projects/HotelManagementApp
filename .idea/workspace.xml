@@ -5,9 +5,14 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="be750a4a-f25b-417a-8b32-89dd50849fe2" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/src/hkrDB/QueryQueue.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/hkrDB/RoomClass.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/hkr/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/hkr/Main.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/hkrDB/DatabaseManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/hkrDB/DatabaseManager.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/hkrFX/Logger.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/hkrFX/Logger.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/hkrDB/QueryThread.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/hkrDB/QueryThread.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/hkrFX/BookingStage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/hkrFX/BookingStage.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/hkrFX/LoggerQueue.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/hkrFX/LoggerQueue.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/hkrFX/MainFX.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/hkrFX/MainFX.java" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -19,6 +24,7 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
+        <option value="Enum" />
         <option value="Class" />
       </list>
     </option>
@@ -125,7 +131,7 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/hkrDB/DatabaseManager.java</url>
-          <line>67</line>
+          <line>78</line>
           <option name="timeStamp" value="2" />
         </line-breakpoint>
       </breakpoints>

@@ -13,12 +13,12 @@ enum QueryType{
 
 public class DatabaseManager {
 
-    private final String rooms = "`hotel`.`Rooms`";
-    private final String clients = "`hotel`.`Customers`";
-    private final String books = "`hotel`.`Bookings`";
-    private final String beds = "`hotel`.`Beds`";
-    private final String orders = "`hotel`.`Orders`";
-    private final String booked = "`hotel`.`Booked`";
+    private final String rooms = "`hotel`.`Room`";
+    private final String clients = "`hotel`.`Customer`";
+    private final String books = "`hotel`.`Booking`";
+    private final String beds = "`hotel`.`Bed`";
+    private final String orders = "`hotel`.`CustomerOrder`";
+    private final String booked = "`hotel`.`BookedRoom`";
 
     static {
         try{
@@ -34,7 +34,7 @@ public class DatabaseManager {
         checkSchema();
     }
 
-    public int addCustomer(String ssn, String name, String midname, String surname, String addr, String phone, Date movein, Date moveout){
+    public int addEntry(String ssn, String name, String midname, String surname, String addr, String phone, Date movein, Date moveout, String roomnum){
         return (int)executeQuery(QueryType.UPDATE,
                 "INSERT INTO "+books+" " +
                         "(`movein`,`moveout`) " +
@@ -46,7 +46,18 @@ public class DatabaseManager {
                         "SELECT @cid:=LAST_INSERT_ID();" +
                         "INSERT INTO "+ orders +" " +
                         "(`Customer_id`,`Booking_reference`) " +
-                        "VALUES (@cid,@bid);"
+                        "VALUES (@cid,@bid);" +
+                        "INSERT INTO "+ booked +" " +
+                        "(`Booking_reference`,`Room_number`) " +
+                        "VALUES (@bid,'"+ roomnum +"');"
+        );
+    }
+
+    public int addRoom(String number, short floor, RoomClass rclass){
+        return (int)executeQuery(QueryType.UPDATE,
+                "INSERT INTO "+rooms+" " +
+                        "(`number`,`floor`,`class`) " +
+                        "VALUES ('"+ number +"','"+ floor +"','"+ rclass +"');"
         );
     }
 
@@ -64,7 +75,7 @@ public class DatabaseManager {
 
     public void checkSchema()
     {
-        try{
+        try {
             executeQuery(QueryType.BOOL,
                     " CREATE SCHEMA IF NOT EXISTS `hotel` DEFAULT CHARACTER SET utf8;" +
                             "CREATE TABLE IF NOT EXISTS " + books + " (" +
@@ -86,24 +97,24 @@ public class DatabaseManager {
                             "`Customer_id` INT NOT NULL," +
                             "`Booking_reference` INT NOT NULL," +
                             "PRIMARY KEY (`id`)," +
-                            "INDEX `fk_Orders_Customer1_idx` (`Customer_id` ASC)," +
-                            "INDEX `fk_Orders_Booking1_idx` (`Booking_reference` ASC)," +
-                            "CONSTRAINT `fk_Orders_Customer1`" +
+                            "INDEX `fk_Order_Customer1_idx` (`Customer_id` ASC)," +
+                            "INDEX `fk_Order_Booking1_idx` (`Booking_reference` ASC)," +
+                            "CONSTRAINT `fk_Order_Customer1`" +
                             "FOREIGN KEY (`Customer_id`)" +
-                            "REFERENCES "+clients+" (`id`)" +
-                            "ON DELETE NO ACTION " +
+                            "REFERENCES " + clients + " (`id`)" +
+                            "ON DELETE CASCADE " +
                             "ON UPDATE NO ACTION," +
-                            "CONSTRAINT `fk_Orders_Booking1`" +
+                            "CONSTRAINT `fk_Order_Booking1`" +
                             "FOREIGN KEY (`Booking_reference`)" +
-                            "REFERENCES "+books+" (`reference`)" +
-                            "ON DELETE NO ACTION " +
+                            "REFERENCES " + books + " (`reference`)" +
+                            "ON DELETE CASCADE " +
                             "ON UPDATE NO ACTION);" +
-                            "CREATE TABLE IF NOT EXISTS "+rooms+" (" +
+                            "CREATE TABLE IF NOT EXISTS " + rooms + " (" +
                             "`number` VARCHAR(10) NOT NULL," +
                             "`floor` SMALLINT(3) NOT NULL," +
                             "`class` ENUM('ECONOMY', 'MIDDLE', 'LUXURY') NOT NULL," +
                             "PRIMARY KEY (`number`));" +
-                            "CREATE TABLE IF NOT EXISTS "+beds+" (" +
+                            "CREATE TABLE IF NOT EXISTS " + beds + " (" +
                             "`code` VARCHAR(15) NOT NULL," +
                             "`Room_number` VARCHAR(10) NOT NULL," +
                             "`size` ENUM('SINGLE', 'DOUBLE') NOT NULL," +
@@ -111,24 +122,25 @@ public class DatabaseManager {
                             "INDEX `fk_Bed_Room_idx` (`Room_number` ASC)," +
                             "CONSTRAINT `fk_Bed_Room`" +
                             "FOREIGN KEY (`Room_number`)" +
-                            "REFERENCES "+rooms+" (`number`)" +
-                            "ON DELETE NO ACTION " +
+                            "REFERENCES " + rooms + " (`number`)" +
+                            "ON DELETE CASCADE " +
                             "ON UPDATE NO ACTION);" +
-                            "CREATE TABLE IF NOT EXISTS "+booked+" (" +
-                            "`id` INT NOT NULL," +
+                            "CREATE TABLE IF NOT EXISTS " + booked + " (" +
+                            "`id` INT NOT NULL AUTO_INCREMENT," +
                             "`Booking_reference` INT NOT NULL," +
                             "`Room_number` VARCHAR(10) NOT NULL," +
+                            "PRIMARY KEY (`id`)," +
                             "INDEX `fk_BookedRoom_Booking1_idx` (`Booking_reference` ASC)," +
                             "INDEX `fk_BookedRoom_Room1_idx` (`Room_number` ASC)," +
                             "CONSTRAINT `fk_BookedRoom_Booking1`" +
                             "FOREIGN KEY (`Booking_reference`)" +
-                            "REFERENCES "+books+" (`reference`)" +
-                            "ON DELETE NO ACTION " +
+                            "REFERENCES " + books + " (`reference`)" +
+                            "ON DELETE CASCADE " +
                             "ON UPDATE NO ACTION," +
                             "CONSTRAINT `fk_BookedRoom_Room1`" +
                             "FOREIGN KEY (`Room_number`)" +
-                            "REFERENCES "+rooms+" (`number`)" +
-                            "ON DELETE NO ACTION " +
+                            "REFERENCES " + rooms + " (`number`)" +
+                            "ON DELETE CASCADE " +
                             "ON UPDATE NO ACTION);"
             );
         }

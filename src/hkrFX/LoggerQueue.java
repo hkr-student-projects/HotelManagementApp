@@ -6,7 +6,6 @@ import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayDeque;
 import java.util.Date;
-import java.util.Queue;
 
 public class LoggerQueue {
 
@@ -16,7 +15,7 @@ public class LoggerQueue {
 
     public void enqueue(LogEntry le)
     {
-        synchronized (LoggerQueue.lock)
+        synchronized (lock)
         {
             logEntryQueue.addLast(le);
         }

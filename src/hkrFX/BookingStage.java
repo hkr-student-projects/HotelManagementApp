@@ -1,5 +1,7 @@
 package hkrFX;
 
+import hkrDB.DatabaseManager;
+import hkrDB.QueryThread;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -15,6 +17,7 @@ import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
 import javax.swing.*;
+import java.util.Date;
 
 public class BookingStage extends Stage{
 
@@ -64,7 +67,8 @@ public class BookingStage extends Stage{
         _boxes = createBoxes(new double[] { 234.0, 274.0 });
         _dates = createDates(new double[] { 325.0, 365.0 });
         buttons = createButtons(new String[] { "Save", "Reset" }, new double[] { 518.0, 236.0 }, new double[] { 60.0, 82.0 });
-        
+        buttons[0].setOnAction(event -> closeStage());
+
         createScene();
     }
 
@@ -252,11 +256,18 @@ public class BookingStage extends Stage{
 
         // "Name", "Surname", "19890518-4376", "+073-751-06-21", "Storagatan 12A-1006"
         boolean errors = false;
+        String name = null;
+        String sname = null;
+        String ssn = null;
+        String phone = null;
+        String addr = null;
         for(TextField field : fields) {
             switch (field.getPromptText().toLowerCase()) {
 
                 case "name":
+                    name = field.getText();
                 case "surname":
+                    sname = field.getText();
                     if (!field.getText().matches("[A-Z][a-z]*")) {
                         redOutField(field);
                         errors = true;
@@ -264,6 +275,7 @@ public class BookingStage extends Stage{
                 break;
 
                 case "19890518-4376":
+                    ssn = field.getText();
                     if (!field.getText().matches("\\d{8}\\-\\d{4}")) {
                         redOutField(field);
                         errors = true;
@@ -271,6 +283,7 @@ public class BookingStage extends Stage{
                 break;
 
                 case "+073-751-06-21":
+                    phone = field.getText();
                     if (!field.getText().matches("\\+\\d{3}\\-\\d{3}\\-\\d{2}\\-\\d{2}")) {
                         redOutField(field);
                         errors = true;
@@ -278,13 +291,30 @@ public class BookingStage extends Stage{
                 break;
 
                 case "storagatan 12a-1006":
+                    addr = field.getText();
                     if (!field.getText().matches("[A-Z][a-z]+\\s\\d+[A-Z]?\\-\\d+")) {
                         redOutField(field);
                         errors = true;
                     }
             }
         }
-        if(!errors)
+        if(!errors){
+            //(String ssn, String name, String midname, String surname, String addr, String phone, Date movein, Date moveout, String roomnum){
+            Class[] parameterTypes = new Class[9];
+            for(byte i = 0; i < 6; i++)
+                parameterTypes[i] = String.class;
+            parameterTypes[6] = Date.class;
+            parameterTypes[7] = Date.class;
+            parameterTypes[8] = String.class;
+            try {
+                new QueryThread("BookingStageThread", DatabaseManager.class.getMethod("addEntry", parameterTypes), "19999999-9999", "Alex", "mid", "Sura", "Asdasd", "asdas", null, null, "301A").start();
+            }
+            catch (NoSuchMethodException e){
+                Logger.logException(e);
+            }
+
             this.close();
+        }
+
     }
 }

@@ -1,6 +1,7 @@
 package hkrFX;
 
 import hkrDB.DatabaseManager;
+import hkrDB.RoomClass;
 import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -48,9 +49,12 @@ public class MainFX extends Application {
 //        Logger.logException("Logging an exception in MainFX class");
         stage.setScene(homeStage.getScene());
         stage.show();
-        databaseManager.addCustomer("1999-08-08","Tom","Bob","Cruise","Storagatan 8A","0734956722",
-                new Date(Calendar.getInstance().getTime().getTime()), new Date(Calendar.getInstance().getTime().getTime()));
+        //! before must be all initializations performed: like rooms
+        //databaseManager.addRoom("301A", (short)3, RoomClass.ECONOMY);
+        //databaseManager.addCustomer("1999-08-08","Tom","Bob","Cruise","Storagatan 8A","0734956722",
+                //new Date(Calendar.getInstance().getTime().getTime()), new Date(Calendar.getInstance().getTime().getTime()), "301A");
         //Parent root = FXMLLoader.load(getClass().getResource("sample.fxml"));
+
     }
 
 

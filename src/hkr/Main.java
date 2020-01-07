@@ -1,5 +1,8 @@
 package hkr;
 
+import hkrDB.DatabaseManager;
+import hkrDB.QueryThread;
+import hkrFX.Logger;
 import hkrFX.MainFX;
 import javafx.application.Application;
 import org.json.simple.JSONObject;
@@ -8,6 +11,8 @@ import org.xml.sax.SAXException;
 import javax.xml.parsers.ParserConfigurationException;
 import java.io.*;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.Scanner;
 
 import static java.lang.System.out;
@@ -26,7 +31,20 @@ public class Main {
     public static void main(String[] args) throws IOException, SAXException, ParserConfigurationException {
 //        Main myApp = new Main();
 //        myApp.showMenu();
-          Application.launch(MainFX.class);
+        //out.println(new Date(Calendar.getInstance().getTime().getTime()));
+            //Application.launch(MainFX.class);
+        Class[] parameterTypes = new Class[9];
+        for(byte i = 0; i < 6; i++)
+            parameterTypes[i] = String.class;
+        parameterTypes[6] = java.util.Date.class;
+        parameterTypes[7] = Date.class;
+        parameterTypes[8] = String.class;
+        try {
+            new QueryThread("BookingStageThread", DatabaseManager.class.getMethod("addEntry", parameterTypes), "19999999-9999", "Alex", "mid", "Sura", "Asdasd", "asdas", null, null, "301A").start();
+        }
+        catch (NoSuchMethodException e){
+            Logger.logException(e);
+        }
          //hkrFX.Logger.logUML(AnchorPane.class, false);
 //        out.println(Translator.translate("field_empty", "MyField", BookingStage.class.getName()));
 //        Logger.logError("MyError");
