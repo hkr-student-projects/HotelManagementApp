@@ -3,10 +3,7 @@ package hkrDB;
 import hkrFX.Logger;
 import hkrFX.MainFX;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.SQLException;
-import java.sql.Statement;
+import java.sql.*;
 
 enum QueryType{
     UPDATE,//INSERT, UPDATE, DELETE, CREATE TABLE, DROP TABLE
@@ -37,13 +34,33 @@ public class DatabaseManager {
         checkSchema();
     }
 
-    public int addCustomer(String bookref, String ssn, String name, String midname, String surname, String addr, String phone){
+    public int addCustomer(String ssn, String name, String midname, String surname, String addr, String phone, Date movein, Date moveout){
         return (int)executeQuery(QueryType.UPDATE,
-                "INSERT INTO " + clients +
-                        " (`Booking_refNumber`,`SSN`,`Name`,`MiddleName`,`Surname`,`Address`,`Phone`) " +
-                        "VALUES ('" + bookref + "','" + ssn + "','" + name + "','" + midname + "','" + surname + "','" + addr + "','" + phone + "');"
+                "INSERT INTO "+books+" " +
+                        "(`movein`,`moveout`) " +
+                        "VALUES ('2018-12-22 23:44:22','2019-12-22 23:44:22');" +
+                        "SELECT @bid:=LAST_INSERT_ID();" +
+                        "INSERT INTO " + clients + " " +
+                        "(`ssn`,`name`,`middlename`,`surname`,`address`,`phone`) " +
+                        "VALUES ('" + ssn + "','" + name + "','" + midname + "','" + surname + "','" + addr + "','" + phone + "');" +
+                        "SELECT @cid:=LAST_INSERT_ID();" +
+                        "INSERT INTO "+ orders +" " +
+                        "(`Customer_id`,`Booking_reference`) " +
+                        "VALUES (@cid,@bid);"
         );
     }
+
+//    "UPDATE "+books+" SET =concat(" +
+//            "substring('ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789', rand(@seed:=round(rand(@lid)*4294967296))*36+1, 1)," +
+//            "substring('ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789', rand(@seed:=round(rand(@seed)*4294967296))*36+1, 1)," +
+//            "substring('ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789', rand(@seed:=round(rand(@seed)*4294967296))*36+1, 1)," +
+//            "substring('ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789', rand(@seed:=round(rand(@seed)*4294967296))*36+1, 1)," +
+//            "substring('ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789', rand(@seed:=round(rand(@seed)*4294967296))*36+1, 1)," +
+//            "substring('ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789', rand(@seed:=round(rand(@seed)*4294967296))*36+1, 1)," +
+//            "substring('ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789', rand(@seed:=round(rand(@seed)*4294967296))*36+1, 1)," +
+//            "substring('ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789', rand(@seed)*36+1, 1)" +
+//            ") " +
+//            "WHERE id=@lid;
 
     public void checkSchema()
     {
@@ -51,7 +68,7 @@ public class DatabaseManager {
             executeQuery(QueryType.BOOL,
                     " CREATE SCHEMA IF NOT EXISTS `hotel` DEFAULT CHARACTER SET utf8;" +
                             "CREATE TABLE IF NOT EXISTS " + books + " (" +
-                            "`reference` VARCHAR(6) NOT NULL," +
+                            "`reference` INT NOT NULL AUTO_INCREMENT," +
                             "`movein` DATETIME NOT NULL," +
                             "`moveout` DATETIME NOT NULL," +
                             "PRIMARY KEY (`reference`));" +
@@ -67,7 +84,7 @@ public class DatabaseManager {
                             "CREATE TABLE IF NOT EXISTS " + orders + " (" +
                             "`id` INT NOT NULL AUTO_INCREMENT," +
                             "`Customer_id` INT NOT NULL," +
-                            "`Booking_reference` VARCHAR(6) NOT NULL," +
+                            "`Booking_reference` INT NOT NULL," +
                             "PRIMARY KEY (`id`)," +
                             "INDEX `fk_Orders_Customer1_idx` (`Customer_id` ASC)," +
                             "INDEX `fk_Orders_Booking1_idx` (`Booking_reference` ASC)," +
@@ -99,7 +116,7 @@ public class DatabaseManager {
                             "ON UPDATE NO ACTION);" +
                             "CREATE TABLE IF NOT EXISTS "+booked+" (" +
                             "`id` INT NOT NULL," +
-                            "`Booking_reference` VARCHAR(6) NOT NULL," +
+                            "`Booking_reference` INT NOT NULL," +
                             "`Room_number` VARCHAR(10) NOT NULL," +
                             "INDEX `fk_BookedRoom_Booking1_idx` (`Booking_reference` ASC)," +
                             "INDEX `fk_BookedRoom_Room1_idx` (`Room_number` ASC)," +

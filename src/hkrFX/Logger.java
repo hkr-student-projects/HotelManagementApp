@@ -75,7 +75,7 @@ class LogEntry{
                 new LogThread("logWarningThread", new LogEntry(message, logType)).start();
                 break;
             case Exception:
-                out.println(logType.Exception.getCode() + message + "\u001B[0m");
+                out.print(logType.Exception.getCode() + message + "\u001B[0m");
                 new LogThread("logExceptionThread", new LogEntry(message, logType)).start();
                 break;
             default:

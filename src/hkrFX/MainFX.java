@@ -9,6 +9,8 @@ import javafx.stage.Stage;
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
+import java.sql.Date;
+import java.util.Calendar;
 
 interface IDeserializable<T> {
 
@@ -46,7 +48,8 @@ public class MainFX extends Application {
 //        Logger.logException("Logging an exception in MainFX class");
         stage.setScene(homeStage.getScene());
         stage.show();
-       // databaseManager.addCustomer("gay","gay","gay","gay","gay","gay","gay");
+        databaseManager.addCustomer("1999-08-08","Tom","Bob","Cruise","Storagatan 8A","0734956722",
+                new Date(Calendar.getInstance().getTime().getTime()), new Date(Calendar.getInstance().getTime().getTime()));
         //Parent root = FXMLLoader.load(getClass().getResource("sample.fxml"));
     }
 
