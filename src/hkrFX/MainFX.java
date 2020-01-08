@@ -1,8 +1,10 @@
 package hkrFX;
 
+import com.sun.glass.ui.Pixels;
 import hkrDB.DatabaseManager;
 import hkrDB.RoomClass;
 import javafx.application.Application;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.control.DatePicker;
@@ -51,7 +53,6 @@ public class MainFX extends Application {
         databaseManager = new DatabaseManager();
         initializeEvents();
 
-
 //        LocalDateTime myDateObj = LocalDateTime.;
 //        System.out.println("Before formatting: " + myDateObj);
 //        DateTimeFormatter myFormatObj = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss");
@@ -80,6 +81,8 @@ public class MainFX extends Application {
 //        Logger.logException("Logging an exception in MainFX class");
         stage.setScene(homeStage.getScene());
         stage.show();
+        ObservableList<String> availableRooms = databaseManager.getAvailableRooms(LocalDate.of(2019, 12, 12), LocalDate.of(2019, 12, 19));
+        //availableRooms.forEach(room -> out.println(room));
         //! before must be all initializations performed: like rooms
         //databaseManager.addRoom("301A", (short)3, RoomClass.ECONOMY);
         //databaseManager.addCustomer("1999-08-08","Tom","Bob","Cruise","Storagatan 8A","0734956722",

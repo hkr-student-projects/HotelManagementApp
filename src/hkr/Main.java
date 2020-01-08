@@ -14,6 +14,7 @@ import org.xml.sax.SAXException;
 
 import javax.xml.parsers.ParserConfigurationException;
 import java.io.*;
+import java.sql.*;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.ZoneId;
@@ -40,7 +41,13 @@ public class Main {
 //        myApp.showMenu();
         //out.println(new Date(Calendar.getInstance().getTime().getTime()));
 
-        //Application.launch(MainFX.class);
+        Application.launch(MainFX.class);
+
+
+
+
+
+
 
         //FxmlConverter.documentBuild("src/hkrFX/[deprecated]BookingInfo.fxml");
         //compare
@@ -58,7 +65,7 @@ public class Main {
 //        catch (NoSuchMethodException e){
 //            Logger.logException(e);
 //        }
-            hkrFX.Logger.logUML(QueryQueue.class, true);
+            //hkrFX.Logger.logUML(QueryQueue.class, true);
 //        out.println(Translator.translate("field_empty", "MyField", BookingStage.class.getName()));
 //        Logger.logError("MyError");
 //        Localization localization = new Localization();

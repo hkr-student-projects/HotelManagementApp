@@ -85,7 +85,7 @@ public class Config implements ISerializable<String>{
 
     public void loadDefaults(){
         languageCode = "en";
-        DatabaseAddress = "jdbc:mysql://localhost/hotel?serverTimezone=Europe/Stockholm&allowMultiQueries=true&useSSL=false";
+        DatabaseAddress = "jdbc:mysql://localhost/hotel?&allowMultiQueries=true&serverTimezone=Europe/Stockholm&useSSL=false";
         DatabaseUsername = "root";
         DatabasePassword = "password";
         DatabaseName = "hotel";

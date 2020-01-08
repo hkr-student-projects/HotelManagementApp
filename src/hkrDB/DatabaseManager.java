@@ -2,10 +2,15 @@ package hkrDB;
 
 import hkrFX.Logger;
 import hkrFX.MainFX;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+import javafx.scene.control.ComboBox;
 
 import javax.xml.transform.Result;
 import java.sql.*;
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 
 enum QueryType{
     UPDATE,//INSERT, UPDATE, DELETE, CREATE TABLE, DROP TABLE
@@ -34,6 +39,52 @@ public class DatabaseManager {
 
     public DatabaseManager(){
         checkSchema();
+    }
+
+    public ObservableList<String> getAvailableRooms(LocalDate movein, LocalDate moveout){
+        ArrayList<String> arooms = new ArrayList<>();
+        try{
+            try (Connection conn = DriverManager.getConnection(MainFX.config.DatabaseAddress, MainFX.config.DatabaseUsername, MainFX.config.DatabasePassword)){
+
+                PreparedStatement pst = conn.prepareStatement("SELECT `Room_number` As Room\n" +
+                        "FROM hotel.BookedRoom, hotel.Booking \n" +
+                        "WHERE hotel.BookedRoom.Booking_reference = hotel.Booking.reference AND `Room_number` NOT IN\n" +
+                        "(SELECT `Room_number`\n" +
+                        "FROM hotel.BookedRoom, hotel.Booking \n" +
+                        "WHERE hotel.BookedRoom.Booking_reference = hotel.Booking.reference AND\n" +
+                        "(\t\n" +
+                        "\t(('"+ movein +"' >= `movein` AND '"+ movein +"' < `moveout`) OR ('"+ moveout +"' >= `movein` AND '"+ moveout +"' <= `moveout`)) \n" +
+                        "    OR \n" +
+                        "\t(`movein` >= '"+ movein +"' AND `moveout` <= '"+ moveout +"')\n" +
+                        "))\n" +
+                        "UNION SELECT `number`\n" +
+                        "FROM hotel.Room \n" +
+                        "WHERE `number` \n" +
+                        "NOT IN (SELECT `Room_number` \n" +
+                        "FROM hotel.BookedRoom)\n" +
+                        "ORDER BY Room;");
+                boolean isResult = pst.execute();
+
+                do {
+                    try (ResultSet rs = pst.getResultSet()) {
+
+                        while (rs.next()) {
+
+                            System.out.println(rs.getString(1));
+                        }
+
+                        isResult = pst.getMoreResults();
+                    }
+
+                } while (isResult);
+            }
+        }
+        catch(Exception ex){
+            System.out.println("Connection failed...");
+            System.out.println(ex);
+        }
+        arooms.forEach(e -> System.out.println(e));
+        return null;//FXCollections.observableArrayList((String[]) arooms.toArray());
     }
 
     public int addEntry(String ssn, String name, String surname, String addr, String phone, String movein, String moveout, String roomnum){
@@ -167,22 +218,24 @@ public class DatabaseManager {
        //(`steamId` varchar(32) NOT NULL,`balance` decimal(15,2) NOT NULL DEFAULT '25.00',`lastUpdated` timestamp NOT NULL DEFAULT NOW() ON UPDATE CURRENT_TIMESTAMP,PRIMARY KEY (`steamId`)) ");
     }
 
+
     public Object executeQuery(QueryType type, String query)
     {
         // This method is to reduce the amount of copy paste that there was within this class.
-        // Initiate result and connection globally instead of within TryCatch context.
         Object result = null;
         Connection connection = createConnection();
         try
         {
-            // Initialize command within try context, and execute within it as well.
-            Statement command = connection.createStatement();
-            result = type == QueryType.UPDATE ? command.executeUpdate(query) : type == QueryType.READER ? command.executeQuery(query) : command.execute(query);
-            connection.close();
+            //Statement command = connection.createStatement();
+            PreparedStatement command = connection.prepareStatement(query);
+            result = type == QueryType.READER ? command : command.getUpdateCount();
+            //connection.close();
+
+            //A ResultSet object is automatically closed when the Statement object that generated it is closed,
+            //re-executed, or used to retrieve the next result from a sequence of multiple results.
         }
         catch (Exception ex)
         {
-            // Catch and log any errors during execution, like connection or similar.
             Logger.logException(ex);
         }
 
@@ -201,3 +254,51 @@ public class DatabaseManager {
         return conn;
     }
 }
+
+
+//        try{
+//                String url = "jdbc:mysql://localhost/hotel?&allowMultiQueries=true&serverTimezone=Europe/Stockholm&useSSL=false";
+//                String username = "root";
+//                String password = "91rasuho";
+//                Class.forName("com.mysql.cj.jdbc.Driver").getDeclaredConstructor().newInstance();
+//
+//                try (Connection conn = DriverManager.getConnection(url, username, password)){
+//
+//                PreparedStatement pst = conn.prepareStatement("SELECT @rin:='2019-12-12';SELECT @rout:='2019-12-19';SELECT `Room_number` As Room\n" +
+//                "FROM hotel.BookedRoom, hotel.Booking \n" +
+//                "WHERE hotel.BookedRoom.Booking_reference = hotel.Booking.reference AND `Room_number` NOT IN\n" +
+//                "(SELECT `Room_number`\n" +
+//                "FROM hotel.BookedRoom, hotel.Booking \n" +
+//                "WHERE hotel.BookedRoom.Booking_reference = hotel.Booking.reference AND\n" +
+//                "(\t\n" +
+//                "\t((@rin >= `movein` AND @rin < `moveout`) OR (@rout >= `movein` AND @rout <= `moveout`)) \n" +
+//                "    OR \n" +
+//                "\t(`movein` >= @rin AND `moveout` <= @rout)\n" +
+//                "))\n" +
+//                "UNION SELECT `number`\n" +
+//                "FROM hotel.Room \n" +
+//                "WHERE `number` \n" +
+//                "NOT IN (SELECT `Room_number` \n" +
+//                "FROM hotel.BookedRoom)\n" +
+//                "ORDER BY Room;");
+//                boolean isResult = pst.execute();
+//
+//                do {
+//                try (ResultSet rs = pst.getResultSet()) {
+//
+//                while (rs.next()) {
+//
+//                System.out.println(rs.getString(1));
+//                }
+//
+//                isResult = pst.getMoreResults();
+//                }
+//
+//                } while (isResult);
+//                }
+//                }
+//                catch(Exception ex){
+//                System.out.println("Connection failed...");
+//
+//                System.out.println(ex);
+//                }
