@@ -1,6 +1,8 @@
 package hkrFX;
 
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -24,7 +26,7 @@ public class BookingStage extends Stage{
 //    private Label _label;
     private Text[] texts;
     private TextField[] fields;
-    private ComboBox[] boxes;
+    private ComboBox rooms;
     private DatePicker[] dates;
     private Button[] buttons;
 
@@ -62,15 +64,40 @@ public class BookingStage extends Stage{
                 new double[] { 53.0, 53.0, 98.0, 143.0, 188.0 }
         );
 
-        boxes = createBoxes(new double[] { 234.0, 274.0 });
+        rooms = new ComboBox();
+        rooms.setLayoutX(238.0);
+        rooms.setLayoutY(234.0);
+        rooms.prefWidth(155.0);
+        rooms.setStyle("-fx-background-color: #f5f5f5; -fx-background-radius: 111;");
+
+        //boxes = createBoxes(new double[] { 234.0, 274.0 });
+//        rooms = new ComboBox(MainFX.databaseManager.getAvailableRooms(
+//                LocalDate.of(2019, 12, 12),
+//                LocalDate.of(2019, 12, 19))
+//        );
+//        rooms.setLayoutX(238.0);
+//        rooms.setLayoutY(234.0);
+//        rooms.prefWidth(155.0);
+//        rooms.setStyle("-fx-background-color: #f5f5f5; -fx-background-radius: 111;");
+
         dates = createDates(new double[] { 325.0, 365.0 });
         buttons = createButtons(new String[] { "Save", "Reset" }, new double[] { 518.0, 236.0 }, new double[] { 60.0, 82.0 });
-        buttons[0].setOnAction(event -> closeStage());
+        buttons[0].setOnAction(event -> createBoxes(new double[] { 234.0, 274.0 }));
+        dates[1].setOnAction(new EventHandler<ActionEvent>() {
 
+            @Override
+            public void handle(ActionEvent event) {
+//                rooms = new ComboBox();
+//                rooms.setLayoutX(238.0);
+//                rooms.setLayoutY(234.0);
+//                rooms.prefWidth(155.0);
+//                rooms.setStyle("-fx-background-color: #f5f5f5; -fx-background-radius: 111;");
+                rooms.setItems(MainFX.databaseManager.getAvailableRooms(dates[0].getValue(), dates[1].getValue()));
+                System.out.println("gay");
+            }
+        });
         createScene();
     }
-
-
 
     private void createScene(){
 
@@ -118,7 +145,7 @@ public class BookingStage extends Stage{
         //pChilds.add(b);
         aChilds.add(pane);
         aChilds.addAll(fields);
-        aChilds.addAll(boxes);
+        aChilds.add(rooms);
         aChilds.addAll(buttons);
         aChilds.addAll(dates);
         aChilds.add(label);
@@ -182,7 +209,7 @@ public class BookingStage extends Stage{
     private ComboBox[] createBoxes(double[] layoutYs){
 
         ComboBox[] boxes = new ComboBox[layoutYs.length];
-//        boxes[0] = new ComboBox(FXCollections.observableArrayList("ECONOMY", "MIDDLE", "LUXURY"));
+//        boxes[0] = new ComboBox(MainFX.databaseManager.getAvailableRooms(dates[0].getValue(), dates[1].getValue()));
 //        boxes[1] = new ComboBox();
 
         for (byte i = 0; i < boxes.length; i++){
@@ -190,7 +217,6 @@ public class BookingStage extends Stage{
             boxes[i].setLayoutX(238.0);
             boxes[i].setLayoutY(layoutYs[i]);
             boxes[i].prefWidth(155.0);
-
             boxes[i].setStyle("-fx-background-color: #f5f5f5; -fx-background-radius: 111;");
         }
 

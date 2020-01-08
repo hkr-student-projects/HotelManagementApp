@@ -70,7 +70,7 @@ public class DatabaseManager {
 
                         while (rs.next()) {
 
-                            System.out.println(rs.getString(1));
+                            arooms.add(rs.getString(1));
                         }
 
                         isResult = pst.getMoreResults();
@@ -80,11 +80,10 @@ public class DatabaseManager {
             }
         }
         catch(Exception ex){
-            System.out.println("Connection failed...");
-            System.out.println(ex);
+            Logger.logException(ex);
         }
-        arooms.forEach(e -> System.out.println(e));
-        return null;//FXCollections.observableArrayList((String[]) arooms.toArray());
+        //arooms.forEach(e -> System.out.println(e));
+        return FXCollections.observableArrayList(arooms);
     }
 
     public int addEntry(String ssn, String name, String surname, String addr, String phone, String movein, String moveout, String roomnum){
