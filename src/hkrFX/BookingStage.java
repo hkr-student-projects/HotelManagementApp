@@ -1,13 +1,12 @@
 package hkrFX;
 
-import hkrDB.DatabaseManager;
-import hkrDB.QueryThread;
 import javafx.collections.ObservableList;
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.scene.Node;
 import javafx.scene.Scene;
-import javafx.scene.control.*;
+import javafx.scene.control.Button;
+import javafx.scene.control.ComboBox;
+import javafx.scene.control.DatePicker;
+import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Paint;
@@ -16,16 +15,14 @@ import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
-import javax.swing.*;
 import java.time.LocalDate;
-import java.util.Date;
 
 public class BookingStage extends Stage{
 
 //    private AnchorPane _anchorpane;
 //    private Pane _pane;
 //    private Label _label;
-    private Text[] _texts;
+    private Text[] texts;
     private TextField[] fields;
     private ComboBox[] boxes;
     private DatePicker[] dates;
@@ -53,7 +50,7 @@ public class BookingStage extends Stage{
 //        _label.setTextFill(Paint.valueOf("#ffb053"));
 //        _label.setFont(new Font("Futura Medium", 13));
 
-//        _texts = createTexts(
+//        texts = createTexts(
 //                new String[] { "Name", "SSN", "Phone", "Address", "Room Type", "Guests", "Arrival Date", "Departure Date" },
 //                new double[] { 71.0, 116.0, 161.0, 206.0, 253.0, 298.0, 343.0, 388.0 },
 //                new double[] { 68.21875, 68.21875, 68.21875, 68.21875, 94.21875, 94.21875, 94.21875, 118.21875}
@@ -72,6 +69,8 @@ public class BookingStage extends Stage{
 
         createScene();
     }
+
+
 
     private void createScene(){
 
@@ -183,6 +182,9 @@ public class BookingStage extends Stage{
     private ComboBox[] createBoxes(double[] layoutYs){
 
         ComboBox[] boxes = new ComboBox[layoutYs.length];
+//        boxes[0] = new ComboBox(FXCollections.observableArrayList("ECONOMY", "MIDDLE", "LUXURY"));
+//        boxes[1] = new ComboBox();
+
         for (byte i = 0; i < boxes.length; i++){
             boxes[i] = new ComboBox();
             boxes[i].setLayoutX(238.0);
@@ -301,6 +303,8 @@ public class BookingStage extends Stage{
         }
         if(!errors){
             LocalDate movein = dates[0].getValue();
+            LocalDate moveout = dates[1].getValue();
+            MainFX.databaseManager.addEntry(ssn, name, sname, addr, phone, movein.toString(), moveout.toString(), null);
             //MainFX.databaseManager.addEntry(ssn, name, sname, addr, phone, dates[0].getda);
             //(String ssn, String name, String midname, String surname, String addr, String phone, Date movein, Date moveout, String roomnum){
 //            Class[] parameterTypes = new Class[9];

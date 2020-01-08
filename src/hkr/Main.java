@@ -2,7 +2,9 @@ package hkr;
 
 import com.mysql.cj.log.Log;
 import hkrDB.DatabaseManager;
+import hkrDB.QueryQueue;
 import hkrDB.QueryThread;
+import hkrFX.FxmlConverter;
 import hkrFX.Logger;
 import hkrFX.MainFX;
 import javafx.application.Application;
@@ -37,9 +39,10 @@ public class Main {
 //        Main myApp = new Main();
 //        myApp.showMenu();
         //out.println(new Date(Calendar.getInstance().getTime().getTime()));
-        Application.launch(MainFX.class);
 
+        //Application.launch(MainFX.class);
 
+        //FxmlConverter.documentBuild("src/hkrFX/[deprecated]BookingInfo.fxml");
         //compare
         //labelCompare.setText("Compare date: " + dateUtil.compareTo(dateFromPicker));
 
@@ -55,7 +58,7 @@ public class Main {
 //        catch (NoSuchMethodException e){
 //            Logger.logException(e);
 //        }
-         //hkrFX.Logger.logUML(AnchorPane.class, false);
+            hkrFX.Logger.logUML(QueryQueue.class, true);
 //        out.println(Translator.translate("field_empty", "MyField", BookingStage.class.getName()));
 //        Logger.logError("MyError");
 //        Localization localization = new Localization();

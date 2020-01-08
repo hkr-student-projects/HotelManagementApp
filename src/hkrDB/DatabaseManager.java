@@ -3,7 +3,9 @@ package hkrDB;
 import hkrFX.Logger;
 import hkrFX.MainFX;
 
+import javax.xml.transform.Result;
 import java.sql.*;
+import java.time.LocalDate;
 
 enum QueryType{
     UPDATE,//INSERT, UPDATE, DELETE, CREATE TABLE, DROP TABLE
@@ -34,7 +36,7 @@ public class DatabaseManager {
         checkSchema();
     }
 
-    public int addEntry(String ssn, String name, String surname, String addr, String phone, Date movein, Date moveout, String roomnum){
+    public int addEntry(String ssn, String name, String surname, String addr, String phone, String movein, String moveout, String roomnum){
         return (int)executeQuery(QueryType.UPDATE,
                 "INSERT INTO "+books+" " +
                         "(`movein`,`moveout`) " +
@@ -60,6 +62,19 @@ public class DatabaseManager {
                         "VALUES ('"+ number +"','"+ floor +"','"+ rclass +"');"
         );
     }
+
+//    public String[] getRoomsDate(LocalDate movein, LocalDate moveout){
+//        ResultSet result = (ResultSet)executeQuery(QueryType.READER,
+//                "SELECT "
+//        );
+//    }
+
+//    private String getAvailableRoom(){
+//        String room = null;
+//        ResultSet res = (ResultSet)executeQuery(QueryType.READER,
+//                ""
+//        );
+//    }
 
 //    "UPDATE "+books+" SET =concat(" +
 //            "substring('ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789', rand(@seed:=round(rand(@lid)*4294967296))*36+1, 1)," +

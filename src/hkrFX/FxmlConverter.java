@@ -21,6 +21,7 @@ public class FxmlConverter {
     public static void documentBuild(String xmlPath) throws ParserConfigurationException, IOException, SAXException {
         DocumentBuilder db = DocumentBuilderFactory.newInstance().newDocumentBuilder();
         Node entry = db.parse(xmlPath);
+        out.println(entry.getBaseURI());
         String[] name = entry.getBaseURI().split("/");
         String out = name[name.length - 1].split("\\.")[0];
         File f = new File(""+ out +".txt");

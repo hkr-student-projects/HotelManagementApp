@@ -61,6 +61,17 @@ public class MainFX extends Application {
 //        Before Formatting: 2020-01-08T09:28:22.691983
 //        After Formatting: 08-01-2020 09:28:22
 
+//        INSERT INTO `hotel`.`Room` (`number`, `floor`, `class`) VALUES ('101', '1', 'ECONOMY');
+//        INSERT INTO `hotel`.`Room` (`number`, `floor`, `class`) VALUES ('102', '1', 'ECONOMY');
+//        INSERT INTO `hotel`.`Room` (`number`, `floor`, `class`) VALUES ('103', '1', 'ECONOMY');
+//        UPDATE `hotel`.`Room` SET `number`='100', `floor`='1' WHERE `number`='301A';
+//        INSERT INTO `hotel`.`Room` (`number`, `floor`, `class`) VALUES ('201', '2', 'MIDDLE');
+//        INSERT INTO `hotel`.`Room` (`number`, `floor`, `class`) VALUES ('202', '2', 'MIDDLE');
+//        INSERT INTO `hotel`.`Room` (`number`, `floor`, `class`) VALUES ('203', '2', 'MIDDLE');
+//        INSERT INTO `hotel`.`Room` (`number`, `floor`, `class`) VALUES ('200', '2', 'MIDDLE');
+//        INSERT INTO `hotel`.`Room` (`number`, `floor`, `class`) VALUES ('300', '3', 'LUXURY');
+//        INSERT INTO `hotel`.`Room` (`number`, `floor`, `class`) VALUES ('301', '3', 'LUXURY');
+//        INSERT INTO `hotel`.`Room` (`number`, `floor`, `class`) VALUES ('302', '3', 'LUXURY');
 
 //        System.out.println(Translator.translate("field_empty", "MyField",  this.getClass().getName()));
 //        System.out.println(Translator.translate("keyid_not_found", "SomeKey"));
