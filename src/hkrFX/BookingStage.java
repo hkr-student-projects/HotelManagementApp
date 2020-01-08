@@ -82,7 +82,7 @@ public class BookingStage extends Stage{
 
         dates = createDates(new double[] { 325.0, 365.0 });
         buttons = createButtons(new String[] { "Save", "Reset" }, new double[] { 518.0, 236.0 }, new double[] { 60.0, 82.0 });
-        buttons[0].setOnAction(event -> createBoxes(new double[] { 234.0, 274.0 }));
+        buttons[0].setOnAction(event -> closeStage());
         dates[1].setOnAction(new EventHandler<ActionEvent>() {
 
             @Override
@@ -137,7 +137,7 @@ public class BookingStage extends Stage{
         label.setFont(new Font("Futura Medium", 14));
 
         pChilds.addAll(createTexts(
-                new String[] { "Name", "SSN", "Phone", "Address", "Room Type", "Guests", "Arrival Date", "Departure Date" },
+                new String[] { "Name", "SSN", "Phone", "Address", "Available Rooms", "", "Arrival Date", "Departure Date" },
                 new double[] { 71.0, 116.0, 161.0, 206.0, 253.0, 298.0, 343.0, 388.0 },
                 new double[] { 68.21875, 68.21875, 68.21875, 68.21875, 94.21875, 94.21875, 94.21875, 118.21875}
         ));

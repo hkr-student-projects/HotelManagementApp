@@ -4,13 +4,10 @@ import hkrFX.Logger;
 import hkrFX.MainFX;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.scene.control.ComboBox;
 
-import javax.xml.transform.Result;
 import java.sql.*;
 import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.List;
 
 enum QueryType{
     UPDATE,//INSERT, UPDATE, DELETE, CREATE TABLE, DROP TABLE
@@ -44,7 +41,7 @@ public class DatabaseManager {
     public ObservableList<String> getAvailableRooms(LocalDate movein, LocalDate moveout){
         ArrayList<String> arooms = new ArrayList<>();
         try{
-            try (Connection conn = DriverManager.getConnection(MainFX.config.DatabaseAddress, MainFX.config.DatabaseUsername, MainFX.config.DatabasePassword)){
+            try (Connection conn = createConnection()){
 
                 PreparedStatement pst = conn.prepareStatement("SELECT `Room_number` As Room\n" +
                         "FROM hotel.BookedRoom, hotel.Booking \n" +
@@ -63,8 +60,8 @@ public class DatabaseManager {
                         "NOT IN (SELECT `Room_number` \n" +
                         "FROM hotel.BookedRoom)\n" +
                         "ORDER BY Room;");
-                boolean isResult = pst.execute();
 
+                boolean isResult = pst.execute();
                 do {
                     try (ResultSet rs = pst.getResultSet()) {
 
