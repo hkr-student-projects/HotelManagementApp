@@ -2,12 +2,10 @@ package hkr;
 
 public class Customer extends Person{
     private String customerPassword;
-    private int customerCounter;
 
-    public Customer(String firstName, String lastName, String personNumber, String phoneNumber, String customerPassword, int customerCounter) {
-        super(firstName, lastName, personNumber, phoneNumber);
+    public Customer(String firstName, String lastName, String personNumber, String phoneNumber,String email,String userId, String customerPassword) {
+        super(firstName, lastName, personNumber, phoneNumber,email,userId);
         this.customerPassword = customerPassword;
-        this.customerCounter = customerCounter;
     }
 
     public String getCustomerPassword() {
@@ -18,11 +16,10 @@ public class Customer extends Person{
         this.customerPassword = customerPassword;
     }
 
-    public int getCustomerCounter() {
-        return customerCounter;
-    }
-
-    public void setCustomerCounter(int customerCounter) {
-        this.customerCounter = customerCounter;
+    @Override
+    public String toString() {
+        return "Customer{" +
+                " customerPassword='" + customerPassword + '\'' +
+                '}';
     }
 }

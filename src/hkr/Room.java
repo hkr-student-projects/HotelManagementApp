@@ -1,20 +1,19 @@
 package hkr;
 
-import java.io.Serializable;
-
-public class Room implements Serializable {
-    private String availableRooms;
+public class Room {
+    private int availableRooms;
     private boolean doubleBed;
     private int numberOfBeds;
     private double price;
     private double size;
-
-    public Room(String availableRooms, boolean doubleBed, int numberOfBeds, double price, double size) {
+    private boolean balcony;
+    public Room(int availableRooms, boolean doubleBed, int numberOfBeds, double price, double size,boolean balcony) {
         this.availableRooms = availableRooms;
         this.doubleBed = doubleBed;
         this.numberOfBeds = numberOfBeds;
         this.price = price;
         this.size = size;
+        this.balcony = balcony;
     }
 
     public boolean isDoubleBed() {
@@ -50,22 +49,29 @@ public class Room implements Serializable {
         this.size = size;
     }
 
-    public String getAvailableRooms() {
+    public int getAvailableRooms() {
         return availableRooms;
     }
 
-    public void setAvailableRooms(String availableRooms) {
+    public void setAvailableRooms(int availableRooms) {
         this.availableRooms = availableRooms;
+    }
+
+    public boolean isBalcony() {
+        return balcony;
+    }
+
+    public void setBalcony(boolean balcony) {
+        this.balcony = balcony;
     }
 
     @Override
     public String toString() {
-        return "Room{" +
-                "availableRooms='" + availableRooms + '\'' +
-                ", doubleBed=" + doubleBed +
-                ", numberOfBeds=" + numberOfBeds +
-                ", price=" + price +
-                ", size=" + size +
-                '}';
+        return "Room No = "+ availableRooms +
+                " Double Bed = " + doubleBed +
+                " Number Of Beds = " + numberOfBeds +
+                " Price = " + price +" sek"+
+                " Size = " + size+" meter square"+
+                " Balcony = "+balcony;
     }
 }

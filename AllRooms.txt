@@ -1,3 +1,4 @@
 Room No =01
 Room No =02
 Room No =02 Price =1100.00 Size =30.00 meter square Number of bed(s) =2 Double Bed =Yes
+Room No =03 Price =1130.00 Size =40.00 meter square Number of bed(s) =3 Double Bed =No

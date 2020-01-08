@@ -1,12 +1,33 @@
 package hkr;
 
-public class Booking {
-    private String bookingReference;
-    private int bookingCounter;
+import java.util.Date;
 
-    public Booking(String bookingReference, int bookingCounter) {
+public class Booking extends Room {
+    private String bookingReference;
+    private Date checkIn;
+    private Date checkOut;
+
+    public Booking(int availableRooms, boolean doubleBed, int numberOfBeds, double price, double size,boolean balcony, String bookingReference,Date checkIn,Date checkOut) {
+        super(availableRooms, doubleBed, numberOfBeds, price, size,balcony);
         this.bookingReference = bookingReference;
-        this.bookingCounter = bookingCounter;
+        this.checkIn = checkIn;
+        this.checkOut = checkOut;
+    }
+
+    public Date getCheckIn() {
+        return checkIn;
+    }
+
+    public void setCheckIn(Date checkIn) {
+        this.checkIn = checkIn;
+    }
+
+    public Date getCheckOut() {
+        return checkOut;
+    }
+
+    public void setCheckOut(Date checkOut) {
+        this.checkOut = checkOut;
     }
 
     public String getBookingReference() {
@@ -17,11 +38,12 @@ public class Booking {
         this.bookingReference = bookingReference;
     }
 
-    public int getBookingCounter() {
-        return bookingCounter;
-    }
 
-    public void setBookingCounter(int bookingCounter) {
-        this.bookingCounter = bookingCounter;
+    @Override
+    public String toString() {
+        return super.toString()+
+                " Booking Reference = " + bookingReference+
+                " CheckIn Date = "+checkIn+
+                " Checkout Date = "+checkOut;
     }
 }
