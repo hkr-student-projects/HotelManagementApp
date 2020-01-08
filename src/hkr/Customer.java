@@ -18,8 +18,7 @@ public class Customer extends Person{
 
     @Override
     public String toString() {
-        return "Customer{" +
-                " customerPassword='" + customerPassword + '\'' +
-                '}';
+        return super.toString()+
+                ", Customer Password = " + customerPassword;
     }
 }

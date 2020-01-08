@@ -1,4 +1,0 @@
-Customer Id =1 Customer First Name =Hamza Customer Last Name =Anwar Customer Personal Number =19980515-3377 Customer Phone Number =0737410229 Customer Password =hamza
-Customer Id =1 Customer First Name =Hamza Customer Last Name =Anwar Customer Personal Number =19980515-3377 Customer Phone Number =0737410229 Customer Password =hamza
-Customer Id =1 Customer First Name =Kalle Customer Last Name =Anna Customer Personal Number =456789 Customer Phone Number =123456 Customer Password =kalle
-Customer Id =4 Customer First Name =adsds Customer Last Name =sdasaddas Customer Personal Number =saddsasda Customer Phone Number =sadsdas Customer Password =asadsad

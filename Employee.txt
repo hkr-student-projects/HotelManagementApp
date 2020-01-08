@@ -1,2 +1,0 @@
-Employee Id =1 Employee First Name =Kalle Employee Last Name =Joy Employee Role =Receptionist Employee Personal Number =4545454545 Employee Phone Number =878787878 Employee Password =kalle
-Employee Id =2 Employee First Name =ahel Employee Last Name =neb Employee Role =cleaner Employee Personal Number =45454884 Employee Phone Number =45454545 Employee Password =ahel

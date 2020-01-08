@@ -1,5 +1,0 @@
-Admin Id =1 Admin First Name =Deniel Admin Last Name =Alekseev Admin Personal Number =19970416-7855 Admin Phone Number =545454545 Admin Password =deniel
-Admin Id =2 Admin First Name =Hamza Admin Last Name =Anwar Admin Personal Number =19980515-3377 Admin Phone Number =0737410229 Admin Password =hamza
-Admin Id =3 Admin First Name =Katia Admin Last Name =Rahi Admin Personal Number =789445146541 Admin Phone Number =6546465465 Admin Password =katia
-Admin Id =4 Admin First Name =abc Admin Last Name =def Admin Personal Number =ghi Admin Phone Number =jkl Admin Password =mno
-Admin Id =5 Admin First Name =qwe Admin Last Name =rty Admin Personal Number =qwe Admin Phone Number =asd Admin Password =zxc

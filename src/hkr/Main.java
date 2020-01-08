@@ -15,13 +15,9 @@ public class Main {
     private ArrayList<Booking> bookings = new ArrayList<>();
     private ArrayList<Employee> employees = new ArrayList<>();
     private ArrayList<Customer> customers = new ArrayList<>();
-    private int empCounter = 0;
+    private ArrayList<CleanLogic>  cleanedRooms = new ArrayList<>();
     LocalDate currentDate = LocalDate.now();
     SimpleDateFormat formatter =new SimpleDateFormat("dd-mm-yy");
-    private int admCounter = 0;
-    private int roomCounter = 0;
-    private int bookingCounter = 0;
-    private int customerCounter = 0;
     private static final String ALPHA_NUMERIC_STRING = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
     public static void main(String[] args) {
         Main myApp = new Main();
@@ -50,28 +46,26 @@ public class Main {
         out.println("3. Forgot Password");
         int a = input.nextInt();
         if(a == 1){
-            out.println("Enter your email:");
-            String cid = input.nextLine();
-            input.nextLine();
+            out.println("Enter your user id:");
+            String usId = input.nextLine();
             for(int i = 0;i<customers.size();i++){
-                if(cid.equals(customers.get(i).getEmail())){
+                if(usId.equals(customers.get(i).getUserId())){
                     out.println("Enter the password:");
                     String pass = input.nextLine();
                     if(pass.equals(customers.get(i).getCustomerPassword())){
                         out.println("Welcome "+customers.get(i).getFirstName());
-                        customerLogIn();
+                        customerLogInMenu(customers.get(i).getFirstName());
                         break;
-                    }
-                    else{
-                        out.println("Wrong Password! Try Again");
+                    }else{
+                        out.println("Incorrect Password! Try again");
                         customerVerify();
-                        break;
                     }
                 }else{
-                    out.println("You are not a registered member Try Sign Up first");
-                    customerVerify();
+                    out.println("You are not a customer registered! Please register first");
+                    //customerSignUp();
                 }
             }
+            showMenu();
         }else if(a == 3){
             findCustomer();
         }
@@ -87,7 +81,9 @@ public class Main {
     private void preDefinedRooms(){
         for(int i = 1;i<=25;i++){
             Room room1 = new Room(i,false,1,1100,19,false);
+            CleanLogic clg = new CleanLogic(i,false);
             rooms.add(room1);
+            cleanedRooms.add(clg);
         }
         for(int i = 0;i<rooms.size();i=i+3){
             rooms.get(i).setDoubleBed(true);
@@ -95,9 +91,13 @@ public class Main {
             rooms.get(i).setPrice(1500);
             rooms.get(i).setSize(30);
             rooms.get(i).setBalcony(true);
+            cleanedRooms.get(i).setCleaned(true);
         }
         for(Room room:rooms) {
             out.println(room);
+        }
+        for(CleanLogic clg:cleanedRooms){
+            out.println(clg);
         }
     }
     private String randomAlphaNumeric(int count) {
@@ -131,15 +131,90 @@ public class Main {
                     employeeVerify();
                     break;
                 case 2:
-                    //employeeverify();
-                    break;
-                case 3:
                     customerVerify();
                     break;
                 default:
                     System.exit(0);
             }
         }
+    }
+    private void adminVerify(){
+        Scanner input = new Scanner(System.in);
+        out.println("Enter your user id:");
+        String uId = input.nextLine();
+        for(int i = 0;i<employees.size();i++){
+            if(uId.equals(employees.get(i).getUserId())){
+                if(employees.get(i).getRole() == Employee.Role.ADMIN){
+                    out.println("Enter the password:");
+                    String pass = input.nextLine();
+                    if(pass.equals(employees.get(i).getEmployeePassword())){
+                        out.println("Welcome "+employees.get(i).getFirstName());
+                        adminMenu();
+                        break;
+                    }else{
+                        out.println("Incorrect Password! Try again");
+                        employeeVerify();
+                    }
+                }else{
+                    out.println("You are not authorized person!");
+                    employeeVerify();
+                }
+            }
+        }
+        out.println("You are not an employee");
+        showMenu();
+    }
+    private void cleanerVerify(){
+        Scanner input = new Scanner(System.in);
+        out.println("Enter your user id:");
+        String usId = input.nextLine();
+        for(int i = 0;i<employees.size();i++){
+            if(usId.equals(employees.get(i).getUserId())){
+                if(employees.get(i).getRole() == Employee.Role.CLEANER){
+                    out.println("Enter the password:");
+                    String pass = input.nextLine();
+                    if(pass.equals(employees.get(i).getEmployeePassword())){
+                        out.println("Welcome "+employees.get(i).getFirstName());
+                        //cleanerMenu();
+                        break;
+                    }else{
+                        out.println("Incorrect Password! Try again");
+                        employeeVerify();
+                    }
+                }else{
+                    out.println("You are not authorized person!");
+                    employeeVerify();
+                }
+            }
+        }
+        out.println("You are not an employee");
+        showMenu();
+    }
+    private void receptionistVerify(){
+        Scanner input = new Scanner(System.in);
+        out.println("Enter your user id:");
+        String usrId = input.nextLine();
+        for(int i = 0;i<employees.size();i++){
+            if(usrId.equals(employees.get(i).getUserId())){
+                if(employees.get(i).getRole() == Employee.Role.RECEPTIONIST){
+                    out.println("Enter the password:");
+                    String pass = input.nextLine();
+                    if(pass.equals(employees.get(i).getEmployeePassword())){
+                        out.println("Welcome "+employees.get(i).getFirstName());
+                        employeeMenu();
+                        break;
+                    }else{
+                        out.println("Incorrect Password! Try again");
+                        employeeVerify();
+                    }
+                }else{
+                    out.println("You are not authorized person!");
+                    employeeVerify();
+                }
+            }
+        }
+        out.println("You are not an employee");
+        showMenu();
     }
     private void employeeVerify() {
        Scanner input = new Scanner(System.in);
@@ -152,78 +227,20 @@ public class Main {
         input.nextLine();
         switch(ch) {
             case 1:
-                out.println("Enter your user id:");
-                String uId = input.nextLine();
-                for(int i = 0;i<employees.size();i++){
-                    if(uId.equals(employees.get(i).getUserId())){
-                        if(employees.get(i).getRole() == Employee.Role.ADMIN){
-                            out.println("Enter the password:");
-                            String pass = input.nextLine();
-
-                        }
-                    }
-                }
-        }
-    }
-        /*try {
-            Scanner input = new Scanner(System.in);
-            String st = "";
-            try {
-                out.println("Enter the Admin Id");
-                st = input.nextLine();
-                int number = Integer.parseInt(st);
-            }catch(NumberFormatException e){
-                out.println("You have entered String!Please try again!");
                 adminVerify();
-            }
-            String str = "Admin Id ="+st;
-            Scanner scanner = new Scanner(new File("Admin.txt"));
-                while (scanner.hasNextLine()) {
-                    String s = scanner.nextLine();
-                    if (s.contains(str)) {
-                        out.println("Enter the password");
-                        String pass = input.nextLine();
-                        String sa = "Admin Password ="+pass;
-                        if(!s.equals("")) {
-                            if (s.contains(sa)) {
-                                out.println("Welcome!");
-                                adminMenu();
-                                break;
-                            } else {
-                                out.println("Access Denied!");
-                                showMenu();
-                                break;
-                            }
-                        }else{
-                            out.println("Access Denied!");
-                            adminVerify();
-                        }
-                    }
-                }
-                scanner.close();
-        } catch (IOException e) {
-            out.println("File Not Found!");
-        }
-        out.println("Done");
-    }*/
-    private void bookingHistory(){
-        try {
-            FileWriter fw = new FileWriter("history.log",true);
-            BufferedWriter bw = new BufferedWriter(fw);
-            PrintWriter pw = new PrintWriter(bw);
-            pw.format("============History===============");
-            for(int i = 0;i<bookings.size();i++) {
-               /* pw.format("Room No = "+bookings.get(i).getAvailableRooms()+);
-                pw.format("Employee First Name =%s ", employee1.getFirstName());
-                pw.format("Employee Last Name =%s ", employee1.getLastName());
-                pw.format("Employee Role =%s ", employee1.getRole());
-                pw.format("Employee Personal Number =%s ", employee1.getPersonNumber());
-                pw.format("Employee Phone Number =%s ", employee1.getPhoneNumber());
-                pw.format("Employee Password =%s%n", employee1.getEmployeePassword());*/
-            }
-            pw.close();
-        } catch (IOException e) {
-            out.println("Error!");
+                break;
+            case 2:
+                cleanerVerify();
+                break;
+            case 3:
+                receptionistVerify();
+                break;
+            case 4:
+                showMenu();
+                break;
+            default:
+                out.println("Incorrect Choice");
+                showMenu();
         }
     }
     private void adminMenu() {
@@ -248,21 +265,20 @@ public class Main {
         switch(inp){
             case 1:
                 showRoom();
+                adminMenu();
                 break;
             case 2:
                 showEmployee();
+                adminMenu();
                 break;
             case 3:
                 showBookings();
                 break;
             case 4:
-                showAdmins();
-                break;
-            case 5:
                 createRoom();
                 break;
             case 6:
-                //createEmployee();
+                createEmployee();
                 break;
             case 7:
                 //createAdmin();
@@ -275,9 +291,6 @@ public class Main {
                 break;
             case 11:
                 removeBooking();
-                break;
-            case 15:
-                showMenu();
                 break;
             case 12:
                 showCustomer();
@@ -293,6 +306,11 @@ public class Main {
                 break;
             default:
                 out.println("You have entered incorrect choice!");
+        }
+    }
+    private void showEmployee(){
+        for(Employee employee:employees){
+            out.println(employee);
         }
     }
     private void createRoom(){
@@ -363,24 +381,7 @@ public class Main {
             out.println(room);
         }
     }
-    /*private void createEmployee(){
-        try {
-            String str = "Employee Id =";
-            int line = 0;
-            Scanner scanner = new Scanner(new File("Employee.txt"));
-            while (scanner.hasNextLine()) {
-                String s = scanner.nextLine();
-                if (s.contains(str)) {
-                    line++;
-
-                }
-            }
-            out.println(line);
-            empCounter = line;
-            scanner.close();
-        } catch (IOException e) {
-            out.println("File Not Found!");
-        }
+    private void createEmployee(){
         Scanner input = new Scanner(System.in);
         System.out.println("Enter the first name of Employee");
         String fname = input.nextLine();
@@ -390,32 +391,33 @@ public class Main {
         String pNumber = input.nextLine();
         System.out.println("Enter the Phone Number of Employee");
         String phNumber = input.nextLine();
+        System.out.println("Enter the email of Employee");
+        String email = input.nextLine();
+        System.out.println("Enter the userId of Employee");
+        String userId = input.nextLine();
+        for(int i=0;i<employees.size();i++){
+            if(userId.equals(employees.get(i).getUserId())){
+                out.println("This user id exists");
+                createEmployee();
+                break;
+            }
+        }
         System.out.println("Enter the Password of Employee");
         String pass = input.nextLine();
-        System.out.println("Enter the role(receptionist,cleaner,waiter)");
+        System.out.println("Enter the role(recep,cleaner,admin)");
         String role = input.nextLine();
-        empCounter++;
-        Employee employee1 = new Employee(fname,lname,pNumber,phNumber,pass,empCounter,role);
-        try {
-            FileWriter fw = new FileWriter("Employee.txt",true);
-            BufferedWriter bw = new BufferedWriter(fw);
-            PrintWriter pw = new PrintWriter(bw);
-            pw.format("Employee Id =%d ",employee1.getEmployeeCounter());
-            pw.format("Employee First Name =%s ",employee1.getFirstName());
-            pw.format("Employee Last Name =%s ",employee1.getLastName());
-            pw.format("Employee Role =%s ",employee1.getRole());
-            pw.format("Employee Personal Number =%s ",employee1.getPersonNumber());
-            pw.format("Employee Phone Number =%s ",employee1.getPhoneNumber());
-            pw.format("Employee Password =%s%n",employee1.getEmployeePassword());
-            pw.close();
-        } catch (IOException e) {
-            out.println("Error!");
-        }
-        showMenu();
-    }*/
-    private void showEmployee(){
-        for(Employee employee:employees){
-            out.println(employee);
+        if(role.equalsIgnoreCase("recep")){
+            Employee employee2  = new Employee(fname,lname,pNumber,phNumber,email,userId,pass,Employee.Role.RECEPTIONIST);
+            employees.add(employee2);
+        }else if(role.equalsIgnoreCase("cleaner")){
+            Employee employee2  = new Employee(fname,lname,pNumber,phNumber,email,userId,pass,Employee.Role.CLEANER);
+            employees.add(employee2);
+        }else if(role.equalsIgnoreCase("admin")){
+            Employee employee2  = new Employee(fname,lname,pNumber,phNumber,email,userId,pass,Employee.Role.ADMIN);
+            employees.add(employee2);
+        }else{
+            out.println("Incorrect choice");
+            createEmployee();
         }
         adminMenu();
     }
@@ -510,55 +512,35 @@ public class Main {
         }
         out.println("Done");
     }
-    private void removeEmployee(){
-        try {
-            out.println("Enter the Employee name you want to remove");
-            Scanner input = new Scanner(System.in);
-            String str = input.nextLine();
-            File oldFile = new File("Employee.txt");
-            File newFile = new File("DeletedEmployee.txt");
-            Scanner scanner = new Scanner(oldFile);
-            while (scanner.hasNextLine()) {
-                String s = scanner.nextLine();
-                if (!s.contains(str)) {
-                    out.println(""+s);
-                    FileWriter fw = new FileWriter(newFile, true);
-                    BufferedWriter bw = new BufferedWriter(fw);
-                    PrintWriter pw = new PrintWriter(bw);
-                    pw.println("" + s);
-                    pw.close();
-                }
-            }scanner.close();
-            File tempFile = new File("Employee.txt");
-            newFile.renameTo(tempFile);
-        }catch(IOException e){
-            out.println("File Not Found!");
+    private void removeEmployee() {
+        Scanner input = new Scanner(System.in);
+        out.println("Which employee you want to remove, Write his/her user id:");
+        String usId = input.nextLine();
+        for(int i = 0;i<employees.size();i++){
+            if(usId.equals(employees.get(i).getUserId())){
+                out.println("Is this is the user: "+employees.get(i).getUserId()+" Press Enter to confirm");
+                input.nextLine();
+                employees.remove(i);
+                adminMenu();
+                break;
+            }
         }
-        out.println("Done");
+        out.println("This user does not exist");
+        adminMenu();
     }
     private void removeBooking() {
         Scanner input = new Scanner(System.in);
-        showBookings();
-        out.println("Enter the booking reference number for the booking you want to remove");
-        String br = input.nextLine();
+        out.println("Enter the room you want to remove the booking for:");
+        int roomNumber = input.nextInt();
         for(int i = 0;i<bookings.size();i++){
-            if(br.equalsIgnoreCase(bookings.get(i).getBookingReference())){
-                int a = bookings.get(i).getAvailableRooms();
-                out.println("Room No is "+a);
-                out.println("Do you want to remove the booking for the room(Press 'Y' for YES and 'N' for NO)");
-                String choice = input.nextLine();
-                if(choice.equalsIgnoreCase("y")){
-                    bookings.remove(i);
-                    showBookings();
-                }
-                else if(choice.equalsIgnoreCase("n")){
-                    showBookings();
-                }
-                else{
-                    showMenu();
-                }
+            if(roomNumber == bookings.get(i).getAvailableRooms()){
+                bookings.remove(i);
+                adminMenu();
+                break;
             }
         }
+        out.println("This booking does not exist");
+        adminMenu();
     }
         private void employeeverify(){
             try {
@@ -622,117 +604,50 @@ public class Main {
                 break;
         }
     }
-    private void showRoomsToBeCleaned(){
-        try {
-            String str = "Cleaned =No";
-            Scanner scanner = new Scanner(new File("AllRooms.txt"));
-            while (scanner.hasNextLine()) {
-                String s = scanner.nextLine();
-                if (s.contains(str)) {
-                    out.println("" + s);
-                }
-            }
-            scanner.close();
-        } catch (IOException e) {
-            out.println("File Not Found!");
-        }
-    }
     private void markCleaned() {
-        try {
-            Scanner input = new Scanner(System.in);
-            out.println("Enter the room number you cleaned");
-            String room = input.nextLine();
-            String str = "Room No =" + room;
-            Scanner scanner = new Scanner(new File("AllRooms.txt"));
-            while (scanner.hasNextLine()) {
-                String s = scanner.nextLine();
-                if (s.contains(str)) {
-                    modifyFile("AllRooms.txt", " Cleaned =No", " Cleaned =Yes");
-                }
-            }
-            scanner.close();
-        } catch (IOException e) {
-            out.println("File Not Found!");
-        }
-    }
-    private void customerLogIn(){
-        try {
-            Scanner input = new Scanner(System.in);
-            out.println("Enter the Customer Id");
-            int st = input.nextInt();
-            input.nextLine();
-            String str = "Customer Id ="+st;
-            Scanner scanner = new Scanner(new File("Customer.txt"));
-            while (scanner.hasNextLine()) {
-                String s = scanner.nextLine();
-                if (s.contains(str)) {
-                    out.println("Enter the password");
-                    String pass = input.nextLine();
-                    String sa = "Customer Password ="+pass;
-                    if(s.contains(sa)){
-                        out.println("Welcome!");
-                        customerLogInMenu();
-                        break;
-                    }
-                    else{
-                        out.println("Access Denied!");
-                        showMenu();
-                        break;
-                    }
-                }
-            }
-            scanner.close();
-        } catch (IOException e) {
-            out.println("File Not Found!");
-        }
-        out.println("Done");
-    }
-    /*private void customerSignUp(){
-        try {
-            String str = "Customer Id =";
-            int line = 0;
-            Scanner scanner = new Scanner(new File("Customer.txt"));
-            while (scanner.hasNextLine()) {
-                String s = scanner.nextLine();
-                if (s.contains(str)) {
-                    line++;
-                }
-            }
-            out.println(line);
-            customerCounter = line;
-            scanner.close();
-        } catch (IOException e) {
-            out.println("File Not Found!");
-        }
         Scanner input = new Scanner(System.in);
-        System.out.println("Enter your first name");
-        String fname = input.nextLine();
-        System.out.println("Enter your last name");
-        String lname = input.nextLine();
-        System.out.println("Enter your person number");
-        String pnumb = input.nextLine();
-        System.out.println("Enter your phone number");
-        String phnumb = input.nextLine();
-        System.out.println("Enter your password");
-        String pass = input.nextLine();
-        customerCounter++;
-        Customer customer = new Customer(fname,lname,pnumb,phnumb,pass,customerCounter);
-        try {
-            FileWriter fw = new FileWriter("Customer.txt",true);
-            BufferedWriter bw = new BufferedWriter(fw);
-            PrintWriter pw = new PrintWriter(bw);
-            pw.format("Customer Id =%d ",customer.getCustomerCounter());
-            pw.format("Customer First Name =%s ",customer.getFirstName());
-            pw.format("Customer Last Name =%s ",customer.getLastName());
-            pw.format("Customer Personal Number =%s ",customer.getPersonNumber());
-            pw.format("Customer Phone Number =%s ",customer.getPhoneNumber());
-            pw.format("Customer Password =%s%n",customer.getCustomerPassword());
-            pw.close();
-        } catch (IOException e) {
-            out.println("Error!");
+        out.println("Enter the room you have cleaned");
+        int rn = input.nextInt();
+        for(int i = 0;i<cleanedRooms.size();i++){
+            if(rn == cleanedRooms.get(i).getRoomNumber()){
+                if(!cleanedRooms.get(i).isCleaned()){
+                    cleanedRooms.get(i).setCleaned(true);
+                    break;
+                }else{
+                    out.println("The room is already cleaned");
+                    break;
+                }
+            }
         }
-    }*/
-    private void customerLogInMenu(){
+        out.println("The room does not exist");
+    }
+    private void customerSignUp(){
+        Scanner input = new Scanner(System.in);
+        System.out.println("Enter the first name of Customer");
+        String fname = input.nextLine();
+        System.out.println("Enter the last name of Customer");
+        String lname = input.nextLine();
+        System.out.println("Enter the Person Number of Customer");
+        String pNumber = input.nextLine();
+        System.out.println("Enter the Phone Number of Customer");
+        String phNumber = input.nextLine();
+        System.out.println("Enter the email of Customer");
+        String email = input.nextLine();
+        System.out.println("Enter the userId of Customer");
+        String userId = input.nextLine();
+        for(int i=0;i<employees.size();i++){
+            if(userId.equals(employees.get(i).getUserId())){
+                out.println("This user id exists");
+                createEmployee();
+                break;
+            }
+        }
+        System.out.println("Enter the Password of Customer");
+        String pass = input.nextLine();
+            Customer customer  = new Customer(fname,lname,pNumber,phNumber,email,userId,pass);
+            customers.add(customer);
+    }
+    private void customerLogInMenu(String name){
         Scanner input = new Scanner(System.in);
         System.out.println("Select Your Choice");
         System.out.println("1. Make A Booking");
@@ -741,39 +656,13 @@ public class Main {
         int  cho = input.nextInt();
         switch(cho){
             case 1:
-                //addBookings();
-                //makeBooking();
+                addBookings(name);
                 break;
         }
     }
     private void showCustomer(){
-        try {
-            String str = "Customer Id =";
-            int line = 0;
-            Scanner scanner = new Scanner(new File("Customer.txt"));
-            while (scanner.hasNextLine()) {
-                String s = scanner.nextLine();
-                if (s.contains(str)) {
-                    line++;
-                }
-            }
-            out.println(line);
-            customerCounter = line;
-            scanner.close();
-        } catch (IOException e) {
-            out.println("File Not Found!");
-        }
-        System.out.println("The available Customers are:"+customerCounter);
-        try{
-            FileReader fr = new FileReader("Customer.txt");
-            BufferedReader br = new BufferedReader(fr);
-
-            String customer;
-            while((customer = br.readLine()) != null){
-                out.println(customer+"\n");
-            }
-        }catch(IOException e){
-            out.println("File Not Found!");
+        for(Customer customer:customers){
+            out.println(customer);
         }
     }
     private void findCustomer(){
@@ -797,7 +686,7 @@ public class Main {
                                 out.println("An email has been sent to your mail");
                                 break;
                             }else{
-                                customerLogInMenu();
+                                customerVerify();
                             }
                         }
                     }
@@ -903,39 +792,62 @@ public class Main {
             }
         }
     }
-    private void roomCounterMethod(){
-        try {
-            String str = "Booking =No";
-            int line = 0;
-            Scanner scanner = new Scanner(new File("AllRooms.txt"));
-            while (scanner.hasNextLine()) {
-                String s = scanner.nextLine();
-                if (s.contains(str)) {
-                    line++;
-                    out.println("" + s);
-                }
-            }
-
-            roomCounter = line;
-            scanner.close();
-        } catch (IOException e) {
-            out.println("File Not Found!");
-        }
-        System.out.println("The available rooms are:"+roomCounter);
-    }
     private void roomCleanedCheck(){
-        try {
-            String str = "Cleaned =No";
-            Scanner scanner = new Scanner(new File("AllRooms.txt"));
-            while (scanner.hasNextLine()) {
-                String s = scanner.nextLine();
-                if (s.contains(str)) {
-                    out.println("" + s);
+      for(CleanLogic clg:cleanedRooms){
+          out.println(clg);
+      }
+    }
+    private void modifyRoom(){
+        Scanner input = new Scanner(System.in);
+        out.println("Enter the room number you want to modify");
+        int rn = input.nextInt();
+        for(int i = 0;i<rooms.size();i++){
+            if(rn == rooms.get(i).getAvailableRooms()){
+                out.println("What do you want to edit");
+                out.println("1. Status of double bed");
+                out.println("2. Number of bed");
+                out.println("3. Price");
+                out.println("4. Size");
+                out.println("5. Status of balcony");
+                out.println("6. Back");
+                int ch = input.nextInt();
+                switch (ch){
+                    case 1:
+                        out.println("Is the room contains double bed");
+                        boolean dbed = input.nextBoolean();
+                        rooms.get(i).setDoubleBed(dbed);
+                        break;
+                    case 2:
+                        out.println("Enter the number of the bed(s)");
+                        int numberBed = input.nextInt();
+                        rooms.get(i).setNumberOfBeds(numberBed);
+                        break;
+                    case 3:
+                        out.println("Enter the price of the room per night");
+                        double price = input.nextDouble();
+                        rooms.get(i).setPrice(price);
+                        break;
+                    case 4:
+                        out.println("Enter the size of the room");
+                        double size = input.nextDouble();
+                        rooms.get(i).setSize(size);
+                        break;
+                    case 5:
+                        out.println("Does the room has balcony");
+                        boolean balcony = input.nextBoolean();
+                        rooms.get(i).setBalcony(balcony);
+                        break;
+                    case 6:
+                        adminMenu();
+                        break;
+                    default:
+                        out.println("Incorrect Choice");
+                        adminMenu();
                 }
             }
-            scanner.close();
-        } catch (IOException e) {
-            out.println("File Not Found!");
         }
+    }
+    private void modifyBooking(){
+
     }
 }
