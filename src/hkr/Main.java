@@ -1,15 +1,20 @@
 package hkr;
 
+import com.mysql.cj.log.Log;
 import hkrDB.DatabaseManager;
 import hkrDB.QueryThread;
 import hkrFX.Logger;
 import hkrFX.MainFX;
 import javafx.application.Application;
+import javafx.scene.control.DatePicker;
 import org.json.simple.JSONObject;
 import org.xml.sax.SAXException;
 
 import javax.xml.parsers.ParserConfigurationException;
 import java.io.*;
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.ZoneId;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
@@ -32,19 +37,24 @@ public class Main {
 //        Main myApp = new Main();
 //        myApp.showMenu();
         //out.println(new Date(Calendar.getInstance().getTime().getTime()));
-            //Application.launch(MainFX.class);
-        Class[] parameterTypes = new Class[9];
-        for(byte i = 0; i < 6; i++)
-            parameterTypes[i] = String.class;
-        parameterTypes[6] = java.util.Date.class;
-        parameterTypes[7] = Date.class;
-        parameterTypes[8] = String.class;
-        try {
-            new QueryThread("BookingStageThread", DatabaseManager.class.getMethod("addEntry", parameterTypes), "19999999-9999", "Alex", "mid", "Sura", "Asdasd", "asdas", null, null, "301A").start();
-        }
-        catch (NoSuchMethodException e){
-            Logger.logException(e);
-        }
+        Application.launch(MainFX.class);
+
+
+        //compare
+        //labelCompare.setText("Compare date: " + dateUtil.compareTo(dateFromPicker));
+
+//        Class[] parameterTypes = new Class[9];
+//        for(byte i = 0; i < 6; i++)
+//            parameterTypes[i] = String.class;
+//        parameterTypes[6] = java.util.Date.class;
+//        parameterTypes[7] = Date.class;
+//        parameterTypes[8] = String.class;
+//        try {
+//            new QueryThread("BookingStageThread", DatabaseManager.class.getMethod("addEntry", parameterTypes), "19999999-9999", "Alex", "mid", "Sura", "Asdasd", "asdas", null, null, "301A").start();
+//        }
+//        catch (NoSuchMethodException e){
+//            Logger.logException(e);
+//        }
          //hkrFX.Logger.logUML(AnchorPane.class, false);
 //        out.println(Translator.translate("field_empty", "MyField", BookingStage.class.getName()));
 //        Logger.logError("MyError");

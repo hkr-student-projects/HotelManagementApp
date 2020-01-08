@@ -34,7 +34,7 @@ public class DatabaseManager {
         checkSchema();
     }
 
-    public int addEntry(String ssn, String name, String midname, String surname, String addr, String phone, Date movein, Date moveout, String roomnum){
+    public int addEntry(String ssn, String name, String surname, String addr, String phone, Date movein, Date moveout, String roomnum){
         return (int)executeQuery(QueryType.UPDATE,
                 "INSERT INTO "+books+" " +
                         "(`movein`,`moveout`) " +
@@ -42,7 +42,7 @@ public class DatabaseManager {
                         "SELECT @bid:=LAST_INSERT_ID();" +
                         "INSERT INTO " + clients + " " +
                         "(`ssn`,`name`,`middlename`,`surname`,`address`,`phone`) " +
-                        "VALUES ('" + ssn + "','" + name + "','" + midname + "','" + surname + "','" + addr + "','" + phone + "');" +
+                        "VALUES ('" + ssn + "','" + name + "','" + surname + "','" + addr + "','" + phone + "');" +
                         "SELECT @cid:=LAST_INSERT_ID();" +
                         "INSERT INTO "+ orders +" " +
                         "(`Customer_id`,`Booking_reference`) " +
@@ -80,14 +80,14 @@ public class DatabaseManager {
                     " CREATE SCHEMA IF NOT EXISTS `hotel` DEFAULT CHARACTER SET utf8;" +
                             "CREATE TABLE IF NOT EXISTS " + books + " (" +
                             "`reference` INT NOT NULL AUTO_INCREMENT," +
-                            "`movein` DATETIME NOT NULL," +
-                            "`moveout` DATETIME NOT NULL," +
+                            "`movein` DATE NOT NULL," +
+                            "`moveout` DATE NOT NULL," +
                             "PRIMARY KEY (`reference`));" +
                             "CREATE TABLE IF NOT EXISTS " + clients + " (" +
                             "`id` INT NOT NULL AUTO_INCREMENT," +
                             "`ssn` VARCHAR(45) NOT NULL," +
                             "`name` VARCHAR(45) NOT NULL," +
-                            "`middlename` VARCHAR(45) DEFAULT NULL," +
+//                            "`middlename` VARCHAR(45) DEFAULT NULL," +
                             "`surname` VARCHAR(45) NOT NULL," +
                             "`phone` VARCHAR(15) NOT NULL," +
                             "`address` VARCHAR(45) NOT NULL," +

@@ -5,13 +5,21 @@ import hkrDB.RoomClass;
 import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
+import javafx.scene.control.DatePicker;
 import javafx.stage.Stage;
 
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
-import java.sql.Date;
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.ZoneId;
+import java.time.format.DateTimeFormatter;
 import java.util.Calendar;
+import java.util.Date;
+
+import static java.lang.System.out;
 
 interface IDeserializable<T> {
 
@@ -42,6 +50,18 @@ public class MainFX extends Application {
         loadConfig();
         databaseManager = new DatabaseManager();
         initializeEvents();
+
+
+//        LocalDateTime myDateObj = LocalDateTime.;
+//        System.out.println("Before formatting: " + myDateObj);
+//        DateTimeFormatter myFormatObj = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss");
+//
+//        String formattedDate = myDateObj.format(myFormatObj);
+//        System.out.println("After formatting: " + formattedDate);
+//        Before Formatting: 2020-01-08T09:28:22.691983
+//        After Formatting: 08-01-2020 09:28:22
+
+
 //        System.out.println(Translator.translate("field_empty", "MyField",  this.getClass().getName()));
 //        System.out.println(Translator.translate("keyid_not_found", "SomeKey"));
 //        Logger.logError(Translator.translate("button_not_found", "SomeButton",  this.getClass().getName()));

@@ -17,6 +17,7 @@ import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
 import javax.swing.*;
+import java.time.LocalDate;
 import java.util.Date;
 
 public class BookingStage extends Stage{
@@ -26,8 +27,8 @@ public class BookingStage extends Stage{
 //    private Label _label;
     private Text[] _texts;
     private TextField[] fields;
-    private ComboBox[] _boxes;
-    private DatePicker[] _dates;
+    private ComboBox[] boxes;
+    private DatePicker[] dates;
     private Button[] buttons;
 
     public BookingStage(){
@@ -64,8 +65,8 @@ public class BookingStage extends Stage{
                 new double[] { 53.0, 53.0, 98.0, 143.0, 188.0 }
         );
 
-        _boxes = createBoxes(new double[] { 234.0, 274.0 });
-        _dates = createDates(new double[] { 325.0, 365.0 });
+        boxes = createBoxes(new double[] { 234.0, 274.0 });
+        dates = createDates(new double[] { 325.0, 365.0 });
         buttons = createButtons(new String[] { "Save", "Reset" }, new double[] { 518.0, 236.0 }, new double[] { 60.0, 82.0 });
         buttons[0].setOnAction(event -> closeStage());
 
@@ -118,9 +119,9 @@ public class BookingStage extends Stage{
         //pChilds.add(b);
         aChilds.add(pane);
         aChilds.addAll(fields);
-        aChilds.addAll(_boxes);
+        aChilds.addAll(boxes);
         aChilds.addAll(buttons);
-        aChilds.addAll(_dates);
+        aChilds.addAll(dates);
         aChilds.add(label);
 
         //this.setScene(new Scene(_anchorpane, Main.SCENE_WIDTH, Main.SCENE_HEIGHT));
@@ -299,19 +300,21 @@ public class BookingStage extends Stage{
             }
         }
         if(!errors){
+            LocalDate movein = dates[0].getValue();
+            //MainFX.databaseManager.addEntry(ssn, name, sname, addr, phone, dates[0].getda);
             //(String ssn, String name, String midname, String surname, String addr, String phone, Date movein, Date moveout, String roomnum){
-            Class[] parameterTypes = new Class[9];
-            for(byte i = 0; i < 6; i++)
-                parameterTypes[i] = String.class;
-            parameterTypes[6] = Date.class;
-            parameterTypes[7] = Date.class;
-            parameterTypes[8] = String.class;
-            try {
-                new QueryThread("BookingStageThread", DatabaseManager.class.getMethod("addEntry", parameterTypes), "19999999-9999", "Alex", "mid", "Sura", "Asdasd", "asdas", null, null, "301A").start();
-            }
-            catch (NoSuchMethodException e){
-                Logger.logException(e);
-            }
+//            Class[] parameterTypes = new Class[9];
+//            for(byte i = 0; i < 6; i++)
+//                parameterTypes[i] = String.class;
+//            parameterTypes[6] = Date.class;
+//            parameterTypes[7] = Date.class;
+//            parameterTypes[8] = String.class;
+//            try {
+//                new QueryThread("BookingStageThread", DatabaseManager.class.getMethod("addEntry", parameterTypes), "19999999-9999", "Alex", "mid", "Sura", "Asdasd", "asdas", null, null, "301A").start();
+//            }
+//            catch (NoSuchMethodException e){
+//                Logger.logException(e);
+//            }
 
             this.close();
         }
