@@ -1,26 +1,13 @@
 package hkr;
 
-import com.mysql.cj.log.Log;
-import hkrDB.DatabaseManager;
-import hkrDB.QueryQueue;
-import hkrDB.QueryThread;
-import hkrFX.FxmlConverter;
-import hkrFX.Logger;
 import hkrFX.MainFX;
 import javafx.application.Application;
-import javafx.scene.control.DatePicker;
 import org.json.simple.JSONObject;
 import org.xml.sax.SAXException;
 
 import javax.xml.parsers.ParserConfigurationException;
 import java.io.*;
-import java.sql.*;
-import java.text.SimpleDateFormat;
-import java.time.LocalDate;
-import java.time.ZoneId;
 import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Date;
 import java.util.Scanner;
 
 import static java.lang.System.out;

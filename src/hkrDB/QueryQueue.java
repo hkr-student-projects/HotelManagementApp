@@ -1,6 +1,5 @@
 package hkrDB;
 
-import com.mysql.cj.log.Log;
 import hkrFX.Logger;
 import hkrFX.MainFX;
 
