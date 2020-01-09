@@ -1,6 +1,8 @@
 package hkrFX;
 
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -14,6 +16,8 @@ import javafx.scene.shape.StrokeType;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
+
+import java.time.LocalDate;
 
 public class BookingStage extends Stage{
 
@@ -79,22 +83,18 @@ public class BookingStage extends Stage{
         dates = createDates(new double[] { 325.0, 365.0 });
         buttons = createButtons(new String[] { "Save", "Reset" }, new double[] { 518.0, 236.0 }, new double[] { 60.0, 82.0 });
         buttons[0].setOnAction(event -> closeStage());
-        buttons[1].setOnAction(event -> emptyData());
-        dates[0].setOnAction(event -> {
-            rooms.setValue(null);
-            System.out.println(dates[1].getValue() == null);
-            System.out.println(dates[0].getValue() == null);
-            if(dates[1].getValue() != null && dates[0].getValue() != null && (dates[1].getValue().compareTo(dates[0].getValue())) >= 0)
+        dates[1].setOnAction(new EventHandler<ActionEvent>() {
+
+            @Override
+            public void handle(ActionEvent event) {
+//                rooms = new ComboBox();
+//                rooms.setLayoutX(238.0);
+//                rooms.setLayoutY(234.0);
+//                rooms.prefWidth(155.0);
+//                rooms.setStyle("-fx-background-color: #f5f5f5; -fx-background-radius: 111;");
                 rooms.setItems(MainFX.databaseManager.getAvailableRooms(dates[0].getValue(), dates[1].getValue()));
-            else
-                rooms.setItems(null);
-        });
-        dates[1].setOnAction(event -> {
-          rooms.setValue(null);
-          if(dates[0].getValue() != null && dates[1].getValue() != null && (dates[1].getValue().compareTo(dates[0].getValue())) >= 0)
-              rooms.setItems(MainFX.databaseManager.getAvailableRooms(dates[0].getValue(), dates[1].getValue()));
-          else
-              rooms.setItems(null);
+                System.out.println("gay");
+            }
         });
         createScene();
     }
@@ -281,16 +281,6 @@ public class BookingStage extends Stage{
         });
     }
 
-    private void emptyData(){
-        rooms.setValue(null);
-        for(TextField t : fields){
-            t.setText(null);
-        }
-        for(DatePicker d : dates){
-            d.setValue(null);
-        }
-    }
-
     private void closeStage(){
 
         // "Name", "Surname", "19890518-4376", "+073-751-06-21", "Storagatan 12A-1006"
@@ -337,8 +327,11 @@ public class BookingStage extends Stage{
                     }
             }
         }
-        if(!errors && rooms != null){
-            MainFX.databaseManager.addEntry(ssn, name, sname, addr, phone, dates[0].getValue(), dates[1].getValue(), rooms.getValue().toString());
+        if(!errors){
+            LocalDate movein = dates[0].getValue();
+            LocalDate moveout = dates[1].getValue();
+            MainFX.databaseManager.addEntry(ssn, name, sname, addr, phone, movein.toString(), moveout.toString(), null);
+            //MainFX.databaseManager.addEntry(ssn, name, sname, addr, phone, dates[0].getda);
             //(String ssn, String name, String midname, String surname, String addr, String phone, Date movein, Date moveout, String roomnum){
 //            Class[] parameterTypes = new Class[9];
 //            for(byte i = 0; i < 6; i++)
@@ -352,8 +345,8 @@ public class BookingStage extends Stage{
 //            catch (NoSuchMethodException e){
 //                Logger.logException(e);
 //            }
+
             this.close();
-            emptyData();
         }
 
     }
