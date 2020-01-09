@@ -83,14 +83,14 @@ public class DatabaseManager {
         return FXCollections.observableArrayList(arooms);
     }
 
-    public int addEntry(String ssn, String name, String surname, String addr, String phone, String movein, String moveout, String roomnum){
+    public int addEntry(String ssn, String name, String surname, String addr, String phone, LocalDate movein, LocalDate moveout, String roomnum){
         return (int)executeQuery(QueryType.UPDATE,
                 "INSERT INTO "+books+" " +
                         "(`movein`,`moveout`) " +
-                        "VALUES ('2018-12-22 23:44:22','2019-12-22 23:44:22');" +
+                        "VALUES ('"+movein+"','"+moveout+"');" +
                         "SELECT @bid:=LAST_INSERT_ID();" +
                         "INSERT INTO " + clients + " " +
-                        "(`ssn`,`name`,`middlename`,`surname`,`address`,`phone`) " +
+                        "(`ssn`,`name`,`surname`,`address`,`phone`) " +
                         "VALUES ('" + ssn + "','" + name + "','" + surname + "','" + addr + "','" + phone + "');" +
                         "SELECT @cid:=LAST_INSERT_ID();" +
                         "INSERT INTO "+ orders +" " +
@@ -224,6 +224,7 @@ public class DatabaseManager {
         {
             //Statement command = connection.createStatement();
             PreparedStatement command = connection.prepareStatement(query);
+            boolean isResult = command.execute(query);
             result = type == QueryType.READER ? command : command.getUpdateCount();
             //connection.close();
 
