@@ -1,9 +1,7 @@
 package hkr;
 import java.text.DateFormat;
 import java.text.ParseException;
-import java.time.LocalDate;
 import java.io.*;
-import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.Scanner;
@@ -16,28 +14,18 @@ public class Main {
     private ArrayList<Employee> employees = new ArrayList<>();
     private ArrayList<Customer> customers = new ArrayList<>();
     private ArrayList<CleanLogic>  cleanedRooms = new ArrayList<>();
-    LocalDate currentDate = LocalDate.now();
+    long current = System.currentTimeMillis() - 1000*60*60*24;
+    Date curr = new Date(current);
     SimpleDateFormat formatter =new SimpleDateFormat("dd-mm-yy");
     private static final String ALPHA_NUMERIC_STRING = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
     public static void main(String[] args) {
         Main myApp = new Main();
-        //myApp.createAdmins();
         myApp.preDefinedRooms();
-        //myApp.readEmployee();
-        //myApp.preDefinedBookings();
+        myApp.outputStreamRooms();
         myApp.preDefinedCustomer();
         myApp.preDefinedEmployee();
         myApp.showMenu();
     }
-    /*private void preDefinedBookings(){
-        for(int i = 0;i<rooms.size();i=i+5){
-            Booking booking = new Booking(rooms.get(i).getAvailableRooms(),rooms.get(i).isDoubleBed(),rooms.get(i).getNumberOfBeds(),rooms.get(i).getPrice(),rooms.get(i).getSize(),randomAlphaNumeric(8));
-            bookings.add(booking);
-        }
-        for(Booking bookng:bookings){
-            out.println(bookng);
-        }
-    }*/
     private void customerVerify(){
         Scanner input = new Scanner(System.in);
         out.println("Enter your choice:");
@@ -45,6 +33,7 @@ public class Main {
         out.println("2. Sign Up");
         out.println("3. Forgot Password");
         int a = input.nextInt();
+        input.nextLine();
         if(a == 1){
             out.println("Enter your user id:");
             String usId = input.nextLine();
@@ -60,13 +49,14 @@ public class Main {
                         out.println("Incorrect Password! Try again");
                         customerVerify();
                     }
-                }else{
-                    out.println("You are not a customer registered! Please register first");
-                    //customerSignUp();
                 }
             }
-            showMenu();
-        }else if(a == 3){
+            out.println("You are not a customer registered! Please register first");
+            customerSignUp();
+        }else if(a == 2){
+            customerSignUp();
+        }
+        else if(a == 3){
             findCustomer();
         }
     }
@@ -92,12 +82,6 @@ public class Main {
             rooms.get(i).setSize(30);
             rooms.get(i).setBalcony(true);
             cleanedRooms.get(i).setCleaned(true);
-        }
-        for(Room room:rooms) {
-            out.println(room);
-        }
-        for(CleanLogic clg:cleanedRooms){
-            out.println(clg);
         }
     }
     private String randomAlphaNumeric(int count) {
@@ -133,8 +117,10 @@ public class Main {
                 case 2:
                     customerVerify();
                     break;
-                default:
+                case 3:
                     System.exit(0);
+                default:
+                    showMenu();
             }
         }
     }
@@ -154,15 +140,40 @@ public class Main {
                     }else{
                         out.println("Incorrect Password! Try again");
                         employeeVerify();
+                        break;
                     }
                 }else{
                     out.println("You are not authorized person!");
                     employeeVerify();
+                    break;
                 }
             }
         }
         out.println("You are not an employee");
         showMenu();
+    }
+    private void cleanerMenu(){
+        Scanner input = new Scanner(System.in);
+        out.println("Enter your choice");
+        out.println("1. Show rooms to be cleaned");
+        out.println("2. Mark a room Cleaned");
+        out.println("3. Back");
+        int ch = input.nextInt();
+        switch(ch){
+            case 1:
+                roomCleanedCheck();
+                break;
+            case 2:
+                markCleaned();
+                break;
+            case 3:
+                employeeVerify();
+                break;
+            default:
+                out.println("Incorrect choice");
+                cleanerMenu();
+        }
+
     }
     private void cleanerVerify(){
         Scanner input = new Scanner(System.in);
@@ -175,15 +186,17 @@ public class Main {
                     String pass = input.nextLine();
                     if(pass.equals(employees.get(i).getEmployeePassword())){
                         out.println("Welcome "+employees.get(i).getFirstName());
-                        //cleanerMenu();
+                        cleanerMenu();
                         break;
                     }else{
                         out.println("Incorrect Password! Try again");
                         employeeVerify();
+                        break;
                     }
                 }else{
                     out.println("You are not authorized person!");
                     employeeVerify();
+                    break;
                 }
             }
         }
@@ -206,10 +219,12 @@ public class Main {
                     }else{
                         out.println("Incorrect Password! Try again");
                         employeeVerify();
+                        break;
                     }
                 }else{
                     out.println("You are not authorized person!");
                     employeeVerify();
+                    break;
                 }
             }
         }
@@ -249,21 +264,21 @@ public class Main {
         System.out.println("1.  View all available rooms");
         System.out.println("2.  View all Employees");
         System.out.println("3.  View all Bookings");
-        System.out.println("4.  View all Admins");
+        System.out.println("4.  Add A Booking");
         System.out.println("5.  Create a new room");
         System.out.println("6.  Create a new Employee");
-        System.out.println("7.  Create a new Admin");
-        System.out.println("8.  Remove a room");
-        System.out.println("9.  Remove a employee");
-        System.out.println("10. Remove a admin");
-        System.out.println("11. Remove a Booking");
+        System.out.println("7.  Modify A Room");
+        System.out.println("8.  Remove A Room");
+        System.out.println("9.  Remove An Employee");
+        System.out.println("10. Modify A Booking");
+        System.out.println("11. Remove A Booking");
         System.out.println("12. Show All Customers");
         System.out.println("13. Find Customers");
-        System.out.println("14. Add A Booking") ;
-        System.out.println("15. Exit");
+        System.out.println("14. Exit");
         int inp = input.nextInt();
         switch(inp){
             case 1:
+                //inputStreamRooms();
                 showRoom();
                 adminMenu();
                 break;
@@ -273,37 +288,52 @@ public class Main {
                 break;
             case 3:
                 showBookings();
+                adminMenu();
                 break;
             case 4:
-                createRoom();
-                break;
-            case 6:
-                createEmployee();
-                break;
-            case 7:
-                //createAdmin();
-                break;
-            case 9:
-                removeEmployee();
-                break;
-            case 10:
-                removeAdmin();
-                break;
-            case 11:
-                removeBooking();
-                break;
-            case 12:
-                showCustomer();
-                break;
-            case 13:
-                findCustomer();
-                break;
-            case 14:
                 input.nextLine();
                 out.println("What's the name of customer:");
                 String name = input.nextLine();
                 addBookings(name);
                 break;
+            case 5:
+                createRoom();
+                adminMenu();
+                break;
+            case 6:
+                createEmployee();
+                adminMenu();
+                break;
+            case 7:
+                modifyRoom();
+                adminMenu();
+                break;
+            case 8:
+                removeRoom();
+                adminMenu();
+                break;
+            case 9:
+                removeEmployee();
+                adminMenu();
+                break;
+            case 10:
+                modifyBooking();
+                adminMenu();
+                break;
+            case 11:
+                removeBooking();
+                adminMenu();
+                break;
+            case 12:
+                showCustomer();
+                adminMenu();
+                break;
+            case 13:
+                findCustomer();
+                adminMenu();
+                break;
+            case 14:
+                System.exit(0);
             default:
                 out.println("You have entered incorrect choice!");
         }
@@ -312,6 +342,19 @@ public class Main {
         for(Employee employee:employees){
             out.println(employee);
         }
+    }
+    private void removeRoom(){
+        Scanner input = new Scanner(System.in);
+        out.println("Enter the room you want to remove:");
+        int roomNumber = input.nextInt();
+        for(int i = 0;i<rooms.size();i++){
+            if(roomNumber == rooms.get(i).getAvailableRooms()){
+                rooms.remove(i);
+                adminMenu();
+                break;
+            }
+        }
+        out.println("This room does not exist");
     }
     private void createRoom(){
         Scanner input = new Scanner(System.in);
@@ -329,7 +372,6 @@ public class Main {
         boolean balcony = input.nextBoolean();
         Room room1 = new Room(roomNumber,dbed,numberBed,price,size,balcony);
         rooms.add(room1);
-        adminMenu();
     }
     private void addBookings(String cname){
         Scanner input = new Scanner(System.in);
@@ -351,25 +393,31 @@ public class Main {
                     input.nextLine();
                     Date checkInDate = null;
                     checkInDate = formatter.parse(checkin);
-                    DateFormat df3 = DateFormat.getDateInstance(DateFormat.LONG);
-                    String s3 = df3.format(checkInDate);
-                    System.out.println("The entered date is: " + s3);
-                    System.out.print("Enter checkout Date: ");
-                    String checkOut = input.nextLine();
-                    Date checkOutDate = null;
-                    checkOutDate = formatter.parse(checkOut);
-                    DateFormat df4 = DateFormat.getDateInstance(DateFormat.LONG);
-                    String s4 = df4.format(checkOutDate);
-                    System.out.println("The entered date is: " + s4);
-                    Booking booking = new Booking(rooms.get(j).getAvailableRooms(), rooms.get(j).isDoubleBed(), rooms.get(j).getNumberOfBeds(), rooms.get(j).getPrice(), rooms.get(j).getSize(),rooms.get(j).isBalcony(), randomAlphaNumeric(8), checkInDate, checkOutDate);
-                    bookings.add(booking);
-                    for(int k = 0;k<bookings.size();k++) {
-                        if(rooms.get(j).getAvailableRooms() == bookings.get(k).getAvailableRooms()) {
-                            makeBooking(bookings.get(k).getAvailableRooms(),bookings.get(k).getBookingReference(),cname,bookings.get(k).getCheckIn(),bookings.get(k).getCheckOut());
-                            break;
-                        }
+                    if(checkInDate.before(curr)){
+                        out.println("You cannot select previous day");
+                        addBookings(cname);
                     }
-                    break;
+                    else {
+                        DateFormat df3 = DateFormat.getDateInstance(DateFormat.LONG);
+                        String s3 = df3.format(checkInDate);
+                        System.out.println("The entered date is: " + s3);
+                        System.out.print("Enter checkout Date: ");
+                        String checkOut = input.nextLine();
+                        Date checkOutDate = null;
+                        checkOutDate = formatter.parse(checkOut);
+                        DateFormat df4 = DateFormat.getDateInstance(DateFormat.LONG);
+                        String s4 = df4.format(checkOutDate);
+                        System.out.println("The entered date is: " + s4);
+                        Booking booking = new Booking(rooms.get(j).getAvailableRooms(), rooms.get(j).isDoubleBed(), rooms.get(j).getNumberOfBeds(), rooms.get(j).getPrice(), rooms.get(j).getSize(), rooms.get(j).isBalcony(), randomAlphaNumeric(8), checkInDate, checkOutDate);
+                        bookings.add(booking);
+                        for (int k = 0; k < bookings.size(); k++) {
+                            if (rooms.get(j).getAvailableRooms() == bookings.get(k).getAvailableRooms()) {
+                                makeBooking(bookings.get(k).getAvailableRooms(), bookings.get(k).getBookingReference(), cname, bookings.get(k).getCheckIn(), bookings.get(k).getCheckOut());
+                                break;
+                            }
+                        }
+                        break;
+                    }
                 }catch(ParseException e) {
                     System.out.println("Unable to parse");
                 }
@@ -419,98 +467,11 @@ public class Main {
             out.println("Incorrect choice");
             createEmployee();
         }
-        adminMenu();
-    }
-    /*private void createAdmin(){
-        try {
-            String str = "Admin Id =";
-            int line = 0;
-            Scanner scanner = new Scanner(new File("Admin.txt"));
-            while (scanner.hasNextLine()) {
-                String s = scanner.nextLine();
-                if (s.contains(str)) {
-                    line++;
-                }
-            }
-            out.println(line);
-            admCounter = line;
-            scanner.close();
-        } catch (IOException e) {
-            out.println("File Not Found!");
-        }
-        Scanner input = new Scanner(System.in);
-        System.out.println("Enter the first name of Admin");
-        String fname = input.nextLine();
-        System.out.println("Enter the last name of Admin");
-        String lname = input.nextLine();
-        System.out.println("Enter the Person Number of Admin");
-        String pNumber = input.nextLine();
-        System.out.println("Enter the Phone Number of Admin");
-        String phNumber = input.nextLine();
-        System.out.println("Enter the Password of Admin");
-        String pass = input.nextLine();
-        admCounter++;
-        Admin admin2 = new Admin(fname,lname,pNumber,phNumber,"ss",pass,admCounter);
-        try {
-            FileWriter fw = new FileWriter("Admin.txt",true);
-            BufferedWriter bw = new BufferedWriter(fw);
-            PrintWriter pw = new PrintWriter(bw);
-                pw.format("Admin Id =%d ",admin2.getAdminCounter());
-                pw.format("Admin First Name =%s ",admin2.getFirstName());
-                pw.format("Admin Last Name =%s ",admin2.getLastName());
-                pw.format("Admin Personal Number =%s ",admin2.getPersonNumber());
-                pw.format("Admin Phone Number =%s ",admin2.getPhoneNumber());
-                pw.format("Admin Password =%s%n",admin2.getAdminPassword());
-            pw.close();
-        } catch (IOException e) {
-            out.println("Error!");
-        }
-        //adminMenu();
-    }*/
-    private void showAdmins(){
-        try{
-            FileReader fr = new FileReader("Admin.txt");
-            BufferedReader br = new BufferedReader(fr);
-
-            String adm;
-            while((adm = br.readLine()) != null){
-                out.println(adm+"\n");
-            }
-        }catch(IOException e){
-            out.println("File Not Found!");
-        }
-        adminMenu();
     }
     private void showBookings() {
         for(Booking booking:bookings){
             out.println(booking);
         }
-    }
-    private void removeAdmin() {
-        try {
-            out.println("Enter the Admin name you want to remove");
-            Scanner input = new Scanner(System.in);
-            String str = input.nextLine();
-            File oldFile = new File("Admin.txt");
-            File newFile = new File("DeletedAdmins.txt");
-            Scanner scanner = new Scanner(oldFile);
-            while (scanner.hasNextLine()) {
-                String s = scanner.nextLine();
-                if (!s.contains(str)) {
-                    out.println(""+s);
-                    FileWriter fw = new FileWriter(newFile, true);
-                    BufferedWriter bw = new BufferedWriter(fw);
-                    PrintWriter pw = new PrintWriter(bw);
-                    pw.println("" + s);
-                    pw.close();
-                }
-            }scanner.close();
-            File tempFile = new File("Admin.txt");
-            newFile.renameTo(tempFile);
-        }catch(IOException e){
-            out.println("File Not Found!");
-        }
-        out.println("Done");
     }
     private void removeEmployee() {
         Scanner input = new Scanner(System.in);
@@ -526,7 +487,6 @@ public class Main {
             }
         }
         out.println("This user does not exist");
-        adminMenu();
     }
     private void removeBooking() {
         Scanner input = new Scanner(System.in);
@@ -542,38 +502,6 @@ public class Main {
         out.println("This booking does not exist");
         adminMenu();
     }
-        private void employeeverify(){
-            try {
-                Scanner input = new Scanner(System.in);
-                out.println("Enter the Employee Id");
-                int st = input.nextInt();
-                input.nextLine();
-                String str = "Employee Id ="+st;
-                Scanner scanner = new Scanner(new File("Employee.txt"));
-                while (scanner.hasNextLine()) {
-                    String s = scanner.nextLine();
-                    if (s.contains(str)) {
-                        out.println("Enter the password");
-                        String pass = input.nextLine();
-                        String sa = "Employee Password ="+pass;
-                        if(s.contains(sa)){
-                            employeeMenu();
-                            break;
-                        }
-                        else{
-                            out.println("Access Denied!");
-                            showMenu();
-                            break;
-                        }
-                    }
-                }
-                scanner.close();
-            } catch (IOException e) {
-                out.println("File Not Found!");
-            }
-            out.println("Done");
-            employeeMenu();
-        }
     private void employeeMenu(){
         Scanner input = new Scanner(System.in);
         System.out.println("Welcome!");
@@ -582,26 +510,42 @@ public class Main {
         System.out.println("2. View Rooms to be Cleaned");
         System.out.println("3. View All Rooms");
         System.out.println("4. Remove A booking");
-        System.out.println("5. Mark a room As cleaned");
+        System.out.println("5. Modify A Booking");
+        System.out.println("6. Show All Customers");
+        System.out.println("7. Back");
         int ch = input.nextInt();
         switch(ch){
             case 1:
                 showBookings();
+                employeeMenu();
                 break;
             case 2:
-                showRoomsToBeCleaned();
+                roomCleanedCheck();
+                employeeMenu();
                 break;
             case 3:
                 showRoom();
+
                 break;
             case 4:
-                //adminVerify();
+                adminVerify();
                 removeBooking();
+                employeeMenu();
                 break;
             case 5:
-                roomCleanedCheck();
-                markCleaned();
+                modifyBooking();
+                employeeMenu();
                 break;
+            case 6:
+                showCustomer();
+                employeeMenu();
+                break;
+            case 7:
+                employeeVerify();
+                break;
+            default:
+                out.println("Incorrect choice");
+                employeeMenu();
         }
     }
     private void markCleaned() {
@@ -646,6 +590,7 @@ public class Main {
         String pass = input.nextLine();
             Customer customer  = new Customer(fname,lname,pNumber,phNumber,email,userId,pass);
             customers.add(customer);
+            customerLogInMenu(fname);
     }
     private void customerLogInMenu(String name){
         Scanner input = new Scanner(System.in);
@@ -653,11 +598,32 @@ public class Main {
         System.out.println("1. Make A Booking");
         System.out.println("2. Cancel Booking");
         System.out.println("3. Change the Booking");
+        System.out.println("4. Change your details");
+        System.out.println("5. Back");
         int  cho = input.nextInt();
         switch(cho){
             case 1:
                 addBookings(name);
+                customerVerify();
                 break;
+            case 2:
+                out.println("Your request has been made");
+                employeeVerify();
+                removeBooking();
+                customerVerify();
+                break;
+            case 3:
+                modifyBooking();
+                customerVerify();
+                break;
+            case 4:
+                break;
+            case 5:
+                customerVerify();
+                break;
+            default:
+                out.println("Incorrect Choice");
+                cleanerVerify();
         }
     }
     private void showCustomer(){
@@ -666,63 +632,56 @@ public class Main {
         }
     }
     private void findCustomer(){
-        try {
             Scanner input = new Scanner(System.in);
             out.println("You want to search by:");
             out.println("1. First Name");
             out.println("2. Last Name");
+            out.println("3. Press any key to back");
             int a = input.nextInt();
             input.nextLine();
-            switch (a){
+            switch (a) {
                 case 1:
                     out.println("Enter your First Name");
                     String fname = input.nextLine();
-                    for(int i = 0;i<customers.size();i++){
-                        if(fname.equalsIgnoreCase(customers.get(i).getFirstName())){
-                            out.println("Is this your email: "+customers.get(i).getEmail());
+                    for (int i = 0; i < customers.size(); i++) {
+                        if (fname.equalsIgnoreCase(customers.get(i).getFirstName())) {
+                            out.println("Is this your email: " + customers.get(i).getEmail());
                             out.println("Press Enter to continue or any other key to exit");
                             String b = input.nextLine();
-                            if(b.equals("")){
+                            if (b.equals("")) {
                                 out.println("An email has been sent to your mail");
-                                break;
-                            }else{
                                 customerVerify();
+                                break;
+                            } else {
+                                customerVerify();
+                                break;
                             }
                         }
                     }
+                    out.println("This user does not exist");
                     break;
                 case 2:
                     out.println("Enter your Last Name");
                     String lname = input.nextLine();
-                    for(int i = 0;i<customers.size();i++){
-                        if(lname.equalsIgnoreCase(customers.get(i).getLastName())){
-                            out.println("Is this your email: "+customers.get(i).getEmail());
+                    for (int i = 0; i < customers.size(); i++) {
+                        if (lname.equalsIgnoreCase(customers.get(i).getLastName())) {
+                            out.println("Is this your email: " + customers.get(i).getEmail());
                             out.println("Press Enter to continue or any other key to exit");
                             String b = input.nextLine();
-                            if(b.equals("")){
+                            if (b.equals("")) {
                                 out.println("An email has been sent to your mail");
                                 break;
-                            }else{
+                            } else {
                                 findCustomer();
+                                break;
                             }
                         }
                     }
+                    out.println("This user does not exist");
                     break;
+                default:
+                    customerVerify();
             }
-            out.println("Enter the Customer Name");
-            String name = input.nextLine();
-            String str = "Customer First Name ="+name;
-            Scanner scanner = new Scanner(new File("Customer.txt"));
-            while (scanner.hasNextLine()) {
-                String s = scanner.nextLine();
-                if (s.contains(str)) {
-                    out.println("" + s);
-                }
-            }
-            scanner.close();
-        } catch (IOException e) {
-            out.println("File Not Found!");
-        }
     }
     private void makeBooking(int roomNumber,String bookingRf,String name,Date chin,Date chout) {
         try {
@@ -735,61 +694,6 @@ public class Main {
             pw.close();
         } catch (IOException e) {
             out.println("Error!");
-        }
-    }
-    private  void modifyFile(String filePath, String oldString, String newString)
-    {
-        File fileToBeModified = new File(filePath);
-
-        String oldContent = "";
-
-        BufferedReader reader = null;
-
-        FileWriter writer = null;
-
-        try
-        {
-            reader = new BufferedReader(new FileReader(fileToBeModified));
-
-            //Reading all the lines of input text file into oldContent
-
-            String line = reader.readLine();
-
-            while (line != null)
-            {
-                oldContent = oldContent + line + System.lineSeparator();
-
-                line = reader.readLine();
-            }
-
-            //Replacing oldString with newString in the oldContent
-
-            String newContent = oldContent.replaceAll(oldString, newString);
-
-            //Rewriting the input text file with newContent
-
-            writer = new FileWriter(fileToBeModified);
-
-            writer.write(newContent);
-        }
-        catch (IOException e)
-        {
-            e.printStackTrace();
-        }
-        finally
-        {
-            try
-            {
-                //Closing the resources
-
-                reader.close();
-
-                writer.close();
-            }
-            catch (IOException e)
-            {
-                e.printStackTrace();
-            }
         }
     }
     private void roomCleanedCheck(){
@@ -842,12 +746,77 @@ public class Main {
                         break;
                     default:
                         out.println("Incorrect Choice");
-                        adminMenu();
+                        modifyRoom();
                 }
             }
         }
     }
     private void modifyBooking(){
-
+        Scanner input = new Scanner(System.in);
+        out.println("Enter the room number you want to change the booking");
+        int rn = input.nextInt();
+        input.nextLine();
+        for(int i = 0;i<bookings.size();i++) {
+            if (rn == bookings.get(i).getAvailableRooms()) {
+                out.println("What do you want to change");
+                out.println("1. Checkin Date");
+                out.println("2. Checkout Date");
+                int ch = input.nextInt();
+                if (ch == 1) {
+                    try {
+                        System.out.print("Enter checkIn Date(dd-mm-yy): ");
+                        String checkin = input.nextLine();
+                        input.nextLine();
+                        Date checkInDate = null;
+                        checkInDate = formatter.parse(checkin);
+                        DateFormat df3 = DateFormat.getDateInstance(DateFormat.LONG);
+                        String s3 = df3.format(checkInDate);
+                        System.out.println("The entered date is: " + s3);
+                    } catch (ParseException e) {
+                        out.println("Unable to parse");
+                    }
+                } else if (ch == 2) {
+                    try {
+                        System.out.print("Enter checkout Date(dd-mm-yy): ");
+                        String checkOut = input.nextLine();
+                        Date checkOutDate = null;
+                        checkOutDate = formatter.parse(checkOut);
+                        DateFormat df4 = DateFormat.getDateInstance(DateFormat.LONG);
+                        String s4 = df4.format(checkOutDate);
+                        System.out.println("The entered date is: " + s4);
+                    } catch (ParseException e) {
+                        out.println("Unable to parse");
+                    }
+                }
+            }
+        }
+        out.println("This booking does not exist");
+    }
+    private void outputStreamRooms(){
+        try{
+            FileOutputStream f = new FileOutputStream(new File("AllRooms.txt"));
+            ObjectOutputStream o = new ObjectOutputStream(f);
+            for(Room room:rooms){
+                o.writeObject(room);
+            }
+            o.close();
+            f.close();
+        }catch (IOException e){
+            out.println("File Not Found");
+        }
+    }
+    private void inputStreamRooms(){
+        try{
+                FileInputStream fi = new FileInputStream(new File("AllRooms.txt"));
+                ObjectInputStream oi = new ObjectInputStream(fi);
+                for(Room room:rooms){
+                    room = (Room) oi.readObject();
+                    out.println(room.toString());
+                }
+                oi.close();
+                fi.close();
+        }
+        catch(Exception e){
+            System.out.println("File Not Found");}
     }
 }

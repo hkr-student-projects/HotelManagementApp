@@ -1,3 +1,0 @@
-========History=========
-Room No = 2 Customer Name = anna========History=========
-Room No = 1 Customer Name = anna

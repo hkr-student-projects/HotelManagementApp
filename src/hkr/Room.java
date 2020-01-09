@@ -1,6 +1,8 @@
 package hkr;
 
-public class Room {
+import java.io.Serializable;
+
+public class Room implements Serializable {
     private int availableRooms;
     private boolean doubleBed;
     private int numberOfBeds;

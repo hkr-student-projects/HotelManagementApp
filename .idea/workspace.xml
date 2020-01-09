@@ -6,9 +6,9 @@
   <component name="ChangeListManager">
     <list default="true" id="be750a4a-f25b-417a-8b32-89dd50849fe2" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/hkr/CleanLogic.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/hkr/CleanLogic.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/hkr/Customer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/hkr/Customer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/AllRooms.txt" beforeDir="false" afterPath="$PROJECT_DIR$/AllRooms.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/hkr/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/hkr/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/hkr/Room.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/hkr/Room.java" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
