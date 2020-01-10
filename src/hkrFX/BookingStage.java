@@ -330,7 +330,7 @@ public class BookingStage extends Stage{
         if(!errors){
             LocalDate movein = dates[0].getValue();
             LocalDate moveout = dates[1].getValue();
-            MainFX.databaseManager.addEntry(ssn, name, sname, addr, phone, movein.toString(), moveout.toString(), null);
+            //MainFX.databaseManager.addEntry(ssn, name, sname, addr, phone, movein.toString(), moveout.toString(), null);
             //MainFX.databaseManager.addEntry(ssn, name, sname, addr, phone, dates[0].getda);
             //(String ssn, String name, String midname, String surname, String addr, String phone, Date movein, Date moveout, String roomnum){
 //            Class[] parameterTypes = new Class[9];

@@ -125,7 +125,7 @@ public class DatabaseManager {
             PreparedStatement pst = conn.prepareStatement(
                     "SELECT `hotel`.`Account`.`id`,`name`,`surname`,`ssn`,`phone`,`address` " +
                             "FROM hotel.Customer,hotel.Account " +
-                            "WHERE '"+ email +"' IN (SELECT `email` FROM hotel.Account);"
+                            "WHERE '"+ email +"' IN (SELECT `email` FROM hotel.Account) LIMIT 1;"
             );
 
             /*boolean isResult = */pst.execute();
@@ -324,21 +324,21 @@ public class DatabaseManager {
         return conn;
     }
 
-    class Profile{
-        int id;
-        String name;
-        String surname;
-        String ssn;
-        String phone;
-        String addrs;
-        String email;
+    public class Profile{
+        public int id;
+        public String name;
+        public String surname;
+        public String ssn;
+        public String phone;
+        public String addrs;
+        public String email;
     }
 
     class Booking{
-        LocalDate movinl;
-        LocalDate moveout;
-        String room;
-        byte guest;
+        public LocalDate movinl;
+        public LocalDate moveout;
+        public String room;
+        public byte guest;
     }
 }
 

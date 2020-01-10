@@ -5,24 +5,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="be750a4a-f25b-417a-8b32-89dd50849fe2" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/css/common.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/out/production/Hotel_Management/hkrFX/css/style.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/out/production/Hotel_Management/hkrFX/sample.fxml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/hkrFX/CustomerLogin.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/hkrFX/[deprecated]BookingInfo.fxml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/hkrFX/css/style.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/hkrFX/sample.fxml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/App.log" beforeDir="false" afterPath="$PROJECT_DIR$/App.log" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Hotel_Management/hkrFX/BookingInfo.fxml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Hotel_Management/hkrFX/sample.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/hkr/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/hkr/Main.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/hkrDB/DatabaseManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/hkrDB/DatabaseManager.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/hkrDB/RoomClass.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/hkrFX/BookingInfo.fxml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/hkrFX/BookingInfoStage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/hkrFX/BookingInfoStage.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/hkrFX/FxmlConverter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/hkrFX/FxmlConverter.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/hkrFX/sample.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/hkrFX/BookingStage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/hkrFX/BookingStage.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/hkrFX/MainFX.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/hkrFX/MainFX.java" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
