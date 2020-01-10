@@ -1,0 +1,8 @@
+{
+  "DatabaseHost": "localhost",
+  "DatabaseUsername": "root",
+  "DatabasePort": 3306,
+  "DatabasePassword": "",
+  "DatabaseName": "application",
+  "lang": "en"
+}

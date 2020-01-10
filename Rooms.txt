@@ -1,5 +1,0 @@
-Admin Id =3 Admin Last Name =assasa Admin Last Name =assasa Admin Personal Number =ass Admin Phone Number =xzxz Admin Password =zxxz
-Room No =02 Booking =No
-Room No =02 Booking =No
-Room No =02 Booking =No
-Room No =02 Booking =No
