@@ -15,6 +15,18 @@ enum QueryType{
     BOOL//ALL -> SELECT ? true : false
 }
 
+enum RoomClass {
+    ECONOMY,
+    MIDDLE,
+    LUXURY
+}
+
+enum EmpPosition {
+    ADMIN,
+    RECEPTIONIST,
+    CLEANER
+}
+
 public class DatabaseManager {
 
     private final String rooms = "`hotel`.`Room`";
@@ -40,41 +52,39 @@ public class DatabaseManager {
 
     public ObservableList<String> getAvailableRooms(LocalDate movein, LocalDate moveout){
         ArrayList<String> arooms = new ArrayList<>();
-        try{
-            try (Connection conn = createConnection()){
+        try (Connection conn = createConnection()){
 
-                PreparedStatement pst = conn.prepareStatement("SELECT `Room_number` As Room\n" +
-                        "FROM hotel.BookedRoom, hotel.Booking \n" +
-                        "WHERE hotel.BookedRoom.Booking_reference = hotel.Booking.reference AND `Room_number` NOT IN\n" +
-                        "(SELECT `Room_number`\n" +
-                        "FROM hotel.BookedRoom, hotel.Booking \n" +
-                        "WHERE hotel.BookedRoom.Booking_reference = hotel.Booking.reference AND\n" +
-                        "(\t\n" +
-                        "\t(('"+ movein +"' >= `movein` AND '"+ movein +"' < `moveout`) OR ('"+ moveout +"' >= `movein` AND '"+ moveout +"' <= `moveout`)) \n" +
-                        "    OR \n" +
-                        "\t(`movein` >= '"+ movein +"' AND `moveout` <= '"+ moveout +"')\n" +
-                        "))\n" +
-                        "UNION SELECT `number`\n" +
-                        "FROM hotel.Room \n" +
-                        "WHERE `number` \n" +
-                        "NOT IN (SELECT `Room_number` \n" +
-                        "FROM hotel.BookedRoom)\n" +
-                        "ORDER BY Room;");
+            PreparedStatement pst = conn.prepareStatement("SELECT `Room_number` As Room\n" +
+                    "FROM hotel.BookedRoom, hotel.Booking \n" +
+                    "WHERE hotel.BookedRoom.Booking_reference = hotel.Booking.reference AND `Room_number` NOT IN\n" +
+                    "(SELECT `Room_number`\n" +
+                    "FROM hotel.BookedRoom, hotel.Booking \n" +
+                    "WHERE hotel.BookedRoom.Booking_reference = hotel.Booking.reference AND\n" +
+                    "(\t\n" +
+                    "\t(('"+ movein +"' >= `movein` AND '"+ movein +"' < `moveout`) OR ('"+ moveout +"' >= `movein` AND '"+ moveout +"' <= `moveout`)) \n" +
+                    "    OR \n" +
+                    "\t(`movein` >= '"+ movein +"' AND `moveout` <= '"+ moveout +"')\n" +
+                    "))\n" +
+                    "UNION SELECT `number`\n" +
+                    "FROM hotel.Room \n" +
+                    "WHERE `number` \n" +
+                    "NOT IN (SELECT `Room_number` \n" +
+                    "FROM hotel.BookedRoom)\n" +
+                    "ORDER BY Room;");
 
-                boolean isResult = pst.execute();
-                do {
-                    try (ResultSet rs = pst.getResultSet()) {
+            boolean isResult = pst.execute();
+            do {
+                try (ResultSet rs = pst.getResultSet()) {
 
-                        while (rs.next()) {
+                    while (rs.next()) {
 
-                            arooms.add(rs.getString(1));
-                        }
-
-                        isResult = pst.getMoreResults();
+                        arooms.add(rs.getString(1));
                     }
 
-                } while (isResult);
-            }
+                    isResult = pst.getMoreResults();
+                }
+
+            } while (isResult);
         }
         catch(Exception ex){
             Logger.logException(ex);
@@ -83,24 +93,78 @@ public class DatabaseManager {
         return FXCollections.observableArrayList(arooms);
     }
 
-    public int addEntry(String ssn, String name, String surname, String addr, String phone, String movein, String moveout, String roomnum){
+
+
+    public int createPerson(String email, String password, String ssn, String name, String surname, String addr, String phone, String movein, String moveout, String roomnum){
         return (int)executeQuery(QueryType.UPDATE,
-                "INSERT INTO "+books+" " +
-                        "(`movein`,`moveout`) " +
-                        "VALUES ('2018-12-22 23:44:22','2019-12-22 23:44:22');" +
-                        "SELECT @bid:=LAST_INSERT_ID();" +
+                        "INSERT INTO `hotel`.`Account` " +
+                        "(`email`,`password`)" +
+                        "VALUES ('"+email+"',SHA1('"+password+"'));" +
+                        "SELECT @aid:=LAST_INSERT_ID();" +
                         "INSERT INTO " + clients + " " +
-                        "(`ssn`,`name`,`middlename`,`surname`,`address`,`phone`) " +
-                        "VALUES ('" + ssn + "','" + name + "','" + surname + "','" + addr + "','" + phone + "');" +
-                        "SELECT @cid:=LAST_INSERT_ID();" +
-                        "INSERT INTO "+ orders +" " +
-                        "(`Customer_id`,`Booking_reference`) " +
-                        "VALUES (@cid,@bid);" +
-                        "INSERT INTO "+ booked +" " +
-                        "(`Booking_reference`,`Room_number`) " +
-                        "VALUES (@bid,'"+ roomnum +"');"
+                        "(`account_id`,`ssn`,`name`,`surname`,`address`,`phone`) " +
+                        "VALUES (@aid,'" + ssn + "','" + name + "','" + surname + "','" + addr + "','" + phone + "');"
         );
     }
+
+    public int createPerson(String email, String password, EmpPosition position, String ssn, String name, String surname, String addr, String phone, String movein, String moveout, String roomnum){
+        return (int)executeQuery(QueryType.UPDATE,
+                "INSERT INTO `hotel`.`Account` " +
+                        "(`email`,`password`)" +
+                        "VALUES ('"+email+"',SHA1('"+password+"'));" +
+                        "SELECT @aid:=LAST_INSERT_ID();" +
+                        "INSERT INTO " + clients + " " +
+                        "(`account_id`,`position`,`ssn`,`name`,`surname`,`address`,`phone`) " +
+                        "VALUES (@aid,'"+ position +"','" + ssn + "','" + name + "','" + surname + "','" + addr + "','" + phone + "');"
+        );
+    }
+
+    public Profile getProfile(String email){
+        Profile profile = null;
+        try (Connection conn = createConnection()){
+            PreparedStatement pst = conn.prepareStatement(
+                    "SELECT `hotel`.`Account`.`id`,`name`,`surname`,`ssn`,`phone`,`address` " +
+                            "FROM hotel.Customer,hotel.Account " +
+                            "WHERE '"+ email +"' IN (SELECT `email` FROM hotel.Account);"
+            );
+
+            /*boolean isResult = */pst.execute();
+            try (ResultSet rs = pst.getResultSet()) {
+
+                while (rs.next()) {
+                    profile = new Profile();
+                    profile.id = rs.getInt(1);
+                    profile.name = rs.getString(2);
+                    profile.surname = rs.getString(3);
+                    profile.ssn = rs.getString(4);
+                    profile.phone = rs.getString(5);
+                    profile.addrs = rs.getString(6);
+                }
+
+               // isResult = pst.getMoreResults();
+            }
+        }
+        catch(Exception ex){
+            Logger.logException(ex);
+        }
+
+        return profile;
+    }
+
+//    "INSERT INTO "+books+" " +
+//            "(`movein`,`moveout`) " +
+//            "VALUES ('2018-12-22 23:44:22','2019-12-22 23:44:22');" +
+//            "SELECT @bid:=LAST_INSERT_ID();" +
+//            "INSERT INTO " + clients + " " +
+//            "(`ssn`,`name`,`middlename`,`surname`,`address`,`phone`) " +
+//            "VALUES ('" + ssn + "','" + name + "','" + surname + "','" + addr + "','" + phone + "');" +
+//            "SELECT @cid:=LAST_INSERT_ID();" +
+//            "INSERT INTO "+ orders +" " +
+//            "(`Customer_id`,`Booking_reference`) " +
+//            "VALUES (@cid,@bid);" +
+//            "INSERT INTO "+ booked +" " +
+//            "(`Booking_reference`,`Room_number`) " +
+//            "VALUES (@bid,'"+ roomnum +"');"
 
     public int addRoom(String number, short floor, RoomClass rclass){
         return (int)executeQuery(QueryType.UPDATE,
@@ -140,37 +204,48 @@ public class DatabaseManager {
         try {
             executeQuery(QueryType.BOOL,
                     " CREATE SCHEMA IF NOT EXISTS `hotel` DEFAULT CHARACTER SET utf8;" +
+                            "use `hotel`;" +
+                            "CREATE TABLE IF NOT EXISTS `hotel`.`Account` (\n" +
+                            "  `id` INT NOT NULL AUTO_INCREMENT,\n" +
+                            "  `email` VARCHAR(45) NOT NULL,\n" +
+                            "  `password` VARCHAR(40) NOT NULL,\n" +
+                            "  PRIMARY KEY (`id`));" +
                             "CREATE TABLE IF NOT EXISTS " + books + " (" +
                             "`reference` INT NOT NULL AUTO_INCREMENT," +
                             "`movein` DATE NOT NULL," +
                             "`moveout` DATE NOT NULL," +
                             "PRIMARY KEY (`reference`));" +
-                            "CREATE TABLE IF NOT EXISTS " + clients + " (" +
-                            "`id` INT NOT NULL AUTO_INCREMENT," +
-                            "`ssn` VARCHAR(45) NOT NULL," +
-                            "`name` VARCHAR(45) NOT NULL," +
-//                            "`middlename` VARCHAR(45) DEFAULT NULL," +
-                            "`surname` VARCHAR(45) NOT NULL," +
-                            "`phone` VARCHAR(15) NOT NULL," +
-                            "`address` VARCHAR(45) NOT NULL," +
-                            "PRIMARY KEY (`id`));" +
-                            "CREATE TABLE IF NOT EXISTS " + orders + " (" +
-                            "`id` INT NOT NULL AUTO_INCREMENT," +
-                            "`Customer_id` INT NOT NULL," +
-                            "`Booking_reference` INT NOT NULL," +
-                            "PRIMARY KEY (`id`)," +
-                            "INDEX `fk_Order_Customer1_idx` (`Customer_id` ASC)," +
-                            "INDEX `fk_Order_Booking1_idx` (`Booking_reference` ASC)," +
-                            "CONSTRAINT `fk_Order_Customer1`" +
-                            "FOREIGN KEY (`Customer_id`)" +
-                            "REFERENCES " + clients + " (`id`)" +
-                            "ON DELETE CASCADE " +
-                            "ON UPDATE NO ACTION," +
-                            "CONSTRAINT `fk_Order_Booking1`" +
-                            "FOREIGN KEY (`Booking_reference`)" +
-                            "REFERENCES " + books + " (`reference`)" +
-                            "ON DELETE CASCADE " +
-                            "ON UPDATE NO ACTION);" +
+                            "CREATE TABLE IF NOT EXISTS `hotel`.`Customer` (\n" +
+                            "  `id` INT NOT NULL AUTO_INCREMENT,\n" +
+                            "  `account_id` INT NOT NULL,\n" +
+                            "  `ssn` VARCHAR(13) NOT NULL,\n" +
+                            "  `name` VARCHAR(45) NOT NULL,\n" +
+                            "  `surname` VARCHAR(45) NOT NULL,\n" +
+                            "  `phone` VARCHAR(15) NOT NULL,\n" +
+                            "  `address` VARCHAR(45) NOT NULL,\n" +
+                            "  PRIMARY KEY (`id`),\n" +
+                            "  INDEX `fk_Customer_Account1_idx` (`account_id` ASC),\n" +
+                            "  CONSTRAINT `fk_Customer_Account1`\n" +
+                            "    FOREIGN KEY (`account_id`)\n" +
+                            "    REFERENCES `hotel`.`Account` (`id`)\n" +
+                            "    ON DELETE CASCADE" +
+                            "    ON UPDATE NO ACTION);" +
+                            "CREATE TABLE IF NOT EXISTS `hotel`.`Employee` (\n" +
+                            "  `id` INT NOT NULL AUTO_INCREMENT,\n" +
+                            "  `account_id` INT NOT NULL,\n" +
+                            "  `position` ENUM('ADMIN', 'RECEPTIONIST', 'CLEANER') NOT NULL,\n" +
+                            "  `ssn` VARCHAR(13) NOT NULL,\n" +
+                            "  `name` VARCHAR(45) NOT NULL,\n" +
+                            "  `surname` VARCHAR(45) NOT NULL,\n" +
+                            "  `phone` VARCHAR(15) NOT NULL,\n" +
+                            "  `address` VARCHAR(45) NOT NULL,\n" +
+                            "  PRIMARY KEY (`id`),\n" +
+                            "  INDEX `fk_Customer_Account1_idx` (`account_id` ASC),\n" +
+                            "  CONSTRAINT `fk_Customer_Account10`\n" +
+                            "    FOREIGN KEY (`account_id`)\n" +
+                            "    REFERENCES `hotel`.`Account` (`id`)\n" +
+                            "    ON DELETE CASCADE\n" +
+                            "    ON UPDATE NO ACTION);" +
                             "CREATE TABLE IF NOT EXISTS " + rooms + " (" +
                             "`number` VARCHAR(10) NOT NULL," +
                             "`floor` SMALLINT(3) NOT NULL," +
@@ -214,7 +289,6 @@ public class DatabaseManager {
        //(`steamId` varchar(32) NOT NULL,`balance` decimal(15,2) NOT NULL DEFAULT '25.00',`lastUpdated` timestamp NOT NULL DEFAULT NOW() ON UPDATE CURRENT_TIMESTAMP,PRIMARY KEY (`steamId`)) ");
     }
 
-
     public Object executeQuery(QueryType type, String query)
     {
         // This method is to reduce the amount of copy paste that there was within this class.
@@ -224,7 +298,7 @@ public class DatabaseManager {
         {
             //Statement command = connection.createStatement();
             PreparedStatement command = connection.prepareStatement(query);
-            result = type == QueryType.READER ? command : command.getUpdateCount();
+            command.execute();
             //connection.close();
 
             //A ResultSet object is automatically closed when the Statement object that generated it is closed,
@@ -248,6 +322,23 @@ public class DatabaseManager {
         }
 
         return conn;
+    }
+
+    class Profile{
+        int id;
+        String name;
+        String surname;
+        String ssn;
+        String phone;
+        String addrs;
+        String email;
+    }
+
+    class Booking{
+        LocalDate movinl;
+        LocalDate moveout;
+        String room;
+        byte guest;
     }
 }
 

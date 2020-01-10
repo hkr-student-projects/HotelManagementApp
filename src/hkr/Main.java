@@ -1,5 +1,6 @@
 package hkr;
 
+import hkrFX.FxmlConverter;
 import hkrFX.MainFX;
 import javafx.application.Application;
 import org.json.simple.JSONObject;
@@ -34,9 +35,6 @@ public class Main {
 
 
 
-
-
-        //FxmlConverter.documentBuild("src/hkrFX/[deprecated]BookingInfo.fxml");
         //compare
         //labelCompare.setText("Compare date: " + dateUtil.compareTo(dateFromPicker));
 

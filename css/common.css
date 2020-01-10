@@ -1,0 +1,8 @@
+FontAwesomeIcon:hover {
+	-fx-cursor: hand;
+}
+
+#side_nav  HBox:hover {
+ -fx-background-color: #da4541;
+ -fx-cursor: hand;
+}

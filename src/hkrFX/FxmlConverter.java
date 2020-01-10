@@ -14,14 +14,13 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
-import static java.lang.System.out;
 
 public class FxmlConverter {
 
     public static void documentBuild(String xmlPath) throws ParserConfigurationException, IOException, SAXException {
         DocumentBuilder db = DocumentBuilderFactory.newInstance().newDocumentBuilder();
         Node entry = db.parse(xmlPath);
-        out.println(entry.getBaseURI());
+        //out.println(entry.getBaseURI());
         String[] name = entry.getBaseURI().split("/");
         String out = name[name.length - 1].split("\\.")[0];
         File f = new File(""+ out +".txt");
@@ -54,7 +53,7 @@ public class FxmlConverter {
             writeNodeAttrs(child, attr, path);
 //            for(short j = 0; j < attr.getLength(); j++)
 //                out.print(attr.item(j) + " ");
-            out.println(child.getNodeName()+"-"+child.getParentNode().getNodeName());
+            //out.println(child.getNodeName()+"-"+child.getParentNode().getNodeName());
             getChildRecursive(child, path);
             //out.println(fullPath + " " + child.getNodeName());
             //out.println(i);
@@ -72,9 +71,7 @@ public class FxmlConverter {
             writer.write(""+ node.getNodeName() + " " + node.getNodeName().toLowerCase() +" = new "+ node.getNodeName() +"();\n");
         }
         catch (Exception e){
-            out.println(e);
-            out.println(e.getMessage());
-            out.println(e.getStackTrace());
+            Logger.logException(e);
         }
     }
 
@@ -93,9 +90,7 @@ public class FxmlConverter {
 
         }
         catch (Exception e){
-            out.println(e);
-            out.println(e.getMessage());
-            out.println(e.getStackTrace());
+            Logger.logException(e);
         }
     }
 
