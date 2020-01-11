@@ -10,23 +10,6 @@ import java.sql.*;
 import java.time.LocalDate;
 import java.util.ArrayList;
 
-enum QueryType{
-    UPDATE,//INSERT, UPDATE, DELETE, CREATE TABLE, DROP TABLE
-    READER,//SELECT -> ResultSet
-    BOOL//ALL -> SELECT ? true : false
-}
-
-enum RoomClass {
-    ECONOMY,
-    MIDDLE,
-    LUXURY
-}
-
-enum EmpPosition {
-    ADMIN,
-    RECEPTIONIST,
-    CLEANER
-}
 
 public class DatabaseManager {
 
@@ -354,7 +337,7 @@ public class DatabaseManager {
         {
             //Statement command = connection.createStatement();
             PreparedStatement command = connection.prepareStatement(query);
-            command.execute();
+            result = type == QueryType.READER ? command.executeQuery() : command.executeUpdate();
             //connection.close();
 
             //A ResultSet object is automatically closed when the Statement object that generated it is closed,
@@ -398,6 +381,25 @@ public class DatabaseManager {
         public String room;
         public LocalDate movein;
         public LocalDate moveout;
+    }
+
+    public enum QueryType{
+        UPDATE,//INSERT, UPDATE, DELETE, CREATE TABLE, DROP TABLE
+        READER,//SELECT -> ResultSet
+        BOOL//ALL -> SELECT ? true : false
+    }
+
+
+    public enum RoomClass {
+        ECONOMY,
+        MIDDLE,
+        LUXURY
+    }
+
+    public enum EmpPosition {
+        ADMIN,
+        RECEPTIONIST,
+        CLEANER
     }
 }
 

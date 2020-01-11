@@ -5,6 +5,7 @@ import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
@@ -23,6 +24,7 @@ public class LoginEmp extends Stage {
     private Button log;
     private Button create;
     private Button forgot;
+    private Label error;
 
     public LoginEmp(){
         this.setResizable(false);
@@ -52,6 +54,14 @@ public class LoginEmp extends Stage {
         log.setMnemonicParsing(false);
         log.setFont(new Font(12.0));
 
+        error = new Label();
+        error.setPrefHeight(17.0);
+        error.setPrefWidth(167.0);
+        error.setTextAlignment(TextAlignment.CENTER);
+        error.setTextFill(Paint.valueOf("RED"));
+        error.setLayoutX(198.0);
+        error.setLayoutY(149.0);
+
         createScene();
     }
 
@@ -78,7 +88,7 @@ public class LoginEmp extends Stage {
 
         ObservableList<Node> aChilds = anchorpane.getChildren();
         ObservableList<Node> pChilds = pane.getChildren();
-        pChilds.addAll(text, email, password, log, create);
+        pChilds.addAll(text, email, password, log, create, error);
         aChilds.add(pane);
 
         Scene scene = new Scene(anchorpane, MainFX.SCENE_WIDTH, MainFX.SCENE_HEIGHT);

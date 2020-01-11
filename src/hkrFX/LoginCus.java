@@ -1,8 +1,10 @@
 package hkrFX;
 
+import hkrDB.DatabaseManager;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
@@ -21,6 +23,7 @@ public class LoginCus extends Stage {
     private Button log;
     private Button create;
     private Button forgot;
+    private Label error;
 
     public LoginCus(){
         this.setResizable(false);
@@ -50,12 +53,8 @@ public class LoginCus extends Stage {
         log.setMnemonicParsing(false);
         log.setFont(new Font(12.0));
         log.setOnAction(event -> {
-            Error e = new Error();
-            if(checkCredentials(e)){
+            if(checkCredentials()){
                 new PersonalAreaCus(MainFX.databaseManager.getProfile(email.getText()));
-            }
-            else {
-
             }
         });
 
@@ -81,20 +80,29 @@ public class LoginCus extends Stage {
         create.setMnemonicParsing(false);
         create.setMnemonicParsing(false);
         create.setFont(new Font("System Bold", 12.0));
+
+        error = new Label();
+        error.setPrefHeight(17.0);
+        error.setPrefWidth(167.0);
+        error.setTextAlignment(TextAlignment.CENTER);
+        error.setTextFill(Paint.valueOf("RED"));
+        error.setLayoutX(198.0);
+        error.setLayoutY(149.0);
         
         createScene();
     }
 
-    class Error{
-        public String msg = "";
-    }
 
-    private boolean checkCredentials(Error e){
-        if(!email.getText().matches("\\s\\d+[A-Z]?\\-\\d+")){
+    private boolean checkCredentials(){
+        if(!email.getText().matches("^[A-Za-z0-9+_.-]+@(.+)$")){
+            error.setText("Incorrect email format");
+        }
+        else if((int) MainFX.databaseManager.executeQuery(DatabaseManager.QueryType.UPDATE,
+                "SELECT 1" ) == 0){
 
         }
 
-        return e.msg.isEmpty();
+        return true;
     }
 
     private void redOutField(TextField field){
@@ -127,7 +135,7 @@ public class LoginCus extends Stage {
         pane.setPrefWidth(MainFX.SCENE_WIDTH);
         pane.setStyle("-fx-background-color: #ffb053;");
 
-        pane.getChildren().addAll(text, email, password, log, create);
+        pane.getChildren().addAll(text, email, password, log, create, error);
         anchorpane.getChildren().add(pane);
 
         Scene scene = new Scene(anchorpane, MainFX.SCENE_WIDTH, MainFX.SCENE_HEIGHT);
