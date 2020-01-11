@@ -274,6 +274,7 @@ public class BookingStage extends Stage{
     }
 
     private void redOutField(TextField field){
+        //?change CSS class
         field.setStyle("-fx-control-inner-background: #ff4c4c; -fx-background-radius: 111;");
         field.focusedProperty().addListener((obs, wasFocused, isNowFocused) -> {
             if (isNowFocused)

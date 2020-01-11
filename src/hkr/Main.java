@@ -24,6 +24,9 @@ public class Main {
     int bookingCounter = 0;
     Admin Admin1 = new Admin("Muhammad","Hamza","980515-3377","073-7410229","Hamza",1);
 
+
+
+
     public static void main(String[] args) throws IOException, SAXException, ParserConfigurationException {
 //        Main myApp = new Main();
 //        myApp.showMenu();
@@ -32,8 +35,7 @@ public class Main {
         Application.launch(MainFX.class);
 
 
-
-
+        //FxmlConverter.documentBuild("/Users/Test/Desktop/FXMLs/LoginEmp.fxml");
 
         //compare
         //labelCompare.setText("Compare date: " + dateUtil.compareTo(dateFromPicker));

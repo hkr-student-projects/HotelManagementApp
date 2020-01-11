@@ -2,22 +2,20 @@ package hkrFX;
 
 import hkrDB.DatabaseManager;
 import javafx.application.Application;
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.stage.Stage;
-
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
+import java.util.ArrayList;
 
 interface IDeserializable<T> {
 
-    public T Deserialize(FileReader reader);
+    T Deserialize(FileReader reader);
 }
 
 interface ISerializable<T> {
 
-    public T Serialize();
+    T Serialize();
 }
 
 public class MainFX extends Application {
@@ -26,19 +24,22 @@ public class MainFX extends Application {
     public static short SCENE_WIDTH = 600;
     public static Config config;
     public static DatabaseManager databaseManager;
-    private BookingInfoStage bookingInfoStage;
+    protected static ArrayList<PersonalAreaCus> sessions;
+    private LoginCus cusLogin;
+    private LoginEmp empLogin;
     private HomeStage homeStage;
 
     @Override
     public void start(Stage stage) {
 
         stage.setResizable(false);
-        bookingInfoStage = new BookingInfoStage();
+        sessions = new ArrayList<>();
         homeStage = new HomeStage();
         config = new Config();
         loadConfig();
         databaseManager = new DatabaseManager();
-
+        cusLogin = new LoginCus();
+        empLogin = new LoginEmp();
         initializeEvents();
 
 //        LocalDateTime myDateObj = LocalDateTime.;
@@ -79,37 +80,10 @@ public class MainFX extends Application {
 
     }
 
-
-
     private void initializeEvents(){
 
-        homeStage.getButton("Customer").setOnAction(new EventHandler<ActionEvent>() {
-
-            @Override
-            public void handle(ActionEvent event) {
-                bookingInfoStage.show();
-            }
-        });
-
-        homeStage.getButton("Employee").setOnAction(new EventHandler<ActionEvent>() {
-
-            @Override
-            public void handle(ActionEvent event) {
-                //new ReceptionStage();
-
-            }
-        });
-
-        homeStage.getButton("Admin").setOnAction(new EventHandler<ActionEvent>() {
-
-            @Override
-            public void handle(ActionEvent event) {
-                new LoginStage();
-            }
-        });
-
-        //scene.setFill(Color.TRANSPARENT);
-        //stage.initStyle(StageStyle.TRANSPARENT);
+        homeStage.getButton("Customer").setOnAction(event -> cusLogin.show());
+        homeStage.getButton("Employee").setOnAction(event -> empLogin.show());
     }
 
     public void loadConfig(){

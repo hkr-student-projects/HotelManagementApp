@@ -1,4 +1,4 @@
-.label {
+/*.label {
     -fx-font-size: 12px;
     -fx-font-weight: bold;
     -fx-text-fill: #333333;
@@ -9,7 +9,7 @@
 
 /*.button:hover {
     -fx-background-color: linear-gradient(#2A5058, #61a2b1);
-}*/
+}
 
 #welcome-circle {
 

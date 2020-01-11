@@ -94,7 +94,17 @@ public class DatabaseManager {
         return FXCollections.observableArrayList(arooms);
     }
 
-
+    public int createBooking(LocalDate in, LocalDate out, byte guests, String room){
+        return (int)executeQuery(QueryType.UPDATE,
+                "INSERT INTO "+books+" " +
+                        "(`guests`,`movein`,`moveout`) " +
+                        "VALUES ('"+guests+"','"+in+"','"+out+"');" +
+                        "SELECT @ref:=LAST_INSERT_ID();" +
+                        "INSERT INTO "+booked+" " +
+                        "(`Booking_reference`,`Room_number`) " +
+                        "VALUES (@ref,'"+room+"');"
+        );
+    }
 
     public int createPerson(String email, String password, String ssn, String name, String surname, String addr, String phone, String movein, String moveout, String roomnum){
         return (int)executeQuery(QueryType.UPDATE,
@@ -126,7 +136,8 @@ public class DatabaseManager {
             PreparedStatement pst = conn.prepareStatement(
                     "SELECT `hotel`.`Account`.`id`,`hotel`.`Customer`.`id`,`name`,`surname`,`ssn`,`phone`,`address` " +
                             "FROM hotel.Customer,hotel.Account " +
-                            "WHERE '"+ email +"' IN (SELECT `email` FROM hotel.Account) LIMIT 1;"
+                            "WHERE '"+ email +"' IN (SELECT `email` FROM hotel.Account) AND " +
+                            "hotel.Account.id = hotel.Customer.account_id;"
             );
 
             /*boolean isResult = */pst.execute();
@@ -380,7 +391,7 @@ public class DatabaseManager {
         public String email;
     }
 
-    class Booking{
+    public class Booking{
         public int bId;
         public int orId;
         public byte guests;
