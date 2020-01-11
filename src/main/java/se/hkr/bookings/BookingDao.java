@@ -3,27 +3,30 @@ package se.hkr.bookings;
 import se.hkr.data.ConnectionProvider;
 import se.hkr.data.Dao;
 
-import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.function.Consumer;
 
 public class BookingDao extends Dao {
     public BookingDao(ConnectionProvider connectionProvider) {
         super(connectionProvider);
     }
 
-    public void addEntry(String ssn, String name, String surname, String addr, String phone, LocalDate movein, LocalDate moveout, String roomnum) {
-        insert("INSERT INTO `Booking` " +
-                "(`movein`,`moveout`) " +
-                "VALUES ('?','?');" +
-                "SELECT @bid:=LAST_INSERT_ID();" +
-                "INSERT INTO `Customer` " +
-                "(`ssn`,`name`,`surname`,`address`,`phone`) " +
-                "VALUES ('?','?','?','?','phone');" +
-                "SELECT @cid:=LAST_INSERT_ID();" +
-                "INSERT INTO `CustomerOrder` " +
-                "(`Customer_id`,`Booking_reference`) " +
-                "VALUES (@cid,@bid);" +
-                "INSERT INTO `BookedRoom`" +
-                "(`Booking_reference`,`Room_number`) " +
-                "VALUES (@bid,'" + roomnum + "');", movein.toString(), moveout.toString(), ssn, name, surname, addr, phone);
+    public void getBookings(int cusId, Consumer<List<Booking>> bookingsConsumer) {
+        select(resultSet -> {
+            List<Booking> bookings = new ArrayList<>();
+            try {
+                while (resultSet.next()) {
+                    bookings.add(new Booking(resultSet));
+                }
+                bookingsConsumer.accept(bookings);
+            } catch (Exception ex) {
+                ex.printStackTrace();
+            }
+        }, "SELECT `Room_number`,`reference`,`Order`.`id` AS oid,`guests`,`movein`,`moveout` " +
+                "FROM Customer, Order, Booking, BookedRoom " +
+                "WHERE Customer.id = Order.Customer_id AND Order.Customer_id = ? AND " +
+                "Order.Booking_reference = Booking.reference AND " +
+                "Booking.reference = BookedRoom.Booking_reference;", cusId);
     }
 }

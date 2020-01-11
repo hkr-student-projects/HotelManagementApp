@@ -50,7 +50,6 @@ public abstract class Dao {
     }
 
     private static PreparedStatement setParameters(PreparedStatement preparedStatement, Object... parameters) throws Exception {
-        System.out.println(parameters.length);
         for (int i = 0; i < parameters.length; i++) {
             preparedStatement.setObject(i + 1, parameters[i]);
         }
