@@ -38,12 +38,7 @@ public class MainFX extends Application {
         config = new Config();
         loadConfig();
         databaseManager = new DatabaseManager();
-        DatabaseManager.Profile p = databaseManager.getProfile("exs1@gg.com");
-        if (p != null) {
-            System.out.println(p.id + " " + p.name + " " + p.ssn);
-        } else {
-            System.out.println("no profile");
-        }
+
         initializeEvents();
 
 //        LocalDateTime myDateObj = LocalDateTime.;
