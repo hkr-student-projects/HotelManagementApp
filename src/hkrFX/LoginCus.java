@@ -16,10 +16,6 @@ import javafx.scene.text.Text;
 import javafx.scene.text.TextAlignment;
 import javafx.stage.Stage;
 
-import java.lang.reflect.Field;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-
 public class LoginCus extends Stage {
 
     private TextField email;
@@ -33,28 +29,18 @@ public class LoginCus extends Stage {
         this.setResizable(false);
 
         email = new TextField();
-        email.setLayoutX(200);
+        email.setLayoutX(198.0);
         email.setStyle("-fx-background-color: white; -fx-background-radius: 0;");
         email.setLayoutY(166.0);
         email.setAlignment(Pos.CENTER);
         email.setPromptText("email");
-        email.focusedProperty().addListener((obs, wasFocused, isNowFocused) -> {
-            if (isNowFocused)
-                error.setText("");
-        });
 
         password = new PasswordField();
-        password.setLayoutX(200);
+        password.setLayoutX(198.0);
         password.setStyle("-fx-background-color: white; -fx-background-radius: 0;");
-        password.setLayoutY(208);
+        password.setLayoutY(166.0);
         password.setAlignment(Pos.CENTER);
-        password.setPromptText("password");
-        password.focusedProperty().addListener((obs, wasFocused, isNowFocused) -> {
-            if (isNowFocused){
-                error.setText("");
-                password.setText("");
-            }
-        });
+        password.setPromptText("email");
 
         log = new Button();
         log.setPrefHeight(23.0);
@@ -67,17 +53,8 @@ public class LoginCus extends Stage {
         log.setMnemonicParsing(false);
         log.setFont(new Font(12.0));
         log.setOnAction(event -> {
-            if(email.getText().isEmpty() || password.getText().isEmpty()){
-                redOutField(email);
-                redOutField(password);
-                return;
-            }
-            try {
-                if(checkCredentials()){
-                    new PersonalAreaCus(MainFX.databaseManager.getProfile(email.getText())).show();
-                }
-            } catch (SQLException e) {
-                Logger.logException(e);
+            if(checkCredentials()){
+                new PersonalAreaCus(MainFX.databaseManager.getProfile(email.getText()));
             }
         });
 
@@ -95,51 +72,45 @@ public class LoginCus extends Stage {
         forgot = new Button();
         forgot.setPrefHeight(23.0);
         forgot.setPrefWidth(65.0);
-        forgot.setTextFill(Paint.valueOf("#ffffff"));
+        create.setTextFill(Paint.valueOf("#ffffff"));
         forgot.setLayoutX(308.0);
         forgot.setStyle("-fx-background-color: transparent; -fx-background-radius: 8;");
         forgot.setLayoutY(242.0);
         forgot.setText("forgot?");
-        forgot.setMnemonicParsing(false);
-        forgot.setMnemonicParsing(false);
-        forgot.setFont(new Font("System Bold", 12.0));
+        create.setMnemonicParsing(false);
+        create.setMnemonicParsing(false);
+        create.setFont(new Font("System Bold", 12.0));
 
         error = new Label();
         error.setPrefHeight(17.0);
-        error.setPrefWidth(200);
+        error.setPrefWidth(167.0);
         error.setTextAlignment(TextAlignment.CENTER);
         error.setTextFill(Paint.valueOf("RED"));
-        error.setLayoutX(200);
+        error.setLayoutX(198.0);
         error.setLayoutY(149.0);
         
         createScene();
     }
 
-    private boolean checkCredentials() throws SQLException {
+
+    private boolean checkCredentials(){
         if(!email.getText().matches("^[A-Za-z0-9+_.-]+@(.+)$")){
             error.setText("Incorrect email format");
-            return false;
         }
-        ResultSet rs = (ResultSet) MainFX.databaseManager.executeQuery(DatabaseManager.QueryType.READER,
-                "SELECT 1 FROM hotel.Account WHERE hotel.Account.email = '"+email.getText()+"' " +
-                        "AND hotel.Account.password = SHA1('"+password.getText()+"');");
-        if(!rs.next()){
-            error.setText("Incorrect password or email");
-        }
-        else{
-            error.setText("");
-            return true;
+        else if((int) MainFX.databaseManager.executeQuery(DatabaseManager.QueryType.UPDATE,
+                "SELECT 1" ) == 0){
+
         }
 
-        return false;
+        return true;
     }
 
     private void redOutField(TextField field){
         //?change CSS class
-        field.setStyle("-fx-background-color: #ff4c4c; -fx-background-radius: 0;");
+        field.setStyle("-fx-control-inner-background: #ff4c4c; -fx-background-radius: 8;");
         field.focusedProperty().addListener((obs, wasFocused, isNowFocused) -> {
             if (isNowFocused)
-                field.setStyle("-fx-background-color: white; -fx-background-radius: 0;");
+                field.setStyle("-fx-control-inner-background: #ffffff; -fx-background-radius: 8;");
         });
     }
 
