@@ -1,0 +1,2 @@
+========History=========
+Room No = 1 Customer Name = Kalle Booking Reference = LDNZO495 CheckIn date = Mon Jan 20 00:01:00 CET 2020 CheckOut date = Wed Jan 22 00:01:00 CET 2020

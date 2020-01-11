@@ -6,12 +6,21 @@ public class Booking extends Room {
     private String bookingReference;
     private Date checkIn;
     private Date checkOut;
-
-    public Booking(int availableRooms, boolean doubleBed, int numberOfBeds, double price, double size,boolean balcony, String bookingReference,Date checkIn,Date checkOut) {
+    private String nameOfCustomer;
+    public Booking(int availableRooms, boolean doubleBed, int numberOfBeds, double price, double size,boolean balcony, String bookingReference,Date checkIn,Date checkOut,String nameOfCustomer) {
         super(availableRooms, doubleBed, numberOfBeds, price, size,balcony);
         this.bookingReference = bookingReference;
         this.checkIn = checkIn;
         this.checkOut = checkOut;
+        this.nameOfCustomer = nameOfCustomer;
+    }
+
+    public String getNameOfCustomer() {
+        return nameOfCustomer;
+    }
+
+    public void setNameOfCustomer(String nameOfCustomer) {
+        this.nameOfCustomer = nameOfCustomer;
     }
 
     public Date getCheckIn() {
@@ -44,6 +53,7 @@ public class Booking extends Room {
         return super.toString()+
                 " Booking Reference = " + bookingReference+
                 " CheckIn Date = "+checkIn+
-                " Checkout Date = "+checkOut;
+                " Checkout Date = "+checkOut+
+                " Name of Customer = "+nameOfCustomer;
     }
 }

@@ -408,7 +408,7 @@ public class Main {
                         DateFormat df4 = DateFormat.getDateInstance(DateFormat.LONG);
                         String s4 = df4.format(checkOutDate);
                         System.out.println("The entered date is: " + s4);
-                        Booking booking = new Booking(rooms.get(j).getAvailableRooms(), rooms.get(j).isDoubleBed(), rooms.get(j).getNumberOfBeds(), rooms.get(j).getPrice(), rooms.get(j).getSize(), rooms.get(j).isBalcony(), randomAlphaNumeric(8), checkInDate, checkOutDate);
+                        Booking booking = new Booking(rooms.get(j).getAvailableRooms(), rooms.get(j).isDoubleBed(), rooms.get(j).getNumberOfBeds(), rooms.get(j).getPrice(), rooms.get(j).getSize(), rooms.get(j).isBalcony(), randomAlphaNumeric(8), checkInDate, checkOutDate,cname);
                         bookings.add(booking);
                         for (int k = 0; k < bookings.size(); k++) {
                             if (rooms.get(j).getAvailableRooms() == bookings.get(k).getAvailableRooms()) {
@@ -599,7 +599,9 @@ public class Main {
         System.out.println("2. Cancel Booking");
         System.out.println("3. Change the Booking");
         System.out.println("4. Change your details");
-        System.out.println("5. Back");
+        System.out.println("5. See Your Booking(s)");
+        System.out.println("6. See Your Booking(s) History");
+        System.out.println("7. Back");
         int  cho = input.nextInt();
         switch(cho){
             case 1:
@@ -619,6 +621,14 @@ public class Main {
             case 4:
                 break;
             case 5:
+                showBookingsForCustomer(name);
+                customerLogInMenu(name);
+                break;
+            case 6:
+                bookingHistory(name);
+                customerLogInMenu(name);
+                break;
+            case 7:
                 customerVerify();
                 break;
             default:
@@ -691,6 +701,9 @@ public class Main {
             pw.format("========History=========\n");
             pw.format("Room No = %d",roomNumber);
             pw.format(" Customer Name = %s",name );
+            pw.format(" Booking Reference = %s",bookingRf );
+            pw.format(" CheckIn date = "+chin );
+            pw.format(" CheckOut date = "+chout+"\n" );
             pw.close();
         } catch (IOException e) {
             out.println("Error!");
@@ -818,5 +831,27 @@ public class Main {
         }
         catch(Exception e){
             System.out.println("File Not Found");}
+    }
+    private void showBookingsForCustomer(String name){
+        for (Booking booking : bookings) {
+            if (name.equals(booking.getNameOfCustomer())) {
+                out.println(booking);
+            }
+        }
+    }
+    private void bookingHistory(String name) {
+        try {
+            String str = " Customer Name = " + name;
+            Scanner scanner = new Scanner(new File("Bookings.txt"));
+                while(scanner.hasNextLine()){
+                    String s = scanner.nextLine();
+                    if(s.contains(str)){
+                        out.println(""+s);
+                }
+                scanner.close();
+            }
+        } catch (IOException e) {
+            out.println("File Not Found");
+        }
     }
 }
