@@ -21,6 +21,7 @@ import javafx.scene.text.Text;
 import javafx.scene.text.TextAlignment;
 import javafx.stage.Stage;
 
+import java.awt.print.Book;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 
@@ -28,8 +29,8 @@ public class PersonalAreaCus extends Stage {
 
     private DatabaseManager.Profile user;
     protected ArrayList<DatabaseManager.Booking> books;
-    private BorderPane borderpane;
-    private ScrollPane scrollPane;
+    protected BorderPane borderpane;
+    protected ScrollPane scrollPane;
     private AnchorPane anchorPane;
     private GridPane gridPane;
     private VBox menu;
@@ -75,10 +76,10 @@ public class PersonalAreaCus extends Stage {
     }
 
     private void loadButtons(){
-        Button[] bookButtons = bookingButtons();
+        Text[] bookButtons = bookingButtons();
         int rowCount = (int)(Math.ceil(books.size()) / 3.0);
-        for(int c = 0, n = 0; c < 3 && n < bookButtons.length; c++){
-            for(int r = 0; r < rowCount; r++, n++){
+        for(int r = 0, n = 0; r < rowCount; r++){
+            for(int c = 0; c < 3 && n < bookButtons.length; c++, n++){
                 gridPane.add(bookButtons[n], c, r);
             }
         }
@@ -86,36 +87,38 @@ public class PersonalAreaCus extends Stage {
         gridPane.add(createBookButton("+"), index == 3 ? index - 3 : index, index == 3 ? rowCount + 1 : rowCount);
     }
 
-    private Button[] bookingButtons(){
-        Button[] buttons = new Button[books.size()];
+    private Text[] bookingButtons(){
+        Text[] buttons = new Text[books.size()];
         for(int i = 0; i < buttons.length; i++){
             DatabaseManager.Booking book = books.get(i);
             buttons[i] = createBookButton(book.movein.format(DateTimeFormatter.ofPattern("dd.MM.yyyy")) + "-" + book.moveout.format(DateTimeFormatter.ofPattern("dd.MM.yyyy")));
-            buttons[i].setOnAction(event -> {
-                new BookingInfo(book, this).show();
+            buttons[i].setOnMouseClicked(event -> {
+                //new BookingInfo(book, this).show();
+                borderpane.setRight(new BookingInfo(book, this).paneMain);
             });
         }
 
         return buttons;
     }
 
-    private Button createBookButton(String text){
-        Button button = new Button();
-        button.setPrefHeight(22.0);
-        button.setPrefWidth(22.0);
-        button.maxWidth(22.0);
-        button.minHeight(22.0);
-        button.minWidth(22.0);
-        button.maxHeight(22.0);
+    private Text createBookButton(String text){
+        Text button = new Text();
+//        button.setPrefHeight(22.0);
+//        button.setPrefWidth(22.0);
+//        button.maxWidth(22.0);
+//        button.minHeight(22.0);
+//        button.minWidth(22.0);
+//        button.maxHeight(22.0);
         button.getStyleClass().add("gridAdd");
-        button.setMnemonicParsing(false);
-        button.getStylesheets().add("hkrFX/css/style.css");
+        //button.setMnemonicParsing(false);
+        //button.getStylesheets().add("hkrFX/css/style.css");
         button.setTextAlignment(TextAlignment.CENTER);
-        button.setTextFill(Paint.valueOf("#909090"));
+        //button.setTextFill(Paint.valueOf("#909090"));
         button.setStyle("-fx-background-color: transparent;");
-        button.setContentDisplay(ContentDisplay.CENTER);
+        //button.setContentDisplay(ContentDisplay.CENTER);
+        button.setWrappingWidth(83);
         button.setText(text);
-        button.setFont(text == "+" ? new Font("Apple SD Gothic Neo Regular", 40) : new Font("Avenir Book",5));
+        button.setFont(text == "+" ? new Font("Apple SD Gothic Neo Regular", 25) : new Font("Avenir Book",15));
 
         return button;
     }
@@ -133,7 +136,7 @@ public class PersonalAreaCus extends Stage {
     }
 
     private RowConstraints[] defRowCons(){
-        RowConstraints[] rcs = new RowConstraints[books.size() + 1];
+        RowConstraints[] rcs = new RowConstraints[((int)(Math.ceil(books.size() + 1) / 3.0))];
         for(int i = 0; i < rcs.length; i++){
             RowConstraints rc = new RowConstraints();
             rc.setFillHeight(false);
@@ -255,6 +258,9 @@ public class PersonalAreaCus extends Stage {
             //graphic
             signout.setGraphic(imageview3);
             signout.setPadding(new Insets(0, 0, 0, 20));
+            signout.setOnAction(event -> {
+                this.close();
+            });
         //menu childs
 
         menu.getChildren().addAll(pane, fullName, bookings, profile, signout);

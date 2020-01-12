@@ -132,7 +132,7 @@ public class BookingInfo extends Stage {
         button2.setText("Back");
         button2.setMnemonicParsing(false);
         button2.setOnAction(event -> {
-            this.close();
+            session.borderpane.setRight(session.scrollPane);
         });
 
 
