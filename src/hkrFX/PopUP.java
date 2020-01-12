@@ -39,7 +39,7 @@ public class PopUP extends Stage {
         pane.setPrefHeight(114.0);
         pane.setPrefWidth(282.0);
         pane.setStyle("-fx-background-color: #"+colorCode+";");
-        
+
         pane.getChildren().addAll(text, button);
         this.setScene(new Scene(pane, 282, 114));
         this.initStyle(StageStyle.UNDECORATED);
