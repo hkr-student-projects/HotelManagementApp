@@ -6,14 +6,6 @@
   <component name="ChangeListManager">
     <list default="true" id="be750a4a-f25b-417a-8b32-89dd50849fe2" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Hotel_Management/hkrFX/Readme.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Hotel_Management/hkrFX/References.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Hotel_Management/hkrFX/ToDo.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Hotel_Management/hkrFX/[deprecated]BookingInfo.fxml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Hotel_Management/hkrFX/[deprecated]Global.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Hotel_Management/hkrFX/misc.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Hotel_Management/hkrFX/sample.fxml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/hkrFX/BookingInfo.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/hkrFX/BookingInfo.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/hkrFX/LoginCus.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/hkrFX/LoginCus.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/hkrFX/PersonalAreaCus.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/hkrFX/PersonalAreaCus.java" afterDir="false" />
     </list>
@@ -22,6 +14,9 @@
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="CoverageViewManager">
+    <option name="myElementSize" value="176" />
   </component>
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
@@ -137,5 +132,8 @@
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
+  </component>
+  <component name="com.intellij.coverage.CoverageDataManagerImpl">
+    <SUITE FILE_PATH="coverage/HotelManagementApp$JavaFXMain.ic" NAME="JavaFXMain Coverage Results" MODIFIED="1578796389906" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
   </component>
 </project>

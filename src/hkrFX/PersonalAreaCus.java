@@ -58,8 +58,8 @@ public class PersonalAreaCus extends Stage {
         gridPane.setLayoutY(33.0);
         gridPane.setAlignment(Pos.CENTER);
         gridPane.getColumnConstraints().addAll(defColCon(), defColCon(), defColCon());
-        loadButtons();
         gridPane.getRowConstraints().addAll(defRowCons());
+        loadButtons();
 
         anchorPane = new AnchorPane();
         anchorPane.setPrefHeight(size);
@@ -69,20 +69,21 @@ public class PersonalAreaCus extends Stage {
         scrollPane = new ScrollPane();
         scrollPane.setPrefHeight(size);
         scrollPane.setPrefWidth(428.0);
-        //scrollPane.setFitToWidth(true);
+
+        scrollPane.setFitToWidth(true);
         scrollPane.setContent(anchorPane);
     }
 
     private void loadButtons(){
         Button[] bookButtons = bookingButtons();
-        int rowCount = (int)(Math.ceil(books.size() + 1) / 3.0);
+        int rowCount = (int)(Math.ceil(books.size()) / 3.0);
         for(int c = 0, n = 0; c < 3 && n < bookButtons.length; c++){
             for(int r = 0; r < rowCount; r++, n++){
                 gridPane.add(bookButtons[n], c, r);
             }
         }
         int index = 3 - (rowCount * 3 - bookButtons.length);
-        gridPane.add(createBookButton("+"), index == 3 ? rowCount + 1 : rowCount, index == 3 ? index - 3 : index);
+        gridPane.add(createBookButton("+"), index == 3 ? index - 3 : index, index == 3 ? rowCount + 1 : rowCount);
     }
 
     private Button[] bookingButtons(){
@@ -114,7 +115,7 @@ public class PersonalAreaCus extends Stage {
         button.setStyle("-fx-background-color: transparent;");
         button.setContentDisplay(ContentDisplay.CENTER);
         button.setText(text);
-        button.setFont(new Font("Apple SD Gothic Neo Regular", 40));
+        button.setFont(text == "+" ? new Font("Apple SD Gothic Neo Regular", 40) : new Font("Avenir Book",5));
 
         return button;
     }
@@ -123,9 +124,9 @@ public class PersonalAreaCus extends Stage {
         ColumnConstraints cc = new ColumnConstraints();
         cc.setHgrow(Priority.NEVER);
         cc.setFillWidth(false);
-        cc.setPrefWidth(111.0);
-        cc.setMinWidth(111.0);
-        cc.setMaxWidth(111.0);
+        cc.setPrefWidth(111);
+        cc.setMinWidth(111);
+        cc.setMaxWidth(111);
         cc.setHalignment(HPos.CENTER);
 
         return cc;
@@ -136,9 +137,9 @@ public class PersonalAreaCus extends Stage {
         for(int i = 0; i < rcs.length; i++){
             RowConstraints rc = new RowConstraints();
             rc.setFillHeight(false);
-            rc.setMinHeight(111.0);
-            rc.setMaxHeight(111.0);
-            rc.setPrefHeight(111.0);
+            rc.setMinHeight(111);
+            rc.setMaxHeight(111);
+            rc.setPrefHeight(111);
             rc.setValignment(VPos.CENTER);
             rc.setVgrow(Priority.NEVER);
             rcs[i] = rc;
@@ -263,7 +264,7 @@ public class PersonalAreaCus extends Stage {
         borderpane.setLeft(menu);
 
         Scene scene = new Scene(borderpane, MainFX.SCENE_WIDTH, MainFX.SCENE_HEIGHT);
-        scene.getStylesheets().add("hkrFX/css/style.css");
+        //scene.getStylesheets().add("hkrFX/css/style.css");
         this.setScene(scene);
 
         //this.show();
