@@ -158,6 +158,7 @@ public class BookingInfo extends Stage {
         MainFX.databaseManager.deleteBooking(booking.bId);
         session.books.remove(booking);
         session.loadButtons();
+        new PopUP("Your order has been deleted!", "ffb053").show();
         session.borderpane.setRight(session.scrollPane);
     }
 }

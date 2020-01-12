@@ -125,6 +125,13 @@ public class LoginEmp extends Stage {
             error.setText("Incorrect email format");
             return false;
         }
+        ResultSet rs1 = (ResultSet) MainFX.databaseManager.executeQuery(DatabaseManager.QueryType.READER,
+                "SELECT 1 FROM hotel.Account WHERE hotel.Account.email = '"+email.getText()+"' " +
+                        "AND hotel.Account.id IN (SELECT `hotel`.`Employee`.`account_id` FROM `hotel`.`Employee`);");
+        if(!rs1.next()){
+            error.setText("You are a customer!");
+            return false;
+        }
         ResultSet rs = (ResultSet) MainFX.databaseManager.executeQuery(DatabaseManager.QueryType.READER,
                 "SELECT 1 FROM hotel.Account WHERE hotel.Account.email = '"+email.getText()+"' " +
                         "AND hotel.Account.password = SHA1('"+password.getText()+"');");
