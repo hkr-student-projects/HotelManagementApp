@@ -1,6 +1,7 @@
 package hkrFX;
 
 import hkrDB.DatabaseManager;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Paint;
@@ -14,11 +15,13 @@ import java.time.format.DateTimeFormatter;
 
 public class BookingInfo extends Stage {
 
+    private PersonalAreaCus session;
     private DatabaseManager.Booking booking;
     public Pane paneMain;
 
-    public BookingInfo(DatabaseManager.Booking booking){
+    public BookingInfo(DatabaseManager.Booking booking, PersonalAreaCus session){
         this.booking = booking;
+        this.session = session;
         createScene();
     }
 
@@ -111,6 +114,12 @@ public class BookingInfo extends Stage {
         button.setLayoutY(332.0);
         button.setText("Delete");
         button.setMnemonicParsing(false);
+        button.setOnAction(event -> {
+            MainFX.databaseManager.deleteBooking(booking.bId);
+            session.books.remove(this.booking);
+            //rebuild book list in personal area
+            this.close();
+        });
 
         Button button2 = new Button();
         button2.getStylesheets().add("hkrFX/css/style.css");
@@ -121,6 +130,10 @@ public class BookingInfo extends Stage {
         button2.setLayoutY(332.0);
         button2.setText("Back");
         button2.setMnemonicParsing(false);
+        button2.setOnAction(event -> {
+            this.close();
+        });
+
 
         Pane pane = new Pane();
         pane.setPrefHeight(379.0);
@@ -129,9 +142,16 @@ public class BookingInfo extends Stage {
         pane.setStyle("-fx-background-color: white;");
         pane.setLayoutY(14.0);
 
+        pane.getChildren().addAll(button, button2, text, text2, text3, text4, text5, text6, text7, text8, text9);
+
         paneMain = new Pane();
         paneMain.setPrefHeight(400.0);
         paneMain.setPrefWidth(427.0);
         paneMain.setStyle("-fx-background-color: white;");
+        paneMain.getChildren().add(pane);
+
+        Scene scene = new Scene(paneMain, MainFX.SCENE_WIDTH, MainFX.SCENE_HEIGHT);
+        scene.getStylesheets().add("hkrFX/css/style.css");
+        this.setScene(scene);
     }
 }

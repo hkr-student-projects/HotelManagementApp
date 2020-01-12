@@ -89,6 +89,12 @@ public class DatabaseManager {
         );
     }
 
+    public int deleteBooking(int refId){
+        return (int)executeQuery(QueryType.UPDATE,
+                "DELETE FROM `hotel`.`Booking` WHERE `reference`='"+refId+"';"
+        );
+    }
+
     public int createPerson(String email, String password, String ssn, String name, String surname, String addr, String phone, String movein, String moveout, String roomnum){
         return (int)executeQuery(QueryType.UPDATE,
                         "INSERT INTO `hotel`.`Account` " +

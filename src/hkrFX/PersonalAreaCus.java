@@ -27,7 +27,7 @@ import java.util.ArrayList;
 public class PersonalAreaCus extends Stage {
 
     private DatabaseManager.Profile user;
-    private ArrayList<DatabaseManager.Booking> books;
+    protected ArrayList<DatabaseManager.Booking> books;
     private ScrollPane scrollPane;
     private AnchorPane anchorPane;
     private GridPane gridPane;
@@ -75,7 +75,7 @@ public class PersonalAreaCus extends Stage {
             DatabaseManager.Booking book = books.get(i);
             buttons[i] = createBookButton(book.movein.format(DateTimeFormatter.ofPattern("dd.MM.yyyy")) + "-" + book.moveout.format(DateTimeFormatter.ofPattern("dd.MM.yyyy")));
             buttons[i].setOnAction(event -> {
-                //new bookingInfo stage
+                new BookingInfo(book, this).show();
             });
         }
 
