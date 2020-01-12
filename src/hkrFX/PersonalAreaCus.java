@@ -1,16 +1,18 @@
 package hkrFX;
 
 import hkrDB.DatabaseManager;
+import javafx.geometry.HPos;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
+import javafx.geometry.VPos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.ContentDisplay;
 import javafx.scene.control.Label;
+import javafx.scene.control.ScrollPane;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.Pane;
-import javafx.scene.layout.VBox;
+import javafx.scene.layout.*;
 import javafx.scene.paint.Paint;
 import javafx.scene.shape.Circle;
 import javafx.scene.shape.StrokeType;
@@ -18,12 +20,17 @@ import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import javafx.scene.text.TextAlignment;
 import javafx.stage.Stage;
+
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 
 public class PersonalAreaCus extends Stage {
 
     private DatabaseManager.Profile user;
     private ArrayList<DatabaseManager.Booking> books;
+    private ScrollPane scrollPane;
+    private AnchorPane anchorPane;
+    private GridPane gridPane;
     private BorderPane borderpane;
     private VBox menu;
     private Text initials;
@@ -36,6 +43,92 @@ public class PersonalAreaCus extends Stage {
         user = profile;
         books = MainFX.databaseManager.getBookings(profile.cId);
         createScene();
+    }
+
+    private void buildBooks(){
+
+        double size = 400.0 + (((int)Math.ceil(books.size() + 1) / 3.0) - 3) * 111;//"+ 1" for extra button for adding booking
+
+        gridPane = new GridPane();
+        gridPane.setPrefHeight(333.0);
+        gridPane.setPrefWidth(333.0);
+        gridPane.setLayoutX(46.0);
+        gridPane.setLayoutY(33.0);
+        gridPane.setAlignment(Pos.CENTER);
+        gridPane.getColumnConstraints().addAll(defColCon(), defColCon(), defColCon());
+        gridPane.getRowConstraints().addAll(defRowCons());
+
+        anchorPane = new AnchorPane();
+        anchorPane.setPrefHeight(size);
+        anchorPane.setPrefWidth(410.0);
+
+        scrollPane = new ScrollPane();
+        scrollPane.setPrefHeight(size);
+        scrollPane.setPrefWidth(428.0);
+        scrollPane.setFitToWidth(true);
+        scrollPane.setContent(anchorPane);
+    }
+
+    private Button[] bookingButtons(){
+        Button[] buttons = new Button[books.size()];
+        for(int i = 0; i < buttons.length; i++){
+            DatabaseManager.Booking book = books.get(i);
+            buttons[i] = createBookButton(book.movein.format(DateTimeFormatter.ofPattern("dd.MM.yyyy")) + "-" + book.moveout.format(DateTimeFormatter.ofPattern("dd.MM.yyyy")));
+            buttons[i].setOnAction(event -> {
+                //new bookingInfo stage
+            });
+        }
+
+        return buttons;
+    }
+
+    private Button createBookButton(String text){
+        Button button = new Button();
+        button.setPrefHeight(22.0);
+        button.setPrefWidth(22.0);
+        button.maxWidth(22.0);
+        button.minHeight(22.0);
+        button.minWidth(22.0);
+        button.maxHeight(22.0);
+        button.getStyleClass().add("gridAdd");
+        button.setMnemonicParsing(false);
+        button.getStylesheets().add("hkrFX/css/style.css");
+        button.setTextAlignment(TextAlignment.CENTER);
+        button.setTextFill(Paint.valueOf("#909090"));
+        button.setStyle("-fx-background-color: transparent;");
+        button.setContentDisplay(ContentDisplay.CENTER);
+        button.setText(text);
+        button.setFont(new Font("Apple SD Gothic Neo Regular", 40));
+
+        return button;
+    }
+
+    private ColumnConstraints defColCon(){
+        ColumnConstraints cc = new ColumnConstraints();
+        cc.setHgrow(Priority.NEVER);
+        cc.setFillWidth(false);
+        cc.setPrefWidth(111.0);
+        cc.setMinWidth(111.0);
+        cc.setMaxWidth(111.0);
+        cc.setHalignment(HPos.CENTER);
+
+        return cc;
+    }
+
+    private RowConstraints[] defRowCons(){
+        RowConstraints[] rcs = new RowConstraints[books.size() + 1];
+        for(int i = 0; i < rcs.length; i++){
+            RowConstraints rc = new RowConstraints();
+            rc.setFillHeight(false);
+            rc.setMinHeight(111.0);
+            rc.setMaxHeight(111.0);
+            rc.setPrefHeight(111.0);
+            rc.setValignment(VPos.CENTER);
+            rc.setVgrow(Priority.NEVER);
+            rcs[i] = rc;
+        }
+
+        return rcs;
     }
 
     private void createScene(){

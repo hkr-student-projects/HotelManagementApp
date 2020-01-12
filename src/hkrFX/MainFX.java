@@ -24,7 +24,7 @@ public class MainFX extends Application {
     public static short SCENE_WIDTH = 600;
     public static Config config;
     public static DatabaseManager databaseManager;
-    protected static ArrayList<PersonalAreaCus> sessions;
+    //protected static ArrayList<PersonalAreaCus> sessions;
     private LoginCus cusLogin;
     private LoginEmp empLogin;
     private HomeStage homeStage;
@@ -33,7 +33,7 @@ public class MainFX extends Application {
     public void start(Stage stage) {
 
         stage.setResizable(false);
-        sessions = new ArrayList<>();
+        //sessions = new ArrayList<>();
         homeStage = new HomeStage();
         config = new Config();
         loadConfig();
@@ -76,7 +76,7 @@ public class MainFX extends Application {
         //databaseManager.addRoom("301A", (short)3, RoomClass.ECONOMY);
         //databaseManager.addCustomer("1999-08-08","Tom","Bob","Cruise","Storagatan 8A","0734956722",
                 //new Date(Calendar.getInstance().getTime().getTime()), new Date(Calendar.getInstance().getTime().getTime()), "301A");
-        //Parent root = FXMLLoader.load(getClass().getResource("sample.fxml"));
+        //Parent root = FXMLLoader.load(getClass().getResource("[deprecated]sample.fxml"));
 
     }
 

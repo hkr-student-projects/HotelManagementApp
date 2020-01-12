@@ -208,7 +208,7 @@
 //        stage.setScene(homeStage.getScene());
 //        stage.show();
 //
-//        //Parent root = FXMLLoader.load(getClass().getResource("sample.fxml"));
+//        //Parent root = FXMLLoader.load(getClass().getResource("[deprecated]sample.fxml"));
 //    }
 //
 //    private void initializeEvents(){

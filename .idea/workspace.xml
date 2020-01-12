@@ -5,9 +5,23 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="be750a4a-f25b-417a-8b32-89dd50849fe2" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/src/hkrFX/BookingInfo.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/hkrFX/deprecated/[deprecated]BookingStage.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/hkrFX/LoginCus.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/hkrFX/LoginCus.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/hkrFX/LoginEmp.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/hkrFX/LoginEmp.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/hkrFX/BookingStage.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/hkrFX/MainFX.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/hkrFX/MainFX.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/hkrFX/PersonalAreaCus.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/hkrFX/PersonalAreaCus.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/hkrFX/Readme.md" beforeDir="false" afterPath="$PROJECT_DIR$/Readme.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/hkrFX/References.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/hkrFX/ToDo.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/hkrFX/[deprecated]BookingInfo.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/hkrFX/deprecated/[deprecated]BookingInfo.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/hkrFX/[deprecated]BookingInfoStage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/hkrFX/deprecated/[deprecated]BookingInfoStage.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/hkrFX/[deprecated]Controller.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/hkrFX/deprecated/[deprecated]Controller.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/hkrFX/[deprecated]Global.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/hkrFX/deprecated/[deprecated]Global.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/hkrFX/[deprecated]LoginStage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/hkrFX/deprecated/[deprecated]LoginStage.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/hkrFX/[deprecated]Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/hkrFX/deprecated/[deprecated]Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/hkrFX/misc.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/hkrFX/sample.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/hkrFX/deprecated/[deprecated]sample.fxml" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -42,6 +56,8 @@
       <recent name="hkrFX" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$" />
+      <recent name="$PROJECT_DIR$/src/hkrFX/deptecated" />
       <recent name="$PROJECT_DIR$/Converted" />
       <recent name="$PROJECT_DIR$/src/hkrFX/css" />
       <recent name="$PROJECT_DIR$/src/hkrFX" />
