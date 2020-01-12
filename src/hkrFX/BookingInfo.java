@@ -20,6 +20,7 @@ public class BookingInfo extends Stage {
     public Pane paneMain;
 
     public BookingInfo(DatabaseManager.Booking booking, PersonalAreaCus session){
+        this.setResizable(false);
         this.booking = booking;
         this.session = session;
         createScene();

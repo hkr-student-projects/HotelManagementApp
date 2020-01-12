@@ -74,6 +74,8 @@ public class LoginCus extends Stage {
             }
             try {
                 if(checkCredentials()){
+                    email.setText("");
+                    password.setText("");
                     new PersonalAreaCus(MainFX.databaseManager.getProfile(email.getText())).show();
                 }
             } catch (SQLException e) {

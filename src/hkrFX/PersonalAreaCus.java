@@ -28,10 +28,10 @@ public class PersonalAreaCus extends Stage {
 
     private DatabaseManager.Profile user;
     protected ArrayList<DatabaseManager.Booking> books;
+    private BorderPane borderpane;
     private ScrollPane scrollPane;
     private AnchorPane anchorPane;
     private GridPane gridPane;
-    private BorderPane borderpane;
     private VBox menu;
     private Text initials;
     private Label fullName;
@@ -40,6 +40,8 @@ public class PersonalAreaCus extends Stage {
     private Button signout;
 
     public PersonalAreaCus(DatabaseManager.Profile profile){
+
+        this.setResizable(false);
         user = profile;
         books = MainFX.databaseManager.getBookings(profile.cId);
         createScene();
@@ -56,17 +58,31 @@ public class PersonalAreaCus extends Stage {
         gridPane.setLayoutY(33.0);
         gridPane.setAlignment(Pos.CENTER);
         gridPane.getColumnConstraints().addAll(defColCon(), defColCon(), defColCon());
+        loadButtons();
         gridPane.getRowConstraints().addAll(defRowCons());
 
         anchorPane = new AnchorPane();
         anchorPane.setPrefHeight(size);
         anchorPane.setPrefWidth(410.0);
+        anchorPane.getChildren().add(gridPane);
 
         scrollPane = new ScrollPane();
         scrollPane.setPrefHeight(size);
         scrollPane.setPrefWidth(428.0);
-        scrollPane.setFitToWidth(true);
+        //scrollPane.setFitToWidth(true);
         scrollPane.setContent(anchorPane);
+    }
+
+    private void loadButtons(){
+        Button[] bookButtons = bookingButtons();
+        int rowCount = (int)(Math.ceil(books.size() + 1) / 3.0);
+        for(int c = 0, n = 0; c < 3 && n < bookButtons.length; c++){
+            for(int r = 0; r < rowCount; r++, n++){
+                gridPane.add(bookButtons[n], c, r);
+            }
+        }
+        int index = 3 - (rowCount * 3 - bookButtons.length);
+        gridPane.add(createBookButton("+"), index == 3 ? rowCount + 1 : rowCount, index == 3 ? index - 3 : index);
     }
 
     private Button[] bookingButtons(){
@@ -194,6 +210,10 @@ public class PersonalAreaCus extends Stage {
             //graphic
             bookings.setGraphic(imageview);
             bookings.setPadding(new Insets(0, 0, 0, 20));
+            bookings.setOnAction(event -> {
+                buildBooks();
+                borderpane.setRight(scrollPane);
+            });
 
             profile = new Button();
             profile.setPrefHeight(42.0);
@@ -220,7 +240,7 @@ public class PersonalAreaCus extends Stage {
             signout.getStylesheets().add("hkrFX/css/style.css");
             signout.setGraphicTextGap(22.0);
             signout.setPrefWidth(259.0);
-            signout.setText("Profile");
+            signout.setText("Sign out");
             signout.setAlignment(Pos.BASELINE_LEFT);
             signout.getStyleClass().add("sideButton");
             signout.setMnemonicParsing(false);
