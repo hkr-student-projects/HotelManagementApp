@@ -386,7 +386,7 @@ public class DatabaseManager {
     public class Booking{
         public int bId;
         public int orId;
-        public byte guests;
+        public int guests;
         public String room;
         public LocalDate movein;
         public LocalDate moveout;

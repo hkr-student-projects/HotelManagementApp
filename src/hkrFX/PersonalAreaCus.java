@@ -66,9 +66,12 @@ public class PersonalAreaCus extends Stage {
         scrollPane.setPrefHeight(HSize);
     }
 
-    private void loadButtons(){
+    protected void loadButtons(){
         Text[] bookButtons = bookingButtons();
         int rowCount = (int)(Math.ceil(books.size()/ 3.0));
+        gridPane.getChildren().clear();
+        gridPane.getRowConstraints().clear();
+        gridPane.getRowConstraints().addAll(defRowCons(rowCount));
         for(int r = 0, n = 0; r < rowCount; r++){
             for(int c = 0; c < 3 && n < bookButtons.length; c++, n++){
                 gridPane.add(bookButtons[n], c, r);
@@ -79,9 +82,9 @@ public class PersonalAreaCus extends Stage {
         plus.setOnMouseClicked(event -> {
             borderpane.setRight(new AddBooking(this, user).pane);
         });
-        System.out.println(books.size());//11
-        System.out.println(rowCount);//4
-        System.out.println(index);//2
+//        System.out.println(books.size());//11
+//        System.out.println(rowCount);//4
+//        System.out.println(index);//2
         gridPane.add(plus, index == 3 ? 0 : index, index == 3 ? rowCount : rowCount - 1);
     }
 
@@ -137,8 +140,8 @@ public class PersonalAreaCus extends Stage {
         return cc;
     }
 
-    private RowConstraints[] defRowCons(int existing){
-        RowConstraints[] rcs = new RowConstraints[((int)(Math.ceil(books.size() + 1) / 3.0)) - existing];
+    private RowConstraints[] defRowCons(int rows){
+        RowConstraints[] rcs = new RowConstraints[rows];
         for(int i = 0; i < rcs.length; i++){
             RowConstraints rc = new RowConstraints();
             rc.setFillHeight(false);
@@ -272,7 +275,6 @@ public class PersonalAreaCus extends Stage {
         gridPane.setLayoutY(33.0);
         gridPane.setAlignment(Pos.CENTER);
         gridPane.getColumnConstraints().addAll(defColCon(), defColCon(), defColCon());
-        gridPane.getRowConstraints().addAll(defRowCons(0));
 
         anchorPane = new AnchorPane();
         anchorPane.setPrefWidth(410.0);
