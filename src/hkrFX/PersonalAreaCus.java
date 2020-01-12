@@ -47,6 +47,8 @@ public class PersonalAreaCus extends Stage {
         this.setResizable(false);
         user = profile;
         books = MainFX.databaseManager.getBookings(profile.cId);
+        System.out.println("cid: " + profile.cId);
+        System.out.println("bookings: " + books.size());
         createScene();
     }
     
@@ -66,21 +68,21 @@ public class PersonalAreaCus extends Stage {
 
     private void loadButtons(){
         Text[] bookButtons = bookingButtons();
-        int rowCount = (int)(Math.ceil(books.size()) / 3.0);
+        int rowCount = (int)(Math.ceil(books.size()/ 3.0));
         for(int r = 0, n = 0; r < rowCount; r++){
             for(int c = 0; c < 3 && n < bookButtons.length; c++, n++){
                 gridPane.add(bookButtons[n], c, r);
             }
         }
-        int index = 3 - (rowCount * 3 - (books.size() - 1));
+        int index = 3 - (rowCount * 3 - (books.size()));
         Text plus = createBookButton("+");
         plus.setOnMouseClicked(event -> {
             borderpane.setRight(new AddBooking(this, user).pane);
         });
-//        System.out.println(books.size());
-//        System.out.println(rowCount);
-//        System.out.println(index);
-        gridPane.add(plus, index == 3 ? 0 : index, index == 3 ? rowCount + 1 : rowCount);
+        System.out.println(books.size());//11
+        System.out.println(rowCount);//4
+        System.out.println(index);//2
+        gridPane.add(plus, index == 3 ? 0 : index, index == 3 ? rowCount : rowCount - 1);
     }
 
     private Text[] bookingButtons(){
