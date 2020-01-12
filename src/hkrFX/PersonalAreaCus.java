@@ -39,6 +39,7 @@ public class PersonalAreaCus extends Stage {
     private Button bookings;
     private Button profile;
     private Button signout;
+    private double HSize;
 
     public PersonalAreaCus(DatabaseManager.Profile profile){
 
@@ -47,32 +48,19 @@ public class PersonalAreaCus extends Stage {
         books = MainFX.databaseManager.getBookings(profile.cId);
         createScene();
     }
+    
+    protected void refreshBooks(){
+        int existingRows = gridPane.getRowConstraints().size();
+        gridPane.getRowConstraints().addAll(defRowCons(existingRows));
+    }
 
-    private void buildBooks(){
+    protected void showUpdateBookings(){
 
-        double size = 400.0 + (((int)Math.ceil(books.size() + 1) / 3.0) - 3) * 111;//"+ 1" for extra button for adding booking
-
-        gridPane = new GridPane();
-        gridPane.setPrefHeight(333.0);
-        gridPane.setPrefWidth(333.0);
-        gridPane.setLayoutX(46.0);
-        gridPane.setLayoutY(33.0);
-        gridPane.setAlignment(Pos.CENTER);
-        gridPane.getColumnConstraints().addAll(defColCon(), defColCon(), defColCon());
-        gridPane.getRowConstraints().addAll(defRowCons());
+        HSize = 400.0 + (((int)Math.ceil(books.size() + 1) / 3.0) - 3) * 111;//"+ 1" for extra button for adding booking
+        gridPane.getRowConstraints().addAll(defRowCons(gridPane.getRowConstraints().size()));
         loadButtons();
-
-        anchorPane = new AnchorPane();
-        anchorPane.setPrefHeight(size);
-        anchorPane.setPrefWidth(410.0);
-        anchorPane.getChildren().add(gridPane);
-
-        scrollPane = new ScrollPane();
-        scrollPane.setPrefHeight(size);
-        scrollPane.setPrefWidth(428.0);
-
-        scrollPane.setFitToWidth(true);
-        scrollPane.setContent(anchorPane);
+        anchorPane.setPrefHeight(HSize);
+        scrollPane.setPrefHeight(HSize);
     }
 
     private void loadButtons(){
@@ -84,7 +72,11 @@ public class PersonalAreaCus extends Stage {
             }
         }
         int index = 3 - (rowCount * 3 - bookButtons.length);
-        gridPane.add(createBookButton("+"), index == 3 ? index - 3 : index, index == 3 ? rowCount + 1 : rowCount);
+        Text plus = createBookButton("+");
+        plus.setOnMouseClicked(event -> {
+            borderpane.setRight(new AddBooking(this, user).pane);
+        });
+        gridPane.add(plus, index == 3 ? index - 3 : index, index == 3 ? rowCount + 1 : rowCount);
     }
 
     private Text[] bookingButtons(){
@@ -101,7 +93,11 @@ public class PersonalAreaCus extends Stage {
         return buttons;
     }
 
-    private Text createBookButton(String text){
+    protected void insertInGrid(){
+
+    }
+
+    protected Text createBookButton(String text){
         Text button = new Text();
 //        button.setPrefHeight(22.0);
 //        button.setPrefWidth(22.0);
@@ -135,8 +131,8 @@ public class PersonalAreaCus extends Stage {
         return cc;
     }
 
-    private RowConstraints[] defRowCons(){
-        RowConstraints[] rcs = new RowConstraints[((int)(Math.ceil(books.size() + 1) / 3.0))];
+    private RowConstraints[] defRowCons(int existing){
+        RowConstraints[] rcs = new RowConstraints[((int)(Math.ceil(books.size() + 1) / 3.0)) - existing];
         for(int i = 0; i < rcs.length; i++){
             RowConstraints rc = new RowConstraints();
             rc.setFillHeight(false);
@@ -215,7 +211,7 @@ public class PersonalAreaCus extends Stage {
             bookings.setGraphic(imageview);
             bookings.setPadding(new Insets(0, 0, 0, 20));
             bookings.setOnAction(event -> {
-                buildBooks();
+                showUpdateBookings();
                 borderpane.setRight(scrollPane);
             });
 
@@ -262,6 +258,25 @@ public class PersonalAreaCus extends Stage {
                 this.close();
             });
         //menu childs
+
+        gridPane = new GridPane();
+        gridPane.setPrefHeight(333.0);
+        gridPane.setPrefWidth(333.0);
+        gridPane.setLayoutX(46.0);
+        gridPane.setLayoutY(33.0);
+        gridPane.setAlignment(Pos.CENTER);
+        gridPane.getColumnConstraints().addAll(defColCon(), defColCon(), defColCon());
+        gridPane.getRowConstraints().addAll(defRowCons(0));
+
+        anchorPane = new AnchorPane();
+        anchorPane.setPrefWidth(410.0);
+        anchorPane.getChildren().add(gridPane);
+
+        scrollPane = new ScrollPane();
+        scrollPane.setPrefHeight(HSize);
+        scrollPane.setPrefWidth(428.0);
+        scrollPane.setFitToWidth(true);
+        scrollPane.setContent(anchorPane);
 
         menu.getChildren().addAll(pane, fullName, bookings, profile, signout);
         VBox.setMargin(pane, new Insets(25, 0, 0 ,0));

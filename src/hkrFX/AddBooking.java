@@ -1,22 +1,30 @@
 package hkrFX;
 
+import hkr.Person;
+import hkrDB.DatabaseManager;
 import javafx.collections.FXCollections;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
+import javafx.scene.layout.Pane;
 import javafx.scene.paint.Paint;
 import javafx.stage.Stage;
 
 public class AddBooking extends Stage {
 
+    private DatabaseManager.Profile profile;
     private DatePicker movein;
     private DatePicker moveout;
     private ComboBox guests;
     private ComboBox rooms;
+    protected Pane pane;
+    private PersonalAreaCus session;
 
-    public AddBooking(){
-
+    public AddBooking(PersonalAreaCus session, DatabaseManager.Profile profile){
+        this.profile = profile;
+        this.session = session;
     }
 
     private void createScene(){
@@ -93,6 +101,14 @@ public class AddBooking extends Stage {
             else
                 rooms.setItems(null);
         });
+
+        pane = new Pane();
+        pane.setPrefHeight(400.0);
+        pane.setPrefWidth(340.0);
+        pane.setStyle("-fx-background-color: white;");
+        pane.getChildren().addAll(movein, moveout, button, rooms, guests, label, label2, label3);
+
+        this.setScene(new Scene(pane, MainFX.SCENE_WIDTH, MainFX.SCENE_HEIGHT));
     }
 
     private void emptyData(){
@@ -103,8 +119,8 @@ public class AddBooking extends Stage {
 
     private void closeStage(){
         if(rooms != null){
-            //add in DB
-            this.close();
+            MainFX.databaseManager.createBooking(profile.cId, movein.getValue(), moveout.getValue(), (int)guests.getValue(), rooms.getValue().toString());
+            session.borderpane.setRight(session.scrollPane);
             emptyData();
         }
     }

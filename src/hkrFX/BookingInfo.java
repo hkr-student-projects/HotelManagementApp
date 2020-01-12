@@ -135,7 +135,6 @@ public class BookingInfo extends Stage {
             session.borderpane.setRight(session.scrollPane);
         });
 
-
         Pane pane = new Pane();
         pane.setPrefHeight(379.0);
         pane.setPrefWidth(398.0);

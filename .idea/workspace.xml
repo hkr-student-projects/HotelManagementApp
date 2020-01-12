@@ -5,8 +5,11 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="be750a4a-f25b-417a-8b32-89dd50849fe2" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/hkrFX/AddBooking.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/hkrDB/DatabaseManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/hkrDB/DatabaseManager.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/hkrFX/AddBooking.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/hkrFX/AddBooking.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/hkrFX/BookingInfo.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/hkrFX/BookingInfo.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/hkrFX/PersonalAreaCus.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/hkrFX/PersonalAreaCus.java" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
