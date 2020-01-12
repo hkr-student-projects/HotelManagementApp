@@ -71,12 +71,15 @@ public class PersonalAreaCus extends Stage {
                 gridPane.add(bookButtons[n], c, r);
             }
         }
-        int index = 3 - (rowCount * 3 - bookButtons.length);
+        int index = 3 - (rowCount * 3 - (books.size() - 1));
         Text plus = createBookButton("+");
         plus.setOnMouseClicked(event -> {
             borderpane.setRight(new AddBooking(this, user).pane);
         });
-        gridPane.add(plus, index == 3 ? index - 3 : index, index == 3 ? rowCount + 1 : rowCount);
+//        System.out.println(books.size());
+//        System.out.println(rowCount);
+//        System.out.println(index);
+        gridPane.add(plus, index == 3 ? 0 : index, index == 3 ? rowCount + 1 : rowCount);
     }
 
     private Text[] bookingButtons(){

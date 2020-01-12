@@ -34,7 +34,8 @@ public class BookingInfo extends Stage {
         text.setTextAlignment(TextAlignment.CENTER);
         text.setLayoutX(67.0);
         text.setLayoutY(84.0);
-        text.setText("Booking #" + Integer.toHexString(booking.bId) +"");
+        //text.setText("Booking #" + Integer.toHexString(booking.bId?format 0000A) +"");
+        text.setText("Booking #"+booking.bId+"");
         text.setWrappingWidth(263.21875);
         text.setFont(new Font("Futura Medium", 24));
 
@@ -134,6 +135,7 @@ public class BookingInfo extends Stage {
         button2.setOnAction(event -> {
             session.borderpane.setRight(session.scrollPane);
         });
+
 
         Pane pane = new Pane();
         pane.setPrefHeight(379.0);

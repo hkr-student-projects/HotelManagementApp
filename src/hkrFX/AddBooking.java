@@ -25,6 +25,7 @@ public class AddBooking extends Stage {
     public AddBooking(PersonalAreaCus session, DatabaseManager.Profile profile){
         this.profile = profile;
         this.session = session;
+        createScene();
     }
 
     private void createScene(){
@@ -66,12 +67,24 @@ public class AddBooking extends Stage {
         rooms.setStyle("-fx-background-radius: 111; -fx-background-color: #ededed;");
         rooms.setLayoutY(239.0);
 
+        Button button2 = new Button();
+        button2.setPrefHeight(27.0);
+        button2.setPrefWidth(76.0);
+        button2.setLayoutX(150);
+        button2.setStyle("-fx-background-color: #ededed; -fx-background-radius: 36;");
+        button2.setLayoutY(332);
+        button2.setText("Back");
+        button2.setMnemonicParsing(false);
+        button2.setOnAction(event -> {
+            session.borderpane.setRight(session.scrollPane);
+        });
+
         Button button = new Button();
         button.setPrefHeight(27.0);
         button.setPrefWidth(76.0);
-        button.setLayoutX(246.0);
+        button.setLayoutX(308);
         button.setStyle("-fx-background-color: #ededed; -fx-background-radius: 36;");
-        button.setLayoutY(347.0);
+        button.setLayoutY(332);
         button.setText("Create");
         button.setMnemonicParsing(false);
         button.setOnAction(event -> {
@@ -104,9 +117,9 @@ public class AddBooking extends Stage {
 
         pane = new Pane();
         pane.setPrefHeight(400.0);
-        pane.setPrefWidth(340.0);
+        pane.setPrefWidth(427.0);
         pane.setStyle("-fx-background-color: white;");
-        pane.getChildren().addAll(movein, moveout, button, rooms, guests, label, label2, label3);
+        pane.getChildren().addAll(movein, moveout, button, button2, rooms, guests, label, label2, label3);
 
         this.setScene(new Scene(pane, MainFX.SCENE_WIDTH, MainFX.SCENE_HEIGHT));
     }
