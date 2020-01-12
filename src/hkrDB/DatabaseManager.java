@@ -95,7 +95,7 @@ public class DatabaseManager {
         );
     }
 
-    public int createPerson(String email, String password, String ssn, String name, String surname, String addr, String phone){
+    public int createPerson(String email, String password, String ssn, String name, String surname, String addr, String phone, String movein, String moveout, String roomnum){
         return (int)executeQuery(QueryType.UPDATE,
                         "INSERT INTO `hotel`.`Account` " +
                         "(`email`,`password`)" +
@@ -107,7 +107,7 @@ public class DatabaseManager {
         );
     }
 
-    public int createPerson(String email, String password, EmpPosition position, String ssn, String name, String surname, String addr, String phone){
+    public int createPerson(String email, String password, EmpPosition position, String ssn, String name, String surname, String addr, String phone, String movein, String moveout, String roomnum){
         return (int)executeQuery(QueryType.UPDATE,
                 "INSERT INTO `hotel`.`Account` " +
                         "(`email`,`password`)" +

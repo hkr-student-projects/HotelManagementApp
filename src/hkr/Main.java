@@ -1,9 +1,7 @@
 package hkr;
 
 import hkrFX.FxmlConverter;
-import hkrFX.Logger;
 import hkrFX.MainFX;
-import hkrFX.PersonalAreaCus;
 import javafx.application.Application;
 import org.json.simple.JSONObject;
 import org.xml.sax.SAXException;
@@ -35,7 +33,7 @@ public class Main {
         //out.println(new Date(Calendar.getInstance().getTime().getTime()));
 
         Application.launch(MainFX.class);
-        Logger.logUML(PersonalAreaCus.class, true);
+
 
         //FxmlConverter.documentBuild("/Users/Test/Desktop/FXMLs/Login.fxml");
 
