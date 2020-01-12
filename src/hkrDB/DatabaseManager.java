@@ -17,7 +17,7 @@ public class DatabaseManager {
     private final String clients = "`hotel`.`Customer`";
     private final String books = "`hotel`.`Booking`";
     private final String beds = "`hotel`.`Bed`";
-    private final String orders = "`hotel`.`Order`";
+    private final String orders = "`hotel`.`CustomerOrder`";
     private final String booked = "`hotel`.`BookedRoom`";
 
     static {
@@ -77,7 +77,7 @@ public class DatabaseManager {
         return FXCollections.observableArrayList(arooms);
     }
 
-    public int createBooking(int cusId, LocalDate in, LocalDate out, int guests, String room){
+    public int createBooking(LocalDate in, LocalDate out, byte guests, String room){
         return (int)executeQuery(QueryType.UPDATE,
                 "INSERT INTO "+books+" " +
                         "(`guests`,`movein`,`moveout`) " +
@@ -85,10 +85,7 @@ public class DatabaseManager {
                         "SELECT @ref:=LAST_INSERT_ID();" +
                         "INSERT INTO "+booked+" " +
                         "(`Booking_reference`,`Room_number`) " +
-                        "VALUES (@ref,'"+room+"');" +
-                        "INSERT INTO "+orders+" " +
-                        "(`Customer_id`,`Booking_reference`) " +
-                        "VALUES ('"+cusId+"',@ref);"
+                        "VALUES (@ref,'"+room+"');"
         );
     }
 
