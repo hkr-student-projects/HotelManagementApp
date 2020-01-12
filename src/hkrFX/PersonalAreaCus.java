@@ -38,7 +38,7 @@ public class PersonalAreaCus extends Stage {
     private Text initials;
     private Label fullName;
     private Button bookings;
-    private Button profile;
+    //private Button profile;
     private Button signout;
     private double HSize;
 
@@ -219,25 +219,25 @@ public class PersonalAreaCus extends Stage {
                 borderpane.setRight(scrollPane);
             });
 
-            profile = new Button();
-            profile.setPrefHeight(42.0);
-            profile.getStylesheets().add("hkrFX/css/style.css");
-            profile.setGraphicTextGap(22.0);
-            profile.setPrefWidth(259.0);
-            profile.setText("Profile");
-            profile.setAlignment(Pos.BASELINE_LEFT);
-            profile.getStyleClass().add("sideButton");
-            profile.setMnemonicParsing(false);
-            //graphic
-                Image image2 = new Image("hkrFX/img/icons8_Person_32px.png");
-                ImageView imageview2 = new ImageView(image2);
-                imageview2.setPickOnBounds(true);
-                imageview2.setFitWidth(27.0);
-                imageview2.setFitHeight(23.0);
-                imageview2.setPreserveRatio(true);
-            //graphic
-            profile.setGraphic(imageview2);
-            profile.setPadding(new Insets(0, 0, 0, 20));
+//            profile = new Button();
+//            profile.setPrefHeight(42.0);
+//            profile.getStylesheets().add("hkrFX/css/style.css");
+//            profile.setGraphicTextGap(22.0);
+//            profile.setPrefWidth(259.0);
+//            profile.setText("Profile");
+//            profile.setAlignment(Pos.BASELINE_LEFT);
+//            profile.getStyleClass().add("sideButton");
+//            profile.setMnemonicParsing(false);
+//            //graphic
+//                Image image2 = new Image("hkrFX/img/icons8_Person_32px.png");
+//                ImageView imageview2 = new ImageView(image2);
+//                imageview2.setPickOnBounds(true);
+//                imageview2.setFitWidth(27.0);
+//                imageview2.setFitHeight(23.0);
+//                imageview2.setPreserveRatio(true);
+//            //graphic
+//            profile.setGraphic(imageview2);
+//            profile.setPadding(new Insets(0, 0, 0, 20));
 
             signout = new Button();
             signout.setPrefHeight(42.0);
@@ -282,7 +282,7 @@ public class PersonalAreaCus extends Stage {
         scrollPane.setFitToWidth(true);
         scrollPane.setContent(anchorPane);
 
-        menu.getChildren().addAll(pane, fullName, bookings, profile, signout);
+        menu.getChildren().addAll(pane, fullName, bookings, signout);
         VBox.setMargin(pane, new Insets(25, 0, 0 ,0));
         VBox.setMargin(fullName, new Insets(0, 0, 75 ,0));
         BorderPane.setAlignment(menu, Pos.CENTER);

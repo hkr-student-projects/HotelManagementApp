@@ -17,7 +17,7 @@ public class DatabaseManager {
     private final String clients = "`hotel`.`Customer`";
     private final String books = "`hotel`.`Booking`";
     private final String beds = "`hotel`.`Bed`";
-    private final String orders = "`hotel`.`CustomerOrder`";
+    private final String orders = "`hotel`.`Order`";
     private final String booked = "`hotel`.`BookedRoom`";
 
     static {
@@ -77,7 +77,7 @@ public class DatabaseManager {
         return FXCollections.observableArrayList(arooms);
     }
 
-    public int createBooking(LocalDate in, LocalDate out, byte guests, String room){
+    public int createBooking(int cusId, LocalDate in, LocalDate out, int guests, String room){
         return (int)executeQuery(QueryType.UPDATE,
                 "INSERT INTO "+books+" " +
                         "(`guests`,`movein`,`moveout`) " +
@@ -85,7 +85,10 @@ public class DatabaseManager {
                         "SELECT @ref:=LAST_INSERT_ID();" +
                         "INSERT INTO "+booked+" " +
                         "(`Booking_reference`,`Room_number`) " +
-                        "VALUES (@ref,'"+room+"');"
+                        "VALUES (@ref,'"+room+"');" +
+                        "INSERT INTO "+orders+" " +
+                        "(`Customer_id`,`Booking_reference`) " +
+                        "VALUES ('"+cusId+"',@ref);"
         );
     }
 
@@ -95,9 +98,9 @@ public class DatabaseManager {
         );
     }
 
-    public int createPerson(String email, String password, String ssn, String name, String surname, String addr, String phone, String movein, String moveout, String roomnum){
+    public int createPerson(String email, String password, String ssn, String name, String surname, String addr, String phone){
         return (int)executeQuery(QueryType.UPDATE,
-                        "INSERT INTO `hotel`.`Account` " +
+                "INSERT INTO `hotel`.`Account` " +
                         "(`email`,`password`)" +
                         "VALUES ('"+email+"',SHA1('"+password+"'));" +
                         "SELECT @aid:=LAST_INSERT_ID();" +
@@ -107,7 +110,7 @@ public class DatabaseManager {
         );
     }
 
-    public int createPerson(String email, String password, EmpPosition position, String ssn, String name, String surname, String addr, String phone, String movein, String moveout, String roomnum){
+    public int createPerson(String email, String password, EmpPosition position, String ssn, String name, String surname, String addr, String phone){
         return (int)executeQuery(QueryType.UPDATE,
                 "INSERT INTO `hotel`.`Account` " +
                         "(`email`,`password`)" +
@@ -143,7 +146,7 @@ public class DatabaseManager {
                     profile.addrs = rs.getString(7);
                 }
 
-               // isResult = pst.getMoreResults();
+                // isResult = pst.getMoreResults();
             }
         }
         catch(Exception ex){
@@ -243,7 +246,7 @@ public class DatabaseManager {
     {
         try {
             executeQuery(QueryType.BOOL,
-                            "CREATE TABLE IF NOT EXISTS `hotel`.`Account` (\n" +
+                    "CREATE TABLE IF NOT EXISTS `hotel`.`Account` (\n" +
                             "  `id` INT NOT NULL AUTO_INCREMENT,\n" +
                             "  `email` VARCHAR(45) NOT NULL,\n" +
                             "  `password` VARCHAR(40) NOT NULL,\n" +
@@ -331,7 +334,7 @@ public class DatabaseManager {
         }
         //out.println(test);
 
-       //(`steamId` varchar(32) NOT NULL,`balance` decimal(15,2) NOT NULL DEFAULT '25.00',`lastUpdated` timestamp NOT NULL DEFAULT NOW() ON UPDATE CURRENT_TIMESTAMP,PRIMARY KEY (`steamId`)) ");
+        //(`steamId` varchar(32) NOT NULL,`balance` decimal(15,2) NOT NULL DEFAULT '25.00',`lastUpdated` timestamp NOT NULL DEFAULT NOW() ON UPDATE CURRENT_TIMESTAMP,PRIMARY KEY (`steamId`)) ");
     }
 
     public Object executeQuery(QueryType type, String query)
