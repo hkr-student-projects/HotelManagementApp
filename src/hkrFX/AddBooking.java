@@ -33,7 +33,7 @@ public class AddBooking extends Stage {
         label.setPrefHeight(17.0);
         label.setPrefWidth(115.0);
         label.setTextFill(Paint.valueOf("#575757"));
-        label.setLayoutX(69.0);
+        label.setLayoutX(100);
         label.setLayoutY(43.0);
         label.setText("Arrival date");
 
@@ -41,7 +41,7 @@ public class AddBooking extends Stage {
         label2.setPrefHeight(17.0);
         label2.setPrefWidth(115.0);
         label2.setTextFill(Paint.valueOf("#575757"));
-        label2.setLayoutX(69.0);
+        label2.setLayoutX(100);
         label2.setLayoutY(102.0);
         label2.setText("Departure date");
 
@@ -49,28 +49,28 @@ public class AddBooking extends Stage {
         label3.setPrefHeight(17.0);
         label3.setPrefWidth(115.0);
         label3.setTextFill(Paint.valueOf("#575757"));
-        label3.setLayoutX(69.0);
+        label3.setLayoutX(100);
         label3.setLayoutY(162.0);
         label3.setText("Number of guest");
 
         guests = new ComboBox(FXCollections.observableArrayList(1, 2, 3, 4, 5, 6, 7, 8, 9, 10));
         guests.setPrefHeight(27.0);
         guests.setPrefWidth(76.0);
-        guests.setLayoutX(69.0);
+        guests.setLayoutX(100);
         guests.setStyle("-fx-background-radius: 111; -fx-background-color: #ededed;");
         guests.setLayoutY(179.0);
 
         rooms = new ComboBox();
         rooms.setPrefHeight(27.0);
         rooms.setPrefWidth(76.0);
-        rooms.setLayoutX(69.0);
+        rooms.setLayoutX(100);
         rooms.setStyle("-fx-background-radius: 111; -fx-background-color: #ededed;");
         rooms.setLayoutY(239.0);
 
         Button button2 = new Button();
         button2.setPrefHeight(27.0);
         button2.setPrefWidth(76.0);
-        button2.setLayoutX(150);
+        button2.setLayoutX(70);
         button2.setStyle("-fx-background-color: #ededed; -fx-background-radius: 36;");
         button2.setLayoutY(332);
         button2.setText("Back");
@@ -92,7 +92,7 @@ public class AddBooking extends Stage {
         });
 
         movein = new DatePicker();
-        movein.setLayoutX(69.0);
+        movein.setLayoutX(100);
         movein.setLayoutY(60.0);
         movein.setOnAction(event -> {
             rooms.setValue(null);
@@ -105,7 +105,7 @@ public class AddBooking extends Stage {
         });
 
         moveout = new DatePicker();
-        moveout.setLayoutX(69.0);
+        moveout.setLayoutX(100);
         moveout.setLayoutY(119.0);
         moveout.setOnAction(event -> {
             rooms.setValue(null);
@@ -134,6 +134,7 @@ public class AddBooking extends Stage {
         if(rooms != null){
             MainFX.databaseManager.createBooking(profile.cId, movein.getValue(), moveout.getValue(), (int)guests.getValue(), rooms.getValue().toString());
             session.borderpane.setRight(session.scrollPane);
+            session.showUpdateBookings();
             emptyData();
         }
     }
