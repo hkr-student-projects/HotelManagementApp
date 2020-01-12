@@ -47,14 +47,8 @@ public class PersonalAreaCus extends Stage {
         this.setResizable(false);
         user = profile;
         books = MainFX.databaseManager.getBookings(profile.cId);
-        System.out.println("cid: " + profile.cId);
-        System.out.println("bookings: " + books.size());
+
         createScene();
-    }
-    
-    protected void refreshBooks(){
-        int existingRows = gridPane.getRowConstraints().size();
-        gridPane.getRowConstraints().addAll(defRowCons(existingRows));
     }
 
     protected void showUpdateBookings(){
