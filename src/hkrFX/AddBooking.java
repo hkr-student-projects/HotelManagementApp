@@ -56,14 +56,14 @@ public class AddBooking extends Stage {
         guests = new ComboBox(FXCollections.observableArrayList(1, 2, 3, 4, 5, 6, 7, 8, 9, 10));
         guests.setPrefHeight(27.0);
         guests.setPrefWidth(76.0);
-        guests.setLayoutX(100);
+        guests.setLayoutX(120);
         guests.setStyle("-fx-background-radius: 111; -fx-background-color: #ededed;");
         guests.setLayoutY(179.0);
 
         rooms = new ComboBox();
         rooms.setPrefHeight(27.0);
         rooms.setPrefWidth(76.0);
-        rooms.setLayoutX(100);
+        rooms.setLayoutX(120);
         rooms.setStyle("-fx-background-radius: 111; -fx-background-color: #ededed;");
         rooms.setLayoutY(239.0);
 
@@ -72,7 +72,7 @@ public class AddBooking extends Stage {
         button2.setPrefWidth(76.0);
         button2.setLayoutX(50);
         button2.setStyle("-fx-background-color: #ededed; -fx-background-radius: 36;");
-        button2.setLayoutY(332);
+        button2.setLayoutY(360);
         button2.setText("Back");
         button2.setMnemonicParsing(false);
         button2.setOnAction(event -> {
@@ -84,7 +84,7 @@ public class AddBooking extends Stage {
         button.setPrefWidth(76.0);
         button.setLayoutX(308);
         button.setStyle("-fx-background-color: #ededed; -fx-background-radius: 36;");
-        button.setLayoutY(332);
+        button.setLayoutY(360);
         button.setText("Create");
         button.setMnemonicParsing(false);
         button.setOnAction(event -> {

@@ -1,5 +1,6 @@
 package hkrFX;
 
+import hkr.Main;
 import hkrDB.DatabaseManager;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -117,10 +118,7 @@ public class BookingInfo extends Stage {
         button.setText("Delete");
         button.setMnemonicParsing(false);
         button.setOnAction(event -> {
-            MainFX.databaseManager.deleteBooking(booking.bId);
-            session.books.remove(this.booking);
-            //rebuild book list in personal area
-            this.close();
+            closeStage();
         });
 
         Button button2 = new Button();
@@ -155,5 +153,11 @@ public class BookingInfo extends Stage {
         Scene scene = new Scene(paneMain, MainFX.SCENE_WIDTH, MainFX.SCENE_HEIGHT);
         scene.getStylesheets().add("hkrFX/css/style.css");
         this.setScene(scene);
+    }
+    private void closeStage(){
+        MainFX.databaseManager.deleteBooking(booking.bId);
+        session.books.remove(booking);
+        session.loadButtons();
+        session.borderpane.setRight(session.scrollPane);
     }
 }
