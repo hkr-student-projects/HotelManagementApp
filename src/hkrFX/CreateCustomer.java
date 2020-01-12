@@ -1,8 +1,6 @@
 package hkrFX;
 
 import hkrDB.DatabaseManager;
-import javafx.collections.ObservableList;
-import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.PasswordField;
@@ -46,23 +44,16 @@ public class CreateCustomer extends Stage{
         );
 
         fields = createFields(
-                new String[] { "Name", "Surname", "19890518-1234", "+073-751-06-21", "Storagatan 12A-1006", "example@example.com"},
+                new String[] { "Name", "Surname", "19890518-1234", "+073-751-06-21", "Storagatan 12A-1006", "example@exmaple.com"},
                 new double[] { 236, 412, 236, 236, 236, 236},
                 new double[] { 53, 53, 95, 137, 180, 247}
         );
 
         buttons = createButtons(
                 new String[] {"Save", "Reset"},
-                new double[] {518, 321},
-                new double[] {60, 82}
+                new double[] {60, 82},
+                new double[] {518, 321}
         );
-
-        buttons[0].setOnAction(event -> {
-            closeStage();
-        });
-        buttons[1].setOnAction(event -> {
-            emptyData();
-        });
 
         passwordfield = new PasswordField();
         passwordfield.setPrefHeight(27.0);
@@ -82,38 +73,23 @@ public class CreateCustomer extends Stage{
 
         AnchorPane anchorpane = new AnchorPane();
         anchorpane.setPrefHeight(437.0);
-        anchorpane.setMaxHeight(437.0);
         anchorpane.setPrefWidth(600.0);
         anchorpane.setStyle("-fx-background-color: white;");
 
         Pane pane = new Pane();
-        pane.setPrefHeight(440.0);
-        pane.setMinHeight(440.0);
+        pane.setPrefHeight(437.0);
         pane.setPrefWidth(216.0);
         pane.setStyle("-fx-background-color: #ffb053;");
 
-        ObservableList<Node> pChilds = pane.getChildren();
-        pChilds.addAll(texts);
-        pChilds.addAll(fields);
-        pChilds.addAll(buttons);
-        pChilds.addAll(passwordfield, passwordfield2);
         anchorpane.getChildren().add(pane);
 
 
 
         Scene scene = new Scene(anchorpane, MainFX.SCENE_WIDTH, MainFX.SCENE_HEIGHT);
-        //scene.getStylesheets().add("hkrFx/General.css");
+        scene.getStylesheets().add("hkrFx/General.css");
         this.setScene(scene);
 
         //this.show();
-    }
-
-    private void emptyData(){
-        for(TextField t : fields){
-            t.setText(null);
-        }
-        passwordfield.setText("");
-        passwordfield2.setText("");
     }
 
 
@@ -211,7 +187,7 @@ public class CreateCustomer extends Stage{
         String email = null;
         String pass = passwordfield.getText();
 
-        if(passwordfield.getText().isEmpty() || passwordfield2.getText().isEmpty() || !MainFX.equals(passwordfield.getText().toCharArray(), passwordfield2.getText().toCharArray())){
+        if(passwordfield.getText().isEmpty() || passwordfield2.getText().isEmpty() || passwordfield.getText() != passwordfield2.getText()){
             redOutField(passwordfield);
             redOutField(passwordfield2);
             errors = true;
@@ -229,7 +205,7 @@ public class CreateCustomer extends Stage{
                     }
                     break;
 
-                case "19890518-1234":
+                case "19890518-4376":
                     ssn = field.getText();
                     if (!field.getText().matches("\\d{8}\\-\\d{4}")) {
                         redOutField(field);
@@ -253,11 +229,10 @@ public class CreateCustomer extends Stage{
                     }
                     break;
                 case "example@example.com" :
-                    email = field.getText();
                     ResultSet rs = (ResultSet) MainFX.databaseManager.executeQuery(DatabaseManager.QueryType.READER,
                             "SELECT 1 FROM hotel.Account WHERE hotel.Account.email = '"+email+"';");
                     try {
-                        if(rs.next() || !field.getText().matches("^[A-Za-z0-9+_.-]+@(.+)$")){
+                        if(!rs.next() || !field.getText().matches("^[A-Za-z0-9+_.-]+@(.+)$")){
                             redOutField(field);
                             errors = true;
                         }
