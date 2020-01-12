@@ -49,15 +49,16 @@ public class PersonalAreaCus extends Stage {
         createScene();
     }
     
-    protected void refreshBooks(){
-        int existingRows = gridPane.getRowConstraints().size();
-        gridPane.getRowConstraints().addAll(defRowCons(existingRows));
-    }
+//    protected void refreshBooks(){
+//        int existingRows = gridPane.getRowConstraints().size();
+//        gridPane.getRowConstraints().addAll(defRowCons(existingRows));
+//    }
 
     protected void showUpdateBookings(){
 
-        HSize = 400.0 + (((int)Math.ceil(books.size() + 1) / 3.0) - 3) * 111;//"+ 1" for extra button for adding booking
-        gridPane.getRowConstraints().addAll(defRowCons(gridPane.getRowConstraints().size()));
+        books = MainFX.databaseManager.getBookings(user.cId);
+        HSize = HSize + (((int)Math.ceil(books.size() + 1) / 3.0) - 3) * 111;//"+ 1" for extra button for adding booking
+        gridPane.getRowConstraints().addAll(defRowCons());
         loadButtons();
         anchorPane.setPrefHeight(HSize);
         scrollPane.setPrefHeight(HSize);
@@ -71,14 +72,18 @@ public class PersonalAreaCus extends Stage {
                 gridPane.add(bookButtons[n], c, r);
             }
         }
-        int index = 3 - (rowCount * 3 - (books.size() - 1));
+        int index = 3 - (rowCount * 3 - books.size());
         Text plus = createBookButton("+");
         plus.setOnMouseClicked(event -> {
             borderpane.setRight(new AddBooking(this, user).pane);
         });
-//        System.out.println(books.size());
-//        System.out.println(rowCount);
-//        System.out.println(index);
+        System.out.println(books.size());
+        System.out.println(rowCount);
+        System.out.println(index);
+        if(rowCount == 0){
+            gridPane.add(plus, 0, 0);
+            return;
+        }
         gridPane.add(plus, index == 3 ? 0 : index, index == 3 ? rowCount + 1 : rowCount);
     }
 
@@ -134,8 +139,8 @@ public class PersonalAreaCus extends Stage {
         return cc;
     }
 
-    private RowConstraints[] defRowCons(int existing){
-        RowConstraints[] rcs = new RowConstraints[((int)(Math.ceil(books.size() + 1) / 3.0)) - existing];
+    private RowConstraints[] defRowCons(){
+        RowConstraints[] rcs = new RowConstraints[((int)(Math.ceil(books.size() + 1) / 3.0))];
         for(int i = 0; i < rcs.length; i++){
             RowConstraints rc = new RowConstraints();
             rc.setFillHeight(false);
@@ -238,6 +243,8 @@ public class PersonalAreaCus extends Stage {
 //            profile.setGraphic(imageview2);
 //            profile.setPadding(new Insets(0, 0, 0, 20));
 
+            HSize = 400.0 + (((int)Math.ceil(books.size() + 1) / 3.0) - 3) * 111;
+
             signout = new Button();
             signout.setPrefHeight(42.0);
             signout.getStylesheets().add("hkrFX/css/style.css");
@@ -269,7 +276,7 @@ public class PersonalAreaCus extends Stage {
         gridPane.setLayoutY(33.0);
         gridPane.setAlignment(Pos.CENTER);
         gridPane.getColumnConstraints().addAll(defColCon(), defColCon(), defColCon());
-        gridPane.getRowConstraints().addAll(defRowCons(0));
+        //gridPane.getRowConstraints().addAll(defRowCons(0));
 
         anchorPane = new AnchorPane();
         anchorPane.setPrefWidth(410.0);
