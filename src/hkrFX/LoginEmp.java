@@ -72,6 +72,8 @@ public class LoginEmp extends Stage {
             try {
                 if(checkCredentials()){
                     new PersonalAreaEmp(MainFX.databaseManager.getProfile(email.getText())).show();
+                    email.setText("");
+                    password.setText("");
                 }
             } catch (SQLException e) {
                 Logger.logException(e);

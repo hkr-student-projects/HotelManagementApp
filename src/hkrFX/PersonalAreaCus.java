@@ -47,6 +47,7 @@ public class PersonalAreaCus extends Stage {
 
         this.setResizable(false);
         user = profile;
+        //System.out.println(profile.name + " " + profile.surname);
         books = MainFX.databaseManager.getBookings(profile.cId);
         this.injection = injection;
 

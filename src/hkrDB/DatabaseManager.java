@@ -177,7 +177,7 @@ public class DatabaseManager {
             PreparedStatement pst = conn.prepareStatement(
                     "SELECT `hotel`.`Account`.`id`,`hotel`.`Customer`.`id`,`name`,`surname`,`ssn`,`phone`,`address` " +
                             "FROM hotel.Customer,hotel.Account " +
-                            "WHERE '"+ email +"' IN (SELECT `email` FROM hotel.Account) AND " +
+                            "WHERE '"+ email +"' = hotel.Account.email AND " +
                             "hotel.Account.id = hotel.Customer.account_id;"
             );
 
