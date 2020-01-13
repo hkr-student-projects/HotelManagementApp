@@ -143,7 +143,10 @@ public class AddBooking extends Stage {
             MainFX.databaseManager.createBooking(profile.cId, movein.getValue(), moveout.getValue(), (int)guests.getValue(), rooms.getValue().toString());
             session.books = MainFX.databaseManager.getBookings(profile.cId);
             session.loadButtons();
-            new PopUP("Thank you! Your order has been placed!", "ffb053").show();
+            String color = "ffb053";
+            if(session.injection.injected)
+                color = PersonalAreaEmp.colorCode;
+            new PopUP("Thank you! Your order has been placed!", ""+color+"").show();
             session.borderpane.setRight(session.scrollPane);
             emptyLocalData();
         }

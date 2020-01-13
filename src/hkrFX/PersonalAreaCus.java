@@ -41,7 +41,7 @@ public class PersonalAreaCus extends Stage {
     //private Button profile;
     private Button signout;
     private double HSize;
-    private Injection injection;
+    protected Injection injection;
 
     public PersonalAreaCus(DatabaseManager.Profile profile, Injection injection){
 
@@ -261,7 +261,9 @@ public class PersonalAreaCus extends Stage {
             signout.setGraphic(imageview3);
             signout.setPadding(new Insets(0, 0, 0, 20));
             if(injection.injected){
-                this.setScene(injection.homeSession.scene);
+                signout.setOnAction(event -> {
+                    injection.homeSession.setScene(injection.homeSession.scene);
+                });
             }
             else{
                 signout.setOnAction(event -> {

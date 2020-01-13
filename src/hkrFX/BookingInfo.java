@@ -232,7 +232,10 @@ public class BookingInfo extends Stage {
                 booking.guests = Integer.parseInt(guests.getText());
                 booking.room = room.getText();
                 session.loadButtons();
-                new PopUP("Your booking has been modified.", "ffb053").show();
+                String color = "ffb053";
+                if(session.injection.injected)
+                    color = PersonalAreaEmp .colorCode;
+                new PopUP("Your booking has been modified.", ""+ color +"").show();
                 movein.setEditable(false);
                 moveout.setEditable(false);
                 guests.setEditable(false);
@@ -303,7 +306,10 @@ public class BookingInfo extends Stage {
         MainFX.databaseManager.deleteBooking(booking.bId);
         session.books.remove(booking);
         session.loadButtons();
-        new PopUP("Your order has been deleted!", "ffb053").show();
+        String color = "ffb053";
+        if(session.injection.injected)
+            color = PersonalAreaEmp .colorCode;
+        new PopUP("Your order has been deleted!", ""+color+"").show();
         session.borderpane.setRight(session.scrollPane);
     }
 }

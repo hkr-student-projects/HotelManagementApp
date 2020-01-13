@@ -278,11 +278,13 @@ public class CreateCustomer extends Stage{
         }
         if(!errors){
             MainFX.databaseManager.createPerson(email, pass, ssn, name, sname, addr, phone);
+            String color = "ffb053";
             if(homeSession != null){
+                color = PersonalAreaEmp.colorCode;
                 homeSession.customers = MainFX.databaseManager.getProfiles();
                 homeSession.loadButtons();
             }
-            new PopUP("You have created the account.", homeSession.colorCode).show();
+            new PopUP("You have created the account.", color).show();
             this.close();
         }
 
