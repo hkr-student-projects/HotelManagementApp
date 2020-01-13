@@ -1,0 +1,10 @@
+[
+  {
+    "DatabaseUsername":"root",
+    "DatabasePort":3306,
+    "DatabasePassword":"91rasuho",
+    "DatabaseName":"hotel",
+    "lang":"en",
+    "DatabaseAddress":"jdbc:mysql://localhost/hotel?&allowMultiQueries=true&serverTimezone=Europe/Stockholm&useSSL=false"
+  }
+]

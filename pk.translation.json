@@ -1,0 +1,10 @@
+[
+  {
+  "field_empty":"The field {0} in {1} is empty",
+  "keyid_not_found":"KeyID {0} was not found",
+  "login_password_fail":"Login: {0} or password: {1} is incorrect",
+  "field_format_fail":"The field {0} in {1} is empty",
+  "json_format_fail":"Incorrect json in {0}",
+  "button_not_found":"بٹن نہیں ملا {0} in {1}"
+  }
+]
