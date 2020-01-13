@@ -59,14 +59,14 @@ public class PersonalAreaEmp extends Stage {
     }
 
     protected void loadButtons(){
-        Text[] bookButtons = customerButtons();
+        Text[] cusButtons = customerButtons();
         int rowCount = (int)(Math.ceil(customers.size()/ 3.0));
         gridPane.getChildren().clear();
         gridPane.getRowConstraints().clear();
         gridPane.getRowConstraints().addAll(defRowCons(rowCount));
         for(int r = 0, n = 0; r < rowCount; r++){
-            for(int c = 0; c < 3 && n < bookButtons.length; c++, n++){
-                gridPane.add(bookButtons[n], c, r);
+            for(int c = 0; c < 3 && n < cusButtons.length; c++, n++){
+                gridPane.add(cusButtons[n], c, r);
             }
         }
         int index = 3 - (rowCount * 3 - (customers.size()));
@@ -84,10 +84,11 @@ public class PersonalAreaEmp extends Stage {
         Text[] buttons = new Text[customers.size()];
         for(int i = 0; i < buttons.length; i++){
             DatabaseManager.Profile cus = customers.get(i);
-            buttons[i] = createCustomerButton(cus.movein.format(DateTimeFormatter.ofPattern("dd.MM.yyyy")) + "-" + book.moveout.format(DateTimeFormatter.ofPattern("dd.MM.yyyy")));
+            buttons[i] = createCustomerButton("(ID: "+cus.cId+") "+cus.name+" "+cus.surname+"");
             buttons[i].setOnMouseClicked(event -> {
                 //new BookingInfo(book, this).show();
-                //borderpane.setRight(new BookingInfo(book, this).paneMain);
+                //borderpane.setRight();
+                this.setScene(new PersonalAreaCus(cus, new Injection(this, true, "3b68ff")).getScene());
             });
         }
 

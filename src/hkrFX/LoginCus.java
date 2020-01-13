@@ -72,7 +72,7 @@ public class LoginCus extends Stage {
             }
             try {
                 if(checkCredentials()){
-                    new PersonalAreaCus(MainFX.databaseManager.getProfile(email.getText()), "ffb053", false).show();
+                    new PersonalAreaCus(MainFX.databaseManager.getProfile(email.getText()), new Injection(null, false, "ffb053")).show();
                     email.setText("");
                     password.setText("");
                 }

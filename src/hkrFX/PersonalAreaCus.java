@@ -41,16 +41,14 @@ public class PersonalAreaCus extends Stage {
     //private Button profile;
     private Button signout;
     private double HSize;
-    private String colorCode;
-    private boolean injected;
+    private Injection injection;
 
-    public PersonalAreaCus(DatabaseManager.Profile profile, String color, boolean injected){
+    public PersonalAreaCus(DatabaseManager.Profile profile, Injection injection){
 
         this.setResizable(false);
         user = profile;
         books = MainFX.databaseManager.getBookings(profile.cId);
-        colorCode = color;
-        injected = injected;
+        this.injection = injection;
 
         createScene();
     }
@@ -163,7 +161,7 @@ public class PersonalAreaCus extends Stage {
         menu = new VBox();
         menu.setPrefHeight(400.0);
         menu.setPrefWidth(173.0);
-        menu.setStyle("-fx-background-color: #"+colorCode+";");
+        menu.setStyle("-fx-background-color: #"+injection.colorCode+";");
         menu.setAlignment(Pos.TOP_CENTER);
 
         //menu childs
@@ -187,7 +185,7 @@ public class PersonalAreaCus extends Stage {
                 initials.setLayoutX(58.0);
                 initials.setLayoutY(68.0);
                 initials.setText(user.name.substring(0, 1) + user.surname.substring(0, 1));
-                initials.setFill(Paint.valueOf("#ffb053"));
+                initials.setFill(Paint.valueOf("#"+injection.colorCode+""));
                 initials.setWrappingWidth(57.21875);
                 initials.setFont(new Font(38.0));
                 //pane childs
@@ -205,7 +203,7 @@ public class PersonalAreaCus extends Stage {
             bookings.setPrefWidth(259.0);
             bookings.setText("Bookings");
             bookings.setAlignment(Pos.BASELINE_LEFT);
-            bookings.getStyleClass().add(injected ? "sideButton2" : "sideButton");
+            bookings.getStyleClass().add(injection.injected ? "sideButton2" : "sideButton");
             bookings.setMnemonicParsing(false);
             //graphic
                 Image image = new Image("hkrFX/img/icons8_Xbox_Menu_32px.png");
@@ -249,7 +247,7 @@ public class PersonalAreaCus extends Stage {
             signout.setPrefWidth(259.0);
             signout.setText("Sign out");
             signout.setAlignment(Pos.BASELINE_LEFT);
-            signout.getStyleClass().add(injected ? "sideButton2" : "sideButton");
+            signout.getStyleClass().add(injection.injected ? "sideButton2" : "sideButton");
             signout.setMnemonicParsing(false);
             //graphic
                 Image image3 = new Image("hkrFX/img/icons8_Sign_Out_32px.png");
