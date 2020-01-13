@@ -1,7 +1,5 @@
 package hkrFX;
 
-import com.mysql.cj.protocol.x.XProtocolRowInputStream;
-import hkr.Main;
 import hkrDB.DatabaseManager;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -16,6 +14,7 @@ import javafx.scene.text.Text;
 import javafx.scene.text.TextAlignment;
 import javafx.stage.Stage;
 
+import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
 public class BookingInfo extends Stage {
@@ -34,6 +33,15 @@ public class BookingInfo extends Stage {
         this.booking = booking;
         this.session = session;
         createScene();
+    }
+
+    private void redOutField(TextField field){
+        //?change CSS class
+        field.setStyle("-fx-control-inner-background: #ff4c4c; -fx-background-color: transparent;");
+        field.focusedProperty().addListener((obs, wasFocused, isNowFocused) -> {
+            if (isNowFocused)
+                field.setStyle("-fx-background-color: transparent;");
+        });
     }
 
     private void createScene(){
@@ -192,8 +200,8 @@ public class BookingInfo extends Stage {
         });
 
         button4 = new Button();
-        button4.getStylesheets().add("hkrFX/css/style.css");
-        button4.getStyleClass().add("backBook");
+        //button4.getStylesheets().add("hkrFX/css/style.css");
+        //button4.getStyleClass().add("backBook");
         button4.setTextFill(Paint.valueOf("GREY"));
         button4.setLayoutX(200);
         button4.setStyle("-fx-background-radius: 9; -fx-background-color: #ededed;");
@@ -201,8 +209,33 @@ public class BookingInfo extends Stage {
         button4.setText("Back");
         button4.setMnemonicParsing(false);
         button4.setVisible(false);
+        button4.setDisable(true);
         button4.setOnAction(event -> {
-            //save edits
+            if(!movein.getText().matches("^\\d{2}-\\d{2}-\\d{4}$")
+                    && moveout.getText().matches("^\\d{2}-\\d{2}-\\d{4}$")
+                    && guests.getText().matches("^\\d{1}|\\d{2}$")
+                    && room.getText().matches("^\\d{3}$")
+            )
+            {
+                redOutField(movein);
+                redOutField(moveout);
+                redOutField(guests);
+                redOutField(room);
+            }
+            else {
+                DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd-MM-yyyy");
+                LocalDate in = LocalDate.parse(movein.getText(), dtf);
+                LocalDate out = LocalDate.parse(moveout.getText(), dtf);
+                MainFX.databaseManager.updateBooking(booking.bId, in, out, Integer.parseInt(guests.getText()), room.getText());
+                booking.movein = in;
+                booking.moveout = out;
+                booking.guests = Integer.parseInt(guests.getText());
+                booking.room = room.getText();
+                session.loadButtons();
+                new PopUP("Your booking has been modified.", "ffb053").show();
+            }
+
+
         });
 
         Button button3 = new Button();
@@ -211,6 +244,7 @@ public class BookingInfo extends Stage {
         button3.setPrefWidth(65.0);
         button3.setTextFill(Paint.valueOf("#000000e5"));
         button3.setLayoutX(330.0);
+        button3.setLayoutY(14);
         button3.setStyle("-fx-background-radius: 9; -fx-background-color: transparent;");
         button3.setMnemonicParsing(false);
 
@@ -222,19 +256,23 @@ public class BookingInfo extends Stage {
             imageview2.setFitHeight(23.0);
             imageview2.setPreserveRatio(true);
             //graphic
-            button.setGraphic(imageview2);
+        button3.setGraphic(imageview2);
         button3.setOnAction(event -> {
-            if(!movein.isEditable()){
+            if(button4.isDisabled()){
                 movein.setEditable(true);
                 moveout.setEditable(true);
                 guests.setEditable(true);
                 room.setEditable(true);
+                button4.setVisible(true);
+                button4.setDisable(false);
             }
             else {
                 movein.setEditable(false);
                 moveout.setEditable(false);
                 guests.setEditable(false);
                 room.setEditable(false);
+                button4.setVisible(false);
+                button4.setDisable(true);
             }
         });
 
@@ -245,7 +283,7 @@ public class BookingInfo extends Stage {
         pane.setStyle("-fx-background-color: white;");
         pane.setLayoutY(14.0);
 
-        pane.getChildren().addAll(button, button2, text, text2, text3, text4, text5, movein, moveout, button4, room, guests);
+        pane.getChildren().addAll(button,button3, button2, text, text2, text3, text4, text5, movein, moveout, button4, room, guests);
 
         paneMain = new Pane();
         paneMain.setPrefHeight(400.0);

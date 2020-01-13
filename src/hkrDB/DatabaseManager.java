@@ -1,6 +1,7 @@
 package hkrDB;
 
 import com.mysql.cj.x.protobuf.MysqlxExpr;
+import hkrFX.Localization;
 import hkrFX.Logger;
 import hkrFX.MainFX;
 import javafx.collections.FXCollections;
@@ -89,6 +90,17 @@ public class DatabaseManager {
                         "INSERT INTO "+orders+" " +
                         "(`Customer_id`,`Booking_reference`) " +
                         "VALUES ('"+cusId+"',@ref);"
+        );
+    }
+
+    public int updateBooking(int bookId, LocalDate in, LocalDate out, int guests, String room){
+        return (int)executeQuery(QueryType.UPDATE,
+                "UPDATE "+books+" " +
+                        "SET `movein` = '"+ in +"', `moveout` = '"+ out +"', `guests` = '"+ guests +"' " +
+                        "WHERE hotel.Booking.reference = '"+bookId+"';" +
+                        "UPDATE "+booked+" " +
+                        "SET `Room_number` = '"+ room +"' " +
+                        "WHERE hotel.BookedRoom.Booking_reference = '"+bookId+"';"
         );
     }
 

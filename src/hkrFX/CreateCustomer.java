@@ -270,6 +270,7 @@ public class CreateCustomer extends Stage{
         }
         if(!errors){
             MainFX.databaseManager.createPerson(email, pass, ssn, name, sname, addr, phone);
+            new PopUP("You have created the account.", "ffb053").show();
             this.close();
         }
 
