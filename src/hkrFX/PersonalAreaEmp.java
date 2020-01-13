@@ -8,7 +8,6 @@ import javafx.geometry.Pos;
 import javafx.geometry.VPos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
-import javafx.scene.control.ContentDisplay;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.image.Image;
@@ -22,14 +21,13 @@ import javafx.scene.text.Text;
 import javafx.scene.text.TextAlignment;
 import javafx.stage.Stage;
 
-import java.awt.print.Book;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 
-public class PersonalAreaCus extends Stage {
+public class PersonalAreaEmp extends Stage {
 
     private DatabaseManager.Profile user;
-    protected ArrayList<DatabaseManager.Booking> books;
+    protected ArrayList<DatabaseManager.Profile> customers;
     protected BorderPane borderpane;
     protected ScrollPane scrollPane;
     private AnchorPane anchorPane;
@@ -41,23 +39,19 @@ public class PersonalAreaCus extends Stage {
     //private Button profile;
     private Button signout;
     private double HSize;
-    private String colorCode;
-    private boolean injected;
 
-    public PersonalAreaCus(DatabaseManager.Profile profile, String color, boolean injected){
+    public PersonalAreaEmp(DatabaseManager.Profile profile){
 
         this.setResizable(false);
         user = profile;
-        books = MainFX.databaseManager.getBookings(profile.cId);
-        colorCode = color;
-        injected = injected;
+        customers = MainFX.databaseManager.getProfiles();
 
         createScene();
     }
 
-    protected void showUpdateBookings(){
+    protected void showUpdateCustomers(){
 
-        HSize = 400.0 + (((int)Math.ceil(books.size() + 1) / 3.0) - 3) * 111;//"+ 1" for extra button for adding booking
+        HSize = 400.0 + (((int)Math.ceil(customers.size() + 1) / 3.0) - 3) * 111;//"+ 1" for extra button for adding booking
         gridPane.getRowConstraints().addAll(defRowCons(gridPane.getRowConstraints().size()));
         loadButtons();
         anchorPane.setPrefHeight(HSize);
@@ -65,8 +59,8 @@ public class PersonalAreaCus extends Stage {
     }
 
     protected void loadButtons(){
-        Text[] bookButtons = bookingButtons();
-        int rowCount = (int)(Math.ceil(books.size()/ 3.0));
+        Text[] bookButtons = customerButtons();
+        int rowCount = (int)(Math.ceil(customers.size()/ 3.0));
         gridPane.getChildren().clear();
         gridPane.getRowConstraints().clear();
         gridPane.getRowConstraints().addAll(defRowCons(rowCount));
@@ -75,25 +69,25 @@ public class PersonalAreaCus extends Stage {
                 gridPane.add(bookButtons[n], c, r);
             }
         }
-        int index = 3 - (rowCount * 3 - (books.size()));
-        Text plus = createBookButton("+");
+        int index = 3 - (rowCount * 3 - (customers.size()));
+        Text plus = createCustomerButton("+");
         plus.setOnMouseClicked(event -> {
-            borderpane.setRight(new AddBooking(this, user).pane);
+            //borderpane.setRight(new AddBooking(this, user).pane);
         });
-//        System.out.println(books.size());//11
+//        System.out.println(customers.size());//11
 //        System.out.println(rowCount);//4
 //        System.out.println(index);//2
         gridPane.add(plus, index == 3 ? 0 : index, index == 3 ? rowCount : rowCount - 1);
     }
 
-    private Text[] bookingButtons(){
-        Text[] buttons = new Text[books.size()];
+    private Text[] customerButtons(){
+        Text[] buttons = new Text[customers.size()];
         for(int i = 0; i < buttons.length; i++){
-            DatabaseManager.Booking book = books.get(i);
-            buttons[i] = createBookButton(book.movein.format(DateTimeFormatter.ofPattern("dd.MM.yyyy")) + "-" + book.moveout.format(DateTimeFormatter.ofPattern("dd.MM.yyyy")));
+            DatabaseManager.Profile cus = customers.get(i);
+            buttons[i] = createCustomerButton(cus.movein.format(DateTimeFormatter.ofPattern("dd.MM.yyyy")) + "-" + book.moveout.format(DateTimeFormatter.ofPattern("dd.MM.yyyy")));
             buttons[i].setOnMouseClicked(event -> {
                 //new BookingInfo(book, this).show();
-                borderpane.setRight(new BookingInfo(book, this).paneMain);
+                //borderpane.setRight(new BookingInfo(book, this).paneMain);
             });
         }
 
@@ -104,7 +98,7 @@ public class PersonalAreaCus extends Stage {
 
     }
 
-    protected Text createBookButton(String text){
+    protected Text createCustomerButton(String text){
         Text button = new Text();
 //        button.setPrefHeight(22.0);
 //        button.setPrefWidth(22.0);
@@ -163,7 +157,7 @@ public class PersonalAreaCus extends Stage {
         menu = new VBox();
         menu.setPrefHeight(400.0);
         menu.setPrefWidth(173.0);
-        menu.setStyle("-fx-background-color: #"+colorCode+";");
+        menu.setStyle("-fx-background-color: #ffb053;");
         menu.setAlignment(Pos.TOP_CENTER);
 
         //menu childs
@@ -205,7 +199,7 @@ public class PersonalAreaCus extends Stage {
             bookings.setPrefWidth(259.0);
             bookings.setText("Bookings");
             bookings.setAlignment(Pos.BASELINE_LEFT);
-            bookings.getStyleClass().add(injected ? "sideButton2" : "sideButton");
+            bookings.getStyleClass().add("sideButton");
             bookings.setMnemonicParsing(false);
             //graphic
                 Image image = new Image("hkrFX/img/icons8_Xbox_Menu_32px.png");
@@ -218,7 +212,7 @@ public class PersonalAreaCus extends Stage {
             bookings.setGraphic(imageview);
             bookings.setPadding(new Insets(0, 0, 0, 20));
             bookings.setOnAction(event -> {
-                showUpdateBookings();
+                showUpdateCustomers();
                 borderpane.setRight(scrollPane);
             });
 
@@ -249,7 +243,7 @@ public class PersonalAreaCus extends Stage {
             signout.setPrefWidth(259.0);
             signout.setText("Sign out");
             signout.setAlignment(Pos.BASELINE_LEFT);
-            signout.getStyleClass().add(injected ? "sideButton2" : "sideButton");
+            signout.getStyleClass().add("sideButton");
             signout.setMnemonicParsing(false);
             //graphic
                 Image image3 = new Image("hkrFX/img/icons8_Sign_Out_32px.png");

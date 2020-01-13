@@ -28,10 +28,10 @@ public class HomeStage extends Stage {
 //        _pane.prefHeight(MainFX.SCENE_HEIGHT);
 //        _pane.prefWidth(MainFX.SCENE_WIDTH);
 
-        buttons = createButtons(
+        buttons = createButtons(//3de377
                 new String[] { "Employee", "Customer"},
                 new String[] {
-                        "-fx-background-color: #3de377; -fx-background-radius: 111;",
+                        "-fx-background-color: #3b68ff; -fx-background-radius: 111;",
                         "-fx-background-color: #ffb053; -fx-background-radius: 111;"
                 },
                 new double[] { 14, 225 }

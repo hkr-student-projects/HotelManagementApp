@@ -22,6 +22,21 @@
 -fx-text-fill : white;
 }
 
+.sideButton2
+{
+-fx-background-color : #3b68ff;
+-fx-text-fill : white;
+}
+.sideButton2:hover{
+-fx-background-color : #3b68ff;
+-fx-text-fill : #ffb053;
+}
+.sideButton2:pressed
+{
+-fx-background-color : #002bba;
+-fx-text-fill : white;
+}
+
 .scroll-pane {
     -fx-background-color: #02030A;
 }

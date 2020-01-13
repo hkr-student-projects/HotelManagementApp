@@ -71,7 +71,7 @@ public class LoginEmp extends Stage {
             }
             try {
                 if(checkCredentials()){
-                    new PersonalAreaCus(MainFX.databaseManager.getProfile(email.getText())).show();
+                    new PersonalAreaEmp(MainFX.databaseManager.getProfile(email.getText())).show();
                 }
             } catch (SQLException e) {
                 Logger.logException(e);
@@ -108,7 +108,7 @@ public class LoginEmp extends Stage {
         Pane pane = new Pane();
         pane.setPrefHeight(MainFX.SCENE_WIDTH);
         pane.setPrefWidth(MainFX.SCENE_WIDTH);
-        pane.setStyle("-fx-background-color: #3de377;");
+        pane.setStyle("-fx-background-color: #3b68ff;");
 
         pane.getChildren().addAll(text, email, password, log, error);
         anchorpane.getChildren().add(pane);

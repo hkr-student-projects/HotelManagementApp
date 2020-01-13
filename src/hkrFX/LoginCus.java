@@ -15,8 +15,6 @@ import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import javafx.scene.text.TextAlignment;
 import javafx.stage.Stage;
-
-import java.lang.reflect.Field;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
@@ -74,7 +72,7 @@ public class LoginCus extends Stage {
             }
             try {
                 if(checkCredentials()){
-                    new PersonalAreaCus(MainFX.databaseManager.getProfile(email.getText())).show();
+                    new PersonalAreaCus(MainFX.databaseManager.getProfile(email.getText()), "ffb053", false).show();
                     email.setText("");
                     password.setText("");
                 }

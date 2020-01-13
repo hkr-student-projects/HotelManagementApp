@@ -134,6 +134,43 @@ public class DatabaseManager {
         );
     }
 
+    public ArrayList<Profile> getProfiles(){
+        ArrayList<Profile> profiles = new ArrayList<>();
+        try (Connection conn = createConnection()){
+            PreparedStatement pst = conn.prepareStatement(
+                    "SELECT `hotel`.`Account`.`id`,`hotel`.`Customer`.`id`,`name`,`surname`,`ssn`,`phone`,`address` " +
+                            "FROM hotel.Customer,hotel.Account " +
+                            "WHERE hotel.Account.id = hotel.Customer.account_id;"
+            );
+
+            boolean isResult = pst.execute();
+            do {
+                try (ResultSet rs = pst.getResultSet()) {
+
+                    while (rs.next()) {
+                        Profile profile = new Profile();
+                        profile.aId = rs.getInt(1);
+                        profile.cId = rs.getInt(2);
+                        profile.name = rs.getString(3);
+                        profile.surname = rs.getString(4);
+                        profile.ssn = rs.getString(5);
+                        profile.phone = rs.getString(6);
+                        profile.addrs = rs.getString(7);
+                        profiles.add(profile);
+                    }
+
+                    isResult = pst.getMoreResults();
+                }
+
+            } while (isResult);
+        }
+        catch(Exception ex){
+            Logger.logException(ex);
+        }
+
+        return profiles;
+    }
+
     public Profile getProfile(String email){
         Profile profile = null;
         try (Connection conn = createConnection()){
