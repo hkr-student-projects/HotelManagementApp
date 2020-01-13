@@ -1,12 +1,7 @@
 package hkr;
 
-import hkrFX.Logger;
 import hkrFX.MainFX;
 import javafx.application.Application;
-import org.xml.sax.SAXException;
-
-import javax.xml.parsers.ParserConfigurationException;
-import java.io.IOException;
 
 
 public class Main {
