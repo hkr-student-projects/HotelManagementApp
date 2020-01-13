@@ -32,7 +32,7 @@ public class LoginEmp extends Stage {
 
     private final UserDao userDao;
 
-    public LoginEmp(UserDao userDao, BookingDao bookingDao, RoomDao roomDao){
+    public LoginEmp(UserDao userDao, BookingDao bookingDao, RoomDao roomDao, CustomerDao customerDao){
         this.setResizable(false);
         this.userDao = userDao;
 
@@ -80,7 +80,7 @@ public class LoginEmp extends Stage {
                 this.checkCredentials(loginResult -> {
                     if (loginResult) {
                         this.userDao.getProfile(this.email.getText(), profile -> {
-                            new PersonalAreaCus(profile, bookingDao, roomDao).show();
+                            new PersonalAreaEmp(profile, customerDao, bookingDao, roomDao).show();
                         });
                     }
                 });

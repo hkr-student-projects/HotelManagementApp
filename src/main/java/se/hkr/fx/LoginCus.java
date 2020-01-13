@@ -83,7 +83,7 @@ public class LoginCus extends Stage {
                 this.checkCredentials(loginResult -> {
                     if (loginResult) {
                         this.customerDao.getProfile(this.email.getText(), profile -> {
-                            new PersonalAreaCus(profile, bookingDao, roomDao).show();
+                            new PersonalAreaCus(profile, new Injection(null, false, "ffb053"), bookingDao, roomDao).show();
                         });
                     }
                 });

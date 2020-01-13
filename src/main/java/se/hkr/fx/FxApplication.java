@@ -45,7 +45,7 @@ public class FxApplication extends Application {
 
             homeStage = new HomeStage();
             cusLogin = new LoginCus(customerDao, userDao, bookingDao, roomDao);
-            empLogin = new LoginEmp(userDao, bookingDao, roomDao);
+            empLogin = new LoginEmp(userDao, bookingDao, roomDao, customerDao);
             initializeEvents();
 
 //        INSERT INTO `hotel`.`Room` (`number`, `floor`, `class`) VALUES ('101', '1', 'ECONOMY');

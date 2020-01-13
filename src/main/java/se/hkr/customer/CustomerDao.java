@@ -4,6 +4,8 @@ import se.hkr.data.ConnectionProvider;
 import se.hkr.data.Dao;
 import se.hkr.user.Profile;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.function.Consumer;
 
 public class CustomerDao extends Dao {
@@ -24,6 +26,21 @@ public class CustomerDao extends Dao {
                 "FROM Customer,Account " +
                 "WHERE ? IN (SELECT `email` FROM Account) AND " +
                 "Account.id = Customer.account_id;", email);
+    }
+
+    public void getProfiles(Consumer<List<Profile>> profilesResult) {
+        select(resultSet -> {
+            List<Profile> result = new ArrayList<>();
+            try {
+                while (resultSet.next()) {
+                    result.add(new Profile(resultSet));
+                }
+            } catch (Exception ex) {
+                ex.printStackTrace();
+            } finally {
+                profilesResult.accept(result);
+            }
+        }, "SELECT `Account`.`id` AS aid,`Customer`.`id` AS cid,`name`,`surname`,`ssn`,`phone`,`address` FROM Customer,Account WHERE Account.id = Customer.account_id;");
     }
 
     public void profileExists(String email, Consumer<Boolean> result) {
