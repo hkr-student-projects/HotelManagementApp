@@ -1,4 +1,4 @@
-package se.hkr.customer;
+package se.hkr.user;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;

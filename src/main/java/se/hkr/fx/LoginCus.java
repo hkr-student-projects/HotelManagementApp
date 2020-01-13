@@ -16,6 +16,7 @@ import javafx.scene.text.TextAlignment;
 import javafx.stage.Stage;
 import se.hkr.bookings.BookingDao;
 import se.hkr.customer.CustomerDao;
+import se.hkr.rooms.RoomDao;
 import se.hkr.user.UserDao;
 
 import java.sql.SQLException;
@@ -33,7 +34,7 @@ public class LoginCus extends Stage {
     private final CustomerDao customerDao;
     private final UserDao userDao;
 
-    public LoginCus(CustomerDao customerDao, UserDao userDao, BookingDao bookingDao) {
+    public LoginCus(CustomerDao customerDao, UserDao userDao, BookingDao bookingDao, RoomDao roomDao) {
         this.setResizable(false);
         this.customerDao = customerDao;
         this.userDao = userDao;
@@ -80,10 +81,11 @@ public class LoginCus extends Stage {
             }
             try {
                 this.checkCredentials(loginResult -> {
-                    if (loginResult)
+                    if (loginResult) {
                         this.customerDao.getProfile(this.email.getText(), profile -> {
-                            new PersonalAreaCus(profile, bookingDao).show();
+                            new PersonalAreaCus(profile, bookingDao, roomDao).show();
                         });
+                    }
                 });
             } catch (SQLException e) {
                 e.printStackTrace();
@@ -100,6 +102,9 @@ public class LoginCus extends Stage {
         create.setText("Create!");
         create.setMnemonicParsing(false);
         create.setFont(new Font("System Bold", 12.0));
+        create.setOnAction(event -> {
+            new CreateCustomer(this.customerDao).show();
+        });
 
         forgot = new Button();
         forgot.setPrefHeight(23.0);

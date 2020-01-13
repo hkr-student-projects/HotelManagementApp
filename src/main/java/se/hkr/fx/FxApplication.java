@@ -8,6 +8,7 @@ import se.hkr.config.JsonConfiguration;
 import se.hkr.customer.CustomerDao;
 import se.hkr.data.ConnectionProvider;
 import se.hkr.data.MySQLConnectionProvider;
+import se.hkr.rooms.RoomDao;
 import se.hkr.user.UserDao;
 
 import java.io.File;
@@ -40,10 +41,11 @@ public class FxApplication extends Application {
             CustomerDao customerDao = new CustomerDao(connectionProvider);
             UserDao userDao = new UserDao(connectionProvider);
             BookingDao bookingDao = new BookingDao(connectionProvider);
+            RoomDao roomDao = new RoomDao(connectionProvider);
 
             homeStage = new HomeStage();
-            cusLogin = new LoginCus(customerDao, userDao, bookingDao);
-            empLogin = new LoginEmp(userDao, customerDao, bookingDao);
+            cusLogin = new LoginCus(customerDao, userDao, bookingDao, roomDao);
+            empLogin = new LoginEmp(userDao, bookingDao, roomDao);
             initializeEvents();
 
 //        INSERT INTO `hotel`.`Room` (`number`, `floor`, `class`) VALUES ('101', '1', 'ECONOMY');

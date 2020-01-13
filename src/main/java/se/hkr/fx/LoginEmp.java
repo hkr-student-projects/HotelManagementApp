@@ -16,6 +16,7 @@ import javafx.scene.text.TextAlignment;
 import javafx.stage.Stage;
 import se.hkr.bookings.BookingDao;
 import se.hkr.customer.CustomerDao;
+import se.hkr.rooms.RoomDao;
 import se.hkr.user.UserDao;
 
 import java.sql.ResultSet;
@@ -30,12 +31,10 @@ public class LoginEmp extends Stage {
     private Label error;
 
     private final UserDao userDao;
-    private final CustomerDao customerDao;
 
-    public LoginEmp(UserDao userDao, CustomerDao customerDao, BookingDao bookingDao){
+    public LoginEmp(UserDao userDao, BookingDao bookingDao, RoomDao roomDao){
         this.setResizable(false);
         this.userDao = userDao;
-        this.customerDao = customerDao;
 
         email = new TextField();
         email.setLayoutX(200);
@@ -79,10 +78,11 @@ public class LoginEmp extends Stage {
             }
             try {
                 this.checkCredentials(loginResult -> {
-                    if (loginResult)
-                        this.customerDao.getProfile(this.email.getText(), profile -> {
-                            new PersonalAreaCus(profile, bookingDao).show();
+                    if (loginResult) {
+                        this.userDao.getProfile(this.email.getText(), profile -> {
+                            new PersonalAreaCus(profile, bookingDao, roomDao).show();
                         });
+                    }
                 });
             } catch (SQLException e) {
                 e.printStackTrace();
