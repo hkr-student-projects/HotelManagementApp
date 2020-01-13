@@ -1,0 +1,27 @@
+- rooms: String
+- clients: String
+- books: String
+- beds: String
+- orders: String
+- booked: String
+
++ checkSchema(): void
++ createConnection(): Connection
++ executeQuery(arg0: DatabaseManager$QueryType, arg1: String): Object
++ deleteBooking(arg0: int): int
++ createPerson(arg0: String, arg1: String, arg2: String, arg3: String, arg4: String, arg5: String, arg6: String): int
++ createPerson(arg0: String, arg1: String, arg2: DatabaseManager$EmpPosition, arg3: String, arg4: String, arg5: String, arg6: String, arg7: String): int
++ getProfile(arg0: String): DatabaseManager$Profile
++ addRoom(arg0: String, arg1: short, arg2: DatabaseManager$RoomClass): int
++ getAvailableRooms(arg0: LocalDate, arg1: LocalDate): String>
++ createBooking(arg0: int, arg1: LocalDate, arg2: LocalDate, arg3: int, arg4: String): int
++ getBookings(arg0: int): DatabaseManager$Booking>
++ wait(arg0: long): void
++ wait(arg0: long, arg1: int): void
++ wait(): void
++ equals(arg0: Object): boolean
++ toString(): String
++ hashCode(): int
++ getClass(): Class<?>
++ notify(): void
++ notifyAll(): void

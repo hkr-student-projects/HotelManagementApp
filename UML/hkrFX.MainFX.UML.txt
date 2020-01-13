@@ -1,0 +1,29 @@
+- SCENE_HEIGHT: short
+- SCENE_WIDTH: short
+- config: Config
+- databaseManager: DatabaseManager
+- cusLogin: LoginCus
+- empLogin: LoginEmp
+- homeStage: HomeStage
+
++ equals(arg0: char[], arg1: char[]): boolean
++ start(arg0: Stage): void
++ loadConfig(): void
++ init(): void
++ stop(): void
++ getParameters(): Application$Parameters
++ getUserAgentStylesheet(): String
++ setUserAgentStylesheet(arg0: String): void
++ launch(arg0: String[]): void
++ launch(arg0: Application>, arg1: String[]): void
++ getHostServices(): HostServices
++ notifyPreloader(arg0: Preloader$PreloaderNotification): void
++ wait(arg0: long): void
++ wait(arg0: long, arg1: int): void
++ wait(): void
++ equals(arg0: Object): boolean
++ toString(): String
++ hashCode(): int
++ getClass(): Class<?>
++ notify(): void
++ notifyAll(): void

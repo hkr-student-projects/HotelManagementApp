@@ -1,0 +1,15 @@
+
++ log(arg0: String): void
++ logUML(arg0: Class, arg1: boolean): void
++ LogWarning(arg0: String): void
++ logError(arg0: String): void
++ logException(arg0: Exception): void
++ wait(arg0: long): void
++ wait(arg0: long, arg1: int): void
++ wait(): void
++ equals(arg0: Object): boolean
++ toString(): String
++ hashCode(): int
++ getClass(): Class<?>
++ notify(): void
++ notifyAll(): void

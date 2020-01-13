@@ -1,0 +1,21 @@
+- languageCode: String
+- DatabaseAddress: String
+- DatabaseUsername: String
+- DatabasePassword: String
+- DatabaseName: String
+- DatabasePort: int
+
++ writeConfig(): void
++ Serialize(): Object
++ Serialize(): String
++ Deserialize(arg0: FileReader): void
++ loadDefaults(): void
++ wait(arg0: long): void
++ wait(arg0: long, arg1: int): void
++ wait(): void
++ equals(arg0: Object): boolean
++ toString(): String
++ hashCode(): int
++ getClass(): Class<?>
++ notify(): void
++ notifyAll(): void

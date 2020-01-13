@@ -1,0 +1,138 @@
+- user: DatabaseManager$Profile
+- books: DatabaseManager$Booking>
+- borderpane: BorderPane
+- scrollPane: ScrollPane
+- anchorPane: AnchorPane
+- gridPane: GridPane
+- menu: VBox
+- initials: Text
+- fullName: Label
+- bookings: Button
+- signout: Button
+- HSize: double
+
++ close(): void
++ getOwner(): Window
++ showAndWait(): void
++ initStyle(arg0: StageStyle): void
++ getStyle(): StageStyle
++ initModality(arg0: Modality): void
++ getModality(): Modality
++ initOwner(arg0: Window): void
++ setFullScreen(arg0: boolean): void
++ isFullScreen(): boolean
++ fullScreenProperty(): ReadOnlyBooleanProperty
++ getIcons(): Image>
++ setTitle(arg0: String): void
++ getTitle(): String
++ titleProperty(): StringProperty
++ setIconified(arg0: boolean): void
++ isIconified(): boolean
++ iconifiedProperty(): ReadOnlyBooleanProperty
++ setMaximized(arg0: boolean): void
++ isMaximized(): boolean
++ maximizedProperty(): ReadOnlyBooleanProperty
++ setAlwaysOnTop(arg0: boolean): void
++ isAlwaysOnTop(): boolean
++ alwaysOnTopProperty(): ReadOnlyBooleanProperty
++ setResizable(arg0: boolean): void
++ isResizable(): boolean
++ resizableProperty(): BooleanProperty
++ setMinWidth(arg0: double): void
++ getMinWidth(): double
++ minWidthProperty(): DoubleProperty
++ setMinHeight(arg0: double): void
++ getMinHeight(): double
++ minHeightProperty(): DoubleProperty
++ setMaxWidth(arg0: double): void
++ getMaxWidth(): double
++ maxWidthProperty(): DoubleProperty
++ setMaxHeight(arg0: double): void
++ getMaxHeight(): double
++ maxHeightProperty(): DoubleProperty
++ toFront(): void
++ toBack(): void
++ setFullScreenExitKeyCombination(arg0: KeyCombination): void
++ getFullScreenExitKeyCombination(): KeyCombination
++ fullScreenExitKeyProperty(): KeyCombination>
++ setFullScreenExitHint(arg0: String): void
++ getFullScreenExitHint(): String
++ fullScreenExitHintProperty(): String>
++ setScene(arg0: Scene): void
++ show(): void
++ getProperties(): Object>
++ isShowing(): boolean
++ getScene(): Scene
++ hide(): void
++ sizeToScene(): void
++ getWindows(): Window>
++ centerOnScreen(): void
++ getOutputScaleX(): double
++ outputScaleXProperty(): ReadOnlyDoubleProperty
++ getOutputScaleY(): double
++ outputScaleYProperty(): ReadOnlyDoubleProperty
++ setForceIntegerRenderScale(arg0: boolean): void
++ isForceIntegerRenderScale(): boolean
++ forceIntegerRenderScaleProperty(): BooleanProperty
++ setRenderScaleX(arg0: double): void
++ getRenderScaleX(): double
++ renderScaleXProperty(): DoubleProperty
++ setRenderScaleY(arg0: double): void
++ getRenderScaleY(): double
++ renderScaleYProperty(): DoubleProperty
++ setX(arg0: double): void
++ getX(): double
++ xProperty(): ReadOnlyDoubleProperty
++ setY(arg0: double): void
++ getY(): double
++ yProperty(): ReadOnlyDoubleProperty
++ setWidth(arg0: double): void
++ getWidth(): double
++ widthProperty(): ReadOnlyDoubleProperty
++ setHeight(arg0: double): void
++ getHeight(): double
++ heightProperty(): ReadOnlyDoubleProperty
++ requestFocus(): void
++ isFocused(): boolean
++ focusedProperty(): ReadOnlyBooleanProperty
++ hasProperties(): boolean
++ setUserData(arg0: Object): void
++ getUserData(): Object
++ sceneProperty(): Scene>
++ setOpacity(arg0: double): void
++ getOpacity(): double
++ opacityProperty(): DoubleProperty
++ setOnCloseRequest(arg0: WindowEvent>): void
++ getOnCloseRequest(): WindowEvent>
++ onCloseRequestProperty(): WindowEvent>>
++ setOnShowing(arg0: WindowEvent>): void
++ getOnShowing(): WindowEvent>
++ onShowingProperty(): WindowEvent>>
++ setOnShown(arg0: WindowEvent>): void
++ getOnShown(): WindowEvent>
++ onShownProperty(): WindowEvent>>
++ setOnHiding(arg0: WindowEvent>): void
++ getOnHiding(): WindowEvent>
++ onHidingProperty(): WindowEvent>>
++ setOnHidden(arg0: WindowEvent>): void
++ getOnHidden(): WindowEvent>
++ onHiddenProperty(): WindowEvent>>
++ showingProperty(): ReadOnlyBooleanProperty
++ setEventDispatcher(arg0: EventDispatcher): void
++ getEventDispatcher(): EventDispatcher
++ eventDispatcherProperty(): EventDispatcher>
++ addEventHandler(arg0: EventType<T>, arg1: EventHandler<? super T>): void
++ removeEventHandler(arg0: EventType<T>, arg1: EventHandler<? super T>): void
++ addEventFilter(arg0: EventType<T>, arg1: EventHandler<? super T>): void
++ removeEventFilter(arg0: EventType<T>, arg1: EventHandler<? super T>): void
++ fireEvent(arg0: Event): void
++ buildEventDispatchChain(arg0: EventDispatchChain): EventDispatchChain
++ wait(arg0: long): void
++ wait(arg0: long, arg1: int): void
++ wait(): void
++ equals(arg0: Object): boolean
++ toString(): String
++ hashCode(): int
++ getClass(): Class<?>
++ notify(): void
++ notifyAll(): void

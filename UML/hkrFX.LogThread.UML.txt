@@ -1,0 +1,51 @@
+- _entry: LogEntry
+
++ run(): void
++ getName(): String
++ toString(): String
++ isInterrupted(): boolean
++ currentThread(): Thread
++ onSpinWait(): void
++ join(arg0: long, arg1: int): void
++ join(arg0: long): void
++ join(): void
++ getThreadGroup(): ThreadGroup
++ setContextClassLoader(arg0: ClassLoader): void
++ holdsLock(arg0: Object): boolean
++ getStackTrace(): StackTraceElement[]
++ checkAccess(): void
++ dumpStack(): void
++ setPriority(arg0: int): void
++ setDaemon(arg0: boolean): void
++ start(): void
++ sleep(arg0: long): void
++ sleep(arg0: long, arg1: int): void
++ isDaemon(): boolean
++ getPriority(): int
++ getContextClassLoader(): ClassLoader
++ resume(): void
++ interrupt(): void
++ activeCount(): int
++ enumerate(arg0: Thread[]): int
++ isAlive(): boolean
++ setDefaultUncaughtExceptionHandler(arg0: Thread$UncaughtExceptionHandler): void
++ getUncaughtExceptionHandler(): Thread$UncaughtExceptionHandler
++ yield(): void
++ stop(): void
++ interrupted(): boolean
++ suspend(): void
++ setName(arg0: String): void
++ countStackFrames(): int
++ getAllStackTraces(): StackTraceElement[]>
++ getId(): long
++ getState(): Thread$State
++ getDefaultUncaughtExceptionHandler(): Thread$UncaughtExceptionHandler
++ setUncaughtExceptionHandler(arg0: Thread$UncaughtExceptionHandler): void
++ wait(arg0: long): void
++ wait(arg0: long, arg1: int): void
++ wait(): void
++ equals(arg0: Object): boolean
++ hashCode(): int
++ getClass(): Class<?>
++ notify(): void
++ notifyAll(): void

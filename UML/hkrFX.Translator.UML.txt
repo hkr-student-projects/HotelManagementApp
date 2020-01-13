@@ -1,0 +1,12 @@
+- translations: String>
+
++ translate(arg0: String, arg1: Object[]): String
++ wait(arg0: long): void
++ wait(arg0: long, arg1: int): void
++ wait(): void
++ equals(arg0: Object): boolean
++ toString(): String
++ hashCode(): int
++ getClass(): Class<?>
++ notify(): void
++ notifyAll(): void
