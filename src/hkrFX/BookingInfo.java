@@ -103,7 +103,7 @@ public class BookingInfo extends Stage {
         movein.setPrefWidth(167.0);
         movein.setLayoutX(163.0);
         movein.setStyle("-fx-background-color: transparent;");
-        movein.setLayoutY(158);
+        movein.setLayoutY(132);
         movein.setText(booking.movein.format(DateTimeFormatter.ofPattern("dd-MM-yyyy")));
         movein.setFont(new Font("AppleGothic Regular", 18));
         movein.setEditable(false);
@@ -113,7 +113,7 @@ public class BookingInfo extends Stage {
         moveout.setPrefWidth(167.0);
         moveout.setLayoutX(163.0);
         moveout.setStyle("-fx-background-color: transparent;");
-        moveout.setLayoutY(199.0);
+        moveout.setLayoutY(171);
         moveout.setText(booking.moveout.format(DateTimeFormatter.ofPattern("dd-MM-yyyy")));
         moveout.setFont(new Font("AppleGothic Regular", 18));
         moveout.setEditable(false);
@@ -140,7 +140,7 @@ public class BookingInfo extends Stage {
         room.setPrefWidth(167.0);
         room.setLayoutX(163.0);
         room.setStyle("-fx-background-color: transparent;");
-        room.setLayoutY(234);
+        room.setLayoutY(211);
         room.setText(booking.room);
         room.setFont(new Font("AppleGothic Regular", 18));
         room.setEditable(false);
@@ -158,9 +158,9 @@ public class BookingInfo extends Stage {
         guests = new TextField();
         guests.setPrefHeight(38.0);
         guests.setPrefWidth(167.0);
-        guests.setLayoutX(147);
+        guests.setLayoutX(171);
         guests.setStyle("-fx-background-color: transparent;");
-        guests.setLayoutY(237);
+        guests.setLayoutY(250);
         guests.setText(""+booking.guests+"");
         guests.setFont(new Font("AppleGothic Regular", 18));
         guests.setEditable(false);
@@ -190,7 +190,7 @@ public class BookingInfo extends Stage {
         button2.getStylesheets().add("hkrFX/css/style.css");
         button2.getStyleClass().add("backBook");
         button2.setTextFill(Paint.valueOf("GREY"));
-        button2.setLayoutX(150);
+        button2.setLayoutX(50);
         button2.setStyle("-fx-background-radius: 9; -fx-background-color: #ededed;");
         button2.setLayoutY(332.0);
         button2.setText("Back");
@@ -206,7 +206,7 @@ public class BookingInfo extends Stage {
         button4.setLayoutX(200);
         button4.setStyle("-fx-background-radius: 9; -fx-background-color: #ededed;");
         button4.setLayoutY(332.0);
-        button4.setText("Back");
+        button4.setText("Save");
         button4.setMnemonicParsing(false);
         button4.setVisible(false);
         button4.setDisable(true);
@@ -233,9 +233,13 @@ public class BookingInfo extends Stage {
                 booking.room = room.getText();
                 session.loadButtons();
                 new PopUP("Your booking has been modified.", "ffb053").show();
+                movein.setEditable(false);
+                moveout.setEditable(false);
+                guests.setEditable(false);
+                room.setEditable(false);
+                button4.setVisible(false);
+                button4.setDisable(true);
             }
-
-
         });
 
         Button button3 = new Button();
@@ -283,7 +287,7 @@ public class BookingInfo extends Stage {
         pane.setStyle("-fx-background-color: white;");
         pane.setLayoutY(14.0);
 
-        pane.getChildren().addAll(button,button3, button2, text, text2, text3, text4, text5, movein, moveout, button4, room, guests);
+        pane.getChildren().addAll(button, button3, button2, text, text2, text3, text4, text5, movein, moveout, button4, room, guests);
 
         paneMain = new Pane();
         paneMain.setPrefHeight(400.0);
