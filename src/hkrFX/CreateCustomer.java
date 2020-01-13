@@ -15,8 +15,10 @@ import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
+import java.sql.Array;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 public class CreateCustomer extends Stage{
 
@@ -25,10 +27,12 @@ public class CreateCustomer extends Stage{
     private PasswordField passwordfield;
     private PasswordField passwordfield2;
     private TextField[] fields;
+    private PersonalAreaEmp homeSession = null;
 
-    public CreateCustomer(){
+    public CreateCustomer(PersonalAreaEmp session){
 
         this.setResizable(false);
+        this.homeSession = session;
         fields = createFields(
                 new String[] { "Name", "Surname", "19890518-4376", "+073-751-06-21", "Storagatan 12A-1006" },
                 new double[] { 236.0, 412.0, 236.0, 236.0, 236.0 },
@@ -90,7 +94,11 @@ public class CreateCustomer extends Stage{
         pane.setPrefHeight(440.0);
         pane.setMinHeight(440.0);
         pane.setPrefWidth(216.0);
-        pane.setStyle("-fx-background-color: #ffb053;");
+        System.out.println(homeSession == null);
+        if(homeSession != null)
+            pane.setStyle("-fx-background-color: #3b68ff;");
+        else
+            pane.setStyle("-fx-background-color: #ffb053;");
 
         ObservableList<Node> pChilds = pane.getChildren();
         pChilds.addAll(texts);
@@ -270,7 +278,11 @@ public class CreateCustomer extends Stage{
         }
         if(!errors){
             MainFX.databaseManager.createPerson(email, pass, ssn, name, sname, addr, phone);
-            new PopUP("You have created the account.", "ffb053").show();
+            if(homeSession != null){
+                homeSession.customers = MainFX.databaseManager.getProfiles();
+                homeSession.loadButtons();
+            }
+            new PopUP("You have created the account.", homeSession.colorCode).show();
             this.close();
         }
 

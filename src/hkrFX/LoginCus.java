@@ -92,7 +92,7 @@ public class LoginCus extends Stage {
         create.setMnemonicParsing(false);
         create.setFont(new Font("System Bold", 12.0));
         create.setOnAction(event -> {
-            new CreateCustomer().show();
+            new CreateCustomer(null).show();
         });
 
         forgot = new Button();

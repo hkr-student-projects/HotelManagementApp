@@ -27,6 +27,7 @@ import java.util.ArrayList;
 public class PersonalAreaEmp extends Stage {
 
     private DatabaseManager.Profile user;
+    protected Scene scene;
     protected ArrayList<DatabaseManager.Profile> customers;
     protected BorderPane borderpane;
     protected ScrollPane scrollPane;
@@ -39,6 +40,7 @@ public class PersonalAreaEmp extends Stage {
     //private Button profile;
     private Button signout;
     private double HSize;
+    public static String colorCode = "3b68ff";
 
     public PersonalAreaEmp(DatabaseManager.Profile profile){
 
@@ -73,6 +75,7 @@ public class PersonalAreaEmp extends Stage {
         Text plus = createCustomerButton("+");
         plus.setOnMouseClicked(event -> {
             //borderpane.setRight(new AddBooking(this, user).pane);
+            new CreateCustomer(this).show();
         });
 //        System.out.println(customers.size());//11
 //        System.out.println(rowCount);//4
@@ -88,7 +91,7 @@ public class PersonalAreaEmp extends Stage {
             buttons[i].setOnMouseClicked(event -> {
                 //new BookingInfo(book, this).show();
                 //borderpane.setRight();
-                this.setScene(new PersonalAreaCus(cus, new Injection(this, true, "3b68ff")).getScene());
+                this.setScene(new PersonalAreaCus(cus, new Injection(this, true, colorCode)).getScene());
             });
         }
 
@@ -158,7 +161,7 @@ public class PersonalAreaEmp extends Stage {
         menu = new VBox();
         menu.setPrefHeight(400.0);
         menu.setPrefWidth(173.0);
-        menu.setStyle("-fx-background-color: #ffb053;");
+        menu.setStyle("-fx-background-color: #"+colorCode+";");
         menu.setAlignment(Pos.TOP_CENTER);
 
         //menu childs
@@ -182,7 +185,7 @@ public class PersonalAreaEmp extends Stage {
                 initials.setLayoutX(58.0);
                 initials.setLayoutY(68.0);
                 initials.setText(user.name.substring(0, 1) + user.surname.substring(0, 1));
-                initials.setFill(Paint.valueOf("#ffb053"));
+                initials.setFill(Paint.valueOf(colorCode));
                 initials.setWrappingWidth(57.21875);
                 initials.setFont(new Font(38.0));
                 //pane childs
@@ -198,9 +201,9 @@ public class PersonalAreaEmp extends Stage {
             bookings.getStylesheets().add("hkrFX/css/style.css");
             bookings.setGraphicTextGap(22.0);
             bookings.setPrefWidth(259.0);
-            bookings.setText("Bookings");
+            bookings.setText("Customers");
             bookings.setAlignment(Pos.BASELINE_LEFT);
-            bookings.getStyleClass().add("sideButton");
+            bookings.getStyleClass().add("sideButton2");
             bookings.setMnemonicParsing(false);
             //graphic
                 Image image = new Image("hkrFX/img/icons8_Xbox_Menu_32px.png");
@@ -244,7 +247,7 @@ public class PersonalAreaEmp extends Stage {
             signout.setPrefWidth(259.0);
             signout.setText("Sign out");
             signout.setAlignment(Pos.BASELINE_LEFT);
-            signout.getStyleClass().add("sideButton");
+            signout.getStyleClass().add("sideButton2");
             signout.setMnemonicParsing(false);
             //graphic
                 Image image3 = new Image("hkrFX/img/icons8_Sign_Out_32px.png");
@@ -285,7 +288,7 @@ public class PersonalAreaEmp extends Stage {
         BorderPane.setAlignment(menu, Pos.CENTER);
         borderpane.setLeft(menu);
 
-        Scene scene = new Scene(borderpane, MainFX.SCENE_WIDTH, MainFX.SCENE_HEIGHT);
+        scene = new Scene(borderpane, MainFX.SCENE_WIDTH, MainFX.SCENE_HEIGHT);
         //scene.getStylesheets().add("hkrFX/css/style.css");
         this.setScene(scene);
 

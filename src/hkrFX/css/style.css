@@ -28,8 +28,8 @@
 -fx-text-fill : white;
 }
 .sideButton2:hover{
--fx-background-color : #3b68ff;
--fx-text-fill : #ffb053;
+-fx-background-color : #ffffff;
+-fx-text-fill : #3b68ff;
 }
 .sideButton2:pressed
 {

@@ -245,7 +245,7 @@ public class PersonalAreaCus extends Stage {
             signout.getStylesheets().add("hkrFX/css/style.css");
             signout.setGraphicTextGap(22.0);
             signout.setPrefWidth(259.0);
-            signout.setText("Sign out");
+            signout.setText(injection.injected ? "Home": "Sign out");
             signout.setAlignment(Pos.BASELINE_LEFT);
             signout.getStyleClass().add(injection.injected ? "sideButton2" : "sideButton");
             signout.setMnemonicParsing(false);
@@ -259,9 +259,15 @@ public class PersonalAreaCus extends Stage {
             //graphic
             signout.setGraphic(imageview3);
             signout.setPadding(new Insets(0, 0, 0, 20));
-            signout.setOnAction(event -> {
-                this.close();
-            });
+            if(injection.injected){
+                this.setScene(injection.homeSession.scene);
+            }
+            else{
+                signout.setOnAction(event -> {
+                    this.close();
+                });
+            }
+
         //menu childs
 
         gridPane = new GridPane();
