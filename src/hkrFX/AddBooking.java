@@ -1,6 +1,5 @@
 package hkrFX;
 
-import hkr.Person;
 import hkrDB.DatabaseManager;
 import javafx.collections.FXCollections;
 import javafx.scene.Scene;
@@ -107,7 +106,7 @@ public class AddBooking extends Stage {
 //            System.out.println(moveout.getValue() == null);
 //            System.out.println(movein.getValue() == null);
             if (moveout.getValue() != null && movein.getValue() != null && (moveout.getValue().compareTo(movein.getValue())) >= 0)
-                rooms.setItems(MainFX.databaseManager.getAvailableRooms(movein.getValue(), moveout.getValue()));
+                rooms.setItems(Main.databaseManager.getAvailableRooms(movein.getValue(), moveout.getValue()));
             else
                 rooms.setItems(null);
         });
@@ -118,7 +117,7 @@ public class AddBooking extends Stage {
         moveout.setOnAction(event -> {
             rooms.setValue(null);
             if(movein.getValue() != null && moveout.getValue() != null && (moveout.getValue().compareTo(movein.getValue())) >= 0)
-                rooms.setItems(MainFX.databaseManager.getAvailableRooms(movein.getValue(), moveout.getValue()));
+                rooms.setItems(Main.databaseManager.getAvailableRooms(movein.getValue(), moveout.getValue()));
             else
                 rooms.setItems(null);
         });
@@ -129,7 +128,7 @@ public class AddBooking extends Stage {
         pane.setStyle("-fx-background-color: white;");
         pane.getChildren().addAll(movein, moveout, button, button2, rooms, guests, label, label2, label3, label4);
 
-        this.setScene(new Scene(pane, MainFX.SCENE_WIDTH, MainFX.SCENE_HEIGHT));
+        this.setScene(new Scene(pane, Main.SCENE_WIDTH, Main.SCENE_HEIGHT));
     }
 
     private void emptyLocalData(){
@@ -140,8 +139,8 @@ public class AddBooking extends Stage {
 
     private void closeStage(){
         if(rooms != null){
-            MainFX.databaseManager.createBooking(profile.cId, movein.getValue(), moveout.getValue(), (int)guests.getValue(), rooms.getValue().toString());
-            session.books = MainFX.databaseManager.getBookings(profile.cId);
+            Main.databaseManager.createBooking(profile.cId, movein.getValue(), moveout.getValue(), (int)guests.getValue(), rooms.getValue().toString());
+            session.books = Main.databaseManager.getBookings(profile.cId);
             session.loadButtons();
             String color = "ffb053";
             if(session.injection.injected)

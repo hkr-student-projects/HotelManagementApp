@@ -3,15 +3,51 @@
   <component name="AnalysisUIOptions">
     <option name="SCOPE_TYPE" value="10" />
   </component>
+  <component name="ArtifactsWorkspaceSettings">
+    <artifacts-to-build>
+      <artifact name="Hotel_Management:jar" />
+    </artifacts-to-build>
+  </component>
   <component name="ChangeListManager">
     <list default="true" id="be750a4a-f25b-417a-8b32-89dd50849fe2" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/.idea/artifacts/Hotel_Management_jar.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/META-INF/MANIFEST.MF" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/App.log" beforeDir="false" afterPath="$PROJECT_DIR$/App.log" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Hotel_Management/META-INF/Hotel_Management.kotlin_module" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Hotel_Management/hkrFX/css/General.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Hotel_Management/hkrFX/css/style.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Hotel_Management/hkrFX/deprecated/[deprecated]BookingInfo.fxml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Hotel_Management/hkrFX/deprecated/[deprecated]Global.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Hotel_Management/hkrFX/deprecated/[deprecated]sample.fxml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Hotel_Management/hkrFX/img/edit_32px.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Hotel_Management/hkrFX/img/garbage_32px.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Hotel_Management/hkrFX/img/icons8_Box_32px.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Hotel_Management/hkrFX/img/icons8_GPS_Antenna_64px_1.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Hotel_Management/hkrFX/img/icons8_Home_32px.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Hotel_Management/hkrFX/img/icons8_Meanpath_64px_2.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Hotel_Management/hkrFX/img/icons8_Open_Envelope_32px.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Hotel_Management/hkrFX/img/icons8_Person_32px.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Hotel_Management/hkrFX/img/icons8_Search_52px.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Hotel_Management/hkrFX/img/icons8_Sign_Out_32px.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Hotel_Management/hkrFX/img/icons8_Slider__32px.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Hotel_Management/hkrFX/img/icons8_Xbox_Menu_32px.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/hkr/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/hkr/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/hkrDB/DatabaseManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/hkrDB/DatabaseManager.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/hkrDB/QueryQueue.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/hkrDB/QueryQueue.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/hkrFX/AddBooking.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/hkrFX/AddBooking.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/hkrFX/BookingInfo.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/hkrFX/BookingInfo.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/hkrFX/CreateCustomer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/hkrFX/CreateCustomer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/hkrFX/FxmlConverter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/hkrFX/FxmlConverter.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/hkrFX/HomeStage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/hkrFX/HomeStage.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/hkrFX/Localization.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/hkrFX/Localization.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/hkrFX/LoginCus.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/hkrFX/LoginCus.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/hkrFX/LoginEmp.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/hkrFX/LoginEmp.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/hkrFX/MainFX.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/hkrFX/Main.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/hkrFX/PersonalAreaCus.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/hkrFX/PersonalAreaCus.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/hkrFX/PersonalAreaEmp.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/hkrFX/PersonalAreaEmp.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/hkrFX/Translator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/hkrFX/Translator.java" afterDir="false" />
     </list>
-    <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -32,11 +68,18 @@
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="ProjectId" id="1TnEu5Nd3poQdjbm1Mxc5ciHH1l" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showExcludedFiles" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
   <component name="PropertiesComponent">
     <property name="ASKED_ADD_EXTERNAL_FILES" value="true" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
-    <property name="project.structure.last.edited" value="Libraries" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="aspect.path.notification.shown" value="true" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/out/artifacts/Hotel_Management_jar/lib" />
+    <property name="project.structure.last.edited" value="Artifacts" />
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.2" />
     <property name="restartRequiresConfirmation" value="false" />
@@ -57,21 +100,9 @@
       <recent name="$PROJECT_DIR$/src/hkrFX" />
     </key>
   </component>
-  <component name="RunDashboard">
-    <option name="ruleStates">
-      <list>
-        <RuleState>
-          <option name="name" value="ConfigurationTypeDashboardGroupingRule" />
-        </RuleState>
-        <RuleState>
-          <option name="name" value="StatusDashboardGroupingRule" />
-        </RuleState>
-      </list>
-    </option>
-  </component>
   <component name="RunManager" selected="Application.JavaFXMain">
     <configuration name="JavaFXMain" type="Application" factoryName="Application">
-      <option name="MAIN_CLASS_NAME" value="hkr.Main" />
+      <option name="MAIN_CLASS_NAME" value="hkrFX.Main" />
       <module name="Hotel_Management" />
       <option name="VM_PARAMETERS" value="--module-path &quot;$PROJECT_DIR$/lib&quot; --add-modules javafx.controls,javafx.fxml" />
       <method v="2">
@@ -98,6 +129,18 @@
       </list>
     </recent_temporary>
   </component>
+  <component name="ServiceViewManager">
+    <option name="viewStates">
+      <list>
+        <serviceView>
+          <treeState>
+            <expand />
+            <select />
+          </treeState>
+        </serviceView>
+      </list>
+    </option>
+  </component>
   <component name="SvnConfiguration">
     <configuration />
   </component>
@@ -108,8 +151,12 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1574087679377</updated>
+      <workItem from="1579102602741" duration="791000" />
     </task>
     <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="1" />
   </component>
   <component name="UnknownFeatures">
     <option featureType="com.intellij.fileTypeFactory" implementationName="*.log" />
@@ -126,6 +173,36 @@
         </entry>
       </map>
     </option>
+  </component>
+  <component name="WindowStateProjectService">
+    <state x="104" y="62" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1579103627246">
+      <screen x="0" y="0" width="1280" height="800" />
+    </state>
+    <state x="104" y="62" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1280.800@0.0.1280.800" timestamp="1579103627246" />
+    <state x="378" y="168" key="#com.intellij.ide.util.TreeClassChooserDialog" timestamp="1579102870619">
+      <screen x="0" y="0" width="1280" height="800" />
+    </state>
+    <state x="378" y="168" key="#com.intellij.ide.util.TreeClassChooserDialog/0.0.1280.800@0.0.1280.800" timestamp="1579102870619" />
+    <state width="1238" height="162" key="GridCell.Tab.0.bottom" timestamp="1579103661349">
+      <screen x="0" y="0" width="1280" height="800" />
+    </state>
+    <state width="1238" height="162" key="GridCell.Tab.0.bottom/0.0.1280.800@0.0.1280.800" timestamp="1579103661349" />
+    <state width="1238" height="162" key="GridCell.Tab.0.center" timestamp="1579103661347">
+      <screen x="0" y="0" width="1280" height="800" />
+    </state>
+    <state width="1238" height="162" key="GridCell.Tab.0.center/0.0.1280.800@0.0.1280.800" timestamp="1579103661347" />
+    <state width="1238" height="162" key="GridCell.Tab.0.left" timestamp="1579103661347">
+      <screen x="0" y="0" width="1280" height="800" />
+    </state>
+    <state width="1238" height="162" key="GridCell.Tab.0.left/0.0.1280.800@0.0.1280.800" timestamp="1579103661347" />
+    <state width="1238" height="162" key="GridCell.Tab.0.right" timestamp="1579103661348">
+      <screen x="0" y="0" width="1280" height="800" />
+    </state>
+    <state width="1238" height="162" key="GridCell.Tab.0.right/0.0.1280.800@0.0.1280.800" timestamp="1579103661348" />
+    <state x="128" y="23" width="1024" height="709" key="SettingsEditor" timestamp="1579102896947">
+      <screen x="0" y="0" width="1280" height="800" />
+    </state>
+    <state x="128" y="23" width="1024" height="709" key="SettingsEditor/0.0.1280.800@0.0.1280.800" timestamp="1579102896947" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

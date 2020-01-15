@@ -21,7 +21,6 @@ import javafx.scene.text.Text;
 import javafx.scene.text.TextAlignment;
 import javafx.stage.Stage;
 
-import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 
 public class PersonalAreaEmp extends Stage {
@@ -46,7 +45,7 @@ public class PersonalAreaEmp extends Stage {
 
         this.setResizable(false);
         user = profile;
-        customers = MainFX.databaseManager.getProfiles();
+        customers = Main.databaseManager.getProfiles();
 
         createScene();
     }
@@ -288,7 +287,7 @@ public class PersonalAreaEmp extends Stage {
         BorderPane.setAlignment(menu, Pos.CENTER);
         borderpane.setLeft(menu);
 
-        scene = new Scene(borderpane, MainFX.SCENE_WIDTH, MainFX.SCENE_HEIGHT);
+        scene = new Scene(borderpane, Main.SCENE_WIDTH, Main.SCENE_HEIGHT);
         //scene.getStylesheets().add("hkrFX/css/style.css");
         this.setScene(scene);
 

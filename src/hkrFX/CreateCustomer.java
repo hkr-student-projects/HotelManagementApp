@@ -15,10 +15,8 @@ import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
-import java.sql.Array;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.ArrayList;
 
 public class CreateCustomer extends Stage{
 
@@ -109,7 +107,7 @@ public class CreateCustomer extends Stage{
 
 
 
-        Scene scene = new Scene(anchorpane, MainFX.SCENE_WIDTH, MainFX.SCENE_HEIGHT);
+        Scene scene = new Scene(anchorpane, Main.SCENE_WIDTH, Main.SCENE_HEIGHT);
         //scene.getStylesheets().add("hkrFx/General.css");
         this.setScene(scene);
 
@@ -219,7 +217,7 @@ public class CreateCustomer extends Stage{
         String email = null;
         String pass = passwordfield.getText();
 
-        if(passwordfield.getText().isEmpty() || passwordfield2.getText().isEmpty() || !MainFX.equals(passwordfield.getText().toCharArray(), passwordfield2.getText().toCharArray())){
+        if(passwordfield.getText().isEmpty() || passwordfield2.getText().isEmpty() || !Main.equals(passwordfield.getText().toCharArray(), passwordfield2.getText().toCharArray())){
             redOutField(passwordfield);
             redOutField(passwordfield2);
             errors = true;
@@ -262,7 +260,7 @@ public class CreateCustomer extends Stage{
                     break;
                 case "example@example.com" :
                     email = field.getText();
-                    ResultSet rs = (ResultSet) MainFX.databaseManager.executeQuery(DatabaseManager.QueryType.READER,
+                    ResultSet rs = (ResultSet) Main.databaseManager.executeQuery(DatabaseManager.QueryType.READER,
                             "SELECT 1 FROM hotel.Account WHERE hotel.Account.email = '"+email+"';");
                     try {
                         if(rs.next() || !field.getText().matches("^[A-Za-z0-9+_.-]+@(.+)$")){
@@ -277,11 +275,11 @@ public class CreateCustomer extends Stage{
             }
         }
         if(!errors){
-            MainFX.databaseManager.createPerson(email, pass, ssn, name, sname, addr, phone);
+            Main.databaseManager.createPerson(email, pass, ssn, name, sname, addr, phone);
             String color = "ffb053";
             if(homeSession != null){
                 color = PersonalAreaEmp.colorCode;
-                homeSession.customers = MainFX.databaseManager.getProfiles();
+                homeSession.customers = Main.databaseManager.getProfiles();
                 homeSession.loadButtons();
             }
             new PopUP("You have created the account.", color).show();

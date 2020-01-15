@@ -8,7 +8,6 @@ import javafx.geometry.Pos;
 import javafx.geometry.VPos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
-import javafx.scene.control.ContentDisplay;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.image.Image;
@@ -22,7 +21,6 @@ import javafx.scene.text.Text;
 import javafx.scene.text.TextAlignment;
 import javafx.stage.Stage;
 
-import java.awt.print.Book;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 
@@ -48,7 +46,7 @@ public class PersonalAreaCus extends Stage {
         this.setResizable(false);
         user = profile;
         //System.out.println(profile.name + " " + profile.surname);
-        books = MainFX.databaseManager.getBookings(profile.cId);
+        books = Main.databaseManager.getBookings(profile.cId);
         this.injection = injection;
 
         createScene();
@@ -297,7 +295,7 @@ public class PersonalAreaCus extends Stage {
         BorderPane.setAlignment(menu, Pos.CENTER);
         borderpane.setLeft(menu);
 
-        Scene scene = new Scene(borderpane, MainFX.SCENE_WIDTH, MainFX.SCENE_HEIGHT);
+        Scene scene = new Scene(borderpane, Main.SCENE_WIDTH, Main.SCENE_HEIGHT);
         //scene.getStylesheets().add("hkrFX/css/style.css");
         this.setScene(scene);
 

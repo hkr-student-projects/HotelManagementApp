@@ -72,9 +72,9 @@ public class Translator{// implements ISerializable<String>, IDeserializable<Has
 
     private static void loadTranslation(){
 
-        File f = new File(""+ MainFX.config.languageCode +".translation.json");
+        File f = new File(""+ Main.config.languageCode +".translation.json");
         if(!f.exists()){
-            Logger.logError("Unable to load language pack: "+ MainFX.config.languageCode +", because pack does not exist");
+            Logger.logError("Unable to load language pack: "+ Main.config.languageCode +", because pack does not exist");
         }
         else {
 
