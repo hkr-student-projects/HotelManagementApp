@@ -4,12 +4,13 @@ import hkr.Person;
 import hkrDB.DatabaseManager;
 import javafx.collections.FXCollections;
 import javafx.scene.Scene;
-import javafx.scene.control.*;
+import javafx.scene.control.Button;
+import javafx.scene.control.ComboBox;
+import javafx.scene.control.DatePicker;
+import javafx.scene.control.Label;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Paint;
 import javafx.stage.Stage;
-
-import java.time.LocalDate;
 
 public class AddBooking extends Stage {
 
@@ -110,14 +111,6 @@ public class AddBooking extends Stage {
             else
                 rooms.setItems(null);
         });
-        movein.setDayCellFactory(picker -> new DateCell() {
-            public void updateItem(LocalDate date, boolean empty) {
-                super.updateItem(date, empty);
-                LocalDate today = LocalDate.now();
-
-                setDisable(empty || date.compareTo(today) < 0 );
-            }
-        });
 
         moveout = new DatePicker();
         moveout.setLayoutX(103);
@@ -128,14 +121,6 @@ public class AddBooking extends Stage {
                 rooms.setItems(MainFX.databaseManager.getAvailableRooms(movein.getValue(), moveout.getValue()));
             else
                 rooms.setItems(null);
-        });
-        moveout.setDayCellFactory(picker -> new DateCell() {
-            public void updateItem(LocalDate date, boolean empty) {
-                super.updateItem(date, empty);
-                LocalDate today = LocalDate.now();
-
-                setDisable(empty || date.compareTo(today) < 0 );
-            }
         });
 
         pane = new Pane();
