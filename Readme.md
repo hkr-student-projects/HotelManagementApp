@@ -5,7 +5,8 @@ A project is a prototype of a hotel management application that stores data on l
 ## User Interface
 Customer panel             |  Employee panel
 :-------------------------:|:-------------------------:
-![](https://github.com/Group4-ProjectCourse/HotelManagementApp/blob/master/img/cuslog.png = 150x115)  |  ![](https://github.com/Group4-ProjectCourse/HotelManagementApp/blob/master/img/emplog.png = 150x115)
+![](https://github.com/Group4-ProjectCourse/HotelManagementApp/blob/master/img/cuslog.png =150x115)  |  ![](https://github.com/Group4-ProjectCourse/HotelManagementApp/blob/master/img/emplog.png =150x115)
+#
 To crate the app's GUI, JavaFX libraries were used. The major parts of the project are classes containing definition for different stages.
 
 Additionally, some classes were used in both: Customer and Employee panels, but with different field values e.g: background color field and permissions. 
