@@ -3,6 +3,7 @@
 A project is a prototype of a hotel management application that stores data on local database and uses GUI to interact with a user.
 
 ## User Interface
+![alt text](https://cdn.educba.com/academy/wp-content/uploads/2019/11/JavaFX-ProgressBar.png)
 To crate the app's GUI, JavaFX libraries were used. The major parts of the project are classes containing definition for different stages.
 
 Additionally, some classes were used in both: Customer and Employee panels, but with different field values e.g: background color field and permissions. 
