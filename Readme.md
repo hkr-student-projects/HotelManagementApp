@@ -4,9 +4,10 @@ A project is a prototype of a hotel management application that stores data on l
 
 ## User Interface
 <div>
-  <h2 alight="left">Customer panel</h2>
-  <h2 alight="right">Employee panel</h2>
+  <h2 align="left">Customer panel</h2>
+  <h2 align="right">Employee panel</h2>
 </div>
+<div>
 <img align="left" src="https://github.com/Group4-ProjectCourse/HotelManagementApp/blob/master/img/logcus.png" data-canonical-src="https://github.com/Group4-ProjectCourse/HotelManagementApp/blob/master/img/logcus.png" width="300" height="230" />
 <img align="right" src="https://github.com/Group4-ProjectCourse/HotelManagementApp/blob/master/img/emplog.png" data-canonical-src="https://github.com/Group4-ProjectCourse/HotelManagementApp/blob/master/img/logcus.png" width="300" height="230" />
   <img src="https://github.com/Group4-ProjectCourse/HotelManagementApp/blob/master/img/percus.png" data-canonical-src="https://github.com/Group4-ProjectCourse/HotelManagementApp/blob/master/img/logcus.png" width="300" height="230" />
