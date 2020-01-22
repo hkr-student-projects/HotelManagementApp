@@ -226,7 +226,7 @@ public class BookingInfo extends Stage {
                 DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd-MM-yyyy");
                 LocalDate in = LocalDate.parse(movein.getText(), dtf);
                 LocalDate out = LocalDate.parse(moveout.getText(), dtf);
-                MainFX.databaseManager.updateBooking(booking.bId, in, out, Integer.parseInt(guests.getText()), room.getText());
+                Main.databaseManager.updateBooking(booking.bId, in, out, Integer.parseInt(guests.getText()), room.getText());
                 booking.movein = in;
                 booking.moveout = out;
                 booking.guests = Integer.parseInt(guests.getText());
@@ -298,12 +298,12 @@ public class BookingInfo extends Stage {
         paneMain.setStyle("-fx-background-color: white;");
         paneMain.getChildren().add(pane);
 
-        Scene scene = new Scene(paneMain, MainFX.SCENE_WIDTH, MainFX.SCENE_HEIGHT);
+        Scene scene = new Scene(paneMain, Main.SCENE_WIDTH, Main.SCENE_HEIGHT);
         scene.getStylesheets().add("hkrFX/css/style.css");
         this.setScene(scene);
     }
     private void closeStage(){
-        MainFX.databaseManager.deleteBooking(booking.bId);
+        Main.databaseManager.deleteBooking(booking.bId);
         session.books.remove(booking);
         session.loadButtons();
         String color = "ffb053";

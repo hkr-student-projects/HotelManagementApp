@@ -1,15 +1,15 @@
 package hkrFX;
 
-import hkr.Person;
 import hkrDB.DatabaseManager;
 import javafx.collections.FXCollections;
 import javafx.scene.Scene;
-import javafx.scene.control.*;
+import javafx.scene.control.Button;
+import javafx.scene.control.ComboBox;
+import javafx.scene.control.DatePicker;
+import javafx.scene.control.Label;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Paint;
 import javafx.stage.Stage;
-
-import java.time.LocalDate;
 
 public class AddBooking extends Stage {
 
@@ -106,17 +106,9 @@ public class AddBooking extends Stage {
 //            System.out.println(moveout.getValue() == null);
 //            System.out.println(movein.getValue() == null);
             if (moveout.getValue() != null && movein.getValue() != null && (moveout.getValue().compareTo(movein.getValue())) >= 0)
-                rooms.setItems(MainFX.databaseManager.getAvailableRooms(movein.getValue(), moveout.getValue()));
+                rooms.setItems(Main.databaseManager.getAvailableRooms(movein.getValue(), moveout.getValue()));
             else
                 rooms.setItems(null);
-        });
-        movein.setDayCellFactory(picker -> new DateCell() {
-            public void updateItem(LocalDate date, boolean empty) {
-                super.updateItem(date, empty);
-                LocalDate today = LocalDate.now();
-
-                setDisable(empty || date.compareTo(today) < 0 );
-            }
         });
 
         moveout = new DatePicker();
@@ -125,17 +117,9 @@ public class AddBooking extends Stage {
         moveout.setOnAction(event -> {
             rooms.setValue(null);
             if(movein.getValue() != null && moveout.getValue() != null && (moveout.getValue().compareTo(movein.getValue())) >= 0)
-                rooms.setItems(MainFX.databaseManager.getAvailableRooms(movein.getValue(), moveout.getValue()));
+                rooms.setItems(Main.databaseManager.getAvailableRooms(movein.getValue(), moveout.getValue()));
             else
                 rooms.setItems(null);
-        });
-        moveout.setDayCellFactory(picker -> new DateCell() {
-            public void updateItem(LocalDate date, boolean empty) {
-                super.updateItem(date, empty);
-                LocalDate today = LocalDate.now();
-
-                setDisable(empty || date.compareTo(today) < 0 );
-            }
         });
 
         pane = new Pane();
@@ -144,7 +128,7 @@ public class AddBooking extends Stage {
         pane.setStyle("-fx-background-color: white;");
         pane.getChildren().addAll(movein, moveout, button, button2, rooms, guests, label, label2, label3, label4);
 
-        this.setScene(new Scene(pane, MainFX.SCENE_WIDTH, MainFX.SCENE_HEIGHT));
+        this.setScene(new Scene(pane, Main.SCENE_WIDTH, Main.SCENE_HEIGHT));
     }
 
     private void emptyLocalData(){
@@ -155,8 +139,8 @@ public class AddBooking extends Stage {
 
     private void closeStage(){
         if(rooms != null){
-            MainFX.databaseManager.createBooking(profile.cId, movein.getValue(), moveout.getValue(), (int)guests.getValue(), rooms.getValue().toString());
-            session.books = MainFX.databaseManager.getBookings(profile.cId);
+            Main.databaseManager.createBooking(profile.cId, movein.getValue(), moveout.getValue(), (int)guests.getValue(), rooms.getValue().toString());
+            session.books = Main.databaseManager.getBookings(profile.cId);
             session.loadButtons();
             String color = "ffb053";
             if(session.injection.injected)

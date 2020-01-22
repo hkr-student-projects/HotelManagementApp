@@ -1,9 +1,7 @@
 package hkrDB;
 
-import com.mysql.cj.x.protobuf.MysqlxExpr;
-import hkrFX.Localization;
 import hkrFX.Logger;
-import hkrFX.MainFX;
+import hkrFX.Main;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
@@ -413,7 +411,7 @@ public class DatabaseManager {
         Connection conn = null;
         try {
             //System.out.println(MainFX.config.DatabaseAddress);
-            conn = DriverManager.getConnection(MainFX.config.DatabaseAddress, MainFX.config.DatabaseUsername, MainFX.config.DatabasePassword);
+            conn = DriverManager.getConnection(Main.config.DatabaseAddress, Main.config.DatabaseUsername, Main.config.DatabasePassword);
         } catch (SQLException ex) {
             Logger.logException(ex);
         }

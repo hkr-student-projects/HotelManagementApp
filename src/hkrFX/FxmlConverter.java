@@ -99,9 +99,9 @@ public class FxmlConverter {
 
         for(short j = 0; j < attr.getLength(); j++){
             String[] str = attr.item(j).toString().split("=");
-            if(MainFX.equals(str[0].toCharArray(), "fx:controller".toCharArray())
-                    || MainFX.equals(str[0].toCharArray(), "xmlns".toCharArray())
-                    || MainFX.equals(str[0].toCharArray(), "xmlns:fx".toCharArray()))
+            if(Main.equals(str[0].toCharArray(), "fx:controller".toCharArray())
+                    || Main.equals(str[0].toCharArray(), "xmlns".toCharArray())
+                    || Main.equals(str[0].toCharArray(), "xmlns:fx".toCharArray()))
                 continue;
             String uncovered = str[1].substring(1, str[1].length() - 1);
             pair.put(str[0], tryParseDouble(uncovered) ? uncovered : str[1]);

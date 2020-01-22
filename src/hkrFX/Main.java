@@ -18,7 +18,7 @@ interface ISerializable<T> {
     T Serialize();
 }
 
-public class MainFX extends Application {
+public class Main extends Application {
 
     public static short SCENE_HEIGHT = 440;
     public static short SCENE_WIDTH = 600;
@@ -28,6 +28,10 @@ public class MainFX extends Application {
     private LoginCus cusLogin;
     private LoginEmp empLogin;
     private HomeStage homeStage;
+
+    public static void main(String[] a){
+        Application.launch(a);
+    }
 
     @Override
     public void start(Stage stage) {

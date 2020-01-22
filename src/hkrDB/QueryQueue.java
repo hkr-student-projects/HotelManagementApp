@@ -1,7 +1,7 @@
 package hkrDB;
 
 import hkrFX.Logger;
-import hkrFX.MainFX;
+import hkrFX.Main;
 
 import java.lang.reflect.Method;
 import java.util.ArrayDeque;
@@ -41,7 +41,7 @@ public class QueryQueue {
 
     private void executeMethod(Method method, Object[] args){
         try {
-            method.invoke(MainFX.databaseManager, args);
+            method.invoke(Main.databaseManager, args);
         }
         catch (Exception e){
             Logger.logException(e);

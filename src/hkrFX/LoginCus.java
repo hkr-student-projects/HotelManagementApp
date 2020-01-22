@@ -72,7 +72,7 @@ public class LoginCus extends Stage {
             }
             try {
                 if(checkCredentials()){
-                    new PersonalAreaCus(MainFX.databaseManager.getProfile(email.getText()), new Injection(null, false, "ffb053")).show();
+                    new PersonalAreaCus(Main.databaseManager.getProfile(email.getText()), new Injection(null, false, "ffb053")).show();
                     email.setText("");
                     password.setText("");
                 }
@@ -123,7 +123,7 @@ public class LoginCus extends Stage {
             error.setText("Incorrect email format");
             return false;
         }
-        ResultSet rs1 = (ResultSet) MainFX.databaseManager.executeQuery(DatabaseManager.QueryType.READER,
+        ResultSet rs1 = (ResultSet) Main.databaseManager.executeQuery(DatabaseManager.QueryType.READER,
                 "SELECT 1 FROM hotel.Account WHERE hotel.Account.email = '"+email.getText()+"' " +
                         "AND hotel.Account.id IN (SELECT `hotel`.`Employee`.`account_id` FROM `hotel`.`Employee`);");
         if(rs1.next()){
@@ -131,7 +131,7 @@ public class LoginCus extends Stage {
             return false;
         }
 
-        ResultSet rs = (ResultSet) MainFX.databaseManager.executeQuery(DatabaseManager.QueryType.READER,
+        ResultSet rs = (ResultSet) Main.databaseManager.executeQuery(DatabaseManager.QueryType.READER,
                 "SELECT 1 FROM hotel.Account WHERE hotel.Account.email = '"+email.getText()+"' " +
                         "AND hotel.Account.password = SHA1('"+password.getText()+"');");
         if(!rs.next()){
@@ -168,17 +168,17 @@ public class LoginCus extends Stage {
         text.setText("Log in");
 
         AnchorPane anchorpane = new AnchorPane();
-        anchorpane.setPrefHeight(MainFX.SCENE_WIDTH);
-        anchorpane.setPrefWidth(MainFX.SCENE_WIDTH);
+        anchorpane.setPrefHeight(Main.SCENE_WIDTH);
+        anchorpane.setPrefWidth(Main.SCENE_WIDTH);
         Pane pane = new Pane();
-        pane.setPrefHeight(MainFX.SCENE_WIDTH);
-        pane.setPrefWidth(MainFX.SCENE_WIDTH);
+        pane.setPrefHeight(Main.SCENE_WIDTH);
+        pane.setPrefWidth(Main.SCENE_WIDTH);
         pane.setStyle("-fx-background-color: #ffb053;");
 
         pane.getChildren().addAll(text, email, password, log, create, error);
         anchorpane.getChildren().add(pane);
 
-        Scene scene = new Scene(anchorpane, MainFX.SCENE_WIDTH, MainFX.SCENE_HEIGHT);
+        Scene scene = new Scene(anchorpane, Main.SCENE_WIDTH, Main.SCENE_HEIGHT);
         //scene.getStylesheets().add("hkrFx/css/General.css");
         this.setScene(scene);
 

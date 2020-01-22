@@ -44,20 +44,20 @@ public class HomeStage extends Stage {
 
         AnchorPane anchorPane = new AnchorPane();
         anchorPane = new AnchorPane();
-        anchorPane.prefHeight(MainFX.SCENE_HEIGHT);
-        anchorPane.prefWidth(MainFX.SCENE_WIDTH);
+        anchorPane.prefHeight(Main.SCENE_HEIGHT);
+        anchorPane.prefWidth(Main.SCENE_WIDTH);
         anchorPane.setStyle("-fx-background-color: white");
 
         Pane pane = new Pane();
-        pane.prefHeight(MainFX.SCENE_HEIGHT);
-        pane.prefWidth(MainFX.SCENE_WIDTH);
+        pane.prefHeight(Main.SCENE_HEIGHT);
+        pane.prefWidth(Main.SCENE_WIDTH);
 
         ObservableList<Node> pChilds = pane.getChildren();
 
         pChilds.addAll(buttons);
         anchorPane.getChildren().add(pane);
 
-        Scene scene = new Scene(anchorPane, MainFX.SCENE_WIDTH - 200, MainFX.SCENE_HEIGHT);
+        Scene scene = new Scene(anchorPane, Main.SCENE_WIDTH - 200, Main.SCENE_HEIGHT);
         scene.getStylesheets().add("hkrFX/css/General.css");
 
         this.setScene(scene);
@@ -89,7 +89,7 @@ public class HomeStage extends Stage {
 
     public Button getButton(String name){
         for (Button b : buttons){
-            if(MainFX.equals(b.getText().toLowerCase().toCharArray(), name.toLowerCase().toCharArray()))
+            if(Main.equals(b.getText().toLowerCase().toCharArray(), name.toLowerCase().toCharArray()))
                 return b;
         }
 
