@@ -9,6 +9,7 @@ A project is a prototype of a hotel management application that stores data on l
   <img src="https://github.com/Group4-ProjectCourse/HotelManagementApp/blob/master/img/percus.png" data-canonical-src="https://github.com/Group4-ProjectCourse/HotelManagementApp/blob/master/img/logcus.png" width="300" height="230" />
 <img align="right" src="https://github.com/Group4-ProjectCourse/HotelManagementApp/blob/master/img/empper.png" data-canonical-src="https://github.com/Group4-ProjectCourse/HotelManagementApp/blob/master/img/logcus.png" width="300" height="230" />
 </div>
+
 #
 To crate the app's GUI, JavaFX libraries were used. The major parts of the project are classes containing definition for different stages.
 
