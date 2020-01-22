@@ -3,10 +3,10 @@
 A project is a prototype of a hotel management application that stores data on local database and uses GUI to interact with a user.
 
 ## User Interface   
-<div align="left" width=50%>
+<div align="left" width="50%">
   Customer panel
 </div>
-<div align="right" width=50%>
+<div align="right" width="50%">
   Employee panel
 </div>
 <div>
