@@ -8,6 +8,10 @@ A project is a prototype of a hotel management application that stores data on l
 <img align="right" src="https://github.com/Group4-ProjectCourse/HotelManagementApp/blob/master/img/emplog.png" data-canonical-src="https://github.com/Group4-ProjectCourse/HotelManagementApp/blob/master/img/logcus.png" width="300" height="230" />
   <img src="https://github.com/Group4-ProjectCourse/HotelManagementApp/blob/master/img/percus.png" data-canonical-src="https://github.com/Group4-ProjectCourse/HotelManagementApp/blob/master/img/logcus.png" width="300" height="230" />
 <img align="right" src="https://github.com/Group4-ProjectCourse/HotelManagementApp/blob/master/img/empper.png" data-canonical-src="https://github.com/Group4-ProjectCourse/HotelManagementApp/blob/master/img/logcus.png" width="300" height="230" />
+    <img src="https://github.com/Group4-ProjectCourse/HotelManagementApp/blob/master/img/per2cus.png" data-canonical-src="https://github.com/Group4-ProjectCourse/HotelManagementApp/blob/master/img/logcus.png" width="300" height="230" />
+<img align="right" src="https://github.com/Group4-ProjectCourse/HotelManagementApp/blob/master/img/emp2per.png" data-canonical-src="https://github.com/Group4-ProjectCourse/HotelManagementApp/blob/master/img/logcus.png" width="300" height="230" />
+      <img src="https://github.com/Group4-ProjectCourse/HotelManagementApp/blob/master/img/per3cus.png" data-canonical-src="https://github.com/Group4-ProjectCourse/HotelManagementApp/blob/master/img/logcus.png" width="300" height="230" />
+<img align="right" src="https://github.com/Group4-ProjectCourse/HotelManagementApp/blob/master/img/emp3per.png" data-canonical-src="https://github.com/Group4-ProjectCourse/HotelManagementApp/blob/master/img/logcus.png" width="300" height="230" />
 </div>
 
 #
