@@ -266,5 +266,43 @@ private void process(LogEntry entry){
        }
 }
 ```
+```log
+[2020-01-09 14:00:03 CET] [Exception] Exception message: Communications link failure
+
+The last packet sent successfully to the server was 0 milliseconds ago. The driver has not received any packets from the server.
+[2020-01-09 14:00:03 CET] [Exception] Exception message: null
+[2020-01-09 14:00:03 CET] [Exception] 
+	at com.mysql.cj.jdbc.exceptions.SQLError.createCommunicationsException()
+	at com.mysql.cj.jdbc.exceptions.SQLExceptionsMapping.translateException()
+	at com.mysql.cj.jdbc.ConnectionImpl.createNewIO()
+	at com.mysql.cj.jdbc.ConnectionImpl.<init>()
+	at com.mysql.cj.jdbc.ConnectionImpl.getInstance()
+	at com.mysql.cj.jdbc.NonRegisteringDriver.connect()
+	at java.sql.DriverManager.getConnection()
+	at java.sql.DriverManager.getConnection()
+	at hkrDB.DatabaseManager.createConnection()
+	at hkrDB.DatabaseManager.executeQuery()
+	at hkrDB.DatabaseManager.checkSchema()
+	at hkrDB.DatabaseManager.<init>()
+	at hkrFX.Main.start()
+	at com.sun.javafx.application.LauncherImpl.lambda$launchApplication1$9()
+	at com.sun.javafx.application.PlatformImpl.lambda$runAndWait$12()
+	at com.sun.javafx.application.PlatformImpl.lambda$runLater$10()
+	at java.security.AccessController.doPrivileged()
+	at com.sun.javafx.application.PlatformImpl.lambda$runLater$11()
+	at com.sun.glass.ui.InvokeLaterDispatcher$Future.run()
+[2020-01-09 14:00:03 CET] [Exception] 
+	at hkrDB.DatabaseManager.executeQuery()
+	at hkrDB.DatabaseManager.checkSchema()
+	at hkrDB.DatabaseManager.<init>()
+	at hkrFX.Main.start()
+	at com.sun.javafx.application.LauncherImpl.lambda$launchApplication1$9()
+	at com.sun.javafx.application.PlatformImpl.lambda$runAndWait$12()
+	at com.sun.javafx.application.PlatformImpl.lambda$runLater$10()
+	at java.security.AccessController.doPrivileged()
+	at com.sun.javafx.application.PlatformImpl.lambda$runLater$11()
+	at com.sun.glass.ui.InvokeLaterDispatcher$Future.run()
+
+```
 *to be continued..*
 
