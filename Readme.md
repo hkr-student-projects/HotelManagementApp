@@ -3,7 +3,8 @@
 A project is a prototype of a hotel management application that stores data on local database and uses GUI to interact with a user.
 
 ## User Interface
-<img src="https://github.com/Group4-ProjectCourse/HotelManagementApp/blob/master/img/logcus.png" data-canonical-src="https://github.com/Group4-ProjectCourse/HotelManagementApp/blob/master/img/logcus.png" width="150" height="115" />
+<img src="https://github.com/Group4-ProjectCourse/HotelManagementApp/blob/master/img/logcus.png" data-canonical-src="https://github.com/Group4-ProjectCourse/HotelManagementApp/blob/master/img/logcus.png" width="300" height="230" />
+<img src="https://github.com/Group4-ProjectCourse/HotelManagementApp/blob/master/img/emplog.png" data-canonical-src="https://github.com/Group4-ProjectCourse/HotelManagementApp/blob/master/img/logcus.png" width="300" height="230" />
 #
 To crate the app's GUI, JavaFX libraries were used. The major parts of the project are classes containing definition for different stages.
 
