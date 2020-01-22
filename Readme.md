@@ -3,14 +3,6 @@
 A project is a prototype of a hotel management application that stores data on local database and uses GUI to interact with a user.
 
 ## User Interface
-
-![alt text]()
-![alt text](https://github.com/Group4-ProjectCourse/HotelManagementApp/blob/master/img/cusper.png = 150x115)
-![alt text](https://github.com/Group4-ProjectCourse/HotelManagementApp/blob/master/img/empper.png = 150x115)
-![alt text](https://github.com/Group4-ProjectCourse/HotelManagementApp/blob/master/img/cus2per.png = 150x115)
-![alt text](https://github.com/Group4-ProjectCourse/HotelManagementApp/blob/master/img/emp2per.png = 150x115)
-![alt text](https://github.com/Group4-ProjectCourse/HotelManagementApp/blob/master/img/cus3per.png = 150x115)
-![alt text](https://github.com/Group4-ProjectCourse/HotelManagementApp/blob/master/img/emp3per.png = 150x115)
 Customer panel             |  Employee panel
 :-------------------------:|:-------------------------:
 ![](https://github.com/Group4-ProjectCourse/HotelManagementApp/blob/master/img/cuslog.png = 150x115)  |  ![](https://github.com/Group4-ProjectCourse/HotelManagementApp/blob/master/img/emplog.png = 150x115)
