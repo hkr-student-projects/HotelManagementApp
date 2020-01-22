@@ -11,23 +11,7 @@
   <component name="ChangeListManager">
     <list default="true" id="be750a4a-f25b-417a-8b32-89dd50849fe2" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/App.log" beforeDir="false" afterPath="$PROJECT_DIR$/App.log" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Readme.md" beforeDir="false" afterPath="$PROJECT_DIR$/Readme.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib copy/javafx.properties" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib copy/libdecora_sse.dylib" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib copy/libfxplugins.dylib" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib copy/libglass.dylib" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib copy/libglib-lite.dylib" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib copy/libgstreamer-lite.dylib" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib copy/libjavafx_font.dylib" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib copy/libjavafx_iio.dylib" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib copy/libjfxmedia.dylib" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib copy/libjfxmedia_avf.dylib" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib copy/libjfxwebkit.dylib" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib copy/libprism_common.dylib" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib copy/libprism_es2.dylib" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib copy/libprism_sw.dylib" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/Hotel_Management_jar/App.log" beforeDir="false" afterPath="$PROJECT_DIR$/out/artifacts/Hotel_Management_jar/App.log" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

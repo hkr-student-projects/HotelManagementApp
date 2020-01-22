@@ -1,10 +1,7 @@
-[
-  {
-    "DatabaseUsername":"root",
-    "DatabasePort":3306,
-    "DatabasePassword":"91rasuho",
-    "DatabaseName":"hotel",
-    "lang":"en",
-    "DatabaseAddress":"jdbc:mysql://localhost/hotel?&allowMultiQueries=true&serverTimezone=Europe/Stockholm&useSSL=false"
-  }
-]
+![alt text]()
+![alt text](https://github.com/Group4-ProjectCourse/HotelManagementApp/blob/master/img/cusper.png = 150x115)
+![alt text](https://github.com/Group4-ProjectCourse/HotelManagementApp/blob/master/img/empper.png = 150x115)
+![alt text](https://github.com/Group4-ProjectCourse/HotelManagementApp/blob/master/img/cus2per.png = 150x115)
+![alt text](https://github.com/Group4-ProjectCourse/HotelManagementApp/blob/master/img/emp2per.png = 150x115)
+![alt text](https://github.com/Group4-ProjectCourse/HotelManagementApp/blob/master/img/cus3per.png = 150x115)
+![alt text](https://github.com/Group4-ProjectCourse/HotelManagementApp/blob/master/img/emp3per.png = 150x115)

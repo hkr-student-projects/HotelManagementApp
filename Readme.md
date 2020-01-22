@@ -3,7 +3,19 @@
 A project is a prototype of a hotel management application that stores data on local database and uses GUI to interact with a user.
 
 ## User Interface
-To crate the app's GUU, JavaFX libraries were used. The major parts of the project are classes containing definition for different stages.
+<div>
+<img align="left" src="https://github.com/Group4-ProjectCourse/HotelManagementApp/blob/master/img/logcus.png" data-canonical-src="https://github.com/Group4-ProjectCourse/HotelManagementApp/blob/master/img/logcus.png" width="300" height="230" />
+<img align="right" src="https://github.com/Group4-ProjectCourse/HotelManagementApp/blob/master/img/emplog.png" data-canonical-src="https://github.com/Group4-ProjectCourse/HotelManagementApp/blob/master/img/logcus.png" width="300" height="230" />
+  <img src="https://github.com/Group4-ProjectCourse/HotelManagementApp/blob/master/img/percus.png" data-canonical-src="https://github.com/Group4-ProjectCourse/HotelManagementApp/blob/master/img/logcus.png" width="300" height="230" />
+<img align="right" src="https://github.com/Group4-ProjectCourse/HotelManagementApp/blob/master/img/empper.png" data-canonical-src="https://github.com/Group4-ProjectCourse/HotelManagementApp/blob/master/img/logcus.png" width="300" height="230" />
+    <img src="https://github.com/Group4-ProjectCourse/HotelManagementApp/blob/master/img/per2cus.png" data-canonical-src="https://github.com/Group4-ProjectCourse/HotelManagementApp/blob/master/img/logcus.png" width="300" height="230" />
+<img align="right" src="https://github.com/Group4-ProjectCourse/HotelManagementApp/blob/master/img/emp2per.png" data-canonical-src="https://github.com/Group4-ProjectCourse/HotelManagementApp/blob/master/img/logcus.png" width="300" height="230" />
+      <img src="https://github.com/Group4-ProjectCourse/HotelManagementApp/blob/master/img/per3cus.png" data-canonical-src="https://github.com/Group4-ProjectCourse/HotelManagementApp/blob/master/img/logcus.png" width="300" height="230" />
+<img align="right" src="https://github.com/Group4-ProjectCourse/HotelManagementApp/blob/master/img/emp3per.png" data-canonical-src="https://github.com/Group4-ProjectCourse/HotelManagementApp/blob/master/img/logcus.png" width="300" height="230" />
+</div>
+
+#
+To crate the app's GUI, JavaFX libraries were used. The major parts of the project are classes containing definition for different stages.
 
 Additionally, some classes were used in both: Customer and Employee panels, but with different field values e.g: background color field and permissions. 
 
@@ -104,8 +116,8 @@ public ObservableList<String> getAvailableRooms(LocalDate movein, LocalDate move
 
 ## Implemented interesting features
 
-####Logger 
-This tool is used to log different types of instances *(simple message, exception, error or waning)* and store them in __App.log__ file. 
+#### Logger 
+This tool is used to log different types of instances *(simple message, exception, error or warning)* and store them in __App.log__ file. 
 
 For example I decided to log a __simple message__, 
 the following method will be used to log a message:
@@ -153,7 +165,7 @@ to make things "look simplier" because we would not need a creation of 4  instan
 The idea behind this is still the defining the type of ELogType to pick appropriate color, so for me the idea of storing data as local variable looks fine at the moment.
 
 #
-####LoggerQueue
+#### QueryQueue
 This is unimplemented cool feature that would store queries in a list of waiting processes to be performed
 one by one. The feature was implemented in __LoggerQueue__ class that performs logs one-by-one by picking each from the queue of logs.
 
@@ -219,5 +231,5 @@ private void process(LogEntry entry){
        }
 }
 ```
-*end of LoggerQueue class*
+*to be continued..*
 
